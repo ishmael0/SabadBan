@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using App.DB;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using App.Models;
 
-namespace App.DB
+namespace App.DBContext
 {
-    public class PaymentDB : BaseWebSiteDBContext
+    public class DB : BaseWebSiteDBContext
     {
         public DbSet<Category> Categories { set; get; }
 
-        public PaymentDB(DbContextOptions<PaymentDB> options) : base(options)
+        public DB(DbContextOptions<DB> options) : base(options)
         {
 
         }
@@ -45,9 +44,9 @@ namespace App.DB
 
         }
     }
-    public class PaymentAcc : BaseAccountDBContext<BaseApplicationUser, BaseApplicationRole>
+    public class AccDB : BaseAccountDBContext<BaseApplicationUser, BaseApplicationRole>
     {
-        public PaymentAcc(DbContextOptions<PaymentAcc> options) : base(options)
+        public AccDB(DbContextOptions<AccDB> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder builder)
@@ -55,20 +54,20 @@ namespace App.DB
             base.OnModelCreating(builder);
         }
     }
-    public class MAINDBContextFactory : IDesignTimeDbContextFactory<PaymentDB>
+    public class MAINDBContextFactory : IDesignTimeDbContextFactory<DB>
     {
-        public PaymentDB CreateDbContext(string[] args)
+        public DB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<PaymentDB>(nameof(App));
-            return new PaymentDB(o.Options);
+            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(App));
+            return new DB(o.Options);
         }
     }
-    public class MAINAccContextFactory : IDesignTimeDbContextFactory<PaymentAcc>
+    public class MAINAccContextFactory : IDesignTimeDbContextFactory<AccDB>
     {
-        public PaymentAcc CreateDbContext(string[] args)
+        public AccDB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<PaymentAcc>(nameof(App));
-            return new PaymentAcc(o.Options);
+            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(App));
+            return new AccDB(o.Options);
         }
     }
 }
