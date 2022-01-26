@@ -1,0 +1,38 @@
+<!--<ng-template #form let-item="item">
+  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIDStatusForm;context:{  item:item}"></ng-container>
+  <form nz-form [formGroup]="item">
+  </form>
+
+
+</ng-template>
+
+<ng-template #viewMessage>
+  آیدی
+</ng-template>
+<ng-template #search>
+
+</ng-template>
+
+<ng-template #tableBodyPicker let-item="item">
+
+</ng-template>
+
+<ng-template #treeBody let-item="item">
+  {{ item.Id }}
+</ng-template>
+
+
+
+
+<app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
+
+
+<ng-container *ngIf="mainTemplate">
+
+
+  <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">
+    <ng-container *nzModalContent>
+      <app-image-uploader-card [key]="dataManager.key" Id="1" (onOk)="addImage($event)"></app-image-uploader-card>
+    </ng-container>
+  </nz-modal>
+</ng-container>-->
