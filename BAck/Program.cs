@@ -1,25 +1,20 @@
+global using Core;
+global using Core.DB;
+global using Core.StartUp;
+global using Core.Models;
+using App.DB;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Manually create an instance of the Startup class
+var startup = new BaseStartup<PaymentAcc, BaseApplicationUser, BaseApplicationRole>(builder.Configuration, builder.Environment);
+
+// Manually call ConfigureServices()
+startup.ConfigureServices(builder.Services);
+
 // Add services to the container.
-builder.Services.AddRazorPages();
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
-
 app.Run();
+
+
+ 
