@@ -17,14 +17,14 @@ const routes: Routes = [
   },
   //{ path: '', redirectTo: 'shopify', pathMatch: 'full' },
   {
-    path: 'PaymentAcc'.toLowerCase(), loadChildren: () => import('../../../../../Santel/ClientApp/src/app/account-manager/account-manager.module').then(m => m.AccountManagerModule),
+    path: 'AccDB'.toLowerCase(), loadChildren: () => import('../../../../../Santel/ClientApp/src/app/account-manager/account-manager.module').then(m => m.AccountManagerModule),
     data: {
-      key: 'PaymentAcc'.toLowerCase(), label: 'مدیریت کاربران', isAcc: true
+      key: 'AccDB'.toLowerCase(), label: 'مدیریت کاربران', isAcc: true
     }
   },
   {
-    path: 'Admin'.toLowerCase(), loadChildren: () => import('./back/back.module').then(m => m.BackModule),
-    data: { key: 'Admin'.toLowerCase(), label: ' مدیریت وب سایت' }
+    path: 'DB'.toLowerCase(), loadChildren: () => import('./back/back.module').then(m => m.BackModule),
+    data: { key: 'DB'.toLowerCase(), label: ' مدیریت وب سایت' }
   },
 
   { path: 'webselector', component: WebSelectorComponent },
