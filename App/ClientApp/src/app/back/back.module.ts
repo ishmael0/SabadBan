@@ -14,7 +14,7 @@ import { CategoryComponent, VendorComponent, BankComponent, CityComponent, Provi
 
 
 
-export const config: WebSiteConfiguration = new WebSiteConfiguration('PaymentDB', 'مدیریت وب سایت ', ' ', [
+export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مدیریت وب سایت ', ' ', [
   //new EntityConfiguration(VendeeComponent, 'داشبورد فروشنده', [], { icon: 'file-tree' }),
   new EntityConfiguration(CategoryComponent, 'دسته بندی', [
     ...defaultPropertyWithTitleConfiguration,

@@ -23,7 +23,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'DB'.toLowerCase(), loadChildren: () => import('./back/back.module').then(m => m.BackModule),
+    path: 'management'.toLowerCase(), loadChildren: () => import('./back/back.module').then(m => m.BackModule),
     data: { key: 'DB'.toLowerCase(), label: ' مدیریت وب سایت' }
   },
 

@@ -9,6 +9,10 @@ namespace App.DBContext
     public class DB : BaseWebSiteDBContext
     {
         public DbSet<Category> Categories { set; get; }
+        public DbSet<Province> Provinces { set; get; }
+        public DbSet<City> Cities { set; get; }
+        public DbSet<Vendor> Vendors { set; get; }
+        public DbSet<VendorSell> VendorSells { set; get; }
 
         public DB(DbContextOptions<DB> options) : base(options)
         {
