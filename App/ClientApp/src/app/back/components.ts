@@ -128,13 +128,13 @@ export class VendorBankAccountComponent implements OnInit {
 
 }
 @Component({
-  selector: 'app-vendor-bank-account-balance',
-  templateUrl: './vendor-bank-account-balance.component.html',
+  selector: 'app-vendor-balance',
+  templateUrl: './vendor-balance.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBankAccountBalanceComponent implements OnInit {
+export class VendorBalanceComponent implements OnInit {
 
   constructor() { }
 
@@ -150,6 +150,17 @@ export class VendorBankAccountBalanceComponent implements OnInit {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorSellComponent extends BaseComponent {
+
+}
+
+@Component({
+  selector: 'app-vendor-withdraw',
+  templateUrl: './vendor-withdraw.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VendorWithdrawComponent extends BaseComponent {
 
 }
 

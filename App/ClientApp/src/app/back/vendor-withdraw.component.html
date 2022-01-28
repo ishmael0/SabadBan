@@ -1,0 +1,80 @@
+<ng-template #form let-item="item">
+  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+  <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+
+    <div nz-row>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  موفق  </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="  موفق   را وارد کنید">
+          <input nz-input formControlName="Successed" />
+        </nz-form-control>
+      </div>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">     قطعی شده</nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="  قطعی شده   را وارد کنید">
+          <input nz-input formControlName="Confirmed" />
+        </nz-form-control>
+      </div>
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">     صادر شده</nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="  صادر شده   را وارد کنید">
+          <input nz-input formControlName="Created" />
+        </nz-form-control>
+      </div>
+
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">     در انتظار پرداخت</nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="  در انتظار پرداخت   را وارد کنید">
+          <input nz-input formControlName="WaitingForPayment" />
+        </nz-form-control>
+      </div>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    باطل شده</nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="  باطل شده   را وارد کنید">
+          <input nz-input formControlName="Canceled" />
+        </nz-form-control>
+      </div>
+
+
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #viewMessage>
+  آیدی
+</ng-template>
+<ng-template #search>
+
+</ng-template>
+
+
+
+
+<ng-template #tableBodyPicker let-item="item">
+
+</ng-template>
+
+<ng-template #tableBody let-item="item">
+  <td> {{ item.Id }}</td>
+  <td></td>
+
+</ng-template>
+
+
+
+
+
+
+
+<app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
+
+<ng-template #tableBody let-item="item">
+  <td>{{ item.Id }}</td>
+  <td>{{ item.Title }}</td>
+  <td>{{ item.Create_}}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+</ng-template>
+
+

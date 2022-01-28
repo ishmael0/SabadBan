@@ -9,7 +9,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FileManagerComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/file-manager/file-manager.component';
 import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/icons/icons.component';
 import { defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/properties';
-import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountBalanceComponent, VendorBankAccountComponent, VendorSellComponent } from './components';
+import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent } from './components';
 
 
 
@@ -57,21 +57,34 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('WaitingForPayment', 'تعداد فاکتور در انتظار پرداخت', {}),
     new PropertyConfiguration('Canceled', 'تعداد فاکتور باطل شده', {}),
     new PropertyConfiguration('', '', {}),
-  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [] }),
+  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable}),
   new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('', 'نام بانک', {}),
-    new PropertyConfiguration('', 'شماره حساب', {}),
-    new PropertyConfiguration('', 'شماره شبا', {}),
-    new PropertyConfiguration('', 'شماره کارت', {}),
-    new PropertyConfiguration('', 'حساب اصلی', {}),
+    new PropertyConfiguration('BankTitle', 'نام بانک', {}),
+    new PropertyConfiguration('AccountNumber', 'شماره حساب', {}),
+    new PropertyConfiguration('Sheba', 'شماره شبا', {}),
+    new PropertyConfiguration('CardNumber', 'شماره کارت', {}),
+    new PropertyConfiguration('Priority', 'حساب اصلی', {}),
   ], {}),
-  new EntityConfiguration(VendorBankAccountBalanceComponent, 'موجودی', [
+  new EntityConfiguration(VendorBalanceComponent, 'موجودی', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('Free', 'آزاد', {}),
     new PropertyConfiguration('Paid', 'پرداخت شده', {}),
     new PropertyConfiguration('Block', 'بلاک شده', {}),
   ], {}),
+  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه', [
+    ...defaultPropertyConfiguration,
+    new PropertyConfiguration('Bank', 'آزاد', {}),
+    new PropertyConfiguration('Value', 'مبلغ', {}),
+    new PropertyConfiguration('', 'شماره پیگیری', {}),
+    new PropertyConfiguration('', 'نوع انتقال', {}),
+    new PropertyConfiguration('', 'زمان اتقال', {}),
+  ], {}),
+
+  new EntityConfiguration(TransactionComponent, 'تراکنش', [
+  ], { icon: 'transfer' }),
+  new EntityConfiguration(VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
+
 
 
 
@@ -85,12 +98,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('ProvinceId', 'استان', {}),
   ], { neededData: [ProvinceComponent] }),
 
-  new EntityConfiguration(TransactionComponent, 'تراکنش', [
-
-  ], { icon: 'transfer' }),
   new EntityConfiguration(BankComponent, 'بانک', [], { componentType: ComponentTypes.lazytable }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
-  new EntityConfiguration(VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
   //new EntityConfiguration(VendorComponent, '', [], {}),
   new EntityConfiguration(TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,
@@ -103,7 +112,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     VendorComponent,
     VendorSellComponent,
     VendorBankAccountComponent,
-    VendorBankAccountBalanceComponent,
+    VendorBalanceComponent,
     ProvinceComponent,
     CityComponent,
     BankComponent,
