@@ -118,7 +118,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     BankComponent,
     TransactionComponent,
     VendeeComponent,
-    TicketComponent
+    TicketComponent,
+    VendorWithdrawComponent
   ],
   imports: [
     TemplateModule,

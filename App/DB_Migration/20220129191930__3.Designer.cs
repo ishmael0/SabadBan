@@ -4,6 +4,7 @@ using App.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220129191930__3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,10 +202,10 @@ namespace App.DB_Migration
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(10,8)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(11,8)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

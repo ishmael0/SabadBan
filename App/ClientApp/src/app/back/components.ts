@@ -20,12 +20,8 @@ export class CityComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BankComponent implements OnInit {
+export class BankComponent extends BaseComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 @Component({
@@ -64,12 +60,7 @@ export class ProvinceComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TicketComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class TicketComponent extends BaseComponent{
 
 }
 @Component({
@@ -79,12 +70,8 @@ export class TicketComponent implements OnInit {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent extends BaseComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 @Component({
@@ -94,12 +81,8 @@ export class TransactionComponent implements OnInit {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendeeComponent implements OnInit {
+export class VendeeComponent extends BaseComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 @Component({
@@ -119,12 +102,8 @@ export class VendorComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBankAccountComponent implements OnInit {
+export class VendorBankAccountComponent extends BaseComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 @Component({
@@ -134,12 +113,8 @@ export class VendorBankAccountComponent implements OnInit {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBalanceComponent implements OnInit {
+export class VendorBalanceComponent extends BaseComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 @Component({

@@ -33,6 +33,11 @@ namespace App.Models
         public virtual Province Province { set; get; }
         public int ProvinceId { set; get; }
     }
+    [SafeToGetAll]
+    public class Bank : BaseModelWithTitle
+    {
+        public string ValidatorString { set; get; }
+    }
     public class Vendor: BaseModel
     {
         [ForeignKey("CityId")]
@@ -41,7 +46,9 @@ namespace App.Models
 
         public string Address { set; get; }
         public string Description { set; get; }
+        [Column(TypeName = "decimal(11,8)")]
         public decimal Longitude { set; get; }
+        [Column(TypeName = "decimal(10,8)")]
         public decimal Latitude { set; get; }
 
     } 
@@ -50,7 +57,6 @@ namespace App.Models
         [ForeignKey("VendorId")]
         public virtual Vendor Vendor { set; get; }
         public int VendorId { set; get; }
-
         public int Successed { set; get; }
         public int Confirmed { set; get; }
         public int Created { set; get; }
@@ -92,6 +98,9 @@ namespace App.Models
         public virtual VendorBankAccount VendorBankAccount { set; get; }
         public int VendorBankAccountId { set; get; }
     }
+
+
+
     public class Vendee:BaseModel
     {
         public string FirstName { set; get; }
