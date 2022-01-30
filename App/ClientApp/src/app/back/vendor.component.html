@@ -1,43 +1,57 @@
 <ng-template #form let-item="item">
-  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
   <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
-    <nz-form-item>
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
-      <nz-form-control [nzXs]="24" [nzSm]="18" [nzMd]="9" nzErrorTip="عنوان لاتین را وارد کنید">
-        <input nz-input formControlName="TitleEn" />
-      </nz-form-control>
-    </nz-form-item>
     <div nz-row>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="عنوان لاتین را وارد کنید">
+          <input nz-input formControlName="TitleEn" />
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">استان  </nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
         <nz-form-control nzErrorTip="استان   را وارد کنید">
           <input nz-input formControlName="Province" />
         </nz-form-control>
-      </div>
+      </nz-form-item>
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   شهرستان</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
         <nz-form-control nzErrorTip="شهرستان   را وارد کنید">
           <input nz-input formControlName="City" />
         </nz-form-control>
-      </div>
+      </nz-form-item>
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   ادامه آدرس</nz-form-label>
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">
+          <input nz-input formControlName="Address" />
+        </nz-form-control>
+      </nz-form-item>
 
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   طول جغرافیایی</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
         <nz-form-control nzErrorTip="طول جغرافیایی   را وارد کنید">
           <input nz-input formControlName="longitude" />
         </nz-form-control>
-      </div>
+      </nz-form-item>
 
 
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   عرض جغرافیایی</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
         <nz-form-control nzErrorTip="عرض جغرافیایی   را وارد کنید">
           <input nz-input formControlName="latitude" />
         </nz-form-control>
-      </div>
+      </nz-form-item>
 
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   توضیحات </nz-form-label>
+      <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="21">
+        <nz-form-control nzErrorTip="   توضیحات را وارد کنید">
+          <textarea nz-input formControlName="Description" placeholder=" توضیحات" [nzAutosize]="{ minRows: 3, maxRows: 15 }"></textarea>
+        </nz-form-control>
+      </nz-form-item>
 
     </div>
+
   </form>
 </ng-template>
 
@@ -58,7 +72,7 @@
 <ng-template #tableBody let-item="item">
   <td> {{ item.Id }}</td>
   <td></td>
- 
+
 </ng-template>
 
 

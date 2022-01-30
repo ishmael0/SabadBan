@@ -28,18 +28,18 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('Images', 'تصاویر', { value: [], Type: 'list', Validators: [] }),
   ], { componentType: ComponentTypes.tree, icon: 'file-tree' }),
 
-  new EntityConfiguration(VendorComponent, 'اطلاعات فروشنده', [
-    ...defaultPropertyConfiguration,
+  new EntityConfiguration(VendorComponent, 'فروشنده', [
+    ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration('TitleEn', 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
     new PropertyConfiguration('Province', 'استان', {}),
     new PropertyConfiguration('City', 'شهرستان', {}),
-    new PropertyConfiguration('Address', 'آدرس', {}),
-    new PropertyConfiguration('Description', 'توضیحات', { value: '', Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    new PropertyConfiguration('longitude', 'طول جغرافیایی', {}),
-    new PropertyConfiguration('latitude', 'عرض جغرافیایی', {}),
-  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [] }),
+    new PropertyConfiguration('Address', 'آدرس', { InTable: false}),
+    new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration('longitude', 'طول جغرافیایی', { InTable: false }),
+    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { InTable: false }),
+  ], { icon: 'storefront', neededData: [ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
   //ConfirmedReadyToSetStatus 
   //ReadyToSend
@@ -49,7 +49,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration(VendorSellComponent, 'اطلاعات فروش', [
+  new EntityConfiguration(VendorSellComponent, 'اطلاعات فروش فروشنده', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('Successed', 'تعداد فاکتور موفق', {}),
     new PropertyConfiguration('Confirmed', 'تعداد فاکتور قطعی شده', {}),
@@ -57,8 +57,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('WaitingForPayment', 'تعداد فاکتور در انتظار پرداخت', {}),
     new PropertyConfiguration('Canceled', 'تعداد فاکتور باطل شده', {}),
     new PropertyConfiguration('', '', {}),
-  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable}),
-  new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب', [
+  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
+  new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب فروشنده', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('BankTitle', 'نام بانک', {}),
     new PropertyConfiguration('AccountNumber', 'شماره حساب', {}),
@@ -66,13 +66,13 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('CardNumber', 'شماره کارت', {}),
     new PropertyConfiguration('Priority', 'حساب اصلی', {}),
   ], {}),
-  new EntityConfiguration(VendorBalanceComponent, 'موجودی', [
+  new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشنده', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('Free', 'آزاد', {}),
     new PropertyConfiguration('Paid', 'پرداخت شده', {}),
     new PropertyConfiguration('Block', 'بلاک شده', {}),
   ], {}),
-  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه', [
+  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه فروشنده', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('Bank', 'آزاد', {}),
     new PropertyConfiguration('Value', 'مبلغ', {}),

@@ -38,8 +38,9 @@ namespace App.Models
     {
         public string ValidatorString { set; get; }
     }
-    public class Vendor: BaseModel
+    public class Vendor: BaseModelWithTitle
     {
+        public string UserId { set; get; }
         [ForeignKey("CityId")]
         public virtual City City { set; get; }
         public int CityId { set; get; }
