@@ -1,10 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using App.DBContext;
+using Core.Controllers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Models
 {
+    public class VendorController : BaseController<DB, Vendor>
+    {
+        public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
+        {
+        }
+    }
     public class Images
     {
         public string Path { set; get; }
