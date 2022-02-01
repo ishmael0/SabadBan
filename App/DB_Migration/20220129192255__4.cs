@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace App.DB_Migration
+namespace Host.DB_Migration
 {
     public partial class _4 : Migration
     {

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using App.Models;
+using Host.Models;
 
-namespace App.DBContext
+namespace Host.DBContext
 {
     public class DB : BaseWebSiteDBContext
     {
@@ -14,6 +14,7 @@ namespace App.DBContext
         public DbSet<Bank> Banks { set; get; }
         public DbSet<Vendor> Vendors { set; get; }
         public DbSet<VendorSell> VendorSells { set; get; }
+        public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
         public DB(DbContextOptions<DB> options) : base(options)
         {
 
@@ -63,7 +64,7 @@ namespace App.DBContext
     {
         public DB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(App));
+            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(Host));
             return new DB(o.Options);
         }
     }
@@ -71,7 +72,7 @@ namespace App.DBContext
     {
         public AccDB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(App));
+            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(Host));
             return new AccDB(o.Options);
         }
     }

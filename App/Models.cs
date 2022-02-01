@@ -1,12 +1,10 @@
-﻿using App.DBContext;
+﻿using Host.DBContext;
 using Core.Controllers;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace App.Models
+namespace Host.Models
 {
     public class VendorController : BaseController<DB, Vendor>
     {
@@ -67,6 +65,7 @@ namespace App.Models
         [ForeignKey("VendorId")]
         public virtual Vendor Vendor { set; get; }
         public int VendorId { set; get; }
+
         public int Successed { set; get; }
         public int Confirmed { set; get; }
         public int Created { set; get; }
@@ -74,11 +73,10 @@ namespace App.Models
     }
     public class VendorBankAccount : BaseModel
     {
-        [ForeignKey("VendorId")]
-        public virtual Vendor Vendor { set; get; }
-        public int VendorId { set; get; }
+        [ForeignKey("BankId")]
+        public virtual Bank Bank { set; get; }
+        public int BankId { set; get; }
         public bool IsConfirmed { set; get; }
-        public int BankTitle { set; get; }
         public string AccountNumber { set; get; }
         [MaxLength(24)]
         [MinLength(24)]
@@ -108,9 +106,6 @@ namespace App.Models
         public virtual VendorBankAccount VendorBankAccount { set; get; }
         public int VendorBankAccountId { set; get; }
     }
-
-
-
     public class Vendee:BaseModel
     {
         public string FirstName { set; get; }

@@ -2,7 +2,7 @@ global using Core;
 global using Core.DB;
 global using Core.StartUp;
 global using Core.Models;
-using App.DBContext;
+using Host.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 var startup = new BaseStartup<AccDB, BaseApplicationUser, BaseApplicationRole>(builder.Configuration, builder.Environment);

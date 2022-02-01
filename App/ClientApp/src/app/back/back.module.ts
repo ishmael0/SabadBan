@@ -28,14 +28,14 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('Images', 'تصاویر', { value: [], Type: 'list', Validators: [] }),
   ], { componentType: ComponentTypes.tree, icon: 'file-tree' }),
 
-  new EntityConfiguration(VendorComponent, 'فروشنده', [
+  new EntityConfiguration(VendorComponent, 'فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration('TitleEn', 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
     new PropertyConfiguration('Province', 'استان', {}),
     new PropertyConfiguration('City', 'شهرستان', {}),
-    new PropertyConfiguration('Address', 'آدرس', { InTable: false}),
+    new PropertyConfiguration('Address', 'آدرس', { InTable: false }),
     new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration('longitude', 'طول جغرافیایی', { InTable: false }),
     new PropertyConfiguration('latitude', 'عرض جغرافیایی', { InTable: false }),
@@ -49,36 +49,38 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration(VendorSellComponent, 'اطلاعات فروش فروشنده', [
+  new EntityConfiguration(VendorSellComponent, 'اطلاعات فروش فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('Successed', 'تعداد فاکتور موفق', {}),
-    new PropertyConfiguration('Confirmed', 'تعداد فاکتور قطعی شده', {}),
-    new PropertyConfiguration('Created', 'تعداد فاکتور صادر شده', {}),
-    new PropertyConfiguration('WaitingForPayment', 'تعداد فاکتور در انتظار پرداخت', {}),
-    new PropertyConfiguration('Canceled', 'تعداد فاکتور باطل شده', {}),
-    new PropertyConfiguration('', '', {}),
+    new PropertyConfiguration('Successed', 'فاکتور موفق', {}),
+    new PropertyConfiguration('Confirmed', 'فاکتور قطعی شده', {}),
+    new PropertyConfiguration('Created', 'فاکتور صادر شده', {}),
+    new PropertyConfiguration('WaitingForPayment', 'فاکتور در انتظار پرداخت', {}),
+    new PropertyConfiguration('Canceled', 'فاکتور باطل شده', {}),
   ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
-  new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب فروشنده', [
+  new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('BankTitle', 'نام بانک', {}),
-    new PropertyConfiguration('AccountNumber', 'شماره حساب', {}),
-    new PropertyConfiguration('Sheba', 'شماره شبا', {}),
-    new PropertyConfiguration('CardNumber', 'شماره کارت', {}),
-    new PropertyConfiguration('Priority', 'حساب اصلی', {}),
+    new PropertyConfiguration('BankId', 'بانک', {}),
+    //new PropertyConfiguration('VendorId', 'فروشگاه', {}),
+    new PropertyConfiguration('AccountNumber', 'شماره حساب', { InTable: false }),
+    new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false}),
+    new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false}),
+    new PropertyConfiguration('Priority', 'اولویت', {}),
   ], {}),
-  new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشنده', [
+  new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشگاه', [
     ...defaultPropertyConfiguration,
+    new PropertyConfiguration('VendorId', 'فروشگاه', {}),
     new PropertyConfiguration('Free', 'آزاد', {}),
     new PropertyConfiguration('Paid', 'پرداخت شده', {}),
     new PropertyConfiguration('Block', 'بلاک شده', {}),
   ], {}),
-  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه فروشنده', [
+  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('Bank', 'آزاد', {}),
+    new PropertyConfiguration('VendorId', 'فروشگاه', {}),
+    new PropertyConfiguration('BankId', 'بانک', {}),
     new PropertyConfiguration('Value', 'مبلغ', {}),
-    new PropertyConfiguration('', 'شماره پیگیری', {}),
-    new PropertyConfiguration('', 'نوع انتقال', {}),
-    new PropertyConfiguration('', 'زمان اتقال', {}),
+    new PropertyConfiguration('TransActionNumber', 'شماره پیگیری', {}),
+    new PropertyConfiguration('TransActionType', 'نوع انتقال', {}),
+    new PropertyConfiguration('TransActionDateTime', 'زمان اتقال', {}),
   ], {}),
 
   new EntityConfiguration(TransactionComponent, 'تراکنش', [

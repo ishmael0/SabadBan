@@ -103,8 +103,6 @@ export class VendorComponent extends BaseComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorBankAccountComponent extends BaseComponent {
-
-
 }
 @Component({
   selector: 'app-vendor-balance',
