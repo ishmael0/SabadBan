@@ -65,7 +65,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false}),
     new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false}),
     new PropertyConfiguration('Priority', 'اولویت', {}),
-  ], {}),
+  ], { neededData: [BankComponent] }),
   new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشگاه', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('VendorId', 'فروشگاه', {}),
@@ -81,7 +81,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('TransActionNumber', 'شماره پیگیری', {}),
     new PropertyConfiguration('TransActionType', 'نوع انتقال', {}),
     new PropertyConfiguration('TransActionDateTime', 'زمان اتقال', {}),
-  ], {}),
+  ], { neededData: [BankComponent]}),
 
   new EntityConfiguration(TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),

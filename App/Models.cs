@@ -18,7 +18,7 @@ namespace Host.Models
         public string Description { set; get; }
     }
     [SafeToGetAll]
-    public class Category: BaseModelWithTitle
+    public class Category : BaseModelWithTitle
     {
         [ForeignKey("ParentCategoryId")]
         public virtual Category? ParentCategory { set; get; }
@@ -45,9 +45,18 @@ namespace Host.Models
     {
         public string ValidatorString { set; get; }
     }
-    public class Vendor: BaseModelWithTitle
+
+    public class VendorUser
     {
-        public string UserId { set; get; }
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { set; get; }
+        public int VendorId { set; get; }
+        public string BaseApplicationUserId { set; get; }
+    }
+
+    public class Vendor : BaseModelWithTitle
+    {
+
         [ForeignKey("CityId")]
         public virtual City City { set; get; }
         public int CityId { set; get; }
@@ -59,7 +68,7 @@ namespace Host.Models
         [Column(TypeName = "decimal(10,8)")]
         public decimal Latitude { set; get; }
 
-    } 
+    }
     public class VendorSell : BaseModel
     {
         [ForeignKey("VendorId")]
@@ -94,7 +103,7 @@ namespace Host.Models
         public int VendorId { set; get; }
         public int Free { set; get; }
         public int Paid { set; get; }
-        public int Block{ set; get; }
+        public int Block { set; get; }
     }
     public class VendorWithdraw : BaseModel
     {
@@ -106,7 +115,7 @@ namespace Host.Models
         public virtual VendorBankAccount VendorBankAccount { set; get; }
         public int VendorBankAccountId { set; get; }
     }
-    public class Vendee:BaseModel
+    public class Vendee : BaseModel
     {
         public string FirstName { set; get; }
         public string LastName { set; get; }
