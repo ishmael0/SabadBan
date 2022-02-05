@@ -37,8 +37,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('City', 'شهرستان', {}),
     new PropertyConfiguration('Address', 'آدرس', { InTable: false }),
     new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    new PropertyConfiguration('longitude', 'طول جغرافیایی', { InTable: false }),
-    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { InTable: false }),
+    new PropertyConfiguration('longitude', 'طول جغرافیایی', { value: 0, InTable: false }),
+    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { value:0, InTable: false }),
   ], { icon: 'storefront', neededData: [ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
   //ConfirmedReadyToSetStatus 
@@ -93,12 +93,12 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration(ProvinceComponent, 'استان', [
     ...defaultPropertyWithTitleConfiguration,
-  ], {}),
+  ], { componentType: ComponentTypes.table }),
 
   new EntityConfiguration(CityComponent, 'شهرستان', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration('ProvinceId', 'استان', {}),
-  ], { neededData: [ProvinceComponent] }),
+  ], { neededData: [ProvinceComponent], componentType: ComponentTypes.table}),
 
   new EntityConfiguration(BankComponent, 'بانک', [], { componentType: ComponentTypes.lazytable }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),

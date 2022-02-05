@@ -45,15 +45,7 @@ namespace Host.Models
     {
         public string ValidatorString { set; get; }
     }
-
-    public class VendorUser
-    {
-        [ForeignKey("VendorId")]
-        public virtual Vendor Vendor { set; get; }
-        public int VendorId { set; get; }
-        public string BaseApplicationUserId { set; get; }
-    }
-
+ 
     public class Vendor : BaseModelWithTitle
     {
 
@@ -67,6 +59,10 @@ namespace Host.Models
         public decimal Longitude { set; get; }
         [Column(TypeName = "decimal(10,8)")]
         public decimal Latitude { set; get; }
+
+    }
+    public class VendorRequest : BaseModelWithTitle
+    {
 
     }
     public class VendorSell : BaseModel

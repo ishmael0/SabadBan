@@ -15,7 +15,6 @@ namespace Host.DBContext
         public DbSet<Vendor> Vendors { set; get; }
         public DbSet<VendorSell> VendorSells { set; get; }
         public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
-        public DbSet<VendorUser> VendorUsers { set; get; }
         public DB(DbContextOptions<DB> options) : base(options)
         {
 
