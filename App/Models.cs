@@ -52,13 +52,26 @@ namespace Host.Models
         [ForeignKey("CityId")]
         public virtual City City { set; get; }
         public int CityId { set; get; }
-
         public string Address { set; get; }
+        [MaxLength(100)]
+        public string PostalCOde { set; get; }
+        public string ShortDescription { set; get; }
         public string Description { set; get; }
         [Column(TypeName = "decimal(11,8)")]
         public decimal Longitude { set; get; }
         [Column(TypeName = "decimal(10,8)")]
         public decimal Latitude { set; get; }
+        [MaxLength(11)]
+        public string Phone1 { set; get; }
+        [MaxLength(11)]
+        public string Phone2 { set; get; }
+        [MaxLength(11)]
+        public string CellPhone1 { set; get; }
+        [MaxLength(11)]
+        public string CellPhone2 { set; get; }
+
+        public List<Images> Images { set; get; }
+        public string Logo { set; get; }
 
     }
     public class VendorRequest : BaseModelWithTitle

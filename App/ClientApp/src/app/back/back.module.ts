@@ -33,13 +33,25 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('TitleEn', 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
-    new PropertyConfiguration('Province', 'استان', {}),
-    new PropertyConfiguration('City', 'شهرستان', {}),
-    new PropertyConfiguration('Address', 'آدرس', { InTable: false }),
+    new PropertyConfiguration('CityId', 'شهرستان', {}),
+    new PropertyConfiguration('Address', 'آدرس', { value: '',  InTable: false }),
+    new PropertyConfiguration('PostalCOde', 'کد پستی', { value: '', InTable: false }),
+
+    new PropertyConfiguration('ShortDescription', 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration('longitude', 'طول جغرافیایی', { value: 0, InTable: false }),
-    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { value:0, InTable: false }),
-  ], { icon: 'storefront', neededData: [ProvinceComponent, CityComponent] }),
+    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { value: 0, InTable: false }),
+
+    new PropertyConfiguration('Phone1', 'شماره تلفن ثابت اول', { value: '', InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration('Phone2', 'شماره تلفن ثابت دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration('CellPhone1', 'شماره همراه اول', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration('CellPhone2', 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+
+
+    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], Type: 'list', Validators: [] }),
+    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', Type: 'list', Validators: [] }),
+
+  ], { icon: 'storefront', neededData: [CategoryComponent, ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
   //ConfirmedReadyToSetStatus 
   //ReadyToSend
@@ -62,8 +74,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('BankId', 'بانک', {}),
     //new PropertyConfiguration('VendorId', 'فروشگاه', {}),
     new PropertyConfiguration('AccountNumber', 'شماره حساب', { InTable: false }),
-    new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false}),
-    new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false}),
+    new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false }),
+    new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false }),
     new PropertyConfiguration('Priority', 'اولویت', {}),
   ], { neededData: [BankComponent] }),
   new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشگاه', [
@@ -81,7 +93,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('TransActionNumber', 'شماره پیگیری', {}),
     new PropertyConfiguration('TransActionType', 'نوع انتقال', {}),
     new PropertyConfiguration('TransActionDateTime', 'زمان اتقال', {}),
-  ], { neededData: [BankComponent]}),
+  ], { neededData: [BankComponent] }),
 
   new EntityConfiguration(TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
@@ -98,7 +110,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   new EntityConfiguration(CityComponent, 'شهرستان', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration('ProvinceId', 'استان', {}),
-  ], { neededData: [ProvinceComponent], componentType: ComponentTypes.table}),
+  ], { neededData: [ProvinceComponent], componentType: ComponentTypes.table }),
 
   new EntityConfiguration(BankComponent, 'بانک', [], { componentType: ComponentTypes.lazytable }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
