@@ -53,6 +53,8 @@ namespace Host.Models
         public virtual City City { set; get; }
         public int CityId { set; get; }
         public string Address { set; get; }
+        //public string TitleEn { set; get; }
+
         [MaxLength(100)]
         public string PostalCOde { set; get; }
         public string ShortDescription { set; get; }

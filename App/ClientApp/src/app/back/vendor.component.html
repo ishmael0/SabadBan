@@ -1,10 +1,10 @@
 <ng-template #form let-item="item">
 
-
   <nz-tabset [nzAnimated]="false">
     <nz-tab nzTitle=" اطلاعات فروشگاه">
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+        {{item.controls.Id.Value}}
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
@@ -39,7 +39,15 @@
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">استان و شهرستان  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-control nzErrorTip="استان و شهرستان را وارد کنید">
-              <nz-cascader [nzShowSearch]="true" nzPlaceHolder="استان و شهرستان" [nzOptions]="nodes" formControlName="CityId"></nz-cascader>
+              <!--<nz-cascader [nzShowSearch]="true" nzPlaceHolder="استان و شهرستان" [nzOptions]="nodes" formControlName="CityId"></nz-cascader>-->
+
+              <nz-tree-select [nzNodes]="nodes"
+                              nzShowSearch
+                              nzPlaceHolder="استان و شهرستان"
+                              formControlName="CityId"></nz-tree-select>
+
+
+
             </nz-form-control>
           </nz-form-item>
 
@@ -105,7 +113,7 @@
         </div>
       </form>
     </nz-tab>
-    <nz-tab nzTitle=" لوگو فروشگاه">
+    <nz-tab *ngIf="item.controls.Id.Value" nzTitle=" لوگو فروشگاه">
 
       <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
         <nz-form-label>لوگو</nz-form-label>
@@ -126,8 +134,8 @@
 
 
     </nz-tab>
-    
-    <nz-tab nzTitle=" تصاویر فروشگاه({{item.controls.Images.value?.length}})">
+
+    <nz-tab *ngIf="item.controls.Id.Value" nzTitle=" تصاویر فروشگاه({{item.controls.Images.value?.length}})">
 
       <div nz-row>
         <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
@@ -175,6 +183,8 @@
   <td>{{ item.Title }}</td>
   <td>{{ item.Create_}}</td>
   <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{ item.TitleEn}}</td>
+  <td>{{ item.CityId}}</td>
 </ng-template>
 
 <ng-container *ngIf="mainTemplate">

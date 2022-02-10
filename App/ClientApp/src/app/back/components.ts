@@ -101,9 +101,9 @@ export class VendorComponent extends BaseComponent {
     let provinces = this.dataManager.getLoadedData(ProvinceComponent);
     let cities = this.dataManager.getLoadedData(CityComponent);
     this.nodes = provinces.map((c:any) => ({
-      label: c.Title,
-      value: "_" + c.Id,
-      children: cities.filter((d: any) => d.ProvinceId == c.Id).map((d: any) => ({ label: d.Title, value:d.Id, isLeaf:true }))
+      title: c.Title,
+      key: "_" + c.Id,
+      children: cities.filter((d: any) => d.ProvinceId == c.Id).map((d: any) => ({ title: d.Title, key:d.Id, isLeaf:true }))
     }));
   }
 

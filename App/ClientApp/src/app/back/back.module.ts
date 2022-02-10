@@ -33,9 +33,9 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('TitleEn', 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
-    new PropertyConfiguration('CityId', 'شهرستان', {}),
+    new PropertyConfiguration('CityId', 'شهرستان', { Validators: [Validators.required] }),
     new PropertyConfiguration('Address', 'آدرس', { value: '',  InTable: false }),
-    new PropertyConfiguration('PostalCOde', 'کد پستی', { value: '', InTable: false }),
+    new PropertyConfiguration('PostalCode', 'کد پستی', { value: '', InTable: false }),
 
     new PropertyConfiguration('ShortDescription', 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
@@ -48,8 +48,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('CellPhone2', 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
 
 
-    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], Type: 'list', Validators: [] }),
-    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', Type: 'list', Validators: [] }),
+    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], InTable: false,  Type: 'list', Validators: [] }),
+    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', InTable: false,  Type: 'list', Validators: [] }),
 
   ], { icon: 'storefront', neededData: [CategoryComponent, ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
