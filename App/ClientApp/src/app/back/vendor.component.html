@@ -4,7 +4,7 @@
     <nz-tab nzTitle=" اطلاعات فروشگاه">
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
-        {{item.controls.Id.Value}}
+        ----{{item.controls.Id.value}}
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
@@ -113,7 +113,7 @@
         </div>
       </form>
     </nz-tab>
-    <nz-tab *ngIf="item.controls.Id.Value" nzTitle=" لوگو فروشگاه">
+    <nz-tab *ngIf="item.controls.Id.value" nzTitle=" لوگو فروشگاه">
 
       <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
         <nz-form-label>لوگو</nz-form-label>
@@ -135,7 +135,7 @@
 
     </nz-tab>
 
-    <nz-tab *ngIf="item.controls.Id.Value" nzTitle=" تصاویر فروشگاه({{item.controls.Images.value?.length}})">
+    <nz-tab *ngIf="item.controls.Id.value" nzTitle=" تصاویر فروشگاه({{item.controls.Images.value?.length}})">
 
       <div nz-row>
         <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">

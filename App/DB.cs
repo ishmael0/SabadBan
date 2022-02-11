@@ -3,9 +3,30 @@ using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Host.Models;
+using Core.Controllers;
+using Microsoft.Extensions.Options;
+using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc;
+using Core.Services;
 
 namespace Host.DBContext
 {
+    public class VendorController : BaseController<DB, Vendor>
+    {
+        public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options, Action<Vendor> beforeSet = null, Expression<Func<Vendor, bool>> tsExp = null) : base(dbContext, upm, options, beforeSet, tsExp)
+        {
+        }
+        [HttpGet]
+        public async JR<bool> ConfirmCendor([FromBody] int id )
+        {
+            var item = await _context.Vendors.FirstOrDefaultAsync(c => c.Id == id);
+            if(item == null )
+            {
+                return new JR<bool>(StatusCodes.Status400BadRequest, "شناسه فروشگاه وجود ندارد");
+            }
+            if()
+        }
+    } 
     public class DB : BaseWebSiteDBContext
     {
         public DbSet<Category> Categories { set; get; }
