@@ -166,6 +166,7 @@ export class VendorBalanceComponent extends BaseComponent<VendorBalance> {
 
   override async fill() {
     let banks = this.dataManager.getLoadedData(BankComponent);
+    console.log(banks)
   }
 }
 @Component({

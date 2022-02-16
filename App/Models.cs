@@ -38,7 +38,9 @@ namespace Host.Models
     [SafeToGetAll]
     public class Bank : BaseModelWithTitle
     {
-        public string ValidatorString { set; get; }
+        public string ShebaValidator { set; get; }
+        public string CardValidator { set; get; }
+        public string AccountNumberValidator { set; get; }
     }
  
     public class Vendor : BaseModelWithTitle
