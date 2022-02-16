@@ -1,6 +1,23 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+
+
+
+
+function reportableClassDecorator<T extends { new(...args: any[]): {} }>(constructor: T) {
+  return class extends constructor {
+    reportingURL = "http://www...";
+  };
+}
+@reportableClassDecorator
+export class A {
+
+}
+
+
 
 
 @Component({
@@ -11,8 +28,16 @@ import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CityComponent extends BaseComponent {
-
+  override async ngOnInit() {
+    await super.ngOnInit();
+    var x = new A();
+    console.log(x);
+  }
 }
+
+
+
+
 
 @Component({
   selector: 'app-bank',
@@ -61,7 +86,7 @@ export class ProvinceComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TicketComponent extends BaseComponent{
+export class TicketComponent extends BaseComponent {
 
 }
 @Component({
@@ -82,7 +107,7 @@ export class TransactionComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendeeComponent extends BaseComponent{
+export class VendeeComponent extends BaseComponent {
 
 
 }
@@ -94,21 +119,24 @@ export class VendeeComponent extends BaseComponent{
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorComponent extends BaseComponent {
-
-
   nodes: NzTreeNodeOptions[] = [];
+  cities: any[] = [];
   override async fill() {
     let provinces = this.dataManager.getLoadedData(ProvinceComponent);
-    let cities = this.dataManager.getLoadedData(CityComponent);
-    this.nodes = provinces.map((c:any) => ({
+    this.cities = this.dataManager.getLoadedData(CityComponent);
+    this.nodes = provinces.map((c: any) => ({
       title: c.Title,
       key: "_" + c.Id,
-      children: cities.filter((d: any) => d.ProvinceId == c.Id).map((d: any) => ({ title: d.Title, key:d.Id, isLeaf:true }))
+      selectable: false,
+      children: this.cities.filter((d: any) => d.ProvinceId == c.Id).map((d: any) => ({ title: d.Title, key: d.Id, isLeaf: true }))
     }));
   }
-
+  override onGet(m: string[], d: any) {
+    super.onGet(m, d);
+    d.Records.forEach((e: any) => { e.CityTitle = this.cities.find(c => c.Id == e.CityId)?.Title });
+  }
   imageModal = false;
-  async addImage(e:any) {
+  async addImage(e: any) {
     this.imageModal = false;
     let x: any[] = this.selectedForm().controls['Images'].value;
     x.push({ Path: e, Description: '' });
@@ -119,6 +147,14 @@ export class VendorComponent extends BaseComponent {
     this.logoModal = false;
     let x: any = this.selectedForm().controls['Images'].setValue({ Path: e, Description: '' });
     this.makeItDirty(this.selectedForm());
+  }
+  async ConfirmVendor(item: any) {
+    this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, this.dataManager.key, {
+      params: { Id: item.Id },
+      action: 'ConfirmVendor', onSuccess: (m: string[], d: any) => {
+      }
+    }))
+    releaseEvents
   }
 }
 @Component({
@@ -137,9 +173,11 @@ export class VendorBankAccountComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBalanceComponent extends BaseComponent{
+export class VendorBalanceComponent extends BaseComponent {
 
-
+  override async fill() {
+    let banks = this.dataManager.getLoadedData(BankComponent);
+  }
 }
 @Component({
   selector: 'app-vendor-sell',

@@ -48,7 +48,7 @@ namespace Host.Models
         public virtual City City { set; get; }
         public int CityId { set; get; }
         public string Address { set; get; }
-        //public string TitleEn { set; get; }
+        public string TitleEn { set; get; }
 
         [MaxLength(100)]
         public string PostalCOde { set; get; }
@@ -87,7 +87,7 @@ namespace Host.Models
         public int Created { set; get; }
         public int Canceled { set; get; }
     }
-    public class VendorBankAccount : BaseModel
+    public class VendorBankAccount : BaseModelWithTitle
     {
         [ForeignKey("BankId")]
         public virtual Bank Bank { set; get; }

@@ -56,12 +56,17 @@
 
 </ng-template>
 
+
 <ng-template #tableBody let-item="item">
-  <td> {{ item.Id }}</td>
-  <td></td>
-
+  <td>{{ item.Id }}</td>
+  <td>{{ item.Create_}}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{item.Successed}}</td>
+  <td>{{item.Confirmed}}</td>
+  <td>{{item.Created}}</td>
+  <td>{{item.Confirmed - item.Canceled}}</td>
+  <td>{{item.Canceled}}</td>
 </ng-template>
-
 
 
 

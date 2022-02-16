@@ -34,7 +34,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
     new PropertyConfiguration('CityId', 'شهرستان', { Validators: [Validators.required] }),
-    new PropertyConfiguration('Address', 'آدرس', { value: '',  InTable: false }),
+    new PropertyConfiguration('Address', 'آدرس', { value: '', InTable: false }),
     new PropertyConfiguration('PostalCode', 'کد پستی', { value: '', InTable: false }),
 
     new PropertyConfiguration('ShortDescription', 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
@@ -48,8 +48,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('CellPhone2', 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
 
 
-    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], InTable: false,  Type: 'list', Validators: [] }),
-    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', InTable: false,  Type: 'list', Validators: [] }),
+    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], InTable: false, Type: 'list', Validators: [] }),
+    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', InTable: false, Type: 'list', Validators: [] }),
 
   ], { icon: 'storefront', neededData: [CategoryComponent, ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
@@ -70,14 +70,14 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration('Canceled', 'فاکتور باطل شده', {}),
   ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
   new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
-    ...defaultPropertyConfiguration,
+    ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration('BankId', 'بانک', {}),
     //new PropertyConfiguration('VendorId', 'فروشگاه', {}),
     new PropertyConfiguration('AccountNumber', 'شماره حساب', { InTable: false }),
     new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false }),
     new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false }),
     new PropertyConfiguration('Priority', 'اولویت', {}),
-  ], { neededData: [BankComponent] }),
+  ], { icon:'bank', getTitle: (item: FormGroup) => { let x: string = item.controls['Title'].value; if (!x.isUndefinedOrWhiteSpaces()) { return x; } return "جدید"; }, neededData: [BankComponent] }),
   new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشگاه', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration('VendorId', 'فروشگاه', {}),
@@ -147,3 +147,7 @@ export class BackModule {
     wss.selectedWebsite = config;
   }
 }
+
+
+
+

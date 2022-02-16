@@ -4,7 +4,6 @@
     <nz-tab nzTitle=" اطلاعات فروشگاه">
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
-        ----{{item.controls.Id.value}}
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
@@ -174,6 +173,17 @@
 
 
 
+<ng-template #otherOptions let-item="item">
+
+  <i *ngIf="ps.HasAccess(this.dataManager.key, 'VendorConfirm')"
+     nz-icon
+     class="larger largerOnHover"
+     style="color: #87CEEB;"
+     [innerHtml]="icons['store-outline']"
+     (click)="ConfirmVendor(item)"
+     nz-tooltip nzTooltipTitle="ایجاد اطلاعات فروشگاه"></i>
+
+</ng-template>
 <ng-template #tableBodyPicker let-item="item">
   <td>{{ item.Id }}</td>
 </ng-template>
@@ -184,8 +194,9 @@
   <td>{{ item.Create_}}</td>
   <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
   <td>{{ item.TitleEn}}</td>
-  <td>{{ item.CityId}}</td>
+  <td>{{ item.CityTitle}}</td>
 </ng-template>
+
 
 <ng-container *ngIf="mainTemplate">
   <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">

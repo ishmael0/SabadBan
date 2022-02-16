@@ -1,5 +1,5 @@
 <ng-template #form let-item="item">
-  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
   <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
 
     <div nz-row>
@@ -54,11 +54,6 @@
 
 </ng-template>
 
-<ng-template #tableBody let-item="item">
-  <td> {{ item.Id }}</td>
-  <td></td>
-
-</ng-template>
 
 
 

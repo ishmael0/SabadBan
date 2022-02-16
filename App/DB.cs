@@ -17,7 +17,7 @@ namespace Host.DBContext
         {
         }
         [HttpGet]
-        public async Task<JR<bool>> ConfirmVendor([FromBody] int id)
+        public async Task<JR<bool>> ConfirmVendor([FromQuery] int id)
         {
             var item = await _context.Vendors.FirstOrDefaultAsync(c => c.Id == id);
             if (item == null)
