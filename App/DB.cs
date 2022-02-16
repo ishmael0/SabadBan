@@ -17,16 +17,18 @@ namespace Host.DBContext
         {
         }
         [HttpGet]
-        public async JR<bool> ConfirmCendor([FromBody] int id )
+        public async Task<JR<bool>> ConfirmVendor([FromBody] int id)
         {
             var item = await _context.Vendors.FirstOrDefaultAsync(c => c.Id == id);
-            if(item == null )
+            if (item == null)
             {
-                return new JR<bool>(StatusCodes.Status400BadRequest, "شناسه فروشگاه وجود ندارد");
+                return JR<bool>.FailureBadRequest("شناسه فروشگاه وجود ندارد");
             }
-            if()
+            _context.VendorSells.Add(new VendorSell { VendorId = id });
+            await _context.SaveChangesAsync();
+            return JR<bool>.OK("به روز رسانی فروشگاه با موفقیت انجام شد");
         }
-    } 
+    }
     public class DB : BaseWebSiteDBContext
     {
         public DbSet<Category> Categories { set; get; }

@@ -3,15 +3,10 @@ using Core.Controllers;
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Host.Models
 {
-    public class VendorController : BaseController<DB, Vendor>
-    {
-        public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
-        {
-        }
-    }
     public class Images
     {
         public string Path { set; get; }
@@ -80,6 +75,7 @@ namespace Host.Models
     {
 
     }
+    [Index(nameof(VendorId), IsUnique = true)]
     public class VendorSell : BaseModel
     {
         [ForeignKey("VendorId")]
