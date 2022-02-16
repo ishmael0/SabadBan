@@ -3,19 +3,10 @@ import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/templa
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { Bank, Category, City, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
 
 
 
-
-function reportableClassDecorator<T extends { new(...args: any[]): {} }>(constructor: T) {
-  return class extends constructor {
-    reportingURL = "http://www...";
-  };
-}
-@reportableClassDecorator
-export class A {
-
-}
 
 
 
@@ -27,11 +18,9 @@ export class A {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CityComponent extends BaseComponent {
+export class CityComponent extends BaseComponent<City> {
   override async ngOnInit() {
     await super.ngOnInit();
-    var x = new A();
-    console.log(x);
   }
 }
 
@@ -46,7 +35,7 @@ export class CityComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BankComponent extends BaseComponent {
+export class BankComponent extends BaseComponent<Bank> {
 
 
 }
@@ -57,7 +46,7 @@ export class BankComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryComponent extends BaseComponent {
+export class CategoryComponent extends BaseComponent<Category> {
 
   imageModal = false;
   async addImage(e: string) {
@@ -75,7 +64,7 @@ export class CategoryComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProvinceComponent extends BaseComponent {
+export class ProvinceComponent extends BaseComponent<Province> {
 
 
 }
@@ -86,7 +75,7 @@ export class ProvinceComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TicketComponent extends BaseComponent {
+export class TicketComponent extends BaseComponent<Ticket> {
 
 }
 @Component({
@@ -96,7 +85,7 @@ export class TicketComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionComponent extends BaseComponent {
+export class TransactionComponent extends BaseComponent<Transaction> {
 
 
 }
@@ -107,7 +96,7 @@ export class TransactionComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendeeComponent extends BaseComponent {
+export class VendeeComponent extends BaseComponent<Vendee> {
 
 
 }
@@ -118,7 +107,7 @@ export class VendeeComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorComponent extends BaseComponent {
+export class VendorComponent extends BaseComponent<Vendor> {
   nodes: NzTreeNodeOptions[] = [];
   cities: any[] = [];
   override async fill() {
@@ -164,7 +153,7 @@ export class VendorComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBankAccountComponent extends BaseComponent {
+export class VendorBankAccountComponent extends BaseComponent<VendorBankAccount> {
 }
 @Component({
   selector: 'app-vendor-balance',
@@ -173,7 +162,7 @@ export class VendorBankAccountComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorBalanceComponent extends BaseComponent {
+export class VendorBalanceComponent extends BaseComponent<VendorBalance> {
 
   override async fill() {
     let banks = this.dataManager.getLoadedData(BankComponent);
@@ -186,7 +175,7 @@ export class VendorBalanceComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorSellComponent extends BaseComponent {
+export class VendorSellComponent extends BaseComponent<VendorSell> {
 
 }
 
@@ -197,7 +186,7 @@ export class VendorSellComponent extends BaseComponent {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendorWithdrawComponent extends BaseComponent {
+export class VendorWithdrawComponent extends BaseComponent<VendorWithdraw> {
 
 }
 

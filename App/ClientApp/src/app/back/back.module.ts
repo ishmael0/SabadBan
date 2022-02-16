@@ -11,45 +11,110 @@ import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/templ
 import { defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/properties';
 import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent } from './components';
 
+import "reflect-metadata";
+
+
+export class Category {
+  ParentCategoryId: number = 0;
+  EnTitle: number = 0;
+  Icon: string = '';
+  Summary: string = '';
+  Description: string = '';
+  Priority: number = 0;
+  Color: string = '';
+  Images: any[] = [];
+}
+export class Vendor {
+  TitleEn: any;
+  CityId: any;
+  Address: any;
+  PostalCode: any;
+  ShortDescription: any;
+  Description: any;
+  longitude: any;
+  latitude: any;
+  Phone1: any;
+  Phone2: any;
+  CellPhone1: any;
+  CellPhone2: any;
+  Images: any;
+  Logo: any;
+}
+export class VendorSell {
+  Successed: any;
+  Confirmed: any;
+  Created: any;
+  WaitingForPayment: any;
+  Canceled: any;
+}
+export class VendorBankAccount {
+  BankId: any;
+  AccountNumber: any;
+  Sheba: any;
+  CardNumber: any;
+  Priority: any;
+}
+export class VendorBalance {
+  VendorId: any;
+  Free: any;
+  Paid: any;
+  Block: any;
+}
+export class VendorWithdraw {
+  VendorId: any;
+  BankId: any;
+  Value: any;
+  TransActionNumber: any;
+  TransActionType: any;
+  TransActionDateTime: any;
+}
+export class Transaction { }
+export class Vendee { }
+export class Province { }
+export class City {
+  ProvinceId: any;
+}
+export class Bank { }
+export class Ticket { }
 
 
 
 export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مدیریت وب سایت ', ' ', [
   //new EntityConfiguration(VendeeComponent, 'داشبورد فروشنده', [], { icon: 'file-tree' }),
-  new EntityConfiguration(CategoryComponent, 'دسته بندی', [
+  new EntityConfiguration<Category>(Category.name,CategoryComponent, 'دسته بندی', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration('ParentCategoryId', 'شناسه والد', { value: null, Type: 'number', Validators: [] }),
-    new PropertyConfiguration('EnTitle', 'نام انگلیسی', { value: '', Type: 'number', Validators: [] }),
-    new PropertyConfiguration('Icon', 'آیکون', { value: '', Type: 'number', Validators: [] }),
-    new PropertyConfiguration('Summary', 'توضیحات خلاصه', { value: null, Type: 'string', Validators: [] }),
-    new PropertyConfiguration('Description', 'توضیحات', { value: '', Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    new PropertyConfiguration('Priority', 'اولویت', { value: 0, Type: 'number', Validators: [] }),
-    new PropertyConfiguration('Color', 'رنگ', { value: '', Type: 'color', Validators: [] }),
-    new PropertyConfiguration('Images', 'تصاویر', { value: [], Type: 'list', Validators: [] }),
+    new PropertyConfiguration(c => c.ParentCategoryId, 'شناسه والد', { value: null, Type: 'number', Validators: [] }),
+    new PropertyConfiguration(c=>c.EnTitle, 'نام انگلیسی', { value: '', Type: 'number', Validators: [] }),
+    new PropertyConfiguration(c=>c.Icon, 'آیکون', { value: '', Type: 'number', Validators: [] }),
+    new PropertyConfiguration(c=>c.Summary, 'توضیحات خلاصه', { value: null, Type: 'string', Validators: [] }),
+    new PropertyConfiguration(c=>c.Description, 'توضیحات', { value: '', Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration(c=>c.Priority, 'اولویت', { value: 0, Type: 'number', Validators: [] }),
+    new PropertyConfiguration(c=>c.Color, 'رنگ', { value: '', Type: 'color', Validators: [] }),
+    new PropertyConfiguration(c=>c.Images, 'تصاویر', { value: [], Type: 'list', Validators: [] }),
   ], { componentType: ComponentTypes.tree, icon: 'file-tree' }),
 
-  new EntityConfiguration(VendorComponent, 'فروشگاه', [
+  new EntityConfiguration<Vendor>(Vendor.name,VendorComponent, 'فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration('TitleEn', 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    //new PropertyConfiguration('IsConfirmed', 'تایید شده', { Type:'bool' }),
-    //new PropertyConfiguration('Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
-    new PropertyConfiguration('CityId', 'شهرستان', { Validators: [Validators.required] }),
-    new PropertyConfiguration('Address', 'آدرس', { value: '', InTable: false }),
-    new PropertyConfiguration('PostalCode', 'کد پستی', { value: '', InTable: false }),
+    new PropertyConfiguration(c=>c.TitleEn, 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    //new PropertyConfiguration(c=>c.IsConfirmed', 'تایید شده', { Type:'bool' }),
+    //new PropertyConfiguration(c=>c.Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
+    new PropertyConfiguration(c=>c.CityId, 'شهرستان', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c=>c.Address, 'آدرس', { value: '', InTable: false }),
+    new PropertyConfiguration(c=>c.PostalCode, 'کد پستی', { value: '', InTable: false }),
 
-    new PropertyConfiguration('ShortDescription', 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    new PropertyConfiguration('Description', 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
-    new PropertyConfiguration('longitude', 'طول جغرافیایی', { value: 0, InTable: false }),
-    new PropertyConfiguration('latitude', 'عرض جغرافیایی', { value: 0, InTable: false }),
+    new PropertyConfiguration(c=>c.ShortDescription, 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration(c=>c.Description, 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration(c=>c.longitude, 'طول جغرافیایی', { value: 0, InTable: false }),
+    new PropertyConfiguration(c=>c.latitude, 'عرض جغرافیایی', { value: 0, InTable: false }),
 
-    new PropertyConfiguration('Phone1', 'شماره تلفن ثابت اول', { value: '', InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
-    new PropertyConfiguration('Phone2', 'شماره تلفن ثابت دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
-    new PropertyConfiguration('CellPhone1', 'شماره همراه اول', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
-    new PropertyConfiguration('CellPhone2', 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration(c=>c.Phone1, 'شماره تلفن ثابت اول', { value: '', InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c=>c.Phone2, 'شماره تلفن ثابت دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c=>c.CellPhone1, 'شماره همراه اول', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration(c=>c.CellPhone2, 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
 
 
-    new PropertyConfiguration('Images', 'تصاویر فروشگاه', { value: [], InTable: false, Type: 'list', Validators: [] }),
-    new PropertyConfiguration('Logo', 'لوگو فروشگاه', { value: '', InTable: false, Type: 'list', Validators: [] }),
+    new PropertyConfiguration(c=>c.Images, 'تصاویر فروشگاه', { value: [], InTable: false, Type: 'list', Validators: [] }),
+    new PropertyConfiguration(c=>c.Logo, 'لوگو فروشگاه', { value: '', InTable: false, Type: 'list', Validators: [] }),
 
   ], { icon: 'storefront', neededData: [CategoryComponent, ProvinceComponent, CityComponent] }),
   //CreatedReadyToConfirm
@@ -61,61 +126,61 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration(VendorSellComponent, 'اطلاعات فروش فروشگاه', [
+new EntityConfiguration<VendorSell>(VendorSell.name,VendorSellComponent, 'اطلاعات فروش فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('Successed', 'فاکتور موفق', {}),
-    new PropertyConfiguration('Confirmed', 'فاکتور قطعی شده', {}),
-    new PropertyConfiguration('Created', 'فاکتور صادر شده', {}),
-    new PropertyConfiguration('WaitingForPayment', 'فاکتور در انتظار پرداخت', {}),
-    new PropertyConfiguration('Canceled', 'فاکتور باطل شده', {}),
+    new PropertyConfiguration(c=>c.Successed, 'فاکتور موفق', {}),
+    new PropertyConfiguration(c=>c.Confirmed, 'فاکتور قطعی شده', {}),
+    new PropertyConfiguration(c=>c.Created, 'فاکتور صادر شده', {}),
+    new PropertyConfiguration(c=>c.WaitingForPayment, 'فاکتور در انتظار پرداخت', {}),
+    new PropertyConfiguration(c=>c.Canceled, 'فاکتور باطل شده', {}),
   ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
-  new EntityConfiguration(VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
+  new EntityConfiguration<VendorBankAccount>(VendorBankAccount.name,VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration('BankId', 'بانک', {}),
-    //new PropertyConfiguration('VendorId', 'فروشگاه', {}),
-    new PropertyConfiguration('AccountNumber', 'شماره حساب', { InTable: false }),
-    new PropertyConfiguration('Sheba', 'شماره شبا', { InTable: false }),
-    new PropertyConfiguration('CardNumber', 'شماره کارت', { InTable: false }),
-    new PropertyConfiguration('Priority', 'اولویت', {}),
-  ], { icon:'bank', getTitle: (item: FormGroup) => { let x: string = item.controls['Title'].value; if (!x.isUndefinedOrWhiteSpaces()) { return x; } return "جدید"; }, neededData: [BankComponent] }),
-  new EntityConfiguration(VendorBalanceComponent, 'موجودی فروشگاه', [
+    new PropertyConfiguration(c=>c.BankId, 'بانک', {}),
+    //new PropertyConfiguration(c=>c.VendorId', 'فروشگاه', {}),
+    new PropertyConfiguration(c=>c.AccountNumber, 'شماره حساب', { InTable: false }),
+    new PropertyConfiguration(c=>c.Sheba, 'شماره شبا', { InTable: false }),
+    new PropertyConfiguration(c=>c.CardNumber, 'شماره کارت', { InTable: false }),
+    new PropertyConfiguration(c=>c.Priority, 'اولویت', {}),
+  ], { icon: 'bank', getTitle: (item: FormGroup) => { let x: string = item.controls['Title'].value; if (!x.isUndefinedOrWhiteSpaces()) { return x; } return "جدید"; }, neededData: [BankComponent] }),
+  new EntityConfiguration<VendorBalance>(VendorBalance.name,VendorBalanceComponent, 'موجودی فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('VendorId', 'فروشگاه', {}),
-    new PropertyConfiguration('Free', 'آزاد', {}),
-    new PropertyConfiguration('Paid', 'پرداخت شده', {}),
-    new PropertyConfiguration('Block', 'بلاک شده', {}),
+    new PropertyConfiguration(c=>c.VendorId, 'فروشگاه', {}),
+    new PropertyConfiguration(c=>c.Free, 'آزاد', {}),
+    new PropertyConfiguration(c=>c.Paid, 'پرداخت شده', {}),
+    new PropertyConfiguration(c=>c.Block, 'بلاک شده', {}),
   ], {}),
-  new EntityConfiguration(VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
+  new EntityConfiguration<VendorWithdraw>(VendorWithdraw.name,VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration('VendorId', 'فروشگاه', {}),
-    new PropertyConfiguration('BankId', 'بانک', {}),
-    new PropertyConfiguration('Value', 'مبلغ', {}),
-    new PropertyConfiguration('TransActionNumber', 'شماره پیگیری', {}),
-    new PropertyConfiguration('TransActionType', 'نوع انتقال', {}),
-    new PropertyConfiguration('TransActionDateTime', 'زمان اتقال', {}),
+    new PropertyConfiguration(c=>c.VendorId, 'فروشگاه', {}),
+    new PropertyConfiguration(c=>c.BankId, 'بانک', {}),
+    new PropertyConfiguration(c=>c.Value, 'مبلغ', {}),
+    new PropertyConfiguration(c=>c.TransActionNumber, 'شماره پیگیری', {}),
+    new PropertyConfiguration(c=>c.TransActionType, 'نوع انتقال', {}),
+    new PropertyConfiguration(c=>c.TransActionDateTime, 'زمان اتقال', {}),
   ], { neededData: [BankComponent] }),
 
-  new EntityConfiguration(TransactionComponent, 'تراکنش', [
+  new EntityConfiguration<Transaction>(Transaction.name,TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
-  new EntityConfiguration(VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
+  new EntityConfiguration<Vendee>(Vendee.name,VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
 
 
 
 
 
-  new EntityConfiguration(ProvinceComponent, 'استان', [
+  new EntityConfiguration<Province>(Province.name,ProvinceComponent, 'استان', [
     ...defaultPropertyWithTitleConfiguration,
   ], { componentType: ComponentTypes.table }),
 
-  new EntityConfiguration(CityComponent, 'شهرستان', [
+  new EntityConfiguration<City>(City.name,CityComponent, 'شهرستان', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration('ProvinceId', 'استان', {}),
+    new PropertyConfiguration(c=>c.ProvinceId, 'استان', {}),
   ], { neededData: [ProvinceComponent], componentType: ComponentTypes.table }),
 
-  new EntityConfiguration(BankComponent, 'بانک', [], { componentType: ComponentTypes.lazytable }),
+  new EntityConfiguration<Bank>(Bank.name,BankComponent, 'بانک', [], { componentType: ComponentTypes.lazytable }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
   //new EntityConfiguration(VendorComponent, '', [], {}),
-  new EntityConfiguration(TicketComponent, 'تیکت ها', [
+  new EntityConfiguration<Ticket>(Ticket.name,TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,
   ], {}),
 ]);
