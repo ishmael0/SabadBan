@@ -111,8 +111,8 @@ export class VendorComponent extends BaseComponent<Vendor> {
   nodes: NzTreeNodeOptions[] = [];
   cities: any[] = [];
   override async fill() {
-    let provinces = this.dataManager.getLoadedData(ProvinceComponent);
-    this.cities = this.dataManager.getLoadedData(CityComponent);
+    let provinces = this.dataManager.getLoadedData(Province);
+    this.cities = this.dataManager.getLoadedData(City);
     this.nodes = provinces.map((c: any) => ({
       title: c.Title,
       key: "_" + c.Id,
@@ -165,7 +165,7 @@ export class VendorBankAccountComponent extends BaseComponent<VendorBankAccount>
 export class VendorBalanceComponent extends BaseComponent<VendorBalance> {
 
   override async fill() {
-    let banks = this.dataManager.getLoadedData(BankComponent);
+    let banks = this.dataManager.getLoadedData(Bank);
     console.log(banks)
   }
 }
