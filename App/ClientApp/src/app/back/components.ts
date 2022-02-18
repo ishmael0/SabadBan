@@ -154,6 +154,10 @@ export class VendorComponent extends BaseComponent<Vendor> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorBankAccountComponent extends BaseComponent<VendorBankAccount> {
+  banks: Bank[] = [];
+  override async fill() {
+    this.banks = this.dataManager.getLoadedData(Bank);
+  }
 }
 @Component({
   selector: 'app-vendor-balance',

@@ -6,7 +6,9 @@
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   بانک  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
         <nz-form-control nzErrorTip="  بانک   را وارد کنید">
-          <input nz-input formControlName="BankId" />
+          <nz-select formControlName="BankId">
+            <nz-option *ngFor="let o of banks" nzValue="o.Id" [nzLabel]="o.Title"></nz-option>
+          </nz-select>
         </nz-form-control>
       </div>
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره حساب</nz-form-label>
