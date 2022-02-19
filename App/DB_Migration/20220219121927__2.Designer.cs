@@ -4,6 +4,7 @@ using Host.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220219121927__2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,7 +318,7 @@ namespace Host.DB_Migration
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirm")
                         .HasColumnType("bit");
@@ -325,10 +327,6 @@ namespace Host.DB_Migration
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhoneNumber")
-                        .IsUnique()
-                        .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.ToTable("Vendee");
                 });
@@ -446,14 +444,20 @@ namespace Host.DB_Migration
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("BankId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CardNumber")
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Priority")
-                        .HasMaxLength(16)
                         .HasColumnType("int");
 
                     b.Property<string>("Sheba")
@@ -514,42 +518,6 @@ namespace Host.DB_Migration
                         .IsUnique();
 
                     b.ToTable("VendorSells");
-                });
-
-            modelBuilder.Entity("Host.Models.VendorWithdraw", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("Create")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VendorBankAccountId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorBankAccountId");
-
-                    b.ToTable("VendorWithdraws");
                 });
 
             modelBuilder.Entity("Host.Models.Category", b =>
@@ -622,17 +590,6 @@ namespace Host.DB_Migration
                         .IsRequired();
 
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("Host.Models.VendorWithdraw", b =>
-                {
-                    b.HasOne("Host.Models.VendorBankAccount", "VendorBankAccount")
-                        .WithMany()
-                        .HasForeignKey("VendorBankAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VendorBankAccount");
                 });
 #pragma warning restore 612, 618
         }

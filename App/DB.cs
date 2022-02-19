@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using Core.Services;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Host.DBContext
 {
@@ -25,10 +26,17 @@ namespace Host.DBContext
                 return JR<bool>.FailureBadRequest("شناسه فروشگاه وجود ندارد");
             }
             _context.VendorSells.Add(new VendorSell { VendorId = id });
+            _context.VendorBalances.Add(new VendorBalance { VendorId = id });
             await _context.SaveChangesAsync();
             return JR<bool>.OK("به روز رسانی فروشگاه با موفقیت انجام شد");
         }
     }
+
+
+
+
+
+
     public class DB : BaseWebSiteDBContext
     {
         public DbSet<Category> Categories { set; get; }
@@ -37,7 +45,9 @@ namespace Host.DBContext
         public DbSet<Bank> Banks { set; get; }
         public DbSet<Vendor> Vendors { set; get; }
         public DbSet<VendorSell> VendorSells { set; get; }
+        public DbSet<VendorBalance> VendorBalances { set; get; }
         public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
+        public DbSet<VendorWithdraw>  VendorWithdraws { set; get; }
         public DB(DbContextOptions<DB> options) : base(options)
         {
 
@@ -48,7 +58,10 @@ namespace Host.DBContext
             modelBuilder.Entity<Category>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Images>>(v));
             modelBuilder.Entity<Vendee>().Property(e => e.Addresses).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Address>>(v));
             modelBuilder.Entity<Vendor>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Images>>(v));
-
+            modelBuilder.Entity<VendorSell>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<VendorBankAccount>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<VendorBalance>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<VendorWithdraw>().Property(e => e.VendorBankAccountId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
 
             //            modelBuilder.Entity<Content>().HasMany(p => p.KeyWords).WithMany(p => p.Contents).UsingEntity<ContentKeyword>(
             //j => j.HasOne(pt => pt.Keyword).WithMany(t => t.ContentKeyWords).HasForeignKey(pt => pt.KeywordId),

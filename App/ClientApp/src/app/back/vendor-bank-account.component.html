@@ -5,38 +5,27 @@
     <div nz-row>
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   بانک  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  بانک   را وارد کنید">
+         <nz-form-item><nz-form-control nzErrorTip="  بانک   را وارد کنید">
           <nz-select formControlName="BankId">
             <nz-option *ngFor="let o of banks" [nzValue]="o.Id" [nzLabel]="o.Title"></nz-option>
           </nz-select>
-        </nz-form-control>
+         </nz-form-control></nz-form-item> 
       </div>
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره حساب</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  شماره حساب   را وارد کنید">
-          <input nz-input formControlName="AccountNumber" />
-        </nz-form-control>
-      </div>
+ 
 
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره شبا</nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  شماره شبا را وارد کنید">
+         <nz-form-item><nz-form-control nzErrorTip="  شماره شبا را وارد کنید">
           <input nz-input formControlName="Sheba" />
-        </nz-form-control>
+         </nz-form-control></nz-form-item> 
       </div>
 
-
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره کارت</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  شماره کارت را وارد کنید">
-          <input nz-input formControlName="CardNumber" />
-        </nz-form-control>
-      </div>
+ 
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">اولویت</nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  اولویت را وارد کنید">
+         <nz-form-item><nz-form-control nzErrorTip="  اولویت را وارد کنید">
           <input nz-input formControlName="Priority" />
-        </nz-form-control>
+         </nz-form-control></nz-form-item> 
       </div>
     </div>
   </form>

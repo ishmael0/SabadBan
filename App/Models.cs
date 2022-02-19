@@ -83,7 +83,6 @@ namespace Host.Models
         [ForeignKey("VendorId")]
         public virtual Vendor Vendor { set; get; }
         public int VendorId { set; get; }
-
         public int Successed { set; get; }
         public int Confirmed { set; get; }
         public int Created { set; get; }
@@ -99,13 +98,13 @@ namespace Host.Models
         [ForeignKey("BankId")]
         public virtual Bank Bank { set; get; }
         public int BankId { set; get; }
-        public string AccountNumber { set; get; }
+        //public string AccountNumber { set; get; }
         [MaxLength(24)]
         [MinLength(24)]
         public string Sheba { set; get; }
         [MaxLength(16)]
         [MinLength(16)]
-        public string CardNumber { set; get; }
+        //public string CardNumber { set; get; }
         public int Priority { set; get; }
 
     }
@@ -120,14 +119,16 @@ namespace Host.Models
     }
     public class VendorWithdraw : BaseModel
     {
-        [ForeignKey("VendorId")]
-        public virtual Vendor Vendor { set; get; }
-        public int VendorId { set; get; }
-        public int Value { set; get; }
         [ForeignKey("VendorBankAccountId")]
         public virtual VendorBankAccount VendorBankAccount { set; get; }
         public int VendorBankAccountId { set; get; }
+        public int Value { set; get; }
+        public string Number { set; get; }
+        public int Type { set; get; }
+        public DateTime DateTime { set; get; }
+ 
     }
+    [Index(nameof(PhoneNumber), IsUnique = true)]
     public class Vendee : BaseModel
     {
         public string FirstName { set; get; }

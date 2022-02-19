@@ -3,40 +3,34 @@
   <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
 
     <div nz-row>
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> بانک </nz-form-label>
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> آزاد  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  بانک را وارد کنید">
-          <input nz-input formControlName="BankId" />
-        </nz-form-control>
-      </div>
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> مبلغ  </nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="مبلغ">
-          <input type="number" nz-input formControlName="Value" />
-        </nz-form-control>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="آزاد">
+            <input type="number" nz-input formControlName="Free" />
+          </nz-form-control>
+        </nz-form-item>
       </div>
 
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره تراکنش</nz-form-label>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> بلاک شده  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  شماره تراکنش را وارد کنید">
-          <input type="number" nz-input formControlName="TransActionNumber" />
-        </nz-form-control>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="بلاک شده ">
+            <input type="number" nz-input formControlName="Block" />
+          </nz-form-control>
+        </nz-form-item>
       </div>
 
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> نوع انتقال</nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="  نوع انتقال را وارد کنید">
-          <input type="number" nz-input formControlName="TransActionType" />
-        </nz-form-control>
-      </div>
 
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> زمان اتقال</nz-form-label>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> پرداخت شده  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-control nzErrorTip="   زمان اتقال را وارد کنید">
-          <input type="number" nz-input formControlName="TransActionDateTime" />
-        </nz-form-control>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="پرداخت شده  ">
+            <input type="number" nz-input formControlName="Paid" />
+          </nz-form-control>
+        </nz-form-item>
       </div>
-
 
     </div>
   </form>
@@ -57,8 +51,13 @@
 </ng-template>
 
 <ng-template #tableBody let-item="item">
-  <td> {{ item.Id }}</td>
-  <td></td>
+  <td>{{ item.Id }}</td>
+  <td>{{ item.Create_}}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{ item.VendorId}}</td>
+  <td>{{ item.Free}}</td>
+  <td>{{ item.Paid}}</td>
+  <td>{{ item.Block}}</td>
 
 </ng-template>
 
@@ -70,11 +69,5 @@
 
 <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
 
-<ng-template #tableBody let-item="item">
-  <td>{{ item.Id }}</td>
-  <td>{{ item.Title }}</td>
-  <td>{{ item.Create_}}</td>
-  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
-</ng-template>
 
 

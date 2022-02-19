@@ -7,16 +7,16 @@
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="عنوان لاتین را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="عنوان لاتین را وارد کنید">
               <input nz-input formControlName="TitleEn" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">توضیح مختصر </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="توضیح مختصر را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="توضیح مختصر را وارد کنید">
               <input nz-input formControlName="ShortDescription" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
 
@@ -25,9 +25,9 @@
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   توضیحات </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="21">
-            <nz-form-control nzErrorTip="   توضیحات را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="   توضیحات را وارد کنید">
               <textarea nz-input formControlName="Description" placeholder=" توضیحات" [nzAutosize]="{ minRows: 3, maxRows: 15 }"></textarea>
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
         </div>
       </form>
@@ -37,7 +37,7 @@
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">استان و شهرستان  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="استان و شهرستان را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="استان و شهرستان را وارد کنید">
               <!--<nz-cascader [nzShowSearch]="true" nzPlaceHolder="استان و شهرستان" [nzOptions]="nodes" formControlName="CityId"></nz-cascader>-->
 
               <nz-tree-select [nzNodes]="nodes"
@@ -47,28 +47,28 @@
 
 
 
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  کد پستی  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="    کد پستی را وارد کنید  ">
+             <nz-form-item><nz-form-control nzErrorTip="    کد پستی را وارد کنید  ">
               <input nz-input formControlName="PostalCode" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   طول جغرافیایی</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="طول جغرافیایی   را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="طول جغرافیایی   را وارد کنید">
               <input nz-input formControlName="longitude" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   عرض جغرافیایی</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="عرض جغرافیایی   را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="عرض جغرافیایی   را وارد کنید">
               <input nz-input formControlName="latitude" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
         </div>
         <div nz-row>
@@ -77,37 +77,37 @@
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره تلفن ثابت اول  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
+             <nz-form-item><nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
               <input nz-input formControlName="Phone1" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره تلفن ثابت دوم  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
+             <nz-form-item><nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
               <input nz-input formControlName="Phone2" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره همراه اول  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
+             <nz-form-item><nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
               <input nz-input formControlName="CellPhone1" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره همراه دوم  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
+             <nz-form-item><nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
               <input nz-input formControlName="CellPhone2" />
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
 
         </div>
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   ادامه آدرس</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-            <nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">
+             <nz-form-item><nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">
               <textarea nz-input formControlName="Address"></textarea>
-            </nz-form-control>
+             </nz-form-control></nz-form-item> 
           </nz-form-item>
         </div>
       </form>

@@ -24,15 +24,15 @@ export class Category extends BaseModelWithTitle {
   Color: string = '';
   Images: any[] = [];
 }
-export class Vendor extends BaseModelWithTitle{
+export class Vendor extends BaseModelWithTitle {
   TitleEn: string = '';
-  CityId!: number ;
+  CityId!: number;
   Address: string = '';
   PostalCode: string = '';
   ShortDescription: string = '';
   Description: string = '';
-  longitude=0;
-  latitude=0;
+  longitude = 0;
+  latitude = 0;
   Phone1: string = '';
   Phone2: string = '';
   CellPhone1: string = '';
@@ -40,8 +40,9 @@ export class Vendor extends BaseModelWithTitle{
   Images: any[] = [];
   Logo: any;
 }
-export class VendorSell extends BaseModel{
-  Successed = 0;;
+export class VendorSell extends BaseModel {
+  Successed = 0;
+  VendorId!: number;
   Confirmed = 0;;
   Created = 0;;
   WaitingForPayment = 0;;
@@ -50,32 +51,29 @@ export class VendorSell extends BaseModel{
 export class VendorBankAccount extends BaseModel {
   BankId!: number;
   VendorId!: number;
-  AccountNumber = '';
   Sheba = '';
-  CardNumber = '';
   Priority = 0;
 }
-export class VendorBalance extends BaseModel{
-  VendorId: any;
+export class VendorBalance extends BaseModel {
+  VendorId!: number;
   Free: any;
   Paid: any;
   Block: any;
 }
 export class VendorWithdraw extends BaseModel {
-  VendorId: any;
-  BankId: any;
-  Value: any;
-  TransActionNumber: any;
-  TransActionType: any;
-  TransActionDateTime: any;
+  Value: number = 0;
+  Number = 0;
+  Type = 0;
+  DateTime = '';
+  VendorBankAccountId!:number;
 }
 export class Transaction extends BaseModelWithTitle { }
-export class Vendee extends BaseModelWithTitle{ }
+export class Vendee extends BaseModelWithTitle { }
 export class Province extends BaseModelWithTitle { }
 export class City extends BaseModelWithTitle {
   ProvinceId: any;
 }
-export class Bank extends BaseModelWithTitle{
+export class Bank extends BaseModelWithTitle {
   ShebaValidator = '';
   CardValidator = '';
   AccountNumberValidator = '';
@@ -133,38 +131,38 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration<VendorSell>(VendorSell, VendorSellComponent, 'اطلاعات فروش فروشگاه', [
     ...defaultPropertyConfiguration,
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Successed, 'فاکتور موفق', {}),
     new PropertyConfiguration(c => c.Confirmed, 'فاکتور قطعی شده', {}),
     new PropertyConfiguration(c => c.Created, 'فاکتور صادر شده', {}),
     new PropertyConfiguration(c => c.WaitingForPayment, 'فاکتور در انتظار پرداخت', {}),
     new PropertyConfiguration(c => c.Canceled, 'فاکتور باطل شده', {}),
-  ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
-  new EntityConfiguration<VendorBankAccount>(VendorBankAccount, VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
-    ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.BankId, 'بانک', { Validators: [Validators.required] }),
-    //new PropertyConfiguration(c=>c.VendorId', 'فروشگاه', {}),
-    new PropertyConfiguration(c => c.AccountNumber, 'شماره حساب', { InTable: false }),
-    new PropertyConfiguration(c => c.Sheba, 'شماره شبا', { InTable: false }),
-    new PropertyConfiguration(c => c.CardNumber, 'شماره کارت', { InTable: false }),
-    new PropertyConfiguration(c => c.Priority, 'اولویت', {}),
-  ], { icon: 'bank', getTitle: (item: FormGroup) => { return item.controls['Title']?.value??"جدید"; }, neededData: [Bank] }),
-  new EntityConfiguration<VendorBalance>(VendorBalance, VendorBalanceComponent, 'موجودی فروشگاه', [
+  ], { icon: 'storefront', canAdd: false, canDelete: false, getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
+  new EntityConfiguration<VendorBalance>(VendorBalance, VendorBalanceComponent, 'موجودی حساب فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', {}),
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Free, 'آزاد', {}),
     new PropertyConfiguration(c => c.Paid, 'پرداخت شده', {}),
     new PropertyConfiguration(c => c.Block, 'بلاک شده', {}),
-  ], {}),
+  ], { icon: 'bank', canAdd: false, canDelete: false, getTitle: (item: FormGroup) => { return item.controls['Title']?.value ?? "جدید"; } }),
+  new EntityConfiguration<VendorBankAccount>(VendorBankAccount, VendorBankAccountComponent, 'حساب بانکی فروشگاه', [
+    ...defaultPropertyWithTitleConfiguration,
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.BankId, 'بانک', { Validators: [Validators.required] }),
+     new PropertyConfiguration(c => c.Sheba, 'شماره شبا', { InTable: false }),
+     new PropertyConfiguration(c => c.Priority, 'اولویت', {}),
+  ], { icon: 'bank', getTitle: (item: FormGroup) => { return item.controls['Title']?.value ?? "جدید"; }, neededData: [Bank] }),
   new EntityConfiguration<VendorWithdraw>(VendorWithdraw, VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', {}),
-    new PropertyConfiguration(c => c.BankId, 'بانک', {}),
+    new PropertyConfiguration(c => c.VendorBankAccountId, 'حساب', {}),
     new PropertyConfiguration(c => c.Value, 'مبلغ', {}),
-    new PropertyConfiguration(c => c.TransActionNumber, 'شماره پیگیری', {}),
-    new PropertyConfiguration(c => c.TransActionType, 'نوع انتقال', {}),
-    new PropertyConfiguration(c => c.TransActionDateTime, 'زمان اتقال', {}),
-  ], { neededData: [Bank] }),
+    new PropertyConfiguration(c => c.Number, 'شماره پیگیری', {}),
+    new PropertyConfiguration(c => c.Type, 'نوع انتقال', {}),
+    new PropertyConfiguration(c => c.DateTime, 'زمان اتقال', {}),
+  ], { neededData: [Bank], canAdd: false, canDelete: false, getTitle: (item: FormGroup) => { return item.controls['Title']?.value ?? "جدید"; } }),
+
+
+
 
   new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
@@ -188,7 +186,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.ShebaValidator, 'اعتبار سنج شماره شبا', {}),
     new PropertyConfiguration(c => c.CardValidator, 'اعتبار سنج شماره کارت', {}),
     new PropertyConfiguration(c => c.AccountNumberValidator, 'اعتبار سنج شماره حساب', {}),
-  ], { icon:'cash-multiple', componentType: ComponentTypes.table }),
+  ], { icon: 'cash-multiple', componentType: ComponentTypes.table }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
   //new EntityConfiguration(VendorComponent, '', [], {}),
   new EntityConfiguration<Ticket>(Ticket, TicketComponent, 'تیکت ها', [
