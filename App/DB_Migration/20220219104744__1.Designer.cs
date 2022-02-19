@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    [Migration("20220201194213__7")]
-    partial class _7
+    [Migration("20220219104744__1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,17 +176,23 @@ namespace Host.DB_Migration
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AccountNumberValidator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardValidator")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ShebaValidator")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ValidatorString")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -336,6 +342,14 @@ namespace Host.DB_Migration
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CellPhone1")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("CellPhone2")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -345,11 +359,32 @@ namespace Host.DB_Migration
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Images")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Latitude")
                         .HasColumnType("decimal(10,8)");
 
+                    b.Property<string>("Logo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Longitude")
                         .HasColumnType("decimal(11,8)");
+
+                    b.Property<string>("Phone1")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("Phone2")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("PostalCOde")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -358,7 +393,7 @@ namespace Host.DB_Migration
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("TitleEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -389,9 +424,6 @@ namespace Host.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
@@ -401,6 +433,10 @@ namespace Host.DB_Migration
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VendorId")
                         .HasColumnType("int");
@@ -445,7 +481,8 @@ namespace Host.DB_Migration
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VendorId");
+                    b.HasIndex("VendorId")
+                        .IsUnique();
 
                     b.ToTable("VendorSells");
                 });

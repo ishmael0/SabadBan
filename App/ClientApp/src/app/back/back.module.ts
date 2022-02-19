@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { buildPath, buildPathFromConfig, TemplateModule } from '../../../../../../Santel/ClientApp/src/app/template/template.module';
 import { RouterModule, Routes } from '@angular/router';
-import { ComponentTypes, EntityConfiguration, PropertyConfiguration, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { ComponentTypes, EntityConfiguration, isUndefinedOrWhiteSpaces, PropertyConfiguration, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { AuthService } from '../../../../../../Santel/ClientApp/src/app/services/auth.service';
 import { WebSiteService } from '../../../../../../Santel/ClientApp/src/app/services/website.service';
 import { Validators, FormGroup } from '@angular/forms';
@@ -26,13 +26,13 @@ export class Category extends BaseModelWithTitle {
 }
 export class Vendor extends BaseModelWithTitle{
   TitleEn: string = '';
-  CityId: number = 0;
+  CityId!: number ;
   Address: string = '';
   PostalCode: string = '';
   ShortDescription: string = '';
   Description: string = '';
-  longitude: any;
-  latitude: any;
+  longitude=0;
+  latitude=0;
   Phone1: string = '';
   Phone2: string = '';
   CellPhone1: string = '';
@@ -48,7 +48,8 @@ export class VendorSell extends BaseModel{
   Canceled = 0;
 }
 export class VendorBankAccount extends BaseModel {
-  BankId = 0;
+  BankId!: number;
+  VendorId!: number;
   AccountNumber = '';
   Sheba = '';
   CardNumber = '';
@@ -85,7 +86,7 @@ export class Ticket extends BaseModelWithTitle { }
 
 export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مدیریت وب سایت ', ' ', [
   //new EntityConfiguration(VendeeComponent, 'داشبورد فروشنده', [], { icon: 'file-tree' }),
-  new EntityConfiguration<Category>(Category.name, CategoryComponent, 'دسته بندی', [
+  new EntityConfiguration<Category>(Category, CategoryComponent, 'دسته بندی', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration(c => c.ParentCategoryId, 'شناسه والد', { value: null, Type: 'number', Validators: [] }),
     new PropertyConfiguration(c => c.EnTitle, 'نام انگلیسی', { value: '', Type: 'number', Validators: [] }),
@@ -97,7 +98,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.Images, 'تصاویر', { value: [], Type: 'list', Validators: [] }),
   ], { componentType: ComponentTypes.tree, icon: 'file-tree' }),
 
-  new EntityConfiguration<Vendor>(Vendor.name, VendorComponent, 'فروشگاه', [
+  new EntityConfiguration<Vendor>(Vendor, VendorComponent, 'فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration(c => c.TitleEn, 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration(c=>c.IsConfirmed', 'تایید شده', { Type:'bool' }),
@@ -130,7 +131,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration<VendorSell>(VendorSell.name, VendorSellComponent, 'اطلاعات فروش فروشگاه', [
+  new EntityConfiguration<VendorSell>(VendorSell, VendorSellComponent, 'اطلاعات فروش فروشگاه', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration(c => c.Successed, 'فاکتور موفق', {}),
     new PropertyConfiguration(c => c.Confirmed, 'فاکتور قطعی شده', {}),
@@ -138,23 +139,24 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.WaitingForPayment, 'فاکتور در انتظار پرداخت', {}),
     new PropertyConfiguration(c => c.Canceled, 'فاکتور باطل شده', {}),
   ], { icon: 'storefront', getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
-  new EntityConfiguration<VendorBankAccount>(VendorBankAccount.name, VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
+  new EntityConfiguration<VendorBankAccount>(VendorBankAccount, VendorBankAccountComponent, 'اطلاعات حساب فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration(c => c.BankId, 'بانک', {}),
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.BankId, 'بانک', { Validators: [Validators.required] }),
     //new PropertyConfiguration(c=>c.VendorId', 'فروشگاه', {}),
     new PropertyConfiguration(c => c.AccountNumber, 'شماره حساب', { InTable: false }),
     new PropertyConfiguration(c => c.Sheba, 'شماره شبا', { InTable: false }),
     new PropertyConfiguration(c => c.CardNumber, 'شماره کارت', { InTable: false }),
     new PropertyConfiguration(c => c.Priority, 'اولویت', {}),
-  ], { icon: 'bank', getTitle: (item: FormGroup) => { let x: string = item.controls['Title'].value; if (!x.isUndefinedOrWhiteSpaces()) { return x; } return "جدید"; }, neededData: [Bank] }),
-  new EntityConfiguration<VendorBalance>(VendorBalance.name, VendorBalanceComponent, 'موجودی فروشگاه', [
+  ], { icon: 'bank', getTitle: (item: FormGroup) => { return item.controls['Title']?.value??"جدید"; }, neededData: [Bank] }),
+  new EntityConfiguration<VendorBalance>(VendorBalance, VendorBalanceComponent, 'موجودی فروشگاه', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', {}),
     new PropertyConfiguration(c => c.Free, 'آزاد', {}),
     new PropertyConfiguration(c => c.Paid, 'پرداخت شده', {}),
     new PropertyConfiguration(c => c.Block, 'بلاک شده', {}),
   ], {}),
-  new EntityConfiguration<VendorWithdraw>(VendorWithdraw.name, VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
+  new EntityConfiguration<VendorWithdraw>(VendorWithdraw, VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', {}),
     new PropertyConfiguration(c => c.BankId, 'بانک', {}),
@@ -164,24 +166,24 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.TransActionDateTime, 'زمان اتقال', {}),
   ], { neededData: [Bank] }),
 
-  new EntityConfiguration<Transaction>(Transaction.name, TransactionComponent, 'تراکنش', [
+  new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
-  new EntityConfiguration<Vendee>(Vendee.name, VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
+  new EntityConfiguration<Vendee>(Vendee, VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
 
 
 
 
 
-  new EntityConfiguration<Province>(Province.name, ProvinceComponent, 'استان', [
+  new EntityConfiguration<Province>(Province, ProvinceComponent, 'استان', [
     ...defaultPropertyWithTitleConfiguration,
   ], { componentType: ComponentTypes.table }),
 
-  new EntityConfiguration<City>(City.name, CityComponent, 'شهرستان', [
+  new EntityConfiguration<City>(City, CityComponent, 'شهرستان', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration(c => c.ProvinceId, 'استان', {}),
   ], { neededData: [Province], componentType: ComponentTypes.table }),
 
-  new EntityConfiguration<Bank>(Bank.name, BankComponent, 'بانک', [
+  new EntityConfiguration<Bank>(Bank, BankComponent, 'بانک', [
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration(c => c.ShebaValidator, 'اعتبار سنج شماره شبا', {}),
     new PropertyConfiguration(c => c.CardValidator, 'اعتبار سنج شماره کارت', {}),
@@ -189,7 +191,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   ], { icon:'cash-multiple', componentType: ComponentTypes.table }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
   //new EntityConfiguration(VendorComponent, '', [], {}),
-  new EntityConfiguration<Ticket>(Ticket.name, TicketComponent, 'تیکت ها', [
+  new EntityConfiguration<Ticket>(Ticket, TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,
   ], {}),
 ]);

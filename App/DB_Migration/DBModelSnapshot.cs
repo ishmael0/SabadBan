@@ -422,9 +422,6 @@ namespace Host.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
@@ -439,9 +436,14 @@ namespace Host.DB_Migration
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BankId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("VendorBankAccounts");
                 });
@@ -522,7 +524,15 @@ namespace Host.DB_Migration
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Host.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Bank");
+
+                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("Host.Models.VendorSell", b =>

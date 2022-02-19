@@ -91,10 +91,14 @@ namespace Host.Models
     }
     public class VendorBankAccount : BaseModelWithTitle
     {
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { set; get; }
+        public int VendorId { set; get; }
+
+
         [ForeignKey("BankId")]
         public virtual Bank Bank { set; get; }
         public int BankId { set; get; }
-        public bool IsConfirmed { set; get; }
         public string AccountNumber { set; get; }
         [MaxLength(24)]
         [MinLength(24)]
