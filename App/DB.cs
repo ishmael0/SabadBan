@@ -14,7 +14,7 @@ namespace Host.DBContext
 {
     public class VendorController : BaseController<DB, Vendor>
     {
-        public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options, Action<Vendor> beforeSet = null, Expression<Func<Vendor, bool>> tsExp = null) : base(dbContext, upm, options, beforeSet, tsExp)
+        public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
         {
         }
         [HttpGet]
@@ -32,7 +32,17 @@ namespace Host.DBContext
         }
     }
 
-
+    public class InvoiceController : BaseController<DB, Invoice>
+    {
+        public InvoiceController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options ) : base(dbContext, upm, options )
+        {
+            
+        }
+        public override IQueryable<Invoice> BeforeGet(IQueryable<Invoice> q)
+        {
+            return base.BeforeGet(q).Include(c=>c.Vendee).Include(c=>c.Vendor);
+        }
+    }
 
 
 
@@ -49,6 +59,7 @@ namespace Host.DBContext
         public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
         public DbSet<VendorWithdraw>  VendorWithdraws { set; get; }
         public DbSet<Vendee>  Vendees{ set; get; }
+        public DbSet<Invoice>  Invoices{ set; get; }
         public DB(DbContextOptions<DB> options) : base(options)
         {
 
@@ -59,6 +70,7 @@ namespace Host.DBContext
             modelBuilder.Entity<Category>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Images>>(v));
             modelBuilder.Entity<Vendee>().Property(e => e.Addresses).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Address>>(v));
             modelBuilder.Entity<Vendor>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<Images>>(v));
+            modelBuilder.Entity<Invoice>().Property(e => e.InvoiceDetails).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<InvoiceDetail>>(v));
             modelBuilder.Entity<VendorSell>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBankAccount>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBalance>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);

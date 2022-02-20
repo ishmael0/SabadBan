@@ -4,6 +4,7 @@ using Host.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220220194117__7")]
+    partial class _7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,17 +291,7 @@ namespace Host.DB_Migration
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("VendeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VendorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VendeeId");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("Invoices");
                 });
@@ -619,25 +611,6 @@ namespace Host.DB_Migration
                         .IsRequired();
 
                     b.Navigation("Province");
-                });
-
-            modelBuilder.Entity("Host.Models.Invoice", b =>
-                {
-                    b.HasOne("Host.Models.Vendee", "Vendee")
-                        .WithMany()
-                        .HasForeignKey("VendeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Host.Models.Vendor", "Vendor")
-                        .WithMany()
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vendee");
-
-                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("Host.Models.Vendor", b =>

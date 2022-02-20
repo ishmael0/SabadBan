@@ -3,7 +3,7 @@ import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/templa
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
-import { Bank, Category, City, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
+import { Bank, Category, City, Invoice, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
 
 
 
@@ -27,6 +27,18 @@ export class CityComponent extends BaseComponent<City> {
 
 
 
+
+@Component({
+  selector: 'app-invoice',
+  templateUrl: './invoice.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class InvoiceComponent extends BaseComponent<Invoice> {
+
+
+}
 
 @Component({
   selector: 'app-bank',

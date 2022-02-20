@@ -140,7 +140,7 @@ namespace Host.Models
         public bool CellPhoneConfirm { get; set; }
         public List<Address> Addresses { get; set; }
     }
-    public class Address  
+    public class Address
     {
         public string Title { set; get; }
         public string PostalCode { set; get; }
@@ -148,5 +148,36 @@ namespace Host.Models
         public string FullAddress { set; get; }
         public string Latitude { set; get; }
         public string Longitude { set; get; }
+    }
+    public enum InvoiceState
+    {
+
+    }
+    public class InvoiceDetail
+    {
+        public string Title { set; get; }
+        public int PriceOfOne { set; get; }
+        public int Off { set; get; }
+        public int Count { set; get; }
+        public int FinalPrice => PriceOfOne * Count - Off;
+        public InvoiceState InvoiceState { set; get; }
+    }
+    public class Invoice : BaseModel
+    {
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { set; get; }
+        public int VendorId { set; get; }
+
+
+        [ForeignKey("VendeeId")]
+        public virtual Vendee Vendee { set; get; }
+        public int VendeeId { set; get; }
+
+
+
+        public int FinalPrice => Price - Off;
+        public int Off { set; get; }
+        public int Price => InvoiceDetails?.Sum(c => c.FinalPrice) ?? 0;
+        public List<InvoiceDetail> InvoiceDetails { set; get; }
     }
 }

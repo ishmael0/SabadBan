@@ -9,7 +9,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FileManagerComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/file-manager/file-manager.component';
 import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/icons/icons.component';
 import { BaseModel, BaseModelWithTitle, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/properties';
-import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent } from './components';
+import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent } from './components';
 
 import "reflect-metadata";
 
@@ -39,7 +39,7 @@ export class Vendor extends BaseModelWithTitle {
   CellPhone2: string = '';
   Images: any[] = [];
   Logo: any;
-  MelliCode='';
+  MelliCode = '';
 }
 export class VendorSell extends BaseModel {
   Successed = 0;
@@ -72,7 +72,7 @@ export class Transaction extends BaseModelWithTitle { }
 export class Address {
   PostalCode = '';
   Title = '';
-  CityId!: number ;
+  CityId!: number;
   FullAddress = '';
   Latitude = 0;
   Longitude = 0;
@@ -96,6 +96,16 @@ export class Bank extends BaseModelWithTitle {
   AccountNumberValidator = '';
 }
 export class Ticket extends BaseModelWithTitle { }
+export class InvoiceDetail {
+}
+export class Invoice extends BaseModel {
+  VendeeId!: number;
+  Vendee: any;
+  VendorId!: number;
+  Vendor: any;
+  Off = 0;
+  InvoiceDetails: InvoiceDetail[] = [];
+}
 
 
 
@@ -181,9 +191,6 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
 
 
-  new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
-  ], { icon: 'transfer' }),
-
 
 
   new EntityConfiguration<Vendee>(Vendee, VendeeComponent, 'خریدار', [
@@ -194,8 +201,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.CellPhoneConfirm, 'تایید شماره تماس', {}),
     new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
     new PropertyConfiguration(c => c.Password, 'پسورد', {}),
-    new PropertyConfiguration(c => c.Addresses, 'آدرس', { InTable:false, InSearch:false }),
-  ], { icon: 'cart-outline', getTitle: (item: FormGroup) => { return (item.controls['FirstName']?.value ?? "جدید") + (item.controls['LastName']?.value ?? "جدید" ); } }),
+    new PropertyConfiguration(c => c.Addresses, 'آدرس', { InTable: false, InSearch: false }),
+  ], { icon: 'cart-outline', getTitle: (item: FormGroup) => { return (item.controls['FirstName']?.value ?? "جدید") + (item.controls['LastName']?.value ?? "جدید"); } }),
 
 
 
@@ -218,9 +225,33 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   ], { icon: 'cash-multiple', componentType: ComponentTypes.table }),
   //new EntityConfiguration(ProductComponent, 'محصول', [], {}),
   //new EntityConfiguration(VendorComponent, '', [], {}),
+  new EntityConfiguration<Invoice>(Invoice, InvoiceComponent, 'فاکتور ها', [
+    ...defaultPropertyConfiguration,
+    new PropertyConfiguration(c => c.VendeeId, 'شناسه خریدار', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.Off, 'تخففیف روی کل فاکتور', { Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', {   }),
+
+
+
+
+
+  ], { getTitle: (item: FormGroup) => { return (item.controls['VendeeId']?.value ?? "جدید"); } }),
+
+
+
+
+
+
+
+
+
   new EntityConfiguration<Ticket>(Ticket, TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,
   ], {}),
+  new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
+  ], { icon: 'transfer' }),
+
 ]);
 
 @NgModule({
@@ -236,7 +267,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     TransactionComponent,
     VendeeComponent,
     TicketComponent,
-    VendorWithdrawComponent
+    VendorWithdrawComponent,
+    InvoiceComponent
   ],
   imports: [
     TemplateModule,
