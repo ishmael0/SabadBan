@@ -4,6 +4,7 @@ using Host.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220219201305__5")]
+    partial class _5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,12 +305,6 @@ namespace Host.DB_Migration
                     b.Property<string>("Addresses")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CellPhone")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("CellPhoneConfirm")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
@@ -318,26 +314,25 @@ namespace Host.DB_Migration
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MelliCode")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("PhoneNumberConfirm")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CellPhone")
+                    b.HasIndex("PhoneNumber")
                         .IsUnique()
-                        .HasFilter("[CellPhone] IS NOT NULL");
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
 
-                    b.HasIndex("MelliCode")
-                        .IsUnique()
-                        .HasFilter("[MelliCode] IS NOT NULL");
-
-                    b.ToTable("Vendees");
+                    b.ToTable("Vendee");
                 });
 
             modelBuilder.Entity("Host.Models.Vendor", b =>
@@ -380,9 +375,6 @@ namespace Host.DB_Migration
                     b.Property<decimal>("Longitude")
                         .HasColumnType("decimal(11,8)");
 
-                    b.Property<string>("MelliCode")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Phone1")
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
@@ -411,10 +403,6 @@ namespace Host.DB_Migration
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
-
-                    b.HasIndex("MelliCode")
-                        .IsUnique()
-                        .HasFilter("[MelliCode] IS NOT NULL");
 
                     b.ToTable("Vendors");
                 });

@@ -39,6 +39,7 @@ export class Vendor extends BaseModelWithTitle {
   CellPhone2: string = '';
   Images: any[] = [];
   Logo: any;
+  MelliCode='';
 }
 export class VendorSell extends BaseModel {
   Successed = 0;
@@ -65,10 +66,26 @@ export class VendorWithdraw extends BaseModel {
   Number = 0;
   Type = 0;
   DateTime = '';
-  VendorBankAccountId!:number;
+  VendorBankAccountId!: number;
 }
 export class Transaction extends BaseModelWithTitle { }
-export class Vendee extends BaseModelWithTitle { }
+export class Address {
+  PostalCode = '';
+  Title = '';
+  CityId!: number ;
+  FullAddress = '';
+  Latitude = 0;
+  Longitude = 0;
+}
+export class Vendee extends BaseModelWithTitle {
+  FirstName = '';
+  LastName = '';
+  CellPhone = '';
+  MelliCode = '';
+  Password = '';
+  Addresses: Address[] = [];
+  CellPhoneConfirm = false;
+}
 export class Province extends BaseModelWithTitle { }
 export class City extends BaseModelWithTitle {
   ProvinceId: any;
@@ -104,7 +121,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.CityId, 'شهرستان', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Address, 'آدرس', { value: '', InTable: false }),
     new PropertyConfiguration(c => c.PostalCode, 'کد پستی', { value: '', InTable: false }),
-
+    new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
     new PropertyConfiguration(c => c.ShortDescription, 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration(c => c.Description, 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration(c => c.longitude, 'طول جغرافیایی', { value: 0, InTable: false }),
@@ -149,8 +166,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     ...defaultPropertyWithTitleConfiguration,
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.BankId, 'بانک', { Validators: [Validators.required] }),
-     new PropertyConfiguration(c => c.Sheba, 'شماره شبا', { InTable: false }),
-     new PropertyConfiguration(c => c.Priority, 'اولویت', {}),
+    new PropertyConfiguration(c => c.Sheba, 'شماره شبا', { InTable: false }),
+    new PropertyConfiguration(c => c.Priority, 'اولویت', {}),
   ], { icon: 'bank', getTitle: (item: FormGroup) => { return item.controls['Title']?.value ?? "جدید"; }, neededData: [Bank] }),
   new EntityConfiguration<VendorWithdraw>(VendorWithdraw, VendorWithdrawComponent, 'درخواست وجه فروشگاه', [
     ...defaultPropertyConfiguration,
@@ -166,7 +183,19 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
-  new EntityConfiguration<Vendee>(Vendee, VendeeComponent, 'خریدار', [...defaultPropertyWithTitleConfiguration], { icon: 'cart-outline' }),
+
+
+
+  new EntityConfiguration<Vendee>(Vendee, VendeeComponent, 'خریدار', [
+    ...defaultPropertyConfiguration,
+    new PropertyConfiguration(c => c.FirstName, 'نام', {}),
+    new PropertyConfiguration(c => c.LastName, 'نام خانوادگی', {}),
+    new PropertyConfiguration(c => c.CellPhone, 'شماره تماس', {}),
+    new PropertyConfiguration(c => c.CellPhoneConfirm, 'تایید شماره تماس', {}),
+    new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
+    new PropertyConfiguration(c => c.Password, 'پسورد', {}),
+    new PropertyConfiguration(c => c.Addresses, 'آدرس', { InTable:false, InSearch:false }),
+  ], { icon: 'cart-outline', getTitle: (item: FormGroup) => { return (item.controls['FirstName']?.value ?? "جدید") + (item.controls['LastName']?.value ?? "جدید" ); } }),
 
 
 

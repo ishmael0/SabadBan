@@ -48,6 +48,7 @@ namespace Host.DBContext
         public DbSet<VendorBalance> VendorBalances { set; get; }
         public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
         public DbSet<VendorWithdraw>  VendorWithdraws { set; get; }
+        public DbSet<Vendee>  Vendees{ set; get; }
         public DB(DbContextOptions<DB> options) : base(options)
         {
 

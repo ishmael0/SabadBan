@@ -1,9 +1,65 @@
-<!--<ng-template #form let-item="item">
-  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIDStatusForm;context:{  item:item}"></ng-container>
-  <form nz-form [formGroup]="item">
+<ng-template #form let-item="item">
+  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+  <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+
+    <div nz-row>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    نام </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="نام را وارد نمایید">
+            <input type="text" nz-input formControlName="FirstName" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  نام خانوادگی   </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="نام خانوادگی را وارد نمایید">
+            <input type="text" nz-input formControlName="LastName" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  کد ملی    </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="کد ملی را وارد نمایید">
+            <input type="text" nz-input formControlName="MelliCode" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  پسورد     </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="پسورد را وارد نمایید">
+            <input type="text" nz-input formControlName="Password" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   شماره موبایل  </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="شماره موبایل را وارد نمایید">
+            <input type="text" nz-input formControlName="CellPhone" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+
+      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   شماره تلفن تایید شده است؟   </nz-form-label>
+      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="">
+            <label   nz-checkbox formControlName="CellPhoneConfirm">
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+
+    </div>
   </form>
-
-
 </ng-template>
 
 <ng-template #viewMessage>
@@ -13,13 +69,27 @@
 
 </ng-template>
 
+
+
+
 <ng-template #tableBodyPicker let-item="item">
 
 </ng-template>
 
-<ng-template #treeBody let-item="item">
-  {{ item.Id }}
+
+<ng-template #tableBody let-item="item">
+  <td>{{ item.Id }}</td>
+  <td>{{ item.Create_}}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{item.FirstName}}</td>
+  <td>{{item.LastName}}</td>
+  <td>{{item.CellPhone}}</td>
+  <td>{{item.CellPhoneConfirm}}</td>
+  <td>{{item.MelliCode  }}</td>
+  <td>{{item.Password}}</td>
 </ng-template>
+
+
 
 
 
@@ -27,12 +97,3 @@
 <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
 
 
-<ng-container *ngIf="mainTemplate">
-
-
-  <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">
-    <ng-container *nzModalContent>
-      <app-image-uploader-card [key]="dataManager.key" Id="1" (onOk)="addImage($event)"></app-image-uploader-card>
-    </ng-container>
-  </nz-modal>
-</ng-container>-->

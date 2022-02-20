@@ -42,7 +42,7 @@ namespace Host.Models
         public string CardValidator { set; get; }
         public string AccountNumberValidator { set; get; }
     }
- 
+    [Index(nameof(MelliCode), IsUnique = true)]
     public class Vendor : BaseModelWithTitle
     {
 
@@ -51,6 +51,7 @@ namespace Host.Models
         public int CityId { set; get; }
         public string Address { set; get; }
         public string TitleEn { set; get; }
+        public string MelliCode { set; get; }
 
         [MaxLength(100)]
         public string PostalCOde { set; get; }
@@ -126,23 +127,24 @@ namespace Host.Models
         public string Number { set; get; }
         public int Type { set; get; }
         public DateTime DateTime { set; get; }
- 
     }
-    [Index(nameof(PhoneNumber), IsUnique = true)]
+    [Index(nameof(CellPhone), IsUnique = true)]
+    [Index(nameof(MelliCode), IsUnique = true)]
     public class Vendee : BaseModel
     {
+        public string MelliCode { set; get; }
         public string FirstName { set; get; }
         public string LastName { set; get; }
-        public string PhoneNumber { set; get; }
+        public string CellPhone { set; get; }
         public string Password { get; set; }
-        public bool PhoneNumberConfirm { get; set; }
+        public bool CellPhoneConfirm { get; set; }
         public List<Address> Addresses { get; set; }
     }
-    public class Address : BaseModelWithTitle
+    public class Address  
     {
+        public string Title { set; get; }
         public string PostalCode { set; get; }
-        public string Province { set; get; }
-        public string City { set; get; }
+        public int CityId { set; get; }
         public string FullAddress { set; get; }
         public string Latitude { set; get; }
         public string Longitude { set; get; }
