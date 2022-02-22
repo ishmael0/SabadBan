@@ -63,9 +63,9 @@ export class CategoryComponent extends BaseComponent<Category> {
   imageModal = false;
   async addImage(e: string) {
     this.imageModal = false;
-    let x: any[] = this.selectedForm().controls['Images'].value;
+    let x: any[] = this.selectedForm().form.controls['Images'].value;
     x.push({ Path: e, Description: '' });
-    this.makeItDirty(this.selectedForm());
+    this.makeItDirty(this.selectedForm().form);
   }
 
 }
@@ -139,15 +139,15 @@ export class VendorComponent extends BaseComponent<Vendor> {
   imageModal = false;
   async addImage(e: any) {
     this.imageModal = false;
-    let x: any[] = this.selectedForm().controls['Images'].value;
+    let x: any[] = this.selectedForm().form.controls['Images'].value;
     x.push({ Path: e, Description: '' });
-    this.makeItDirty(this.selectedForm());
+    this.makeItDirty(this.selectedForm().form);
   }
   logoModal = false;
   async addLogo(e: any) {
     this.logoModal = false;
-    let x: any = this.selectedForm().controls['Images'].setValue({ Path: e, Description: '' });
-    this.makeItDirty(this.selectedForm());
+    let x: any = this.selectedForm().form.controls['Images'].setValue({ Path: e, Description: '' });
+    this.makeItDirty(this.selectedForm().form);
   }
   async ConfirmVendor(item: any) {
     this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, this.dataManager.key, {

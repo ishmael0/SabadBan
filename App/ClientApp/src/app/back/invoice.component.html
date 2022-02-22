@@ -47,7 +47,15 @@
   <td>{{ item.Id }}</td>
   <td>{{ item.Create_}}</td>
   <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
- 
+  <td>
+    <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه خریدار">{{item.VendeeId}}</nz-tag>
+    {{item.Vendee.FirstName + " " +item.Vendee.LastName  }}
+  </td>
+  <td>
+    <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه فروشگاه">{{item.VendorId}}</nz-tag>
+    {{item.Vendor .Title}}
+  </td>
+  <td>{{item.FinalPrice}}</td>
 </ng-template>
 
 

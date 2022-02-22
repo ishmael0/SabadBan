@@ -16,7 +16,7 @@ namespace Host.Models
     public class Category : BaseModelWithTitle
     {
         [ForeignKey("ParentCategoryId")]
-        public virtual Category? ParentCategory { set; get; }
+        public virtual Category ParentCategory { set; get; }
         public int? ParentCategoryId { set; get; }
         public List<Images> Images { set; get; }
         public string Description { set; get; }
@@ -51,9 +51,12 @@ namespace Host.Models
         public int CityId { set; get; }
         public string Address { set; get; }
         public string TitleEn { set; get; }
+        public string FirstName { set; get; }
+        public string LastName { set; get; }
+        [MaxLength(10),MinLength(10),StringLength(10)]
         public string MelliCode { set; get; }
 
-        [MaxLength(100)]
+        [MaxLength(10), MinLength(10), StringLength(10)]
         public string PostalCOde { set; get; }
         public string ShortDescription { set; get; }
         public string Description { set; get; }
@@ -69,7 +72,10 @@ namespace Host.Models
         public string CellPhone1 { set; get; }
         [MaxLength(11)]
         public string CellPhone2 { set; get; }
-
+        public bool Phone1Confirm { set; get; }
+        public bool Phone2Confirm { set; get; }
+        public bool CellPhone1Confirm { set; get; }
+        public bool CellPhone2Confirm { set; get; }
         public List<Images> Images { set; get; }
         public string Logo { set; get; }
 

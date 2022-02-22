@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Host.DBContext
 {
-    public class VendorController : BaseController<DB, Vendor>
+    public class VendorController : BaseController<DB, Vendor, Vendor>
     {
         public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
         {
@@ -32,7 +32,7 @@ namespace Host.DBContext
         }
     }
 
-    public class InvoiceController : BaseController<DB, Invoice>
+    public class InvoiceController : BaseController<DB, Invoice, Invoice>
     {
         public InvoiceController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options ) : base(dbContext, upm, options )
         {
@@ -40,7 +40,8 @@ namespace Host.DBContext
         }
         public override IQueryable<Invoice> BeforeGet(IQueryable<Invoice> q)
         {
-            return base.BeforeGet(q).Include(c=>c.Vendee).Include(c=>c.Vendor);
+            return base.BeforeGet(q).Include(c => c.Vendee).Include(c => c.Vendor);
+            //.Select(c=> c with {Vendee = new Vendee {FirstName = c.Vendee.FirstName }            });
         }
     }
 
@@ -75,6 +76,8 @@ namespace Host.DBContext
             modelBuilder.Entity<VendorBankAccount>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBalance>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorWithdraw>().Property(e => e.VendorBankAccountId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<Invoice>().Property(e => e.VendeeId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<Invoice>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
 
             //            modelBuilder.Entity<Content>().HasMany(p => p.KeyWords).WithMany(p => p.Contents).UsingEntity<ContentKeyword>(
             //j => j.HasOne(pt => pt.Keyword).WithMany(t => t.ContentKeyWords).HasForeignKey(pt => pt.KeywordId),

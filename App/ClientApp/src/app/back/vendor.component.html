@@ -5,18 +5,52 @@
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
         <div nz-row>
-          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">عنوان لاتین</nz-form-label>
+
+
+
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    نام </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="نام را وارد نمایید">
+                <input type="text" nz-input formControlName="FirstName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  نام خانوادگی   </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="نام خانوادگی را وارد نمایید">
+                <input type="text" nz-input formControlName="LastName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  کد ملی    </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="کد ملی را وارد نمایید">
+                <input type="text" nz-input formControlName="MelliCode" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+      
+
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">نام لاتین فروشگاه</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="عنوان لاتین را وارد کنید">
-              <input nz-input formControlName="TitleEn" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="نام لاتین را وارد کنید">
+                <input nz-input formControlName="TitleEn" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">توضیح مختصر </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="توضیح مختصر را وارد کنید">
-              <input nz-input formControlName="ShortDescription" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="توضیح مختصر را وارد کنید">
+                <input nz-input formControlName="ShortDescription" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
 
 
@@ -70,8 +104,7 @@
               <input nz-input formControlName="latitude" />
              </nz-form-control></nz-form-item> 
           </nz-form-item>
-        </div>
-        <div nz-row>
+       
 
 
 
@@ -101,8 +134,7 @@
              </nz-form-control></nz-form-item> 
           </nz-form-item>
 
-        </div>
-        <div nz-row>
+    
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   ادامه آدرس</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
              <nz-form-item><nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">

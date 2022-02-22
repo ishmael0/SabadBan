@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { buildPath, buildPathFromConfig, TemplateModule } from '../../../../../../Santel/ClientApp/src/app/template/template.module';
 import { RouterModule, Routes } from '@angular/router';
-import { ComponentTypes, EntityConfiguration, isUndefinedOrWhiteSpaces, PropertyConfiguration, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { ComponentTypes, EntityConfiguration, getNameOf, isUndefinedOrWhiteSpaces, PropertyConfiguration, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { AuthService } from '../../../../../../Santel/ClientApp/src/app/services/auth.service';
 import { WebSiteService } from '../../../../../../Santel/ClientApp/src/app/services/website.service';
 import { Validators, FormGroup } from '@angular/forms';
@@ -27,6 +27,8 @@ export class Category extends BaseModelWithTitle {
 export class Vendor extends BaseModelWithTitle {
   TitleEn: string = '';
   CityId!: number;
+  LastName: any;
+  FirstName: any;
   Address: string = '';
   PostalCode: string = '';
   ShortDescription: string = '';
@@ -40,6 +42,11 @@ export class Vendor extends BaseModelWithTitle {
   Images: any[] = [];
   Logo: any;
   MelliCode = '';
+  CellPhone2Confirm = false;
+  Phone1Confirm = false;
+  Phone2Confirm = false;
+  CellPhone1Confirm = false;
+
 }
 export class VendorSell extends BaseModel {
   Successed = 0;
@@ -97,13 +104,23 @@ export class Bank extends BaseModelWithTitle {
 }
 export class Ticket extends BaseModelWithTitle { }
 export class InvoiceDetail {
+
+
+  Title = '';
+  PriceOfOne = 0;
+  Off = 0;
+  Count = 0;
+  get FinalPrice() { return this.PriceOfOne * this.Count - this.Off; }
+  InvoiceState: any
 }
 export class Invoice extends BaseModel {
   VendeeId!: number;
-  Vendee: any;
+  Vendee!: Vendee;
   VendorId!: number;
-  Vendor: any;
+  Vendor!: Vendor;
   Off = 0;
+  get Price() { return this.InvoiceDetails.reduce((p, c) => p + c.FinalPrice, 0) };
+  get FinalPrice() { return this.Price - this.Off; }
   InvoiceDetails: InvoiceDetail[] = [];
 }
 
@@ -131,16 +148,24 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.CityId, 'شهرستان', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Address, 'آدرس', { value: '', InTable: false }),
     new PropertyConfiguration(c => c.PostalCode, 'کد پستی', { value: '', InTable: false }),
-    new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
+    new PropertyConfiguration(c => c.FirstName, 'نام', { InTable: false }),
+    new PropertyConfiguration(c => c.LastName, 'نام خانوادگی', { InTable: false }),
+    new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { InTable: false, Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
     new PropertyConfiguration(c => c.ShortDescription, 'توضیحات مختصر', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration(c => c.Description, 'توضیحات', { value: '', InTable: false, Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
     new PropertyConfiguration(c => c.longitude, 'طول جغرافیایی', { value: 0, InTable: false }),
     new PropertyConfiguration(c => c.latitude, 'عرض جغرافیایی', { value: 0, InTable: false }),
 
-    new PropertyConfiguration(c => c.Phone1, 'شماره تلفن ثابت اول', { value: '', InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
-    new PropertyConfiguration(c => c.Phone2, 'شماره تلفن ثابت دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
-    new PropertyConfiguration(c => c.CellPhone1, 'شماره همراه اول', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
-    new PropertyConfiguration(c => c.CellPhone2, 'شماره همراه دوم', { value: '', InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration(c => c.Phone1, 'شماره تلفن ثابت اول', { InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c => c.Phone2, 'شماره تلفن ثابت دوم', { InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c => c.CellPhone1, 'شماره همراه اول', { InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration(c => c.CellPhone2, 'شماره همراه دوم', { InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+
+
+    new PropertyConfiguration(c => c.Phone1Confirm, 'تایید شماره تلفن ثابت اول', { InTable: false, Validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c => c.Phone2Confirm, 'تایید شماره تلفن ثابت دوم', { InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^0\d{10}/g)*/] }),
+    new PropertyConfiguration(c => c.CellPhone1Confirm, 'تایید شماره همراه اول', { InTable: false, Validators: [Validators.minLength(11), Validators.required, Validators.maxLength(11),/* Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
+    new PropertyConfiguration(c => c.CellPhone2Confirm, 'تایید شماره همراه دوم', { InTable: false, Validators: [Validators.minLength(11), Validators.maxLength(11)/*, Validators.pattern(/^09[0123]{1}\d{8}/g)*/] }),
 
 
     new PropertyConfiguration(c => c.Images, 'تصاویر فروشگاه', { value: [], InTable: false, Type: 'list', Validators: [] }),
@@ -202,7 +227,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
     new PropertyConfiguration(c => c.Password, 'پسورد', {}),
     new PropertyConfiguration(c => c.Addresses, 'آدرس', { InTable: false, InSearch: false }),
-  ], { icon: 'cart-outline', getTitle: (item: FormGroup) => { return (item.controls['FirstName']?.value ?? "جدید") + (item.controls['LastName']?.value ?? "جدید"); } }),
+  ], { icon: 'cart-outline', getTitle: (item: FormGroup) => { return (item.controls['FirstName']?.value ?? "جدید") + " " + (item.controls['LastName']?.value ?? "جدید"); } }),
 
 
 
@@ -227,16 +252,17 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //new EntityConfiguration(VendorComponent, '', [], {}),
   new EntityConfiguration<Invoice>(Invoice, InvoiceComponent, 'فاکتور ها', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration(c => c.VendeeId, 'شناسه خریدار', { Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.Off, 'تخففیف روی کل فاکتور', { Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', {   }),
+    new PropertyConfiguration(c => c.VendeeId, 'خریدار', { canEdit:false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { canEdit: false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.Off, 'تخففیف روی کل فاکتور', { InTable: false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.FinalPrice, 'قیمت نهایی', { InForm: false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', { InTable: false }),
 
 
 
 
-
-  ], { getTitle: (item: FormGroup) => { return (item.controls['VendeeId']?.value ?? "جدید"); } }),
+    
+  ], { getTitle: (item: FormGroup) => { return (item.controls[getNameOf<Invoice>(c => c.VendeeId)]?.value?.toString() ?? "جدید"); } }),
 
 
 
