@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { getNameOf, HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { Bank, Category, City, Invoice, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
 
 
@@ -37,6 +37,27 @@ export class CityComponent extends BaseComponent<City> {
 })
 export class InvoiceComponent extends BaseComponent<Invoice> {
 
+
+  vendorTitle = getNameOf<Invoice>(c => c.Vendor) + getNameOf<Invoice>(c => c.Vendor.Title);
+  VendeeTitle = getNameOf<Invoice>(c => c.Vendee.FirstName) + getNameOf<Invoice>(c => c.Vendee.LastName)
+  selectVendorModal = false;
+  selectVendeeModal = false;
+  override async onNewObjectAdded(temp: FormGroup, t: Invoice) {
+    super.onNewObjectAdded(temp, t);
+    temp.addControl(this.VendeeTitle, new FormControl(t.Vendee?.FirstName + " " + t.Vendee?.LastName))
+    temp.addControl(this.vendorTitle, new FormControl(t.Vendor?.Title))
+  }
+  vendorModalSelected(e: Vendor) {
+    this.selectedForm().form.controls[this.vendorTitle].setValue(e.Title);
+    this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendorId)].setValue(e.Id);
+    this.selectVendorModal = false;
+  }
+  vendeeModalSelected(e: Vendee) {
+    this.selectedForm().form.controls[this.VendeeTitle].setValue(e.FirstName + " " + e.LastName);
+    this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendeeId)].setValue(e.Id);
+    this.selectVendeeModal = false;
+  }
+  list: any[] = [{ id: 1, title: '1' }, { id: 2, title: '22' }, { id: 3, title: '333' }];
 
 }
 

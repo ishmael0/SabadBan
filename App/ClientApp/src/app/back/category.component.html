@@ -79,7 +79,7 @@ https://www.iconpacks.net/search/?icon=man
           <button nz-button nzType="dashed" (click)=" imageModal = true ">اضافه کردن  تصویر</button>
         </div>
         <div nz-col [nzSm]="12" [nzXs]="24">
-          <div nz-row cdkDropList (cdkDropListDropped)="dropAndDrop_DropHandler($event, item,'Images')">
+          <!--<div nz-row cdkDropList (cdkDropListDropped)="dropAndDrop_DropHandler($event, item,'Images')">
             <nz-card *ngFor="let r of item.controls.Images.value" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
               <img style="width:100%" [src]="'/front'+r.Path" />
               <br />
@@ -89,7 +89,7 @@ https://www.iconpacks.net/search/?icon=man
                  class="larger"
                  [innerHtml]="icons['delete']"></i>
             </nz-card>
-          </div>
+          </div>-->
         </div>
       </div>
     </nz-tab>

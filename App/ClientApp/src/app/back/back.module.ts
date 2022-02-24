@@ -84,7 +84,7 @@ export class Address {
   Latitude = 0;
   Longitude = 0;
 }
-export class Vendee extends BaseModelWithTitle {
+export class Vendee extends BaseModel {
   FirstName = '';
   LastName = '';
   CellPhone = '';
@@ -142,7 +142,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration<Vendor>(Vendor, VendorComponent, 'فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration(c => c.TitleEn, 'نام لاتین', { Type: 'string', Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration(c => c.TitleEn, 'نام لاتین', { Type: 'string', InPicker:true, Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration(c=>c.IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration(c=>c.Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
     new PropertyConfiguration(c => c.CityId, 'شهرستان', { Validators: [Validators.required] }),

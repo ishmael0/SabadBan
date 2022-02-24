@@ -177,7 +177,7 @@
           <button nz-button nzType="dashed" (click)=" imageModal = true ">اضافه کردن   تصاویر</button>
         </div>
         <div nz-col [nzSm]="12" [nzXs]="24">
-          <div nz-row cdkDropList (cdkDropListDropped)="dropAndDrop_DropHandler($event, item,'Images')">
+          <!--<div nz-row cdkDropList (cdkDropListDropped)="dropAndDrop_DropHandler($event, item,'Images')">
             <nz-card *ngFor="let r of item.controls.Images.value" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
               <img style="width:100%" [src]="'/front'+r.Path" />
               <br />
@@ -187,7 +187,7 @@
                  class="larger"
                  [innerHtml]="icons['delete']"></i>
             </nz-card>
-          </div>
+          </div>-->
         </div>
       </div>
 
@@ -196,8 +196,6 @@
   </nz-tabset>
 </ng-template>
 
-<ng-template>
-</ng-template>
 <ng-template #search>
 
 </ng-template>
@@ -218,6 +216,9 @@
 </ng-template>
 <ng-template #tableBodyPicker let-item="item">
   <td>{{ item.Id }}</td>
+  <td>{{ item.Title }}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{ item.TitleEn}}</td>
 </ng-template>
 <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
 <ng-template #tableBody let-item="item">

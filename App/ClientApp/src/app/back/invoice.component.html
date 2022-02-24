@@ -1,68 +1,109 @@
-<ng-template #form let-item="item">
-  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
-  <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
 
-    <div nz-row>
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">      فروشنده  </nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-item>
-          <nz-form-control nzErrorTip=" فروشنده را وارد نمایید">
-            <input type="text" nz-input formControlName="VendorId" />
-          </nz-form-control>
-        </nz-form-item>
+
+
+
+  <ng-template #form let-item="item">
+    <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+    <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+
+      <div nz-row>
+        <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">      فروشنده  </nz-form-label>
+        <div nz-col [nzXs]="24" [nzSm]="6" [nzMd]="3">
+          <nz-form-item>
+            <nz-form-control nzErrorTip=" فروشنده را وارد نمایید">
+              <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه فروشگاه">{{item.controls['VendorId'].value}}</nz-tag>
+              {{item.controls['VendorTitle'].value}}
+              <button *ngIf="!item.controls['Id'].value" nz-button nzType="dashed" nzDanger (click)="selectVendorModal = true">
+                انتخاب
+                <i nz-icon [innerHtml]="icons['plus-thick']"></i>
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    خریدار  </nz-form-label>
+        <div nz-col [nzXs]="24" [nzSm]="6" [nzMd]="3">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="خریدار را وارد نمایید ">
+              <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه خریدار">{{item.controls['VendeeId'].value}}</nz-tag>
+              {{item.controls['FirstNameLastName'].value}}
+              <button *ngIf="!item.controls['Id'].value" nz-button nzType="dashed" nzDanger>
+                انتخاب
+                <i nz-icon [innerHtml]="icons['plus-thick']"></i>
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    جزییات فاکتور  </nz-form-label>
+        <div nz-col [nzXs]="24"  [nzSm]="18" [nzMd]="21">
+          <app-drag-and-drop-list [list]="item.controls['InvoiceDetails'].value"
+                                  [header]="header"
+                                  [body]="body">
+            <ng-template #header>
+              <th>
+                عنوان
+              </th>
+            </ng-template>
+            <ng-template #body let-item="item">
+              <td>{{item.title}}</td>
+            </ng-template>
+          </app-drag-and-drop-list>
+        </div>
+
+
+
+
+
+
+
+
+
       </div>
+    </form>
+  </ng-template>
 
+  <ng-template #viewMessage>
+    آیدی
+  </ng-template>
+  <ng-template #search>
 
-
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    خریدار  </nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-        <nz-form-item>
-          <nz-form-control nzErrorTip="خریدار را وارد نمایید ">
-            <input type="text" nz-input formControlName="VendeeId" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-
-    </div>
-  </form>
-</ng-template>
-
-<ng-template #viewMessage>
-  آیدی
-</ng-template>
-<ng-template #search>
-
-</ng-template>
+  </ng-template>
 
 
 
 
-<ng-template #tableBodyPicker let-item="item">
+  <ng-template #tableBodyPicker let-item="item">
 
-</ng-template>
+  </ng-template>
 
 
-<ng-template #tableBody let-item="item">
-  <td>{{ item.Id }}</td>
-  <td>{{ item.Create_}}</td>
-  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
-  <td>
-    <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه خریدار">{{item.VendeeId}}</nz-tag>
-    {{item.Vendee.FirstName + " " +item.Vendee.LastName  }}
-  </td>
-  <td>
-    <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه فروشگاه">{{item.VendorId}}</nz-tag>
-    {{item.Vendor .Title}}
-  </td>
-  <td>{{item.FinalPrice}}</td>
-</ng-template>
+  <ng-template #tableBody let-item="item">
+    <td>{{ item.Id }}</td>
+    <td>{{ item.Create_}}</td>
+    <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+    <td>
+      <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه خریدار">{{item.VendeeId}}</nz-tag>
+      {{item.Vendee.FirstName + " " +item.Vendee.LastName  }}
+    </td>
+    <td>
+      <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه فروشگاه">{{item.VendorId}}</nz-tag>
+      {{item.Vendor .Title}}
+    </td>
+    <td>{{item.FinalPrice}}</td>
+  </ng-template>
 
 
 
 
 
 
-<app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
+  <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
 
-
+  <ng-container *ngIf="mainTemplate">
+    <nz-modal [nzWidth]="'80%'" [(nzVisible)]="selectVendorModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن  لیبل" (nzOnCancel)="selectVendorModal = false">
+      <ng-container *nzModalContent>
+        <app-vendor (select)="vendorModalSelected($event)"></app-vendor>
+        <button style="float:left" nz-button nzType="primary" (click)=" selectVendorModal = false">تایید </button>
+      </ng-container>
+    </nz-modal>
+  </ng-container>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Host.DBContext
 {
-    public class VendorController : BaseController<DB, Vendor, Vendor>
+    public class VendorController : BaseController<DB, Vendor>
     {
         public VendorController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
         {
@@ -32,7 +32,7 @@ namespace Host.DBContext
         }
     }
 
-    public class InvoiceController : BaseController<DB, Invoice, Invoice>
+    public class InvoiceController : BaseController<DB, Invoice>
     {
         public InvoiceController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options ) : base(dbContext, upm, options )
         {
