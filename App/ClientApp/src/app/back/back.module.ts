@@ -104,13 +104,15 @@ export class Bank extends BaseModelWithTitle {
 }
 export class Ticket extends BaseModelWithTitle { }
 export class InvoiceDetail {
-
-
+  constructor(p: Partial<InvoiceDetail>) {
+    Object.assign(this, p);
+  }
   Title = '';
+  Description = '';
   PriceOfOne = 0;
   Off = 0;
   Count = 0;
-  get FinalPrice() { return this.PriceOfOne * this.Count - this.Off; }
+  get FinalPrice() { console.log(this); return this.PriceOfOne * this.Count - this.Off; }
   InvoiceState: any
 }
 export class Invoice extends BaseModel {

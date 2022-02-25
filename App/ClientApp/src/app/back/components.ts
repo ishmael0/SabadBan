@@ -3,7 +3,7 @@ import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/templa
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { getNameOf, HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
-import { Bank, Category, City, Invoice, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
+import { Bank, Category, City, Invoice, InvoiceDetail, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
 
 
 
@@ -57,9 +57,10 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendeeId)].setValue(e.Id);
     this.selectVendeeModal = false;
   }
-  ttt: Partial< Invoice> = {
+  t3: InvoiceDetail= new InvoiceDetail( { Count: 2, Off: 3000, PriceOfOne: 100000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' });
+  ttt:  any = {
     InvoiceDetails: [
-      { Count: 2, Off: 3000, PriceOfOne: 100000, Title: 'پیراهن صولتی آستین سه رب', InvoiceState:0 ,FinalPrice:0}
+      this.t3
     ]
   }
 

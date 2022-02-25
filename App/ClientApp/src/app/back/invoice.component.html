@@ -1,14 +1,35 @@
 
-<app-drag-and-drop-list [list]="[]"
+<app-drag-and-drop-list [list]="ttt.InvoiceDetails"
+                        [deleteEnabled]="false"
                         [header]="header"
                         [body]="body">
   <ng-template #header>
-    <th>
-      عنوان
-    </th>
+    <tr>
+
+      <th>ردیف</th>
+      <th> ناممحصول</th>
+      <th> تعداد و قیمت</th>
+      <th>تخفیف کل </th>
+      <th> قیمت کل</th>
+    </tr>
   </ng-template>
-  <ng-template #body let-item="item">
-    <td>{{item.title}}</td>
+  <ng-template #body let-item="item" let-index="index">
+    <td>{{item.Id}}</td>
+    <td>
+      {{item.Title}}<br />
+      {{item.Description}}
+    </td>
+    <td style="direction:ltr">
+      {{item.PriceOfOne|number:'3.'}}ریال x {{item.Count}}
+
+    </td>
+    <td>
+      {{(item.Off / (item.PriceOfOne * item.Count) * 100) | number:'1.0-2'}}درصد<br />
+      {{item.Off|number:'3.'}}ریال
+    </td>
+    <td>
+      {{(item.FinalPrice )|number:'3.'}}
+    </td>
   </ng-template>
 </app-drag-and-drop-list>
 
