@@ -4,6 +4,7 @@ using Host.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220224061408__11")]
+    partial class _11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,19 +282,10 @@ namespace Host.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FinalPrice")
-                        .HasColumnType("int");
-
                     b.Property<string>("InvoiceDetails")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InvoiceState")
-                        .HasColumnType("int");
-
                     b.Property<int>("Off")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")

@@ -57,7 +57,11 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendeeId)].setValue(e.Id);
     this.selectVendeeModal = false;
   }
-  list: any[] = [{ id: 1, title: '1' }, { id: 2, title: '22' }, { id: 3, title: '333' }];
+  ttt: Partial< Invoice> = {
+    InvoiceDetails: [
+      { Count: 2, Off: 3000, PriceOfOne: 100000, Title: 'پیراهن صولتی آستین سه رب', InvoiceState:0 ,FinalPrice:0}
+    ]
+  }
 
 }
 

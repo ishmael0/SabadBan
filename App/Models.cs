@@ -53,7 +53,7 @@ namespace Host.Models
         public string TitleEn { set; get; }
         public string FirstName { set; get; }
         public string LastName { set; get; }
-        [MaxLength(10),MinLength(10),StringLength(10)]
+        [MaxLength(10), MinLength(10), StringLength(10)]
         public string MelliCode { set; get; }
 
         [MaxLength(10), MinLength(10), StringLength(10)]
@@ -78,7 +78,14 @@ namespace Host.Models
         public bool CellPhone2Confirm { set; get; }
         public List<Images> Images { set; get; }
         public string Logo { set; get; }
-
+    }
+    public class VendorSocialMedia : BaseModelWithTitle
+    {
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { set; get; }
+        public int VendorId { set; get; }
+        public string Url { get; set; }
+        public int Type { get; set; }
     }
     public class VendorRequest : BaseModelWithTitle
     {
@@ -154,6 +161,7 @@ namespace Host.Models
         public string FullAddress { set; get; }
         public string Latitude { set; get; }
         public string Longitude { set; get; }
+        public bool IsHidden { set; get; }
     }
     public enum InvoiceState
     {
@@ -165,8 +173,7 @@ namespace Host.Models
         public int PriceOfOne { set; get; }
         public int Off { set; get; }
         public int Count { set; get; }
-        public int FinalPrice => PriceOfOne * Count - Off;
-        public InvoiceState InvoiceState { set; get; }
+        public int FinalPrice { set; get; }
     }
     public class Invoice : BaseModel
     {
@@ -181,9 +188,13 @@ namespace Host.Models
 
 
 
-        public int FinalPrice => Price - Off;
+        public int FinalPrice { set; get; }
         public int Off { set; get; }
-        public int Price => InvoiceDetails?.Sum(c => c.FinalPrice) ?? 0;
+        public int Price { set; get; }
         public List<InvoiceDetail> InvoiceDetails { set; get; }
+
+
+        public InvoiceState InvoiceState { set; get; }
+
     }
 }

@@ -4,6 +4,7 @@ using Host.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Host.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220224061107__10")]
+    partial class _10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,19 +282,10 @@ namespace Host.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FinalPrice")
-                        .HasColumnType("int");
-
                     b.Property<string>("InvoiceDetails")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InvoiceState")
-                        .HasColumnType("int");
-
                     b.Property<int>("Off")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -334,6 +327,40 @@ namespace Host.DB_Migration
                     b.HasKey("Id");
 
                     b.ToTable("Provinces");
+                });
+
+            modelBuilder.Entity("Host.Models.SocilalMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("Create")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("SocilalMedias");
                 });
 
             modelBuilder.Entity("Host.Models.Vendee", b =>
@@ -593,40 +620,6 @@ namespace Host.DB_Migration
                     b.ToTable("VendorSells");
                 });
 
-            modelBuilder.Entity("Host.Models.VendorSocialMedia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("Create")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VendorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorId");
-
-                    b.ToTable("SocilalMedias");
-                });
-
             modelBuilder.Entity("Host.Models.VendorWithdraw", b =>
                 {
                     b.Property<int>("Id")
@@ -702,6 +695,17 @@ namespace Host.DB_Migration
                     b.Navigation("Vendor");
                 });
 
+            modelBuilder.Entity("Host.Models.SocilalMedia", b =>
+                {
+                    b.HasOne("Host.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vendor");
+                });
+
             modelBuilder.Entity("Host.Models.Vendor", b =>
                 {
                     b.HasOne("Host.Models.City", "City")
@@ -744,17 +748,6 @@ namespace Host.DB_Migration
                 });
 
             modelBuilder.Entity("Host.Models.VendorSell", b =>
-                {
-                    b.HasOne("Host.Models.Vendor", "Vendor")
-                        .WithMany()
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("Host.Models.VendorSocialMedia", b =>
                 {
                     b.HasOne("Host.Models.Vendor", "Vendor")
                         .WithMany()
