@@ -32,6 +32,7 @@ export class CityComponent extends BaseComponent<City> {
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styles: [
+    ``
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -53,16 +54,19 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     this.selectVendorModal = false;
   }
   vendeeModalSelected(e: Vendee) {
+
     this.selectedForm().form.controls[this.VendeeTitle].setValue(e.FirstName + " " + e.LastName);
     this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendeeId)].setValue(e.Id);
     this.selectVendeeModal = false;
   }
-  t3: InvoiceDetail= new InvoiceDetail( { Count: 2, Off: 3000, PriceOfOne: 100000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' });
-  ttt:  any = {
+  ttt: Invoice = new Invoice({
+    Discount: 5,
+    Vendor: new Vendor({ Title: 'sadsa' }),
     InvoiceDetails: [
-      this.t3
+      new InvoiceDetail({ Count: 2, Discount: 3000, Price: 100000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Discount: 6000, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
     ]
-  }
+  })
 
 }
 

@@ -25,6 +25,11 @@ export class Category extends BaseModelWithTitle {
   Images: any[] = [];
 }
 export class Vendor extends BaseModelWithTitle {
+  constructor(p?: Partial<Vendor>) {
+    super();
+    if (p)
+      Object.assign(this, p);
+  }
   TitleEn: string = '';
   CityId!: number;
   LastName: any;
@@ -46,7 +51,6 @@ export class Vendor extends BaseModelWithTitle {
   Phone1Confirm = false;
   Phone2Confirm = false;
   CellPhone1Confirm = false;
-
 }
 export class VendorSell extends BaseModel {
   Successed = 0;
@@ -104,25 +108,33 @@ export class Bank extends BaseModelWithTitle {
 }
 export class Ticket extends BaseModelWithTitle { }
 export class InvoiceDetail {
-  constructor(p: Partial<InvoiceDetail>) {
-    Object.assign(this, p);
+  constructor(p?: Partial<InvoiceDetail>) {
+    if (p) Object.assign(this, p);
   }
   Title = '';
   Description = '';
-  PriceOfOne = 0;
-  Off = 0;
+  Price = 0;
+  Discount = 0;
   Count = 0;
-  get FinalPrice() { console.log(this); return this.PriceOfOne * this.Count - this.Off; }
+  get Percentage() { return this.Discount / this.TotalPrice; }
+  get TotalPrice() { return this.Price * this.Count; }
+  get TotalPriceWithDiscount() { return this.Price * this.Count - this.Discount; }
   InvoiceState: any
 }
 export class Invoice extends BaseModel {
+  constructor(p?: Partial<Invoice>) {
+    super();
+    if (p)
+      Object.assign(this, p);
+  }
   VendeeId!: number;
   Vendee!: Vendee;
   VendorId!: number;
   Vendor!: Vendor;
-  Off = 0;
-  get Price() { return this.InvoiceDetails.reduce((p, c) => p + c.FinalPrice, 0) };
-  get FinalPrice() { return this.Price - this.Off; }
+  Discount = 0;
+  get TotalDiscount() { return this.InvoiceDetails.reduce((p, c) => p + c.Discount, 0) };
+  get TotalPrice() { return this.InvoiceDetails.reduce((p, c) => p + c.TotalPrice, 0) };
+  get TotalWithDiscount() { return this.InvoiceDetails.reduce((p, c) => p + c.TotalPriceWithDiscount, 0) - this.Discount };
   InvoiceDetails: InvoiceDetail[] = [];
 }
 
@@ -144,7 +156,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration<Vendor>(Vendor, VendorComponent, 'فروشگاه', [
     ...defaultPropertyWithTitleConfiguration,
-    new PropertyConfiguration(c => c.TitleEn, 'نام لاتین', { Type: 'string', InPicker:true, Validators: [Validators.required, Validators.minLength(3)] }),
+    new PropertyConfiguration(c => c.TitleEn, 'نام لاتین', { Type: 'string', InPicker: true, Validators: [Validators.required, Validators.minLength(3)] }),
     //new PropertyConfiguration(c=>c.IsConfirmed', 'تایید شده', { Type:'bool' }),
     //new PropertyConfiguration(c=>c.Categories', 'دسته بندی ها', { Type: 'string', value:[] }),
     new PropertyConfiguration(c => c.CityId, 'شهرستان', { Validators: [Validators.required] }),
@@ -254,16 +266,16 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //new EntityConfiguration(VendorComponent, '', [], {}),
   new EntityConfiguration<Invoice>(Invoice, InvoiceComponent, 'فاکتور ها', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration(c => c.VendeeId, 'خریدار', { canEdit:false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.VendeeId, 'خریدار', { canEdit: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { canEdit: false, Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.Off, 'تخففیف روی کل فاکتور', { InTable: false, Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.FinalPrice, 'قیمت نهایی', { InForm: false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.Discount, 'تخففیف روی کل فاکتور', { InTable: false, Validators: [Validators.required] }),
+    new PropertyConfiguration(c => c.TotalWithDiscount, 'قیمت نهایی', { InForm: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', { InTable: false }),
 
 
 
 
-    
+
   ], { getTitle: (item: FormGroup) => { return (item.controls[getNameOf<Invoice>(c => c.VendeeId)]?.value?.toString() ?? "جدید"); } }),
 
 

@@ -42,6 +42,7 @@
             ],
             "styles": [
               "../../../Santel/ClientApp/src/styles.css",
+              "src/styles.css",
               {
                 "input": "../../../Santel/ClientApp/src/styles/default.less",
                 "bundleName": "default",

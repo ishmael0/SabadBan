@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+.invoice {
+  text-align: center;
+}
+  .invoice .invoice-header tbody  tr td:nth-child(1){
+    text-align: start;
+    background-color:#ffffff68;
+  }
+  .invoice .invoice-header tbody tr td:nth-child(3) {
+    text-align: end;
+    background-color: #ffffff68;
+  }
+
+  .invoice .ant-table {
+    background-color: transparent;
+  }
+
+    .invoice .ant-table th {
+      background-color: transparent;
+    }

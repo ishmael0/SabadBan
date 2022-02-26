@@ -171,10 +171,9 @@ namespace Host.Models
     {
         public string Title { set; get; }
         public string Description { set; get; }
-        public int PriceOfOne { set; get; }
-        public int DiscountOfOne { set; get; }
+        public int Price { set; get; }
+        public int Discount { set; get; }
         public int Count { set; get; }
-        public int FinalPrice { set; get; }
     }
     public class Invoice : BaseModel
     {
@@ -189,9 +188,8 @@ namespace Host.Models
 
 
 
-        public int FinalPrice { set; get; }
-        public int Off { set; get; }
         public int Price { set; get; }
+        public int Discount { set; get; }
         public List<InvoiceDetail> InvoiceDetails { set; get; }
 
 
