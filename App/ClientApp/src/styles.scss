@@ -1,0 +1,21 @@
+.invoice {
+  text-align: center;
+  .invoice-header tbody tr td:nth-child(1)
+{
+  text-align: start;
+  background-color: #ffffff68;
+}
+
+.invoice-header tbody tr td:nth-child(3) {
+  text-align: end;
+  background-color: #ffffff68;
+}
+
+.ant-table {
+  background-color: transparent;
+}
+
+.ant-table th {
+  background-color: transparent;
+}
+}
