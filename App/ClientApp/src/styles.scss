@@ -1,21 +1,27 @@
 .invoice {
   text-align: center;
-  .invoice-header tbody tr td:nth-child(1)
-{
-  text-align: start;
-  background-color: #ffffff68;
-}
+  padding:5px;
+  .invoice-inner {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.21);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.2px);
+    -webkit-backdrop-filter: blur(3.2px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    margin:10px;
+  }
 
-.invoice-header tbody tr td:nth-child(3) {
-  text-align: end;
-  background-color: #ffffff68;
-}
+  .invoice-header .highlight {
+    text-align: start;
+  }
 
-.ant-table {
-  background-color: transparent;
-}
 
-.ant-table th {
-  background-color: transparent;
-}
+  .ant-table {
+    background-color: transparent;
+  }
+
+  .ant-table th {
+    background-color: transparent;
+  }
 }

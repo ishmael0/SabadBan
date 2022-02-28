@@ -1,17 +1,25 @@
 <nz-card>
   <div class="invoice" style="background-image:url('../../assets/invoice templates/001.jpg')">
-    <div>
+    <div class="invoice-inner">
       <table class="invoice-header">
         <tbody>
           <tr>
-            <td colspan="3">
+            <td></td>
+            <td>
               <h2>به نام خدا</h2>
             </td>
+            <td></td>
           </tr>
           <tr>
-            <td>شماره فاکتور:</td>
             <td>
-              <span>فروشگاه  {{ttt.Vendor.Title}} </span>
+              شماره فاکتور:
+              <span class="highlight">
+                1234654
+                </span>
+            </td>
+            <td>
+              فروشگاه
+              <span class="highlight">{{ttt.Vendor.Title}} </span>
             </td>
             <td>
               تاریخ ثبت:
@@ -29,56 +37,59 @@
       <br />
     </div>
     <br />
-    <app-drag-and-drop-list [list]="ttt.InvoiceDetails"
-                            [deleteEnabled]="false"
-                            [footer]="footer"
-                            [header]="header"
-                            [body]="body">
-      <ng-template #footer>
-        <tr>
-          <td colspan="3">جمع </td>
-          <td>{{ttt.TotalDiscount}}</td>
-          <td>{{ttt.TotalPrice}}</td>
-        </tr>
-        <tr>
-          <td colspan="3">تخفیف روی کل فاکتور  </td>
-          <td>{{ttt.Discount}}</td>
-        </tr>
-        <tr>
-          <td colspan="4">قابل پرداخت </td>
-          <td>{{ttt.TotalWithDiscount}}</td>
-        </tr>
-      </ng-template>
+    <div class="invoice-inner">
 
-      <ng-template #header>
-        <tr>
-          <th>ردیف</th>
-          <th> نام محصول</th>
-          <th> تعداد و قیمت</th>
-          <th>تخفیف کل </th>
-          <th> قیمت کل</th>
-        </tr>
-      </ng-template>
-      <ng-template #body let-item="item" let-index="index">
-        <td>{{item.Id}}</td>
-        <td>
-          {{item.Title}}<br />
-          {{item.Description}}
-        </td>
-        <td style="direction:ltr">
-          {{item.Price|number:'3.'}}ریال x {{item.Count|number:'3.'}}
 
-        </td>
-        <td>
-          {{item.Percentage | number:'1.0-2'}}درصد<br />
-          {{item.Discount|number:'3.'}}ریال
-        </td>
-        <td>
-          {{item.TotalPriceWithDiscount|number:'3.'}}
-        </td>
-      </ng-template>
-    </app-drag-and-drop-list>
+      <app-drag-and-drop-list [list]="ttt.InvoiceDetails"
+                              [deleteEnabled]="false"
+                              [footer]="footer"
+                              [header]="header"
+                              [body]="body">
+        <ng-template #footer>
+          <tr>
+            <td colspan="3">جمع </td>
+            <td>{{ttt.TotalDiscount}}</td>
+            <td>{{ttt.TotalPrice}}</td>
+          </tr>
+          <tr>
+            <td colspan="3">تخفیف روی کل فاکتور  </td>
+            <td>{{ttt.Discount}}</td>
+          </tr>
+          <tr>
+            <td colspan="4">قابل پرداخت </td>
+            <td>{{ttt.TotalWithDiscount}}</td>
+          </tr>
+        </ng-template>
 
+        <ng-template #header>
+          <tr>
+            <th>ردیف</th>
+            <th> نام محصول</th>
+            <th> تعداد و قیمت</th>
+            <th>تخفیف کل </th>
+            <th> قیمت کل</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-item="item" let-index="index">
+          <td>{{item.Id}}</td>
+          <td>
+            {{item.Title}}<br />
+            {{item.Description}}
+          </td>
+          <td style="direction:ltr">
+            {{item.Price|number:'3.'}}ریال x {{item.Count|number:'3.'}}
+
+          </td>
+          <td>
+            {{item.Percentage | number:'1.0-2'}}درصد<br />
+            {{item.Discount|number:'3.'}}ریال
+          </td>
+          <td>
+            {{item.TotalPriceWithDiscount|number:'3.'}}
+          </td>
+        </ng-template>
+      </app-drag-and-drop-list>
+    </div>
   </div>
 </nz-card>
 
