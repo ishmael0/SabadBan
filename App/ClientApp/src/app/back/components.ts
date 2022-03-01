@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { getNameOf, HTTPTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { getNameOf, HTTPTypes, numberToText, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { Bank, Category, City, Invoice, InvoiceDetail, Province, Ticket, Transaction, Vendee, Vendor, VendorBalance, VendorBankAccount, VendorSell, VendorWithdraw } from './back.module';
 
 
@@ -38,33 +38,50 @@ export class CityComponent extends BaseComponent<City> {
 })
 export class InvoiceComponent extends BaseComponent<Invoice> {
 
-
-  vendorTitle = getNameOf<Invoice>(c => c.Vendor) + getNameOf<Invoice>(c => c.Vendor.Title);
-  VendeeTitle = getNameOf<Invoice>(c => c.Vendee.FirstName) + getNameOf<Invoice>(c => c.Vendee.LastName)
   selectVendorModal = false;
   selectVendeeModal = false;
   override async onNewObjectAdded(temp: FormGroup, t: Invoice) {
     super.onNewObjectAdded(temp, t);
-    temp.addControl(this.VendeeTitle, new FormControl(t.Vendee?.FirstName + " " + t.Vendee?.LastName))
-    temp.addControl(this.vendorTitle, new FormControl(t.Vendor?.Title))
+    temp.addControl(getNameOf<Invoice>(c => c.Vendee), new FormControl(t.Vendee))
+    temp.addControl(getNameOf<Invoice>(c => c.Vendor), new FormControl(t.Vendor))
+    temp.getControlByName((c: Invoice) => c.InvoiceDetails).setValue(this.ttt.InvoiceDetails);
   }
   vendorModalSelected(e: Vendor) {
-    this.selectedForm().form.controls[this.vendorTitle].setValue(e.Title);
-    this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendorId)].setValue(e.Id);
+    this.selectedForm().form.getControlByName<Invoice>(c => c.Vendor).setValue(e);
+    this.selectedForm().form.getControlByName<Invoice>(c => c.VendorId).setValue(e.Id);
     this.selectVendorModal = false;
   }
   vendeeModalSelected(e: Vendee) {
-
-    this.selectedForm().form.controls[this.VendeeTitle].setValue(e.FirstName + " " + e.LastName);
-    this.selectedForm().form.controls[getNameOf<Invoice>(c => c.VendeeId)].setValue(e.Id);
+    this.selectedForm().form.getControlByName<Invoice>(c => c.Vendee).setValue(e);
+    this.selectedForm().form.getControlByName<Invoice>(c => c.VendeeId).setValue(e.Id);
     this.selectVendeeModal = false;
+  }
+
+
+  canEditInvoice(item: any) {
+    return true
+  }
+  TotalPrice(itemc: InvoiceDetail[]) {
+    return itemc.reduce((p, c: InvoiceDetail) => p + c.Price * c.Count, 0)
+  }
+  addRowToInvoice(item: FormGroup) {
+    item.getControlByName((c: Invoice) => c.InvoiceDetails).setValue([...item.getControlByName((c: Invoice) => c.InvoiceDetails).value, { Count: 0, Price: 0 }]);
+    this.makeItDirty(item);
+    this.cdr.detectChanges();
   }
   ttt: Invoice = new Invoice({
     Discount: 5,
     Vendor: new Vendor({ Title: 'sadsa' }),
+    Vendee: new Vendee({ FirstName: 'منیره', LastName: 'زاهدی', CellPhone: '09016200321' }),
     InvoiceDetails: [
-      new InvoiceDetail({ Count: 2, Discount: 3000, Price: 100000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
-      new InvoiceDetail({ Count: 1, Discount: 6000, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 2, Price: 100000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
+      new InvoiceDetail({ Count: 1, Price: 200000, Description: 'ghhh', Title: 'پیراهن صولتی آستین سه رب' }),
     ]
   })
 

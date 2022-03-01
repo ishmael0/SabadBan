@@ -1,21 +1,18 @@
 .invoice {
-  text-align: center;
-  padding:5px;
   .invoice-inner {
-    /* From https://css.glass */
     background: rgba(255, 255, 255, 0.21);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.2px);
     -webkit-backdrop-filter: blur(3.2px);
     border: 1px solid rgba(255, 255, 255, 1);
-    margin:10px;
+    margin: 10px;
   }
 
-  .invoice-header .highlight {
-    text-align: start;
+  .highlight {
+    font-weight: bold;
+    padding-right: 10px;
   }
-
 
   .ant-table {
     background-color: transparent;
@@ -24,4 +21,8 @@
   .ant-table th {
     background-color: transparent;
   }
+
+  text-align: center;
+  background-size: cover;
+  padding: 5px;
 }

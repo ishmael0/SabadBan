@@ -73,7 +73,11 @@
 
 
 <ng-template #tableBodyPicker let-item="item">
-
+  <td>{{item.Id}}</td>
+  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{item.FirstName}}</td>
+  <td>{{item.LastName}}</td>
+  <td>{{item.CellPhone}}</td>
 </ng-template>
 
 

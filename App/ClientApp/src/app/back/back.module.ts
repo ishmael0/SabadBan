@@ -89,6 +89,10 @@ export class Address {
   Longitude = 0;
 }
 export class Vendee extends BaseModel {
+  constructor(p?: Partial<Vendee>) {
+    super();
+    if (p) Object.assign(this, p);
+  }
   FirstName = '';
   LastName = '';
   CellPhone = '';
@@ -114,11 +118,8 @@ export class InvoiceDetail {
   Title = '';
   Description = '';
   Price = 0;
-  Discount = 0;
   Count = 0;
-  get Percentage() { return this.Discount / this.TotalPrice; }
   get TotalPrice() { return this.Price * this.Count; }
-  get TotalPriceWithDiscount() { return this.Price * this.Count - this.Discount; }
   InvoiceState: any
 }
 export class Invoice extends BaseModel {
@@ -128,13 +129,12 @@ export class Invoice extends BaseModel {
       Object.assign(this, p);
   }
   VendeeId!: number;
-  Vendee!: Vendee;
+  Vendee: Vendee = new Vendee();
   VendorId!: number;
-  Vendor!: Vendor;
+  Vendor: Vendor = new Vendor();
+  Options: any = {};
   Discount = 0;
-  get TotalDiscount() { return this.InvoiceDetails.reduce((p, c) => p + c.Discount, 0) };
   get TotalPrice() { return this.InvoiceDetails.reduce((p, c) => p + c.TotalPrice, 0) };
-  get TotalWithDiscount() { return this.InvoiceDetails.reduce((p, c) => p + c.TotalPriceWithDiscount, 0) - this.Discount };
   InvoiceDetails: InvoiceDetail[] = [];
 }
 
@@ -234,9 +234,9 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
 
   new EntityConfiguration<Vendee>(Vendee, VendeeComponent, 'خریدار', [
     ...defaultPropertyConfiguration,
-    new PropertyConfiguration(c => c.FirstName, 'نام', {}),
-    new PropertyConfiguration(c => c.LastName, 'نام خانوادگی', {}),
-    new PropertyConfiguration(c => c.CellPhone, 'شماره تماس', {}),
+    new PropertyConfiguration(c => c.FirstName, 'نام', { InPicker:true }),
+    new PropertyConfiguration(c => c.LastName, 'نام خانوادگی', { InPicker: true}),
+    new PropertyConfiguration(c => c.CellPhone, 'شماره تماس', { InPicker: true}),
     new PropertyConfiguration(c => c.CellPhoneConfirm, 'تایید شماره تماس', {}),
     new PropertyConfiguration(c => c.MelliCode, 'کد ملی', { Validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)] }),
     new PropertyConfiguration(c => c.Password, 'پسورد', {}),
@@ -269,23 +269,9 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.VendeeId, 'خریدار', { canEdit: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { canEdit: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Discount, 'تخففیف روی کل فاکتور', { InTable: false, Validators: [Validators.required] }),
-    new PropertyConfiguration(c => c.TotalWithDiscount, 'قیمت نهایی', { InForm: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', { InTable: false }),
-
-
-
-
-
+    new PropertyConfiguration(c => c.Options, ' سایر تنظیمات', { InTable: false }),
   ], { getTitle: (item: FormGroup) => { return (item.controls[getNameOf<Invoice>(c => c.VendeeId)]?.value?.toString() ?? "جدید"); } }),
-
-
-
-
-
-
-
-
-
   new EntityConfiguration<Ticket>(Ticket, TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,
   ], {}),

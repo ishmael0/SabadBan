@@ -1,109 +1,13 @@
-<nz-card>
-  <div class="invoice" style="background-image:url('../../assets/invoice templates/001.jpg')">
-    <div class="invoice-inner">
-      <table class="invoice-header">
-        <tbody>
-          <tr>
-            <td></td>
-            <td>
-              <h2>به نام خدا</h2>
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              شماره فاکتور:
-              <span class="highlight">
-                1234654
-                </span>
-            </td>
-            <td>
-              فروشگاه
-              <span class="highlight">{{ttt.Vendor.Title}} </span>
-            </td>
-            <td>
-              تاریخ ثبت:
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>خریدار:</span>
-            </td>
-            <td></td>
-            <td>تاریخ پرداخت:</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-    </div>
-    <br />
-    <div class="invoice-inner">
-
-
-      <app-drag-and-drop-list [list]="ttt.InvoiceDetails"
-                              [deleteEnabled]="false"
-                              [footer]="footer"
-                              [header]="header"
-                              [body]="body">
-        <ng-template #footer>
-          <tr>
-            <td colspan="3">جمع </td>
-            <td>{{ttt.TotalDiscount}}</td>
-            <td>{{ttt.TotalPrice}}</td>
-          </tr>
-          <tr>
-            <td colspan="3">تخفیف روی کل فاکتور  </td>
-            <td>{{ttt.Discount}}</td>
-          </tr>
-          <tr>
-            <td colspan="4">قابل پرداخت </td>
-            <td>{{ttt.TotalWithDiscount}}</td>
-          </tr>
-        </ng-template>
-
-        <ng-template #header>
-          <tr>
-            <th>ردیف</th>
-            <th> نام محصول</th>
-            <th> تعداد و قیمت</th>
-            <th>تخفیف کل </th>
-            <th> قیمت کل</th>
-          </tr>
-        </ng-template>
-        <ng-template #body let-item="item" let-index="index">
-          <td>{{item.Id}}</td>
-          <td>
-            {{item.Title}}<br />
-            {{item.Description}}
-          </td>
-          <td style="direction:ltr">
-            {{item.Price|number:'3.'}}ریال x {{item.Count|number:'3.'}}
-
-          </td>
-          <td>
-            {{item.Percentage | number:'1.0-2'}}درصد<br />
-            {{item.Discount|number:'3.'}}ریال
-          </td>
-          <td>
-            {{item.TotalPriceWithDiscount|number:'3.'}}
-          </td>
-        </ng-template>
-      </app-drag-and-drop-list>
-    </div>
-  </div>
-</nz-card>
-
 <ng-template #form let-item="item">
   <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
   <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
-
     <div nz-row>
       <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">      فروشنده  </nz-form-label>
       <div nz-col [nzXs]="24" [nzSm]="6" [nzMd]="3">
         <nz-form-item>
           <nz-form-control nzErrorTip=" فروشنده را وارد نمایید">
             <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه فروشگاه">{{item.controls['VendorId'].value}}</nz-tag>
-            {{item.controls['VendorTitle'].value}}
+            {{item.controls['Vendor'].value.Title}}
             <button *ngIf="!item.controls['Id'].value" nz-button nzType="dashed" nzDanger (click)="selectVendorModal = true">
               انتخاب
               <i nz-icon [innerHtml]="icons['plus-thick']"></i>
@@ -116,59 +20,155 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="خریدار را وارد نمایید ">
             <nz-tag [nzColor]="'#f50'" nz-tooltip nzTooltipTitle="شناسه خریدار">{{item.controls['VendeeId'].value}}</nz-tag>
-            {{item.controls['FirstNameLastName'].value}}
-            <button *ngIf="!item.controls['Id'].value" nz-button nzType="dashed" nzDanger>
+            {{item.controls['Vendee'].value.FirstName + " " + item.controls['Vendee'].value.LastName}}
+            <button *ngIf="!item.controls['Id'].value" nz-button nzType="dashed" nzDanger (click)="selectVendeeModal = true">
               انتخاب
               <i nz-icon [innerHtml]="icons['plus-thick']"></i>
             </button>
           </nz-form-control>
         </nz-form-item>
       </div>
+    </div>
 
-      <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    جزییات فاکتور  </nz-form-label>
-      <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="21">
-        <!--<app-drag-and-drop-list [list]="item.controls['InvoiceDetails'].value"
-                                [header]="header"
-                                [body]="body">
-          <ng-template #header>
-            <th>
-              عنوان
-            </th>
-          </ng-template>
-          <ng-template #body let-item="item">
-            <td>{{item.title}}</td>
-          </ng-template>
-        </app-drag-and-drop-list>-->
+    <div nz-row>
+      <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
+        <nz-form-label>فاکتور</nz-form-label>
+        <br />
+        <nz-alert nzType="info" class="alertInTopOfTable" nzMessage=" میتوانید با کشیدن و رها کردن ترتیب محصولات را تغییر دهید"></nz-alert>
+        <br />
+        <button nz-button nzType="dashed" (click)=" addRowToInvoice(item)">اضافه کردن  یک محصول به فاکتور</button>
+        <br />
+        <nz-form-label>تنظیمات فاکتور</nz-form-label>
+        <br />
+        <div class="invoice" style="background-image: url('../../assets/invoice templates/001.jpg')">
+          <div style="display:flex" class="invoice-inner">
+            <label nz-checkbox>نمایش ردیف تخفیف در فاکتور</label>
+
+          </div>
+        </div>
+        <div class="invoice">
+          <div class="invoice-inner">
+            <label  [(ngModel)]="item.controls['Options'].value" (change)="makeItDirty(item)" [ngModelOptions]="{standalone: true}" nz-checkbox>نمایش ردیف تخفیف در فاکتور</label><br />
+            <label nz-checkbox>نمایش هزینه ارسال در فاکتور</label><br />
+
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzMd]="18" [nzXs]="24">
+        <div class="invoice" style="width:100%;background-image:url('../../assets/invoice templates/001.jpg')">
+          <div style="display:flex" class="invoice-inner">
+            <div style="width:50%">
+              فروشگاه
+              <span class="highlight">{{item.controls['Vendor'].value.Title}} </span>
+            </div>
+            <div style="width:25%;text-align:end">
+              شماره فاکتور:<br />
+              تاریخ ثبت:<br />
+              تاریخ پرداخت:<br />
+              خریدار:<br />
+            </div>
+            <div style="width:25%;text-align:start">
+              <span class="highlight">1234654</span><br />
+              <span class="highlight">1234654</span><br />
+              <span class="highlight">1234654</span><br />
+              <span class="highlight">1234654</span><br />
+            </div>
+          </div>
+          <div style="display:flex" class="invoice-inner">
+            <div style="width:50%">
+              خریدار
+              <span class="highlight">  {{item.controls['Vendee'].value.FirstName + " " + item.controls['Vendee'].value.LastName}} </span>
+            </div>
+            <div style="width:25%;text-align:end">
+              شماره تماس:<br />
+              آدرس:<br />
+              تاریخ پرداخت:<br />
+              خریدار:<br />
+            </div>
+            <div style="width:25%;text-align:start">
+              <span class="highlight">{{item.controls['Vendee'].value.CellPhone}}</span><br />
+              <span class="highlight">{{item.controls['Vendee'].value.Addresses}}</span><br />
+              <span class="highlight">1234654</span><br />
+              <span class="highlight">1234654</span><br />
+            </div>
+          </div>
+          <div class="invoice-inner">
+            <app-drag-and-drop-list formControlName="InvoiceDetails"
+                                    [deleteEnabled]="canEditInvoice(item)"
+                                    [footer]="footer"
+                                    [header]="header"
+                                    [body]="body">
+              <ng-template #footer>
+                <tr>
+                  <td colspan="4">جمع </td>
+                  <td style="font-weight:bold">{{TotalPrice(item.controls['InvoiceDetails'].value)|number:'3.'}}</td>
+                </tr>
+                <tr>
+                  <td colspan="4">تخفیف   </td>
+                  <td *ngIf="!canEditInvoice(item)" style="font-weight:bold">{{item.controls['Discount'].value|number:'3.'}}</td>
+                  <td *ngIf="canEditInvoice(item)" style="font-weight:bold">
+                    <input formControlName="Discount" nz-input type="number" />
+                  </td>
+
+                </tr>
+                <tr>
+                  <td colspan="4">قابل پرداخت </td>
+                  <td style="font-weight:bold;font-size:large">
+                    {{(TotalPrice(item.controls['InvoiceDetails'].value) - item.controls['Discount'].value)|number:'3.'}}
+                    <!--{{(TotalPrice(item.controls['InvoiceDetails'].value) - item.controls['Discount'].value)|numToText}}-->
+
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template #header>
+                <th>ردیف</th>
+                <th> نام محصول</th>
+                <th> تعداد  </th>
+                <th>قیمت </th>
+                <th> قیمت کل</th>
+              </ng-template>
+              <ng-template #body let-invoiceItem="item" let-index="index">
+                <td>{{index + 1}}</td>
+                <td *ngIf="!canEditInvoice(item)">
+                  {{invoiceItem.Title}}<br />
+                  {{invoiceItem.Description}}
+                </td>
+                <td *ngIf="canEditInvoice(item)">
+                  <input [(ngModel)]="invoiceItem.Title" nz-input (change)="makeItDirty(item)" [ngModelOptions]="{standalone: true}" />
+                  <input [(ngModel)]="invoiceItem.Description" nz-input (change)="makeItDirty(item)" [ngModelOptions]="{standalone: true}" />
+                </td>
+                <td *ngIf="!canEditInvoice(item)">
+                  {{invoiceItem.Count}}
+                </td>
+                <td *ngIf="canEditInvoice(item)">
+                  <input [(ngModel)]="invoiceItem.Count" nz-input (change)="makeItDirty(item)" type="number" [ngModelOptions]="{standalone: true}" />
+                </td>
+                <td>
+                  {{invoiceItem.Price |number:'3.'}}
+                  ریال
+                </td>
+                <td style="font-weight:bold">
+                  {{(invoiceItem.Count *invoiceItem.Price) |number:'3.'}}
+                </td>
+              </ng-template>
+            </app-drag-and-drop-list>
+          </div>
+        </div>
       </div>
 
 
-
-
-
-
-
-
-
     </div>
+
   </form>
 </ng-template>
-
 
 <ng-template #viewMessage>
   آیدی
 </ng-template>
 <ng-template #search>
-
 </ng-template>
-
-
-
-
 <ng-template #tableBodyPicker let-item="item">
-
 </ng-template>
-
-
 <ng-template #tableBody let-item="item">
   <td>{{ item.Id }}</td>
   <td>{{ item.Create_}}</td>
@@ -183,19 +183,19 @@
   </td>
   <td>{{item.FinalPrice}}</td>
 </ng-template>
-
-
-
-
-
-
 <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
-
 <ng-container *ngIf="mainTemplate">
-  <nz-modal [nzWidth]="'80%'" [(nzVisible)]="selectVendorModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن  لیبل" (nzOnCancel)="selectVendorModal = false">
+  <nz-modal [nzWidth]="'80%'" [(nzVisible)]="selectVendorModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="انتخاب فروشنده   " (nzOnCancel)="selectVendorModal = false">
     <ng-container *nzModalContent>
       <app-vendor (select)="vendorModalSelected($event)"></app-vendor>
       <button style="float:left" nz-button nzType="primary" (click)=" selectVendorModal = false">تایید </button>
+    </ng-container>
+  </nz-modal>
+
+  <nz-modal [nzWidth]="'80%'" [(nzVisible)]="selectVendeeModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="   انتخاب خریدار" (nzOnCancel)="selectVendeeModal = false">
+    <ng-container *nzModalContent>
+      <app-vendee (select)="vendeeModalSelected($event)"></app-vendee>
+      <button style="float:left" nz-button nzType="primary" (click)=" selectVendeeModal = false">تایید </button>
     </ng-container>
   </nz-modal>
 </ng-container>
