@@ -45,7 +45,7 @@ export class Vendor extends BaseModelWithTitle {
   CellPhone1: string = '';
   CellPhone2: string = '';
   Images: any[] = [];
-  Logo: any;
+  Logo='';
   MelliCode = '';
   CellPhone2Confirm = false;
   Phone1Confirm = false;

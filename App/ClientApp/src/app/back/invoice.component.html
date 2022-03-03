@@ -177,7 +177,7 @@
                 <tr>
                   <td>نحوه پرداخت   </td>
 
-                  <td colspan="3">
+                  <td colspan="4">
                     <nz-radio-group class="PostTypes" formControlName="PaymentType">
                       <label nz-radio [nzValue]="0">
                         <div class="glass">
@@ -245,10 +245,7 @@
                     </nz-radio-group>
 
                   </td>
-                  <td *ngIf="!canEditInvoice(item)" style="font-weight:bold">{{item.controls['PaymentType'].value|number:'3.'}}</td>
-                  <td *ngIf="canEditInvoice(item)" style="font-weight:bold">
-                    <nz-input-number formControlName="PaymentType" [nzMin]="0"></nz-input-number>
-                  </td>
+
                 </tr>
                 <tr>
                   <td colspan="5">

@@ -68,6 +68,7 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     item.getControlByName((c: Invoice) => c.InvoiceDetails).setValue([...item.getControlByName((c: Invoice) => c.InvoiceDetails).value, { Count: 0, Price: 0 }]);
     this.makeItDirty(item);
     this.cdr.detectChanges();
+
   }
   ttt: Invoice = new Invoice({
     Discount: 5,
@@ -194,17 +195,17 @@ export class VendorComponent extends BaseComponent<Vendor> {
     d.Records.forEach((e: any) => { e.CityTitle = this.cities.find(c => c.Id == e.CityId)?.Title });
   }
   imageModal = false;
-  async addImage(e: any) {
+  async addImage(item: FormGroup, e: string) {
     this.imageModal = false;
-    let x: any[] = this.selectedForm().form.controls['Images'].value;
+    let x: any[] = item.getControlByName<Vendor>(c => c.Images).value;
     x.push({ Path: e, Description: '' });
-    this.makeItDirty(this.selectedForm().form);
+    this.makeItDirty(item);
   }
   logoModal = false;
-  async addLogo(e: any) {
+  async addLogo(item: FormGroup, e: string) {
     this.logoModal = false;
-    let x: any = this.selectedForm().form.controls['Images'].setValue({ Path: e, Description: '' });
-    this.makeItDirty(this.selectedForm().form);
+    let x: any = item.getControlByName<Vendor>(c => c.Logo).setValue(e);
+    this.makeItDirty(item);
   }
   async ConfirmVendor(item: any) {
     this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, this.dataManager.key, {

@@ -6,8 +6,6 @@
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
         <div nz-row>
 
-
-
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">    نام </nz-form-label>
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
@@ -25,6 +23,7 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  کد ملی    </nz-form-label>
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
@@ -33,7 +32,6 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-      
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">نام لاتین فروشگاه</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
@@ -52,122 +50,134 @@
               </nz-form-control>
             </nz-form-item>
           </nz-form-item>
-
-
         </div>
 
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   توضیحات </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="21">
-             <nz-form-item><nz-form-control nzErrorTip="   توضیحات را وارد کنید">
-              <textarea nz-input formControlName="Description" placeholder=" توضیحات" [nzAutosize]="{ minRows: 3, maxRows: 15 }"></textarea>
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="   توضیحات را وارد کنید">
+                <textarea nz-input formControlName="Description" placeholder=" توضیحات" [nzAutosize]="{ minRows: 3, maxRows: 15 }"></textarea>
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
+
         </div>
       </form>
     </nz-tab>
+
     <nz-tab nzTitle=" اطلاعات تماس فروشگاه">
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
         <div nz-row>
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">استان و شهرستان  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="استان و شهرستان را وارد کنید">
-              <!--<nz-cascader [nzShowSearch]="true" nzPlaceHolder="استان و شهرستان" [nzOptions]="nodes" formControlName="CityId"></nz-cascader>-->
-
-              <nz-tree-select [nzNodes]="nodes"
-                              nzShowSearch
-                              nzPlaceHolder="استان و شهرستان"
-                              formControlName="CityId"></nz-tree-select>
-
-
-
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="استان و شهرستان را وارد کنید">
+                <!--<nz-cascader [nzShowSearch]="true" nzPlaceHolder="استان و شهرستان" [nzOptions]="nodes" formControlName="CityId"></nz-cascader>-->
+                <nz-tree-select [nzNodes]="nodes"
+                                nzShowSearch
+                                nzPlaceHolder="استان و شهرستان"
+                                formControlName="CityId"></nz-tree-select>
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  کد پستی  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="    کد پستی را وارد کنید  ">
-              <input nz-input formControlName="PostalCode" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="    کد پستی را وارد کنید  ">
+                <input nz-input formControlName="PostalCode" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
-
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   طول جغرافیایی</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="طول جغرافیایی   را وارد کنید">
-              <input nz-input formControlName="longitude" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="طول جغرافیایی   را وارد کنید">
+                <input nz-input formControlName="longitude" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
+
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   عرض جغرافیایی</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="عرض جغرافیایی   را وارد کنید">
-              <input nz-input formControlName="latitude" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="عرض جغرافیایی   را وارد کنید">
+                <input nz-input formControlName="latitude" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
-       
-
-
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره تلفن ثابت اول  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
-              <input nz-input formControlName="Phone1" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
+                <input nz-input formControlName="Phone1" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
+
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره تلفن ثابت دوم  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
-              <input nz-input formControlName="Phone2" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شماره تلفن ثابت به همراه کد شهر را وارد نمایید">
+                <input nz-input formControlName="Phone2" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
 
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره همراه اول  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
-              <input nz-input formControlName="CellPhone1" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
+                <input nz-input formControlName="CellPhone1" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
+          
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">  شماره همراه دوم  </nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
-              <input nz-input formControlName="CellPhone2" />
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شماره همراه را وارد نمایید">
+                <input nz-input formControlName="CellPhone2" />
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
 
-    
           <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3">   ادامه آدرس</nz-form-label>
           <nz-form-item nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
-             <nz-form-item><nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">
-              <textarea nz-input formControlName="Address"></textarea>
-             </nz-form-control></nz-form-item> 
+            <nz-form-item>
+              <nz-form-control nzErrorTip="ادامه آدرس   را وارد کنید">
+                <textarea nz-input formControlName="Address"></textarea>
+              </nz-form-control>
+            </nz-form-item>
           </nz-form-item>
+
         </div>
       </form>
     </nz-tab>
-    <nz-tab *ngIf="item.controls.Id.value" nzTitle=" لوگو فروشگاه">
 
+    <nz-tab *ngIf="item.controls.Id.value" nzTitle=" لوگو فروشگاه">
       <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
         <nz-form-label>لوگو</nz-form-label>
         <br />
         <button nz-button nzType="dashed" (click)="logoModal = true ">اضافه کردن   لوگو</button>
-        <div nz-col [nzSm]="12" [nzXs]="24">
-          <nz-card *ngIf="item.controls.Logo.value && item.controls.Logo.value.Path" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
-            <img style="width:100%" [src]="'/front'+item.controls.Logo.value.Path" />
+        <app-image-uploader-card-as-modal *ngIf="logoModal" (onCancel)="logoModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addLogo(item, $event)"></app-image-uploader-card-as-modal>
+        <div>
+          <nz-card *ngIf="item.controls.Logo.value" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
+            <img style="width:100%;min-width:200px" [src]="'/front'+item.controls.Logo.value" />
             <br />
-            <input type="text" nz-input style="width:100%" placeholder="توضیحات" [(ngModel)]="item.controls.Logo.value.Description" />
-            <i nz-icon (click)="item.controls.Logo.serValue({})"
+            <i nz-icon (click)="item.controls.Logo.setValue('')"
                style="color: #F93154;"
                class="larger"
                [innerHtml]="icons['delete']"></i>
           </nz-card>
         </div>
       </div>
-
-
     </nz-tab>
 
     <nz-tab *ngIf="item.controls.Id.value" nzTitle=" تصاویر فروشگاه({{item.controls.Images.value?.length}})">
-
       <div nz-row>
         <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">
           <nz-form-label>تصاویر</nz-form-label>
@@ -175,24 +185,36 @@
           <nz-alert nzType="info" class="alertInTopOfTable" nzMessage=" اولین تصویر، تصویر اصلی، دومین تصویر تصویر فرعی محسوب میشوند"></nz-alert>
           <nz-alert nzType="info" class="alertInTopOfTable" nzMessage=" میتوانید با کشیدن و رها کردن ترتیب تصاویر را تغییر دهید"></nz-alert>
           <button nz-button nzType="dashed" (click)=" imageModal = true ">اضافه کردن   تصاویر</button>
+          <app-image-uploader-card-as-modal *ngIf="imageModal" (onCancel)="imageModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addImage(item, $event)"></app-image-uploader-card-as-modal>
         </div>
-        <div nz-col [nzSm]="12" [nzXs]="24">
-          <!--<div nz-row cdkDropList (cdkDropListDropped)="dropAndDrop_DropHandler($event, item,'Images')">
-            <nz-card *ngFor="let r of item.controls.Images.value" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
-              <img style="width:100%" [src]="'/front'+r.Path" />
-              <br />
-              <input type="text" nz-input style="width:100%" placeholder="توضیحات" [(ngModel)]="r.Description" />
-              <i nz-icon (click)="deleteFromList(item, 'Images',r.Path,'Path' )"
-                 style="color: #F93154;"
-                 class="larger"
-                 [innerHtml]="icons['delete']"></i>
-            </nz-card>
-          </div>-->
-        </div>
+        <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+          <app-drag-and-drop-list formControlName="Images"
+                                  [deleteEnabled]="true"
+                                  [footer]="footer"
+                                  [header]="header"
+                                  [body]="body">
+            <ng-template #footer>
+
+            </ng-template>
+            <ng-template #header>
+              <th>ردیف</th>
+              <th>شرح تصویر</th>
+              <th>تصویر</th>
+            </ng-template>
+            <ng-template #body let-imgItem="item" let-index="index">
+              <td>{{index + 1}}</td>
+              <td>
+                <input type="text" nz-input style="width:100%" placeholder="توضیحات" [ngModelOptions]="{standalone: true}" [(ngModel)]="imgItem.Description" />
+              </td>
+              <td>
+                <img style="width:100%" [src]="'/front'+imgItem.Path" />
+              </td>
+            </ng-template>
+          </app-drag-and-drop-list>
+        </form>
       </div>
-
-
     </nz-tab>
+
   </nz-tabset>
 </ng-template>
 
@@ -232,16 +254,6 @@
 
 
 <ng-container *ngIf="mainTemplate">
-  <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">
-    <ng-container *nzModalContent>
-      <app-image-uploader-card [key]="this.dataManager" Id="1" (onOk)="addImage($event)"></app-image-uploader-card>
-    </ng-container>
-  </nz-modal>
 
-  <nz-modal [(nzVisible)]="logoModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="logoModal = false">
-    <ng-container *nzModalContent>
-      <app-image-uploader-card [key]="this.dataManager" Id="1" (onOk)="addLogo($event)"></app-image-uploader-card>
-    </ng-container>
-  </nz-modal>
 </ng-container>
 
