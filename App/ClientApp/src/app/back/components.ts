@@ -85,6 +85,16 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     ]
   })
 
+
+  opts = [
+    { Id: 0, Title: 'رایگان', Price: 0 },
+    { Id: 0, Title: 'ارسال با پیک درون شهری', PaymentSterategy: '' },
+    { Id: 1, Title: 'ارسال با پست' },
+    { Id: 3, Title: 'بدون نیاز به ارسال(قابل دانلود)' },
+    { Id: 4, Title: 'تحویل حضوری' },
+
+  ];
+
 }
 
 @Component({

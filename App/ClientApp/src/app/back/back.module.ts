@@ -123,6 +123,7 @@ export class InvoiceDetail {
   InvoiceState: any
 }
 export class Invoice extends BaseModel {
+  PostType: any;
   constructor(p?: Partial<Invoice>) {
     super();
     if (p)
@@ -132,8 +133,10 @@ export class Invoice extends BaseModel {
   Vendee: Vendee = new Vendee();
   VendorId!: number;
   Vendor: Vendor = new Vendor();
-  Options: any = {};
   Discount = 0;
+  PaymentType = 0;
+  PostCost = 0;
+  Description = 0;
   get TotalPrice() { return this.InvoiceDetails.reduce((p, c) => p + c.TotalPrice, 0) };
   InvoiceDetails: InvoiceDetail[] = [];
 }
@@ -270,7 +273,11 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { canEdit: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Discount, 'تخففیف روی کل فاکتور', { InTable: false, Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.InvoiceDetails, 'جزییات فاکتور', { InTable: false }),
-    new PropertyConfiguration(c => c.Options, ' سایر تنظیمات', { InTable: false }),
+    new PropertyConfiguration(c => c.PaymentType, 'نحوه پرداخت', { InTable: false }),
+    new PropertyConfiguration(c => c.Description, 'توضیحات', { InTable: false }),
+    new PropertyConfiguration(c => c.PostCost, 'هزینه ارسال', { InTable: false }),
+    new PropertyConfiguration(c => c.PostType, 'نحوه ارسال', { InTable: false }),
+    //new PropertyConfiguration(c => c.Options, ' سایر تنظیمات', { InTable: false }),
   ], { getTitle: (item: FormGroup) => { return (item.controls[getNameOf<Invoice>(c => c.VendeeId)]?.value?.toString() ?? "جدید"); } }),
   new EntityConfiguration<Ticket>(Ticket, TicketComponent, 'تیکت ها', [
     ...defaultPropertyWithTitleConfiguration,

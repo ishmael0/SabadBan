@@ -41,22 +41,20 @@
         <nz-form-label>تنظیمات فاکتور</nz-form-label>
         <br />
         <div class="invoice" style="background-image: url('../../assets/invoice templates/001.jpg')">
-          <div style="display:flex" class="invoice-inner">
+          <div style="display:flex" class="glass">
             <label nz-checkbox>نمایش ردیف تخفیف در فاکتور</label>
 
           </div>
         </div>
         <div class="invoice">
-          <div class="invoice-inner">
-            <label  [(ngModel)]="item.controls['Options'].value" (change)="makeItDirty(item)" [ngModelOptions]="{standalone: true}" nz-checkbox>نمایش ردیف تخفیف در فاکتور</label><br />
-            <label nz-checkbox>نمایش هزینه ارسال در فاکتور</label><br />
-
+          <div class="glass">
+            <!--<label formControlName="InvoiceDetails" nz-checkbox>نمایش هزینه ارسال در فاکتور</label><br />-->
           </div>
         </div>
       </div>
       <div nz-col [nzMd]="18" [nzXs]="24">
         <div class="invoice" style="width:100%;background-image:url('../../assets/invoice templates/001.jpg')">
-          <div style="display:flex" class="invoice-inner">
+          <div style="display:flex" class="glass">
             <div style="width:50%">
               فروشگاه
               <span class="highlight">{{item.controls['Vendor'].value.Title}} </span>
@@ -74,7 +72,7 @@
               <span class="highlight">1234654</span><br />
             </div>
           </div>
-          <div style="display:flex" class="invoice-inner">
+          <div style="display:flex" class="glass">
             <div style="width:50%">
               خریدار
               <span class="highlight">  {{item.controls['Vendee'].value.FirstName + " " + item.controls['Vendee'].value.LastName}} </span>
@@ -92,7 +90,7 @@
               <span class="highlight">1234654</span><br />
             </div>
           </div>
-          <div class="invoice-inner">
+          <div class="glass">
             <app-drag-and-drop-list formControlName="InvoiceDetails"
                                     [deleteEnabled]="canEditInvoice(item)"
                                     [footer]="footer"
@@ -107,13 +105,161 @@
                   <td colspan="4">تخفیف   </td>
                   <td *ngIf="!canEditInvoice(item)" style="font-weight:bold">{{item.controls['Discount'].value|number:'3.'}}</td>
                   <td *ngIf="canEditInvoice(item)" style="font-weight:bold">
-                    <input formControlName="Discount" nz-input type="number" />
+                    <nz-input-number formControlName="Discount" [nzMin]="0"></nz-input-number>
+                  </td>
+                </tr>
+                <tr>
+                  <td>نحوه و هزینه ارسال   </td>
+
+                  <td colspan="3">
+
+
+
+                    <nz-radio-group class="PostTypes" formControlName="PostType">
+                      <label nz-radio [nzValue]="0">
+                        <div class="glass">
+                          <h3>
+                            رایگان
+                          </h3>
+                          <h4>
+                            توضیحات
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="1">
+                        <div class="glass">
+                          <h3>
+                            ارسال با پیک درون شهری
+                          </h3>
+                          <h4>
+                            پرداخت در هنگام تحویل
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="2">
+                        <div class="glass">
+                          <h3>
+                            ارسال با پست
+                          </h3>
+                          <button>هزینه ارسال</button>
+                          <h4>
+                            توضیحات
+                          </h4>
+                        </div>
+                      </label>
+
+
+
+
+                      <label nz-radio [nzValue]="3">
+                        <div class="glass">
+                          <h3>
+                            تحویل حضوری
+                          </h3>
+                          <h4>
+                            بدون نیاز به ارسال
+                          </h4>
+                        </div>
+                      </label>
+                    </nz-radio-group>
+
+                  </td>
+                  <td *ngIf="!canEditInvoice(item)" style="font-weight:bold">{{item.controls['PostCost'].value|number:'3.'}}</td>
+                  <td *ngIf="canEditInvoice(item)" style="font-weight:bold">
+                    <nz-input-number formControlName="PostCost" [nzMin]="0"></nz-input-number>
                   </td>
 
+
+
+                </tr>
+                <tr>
+                  <td>نحوه پرداخت   </td>
+
+                  <td colspan="3">
+                    <nz-radio-group class="PostTypes" formControlName="PaymentType">
+                      <label nz-radio [nzValue]="0">
+                        <div class="glass">
+                          <h3>
+                            پرداخت قبل از ارسال
+                            <br />
+                            تسویه آنی
+                          </h3>
+                          <h4>
+                            توضیحات
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="1">
+                        <div class="glass">
+                          <h3>
+                            پرداخت قبل از ارسال
+                            <br />
+                            تسویه پس از تحویل
+                          </h3>
+                          <h4>
+                            پرداخت در هنگام تحویل
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="2">
+                        <div class="glass">
+                          <h3>
+                            پرداخت قبل از ارسال
+                            <br />
+                            تسویه پس از تایید
+                          </h3>
+                          <h4>
+                            توضیحات
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="4">
+                        <div class="glass">
+                          <h3>
+                            پرداخت درهنگام تحویل
+                            <br />
+                            تسویه آنی
+                          </h3>
+                          <h4>
+                            بدون نیاز به ارسال
+                          </h4>
+                        </div>
+                      </label>
+
+                      <label nz-radio [nzValue]="5">
+                        <div class="glass">
+                          <h3>
+                            پرداخت نقدی در محل
+                          </h3>
+                          <h4>
+                          </h4>
+                        </div>
+                      </label>
+
+
+                    </nz-radio-group>
+
+                  </td>
+                  <td *ngIf="!canEditInvoice(item)" style="font-weight:bold">{{item.controls['PaymentType'].value|number:'3.'}}</td>
+                  <td *ngIf="canEditInvoice(item)" style="font-weight:bold">
+                    <nz-input-number formControlName="PaymentType" [nzMin]="0"></nz-input-number>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5">
+                    <textarea nz-input formControlName="Description" placeholder="توضیحات" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="4">قابل پرداخت </td>
                   <td style="font-weight:bold;font-size:large">
+
                     {{(TotalPrice(item.controls['InvoiceDetails'].value) - item.controls['Discount'].value)|number:'3.'}}
                     <!--{{(TotalPrice(item.controls['InvoiceDetails'].value) - item.controls['Discount'].value)|numToText}}-->
 
@@ -123,9 +269,15 @@
               <ng-template #header>
                 <th>ردیف</th>
                 <th> نام محصول</th>
-                <th> تعداد  </th>
-                <th>قیمت </th>
-                <th> قیمت کل</th>
+                <th>
+ تعداد
+                </th>
+                <th>
+قیمت
+                </th>
+                <th>
+ قیمت کل
+                </th>
               </ng-template>
               <ng-template #body let-invoiceItem="item" let-index="index">
                 <td>{{index + 1}}</td>
@@ -141,7 +293,7 @@
                   {{invoiceItem.Count}}
                 </td>
                 <td *ngIf="canEditInvoice(item)">
-                  <input [(ngModel)]="invoiceItem.Count" nz-input (change)="makeItDirty(item)" type="number" [ngModelOptions]="{standalone: true}" />
+                  <nz-input-number [(ngModel)]="invoiceItem.Count" [nzMin]="1" (change)="makeItDirty(item)" [ngModelOptions]="{standalone: true}"></nz-input-number>
                 </td>
                 <td>
                   {{invoiceItem.Price |number:'3.'}}

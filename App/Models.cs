@@ -187,9 +187,12 @@ namespace Host.Models
         public int VendeeId { set; get; }
 
 
-
+        public string Description { set; get; }
+        public int PostType { set; get; }
+        public int PostCost { set; get; }
         public int Price { set; get; }
         public int Discount { set; get; }
+        public int PaymentType { set; get; }
         public List<InvoiceDetail> InvoiceDetails { set; get; }
 
 
