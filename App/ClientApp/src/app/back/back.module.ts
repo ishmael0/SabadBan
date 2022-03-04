@@ -285,7 +285,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   new EntityConfiguration<Transaction>(Transaction, TransactionComponent, 'تراکنش', [
   ], { icon: 'transfer' }),
 
-]);
+], {});
 
 @NgModule({
   declarations: [

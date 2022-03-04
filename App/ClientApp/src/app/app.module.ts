@@ -47,7 +47,7 @@ export class AppModule {
     wss.appConfig = {
       description: '',
       fullName: '',
-      logInDesc: 'ماهر پی  '
+      logInDesc: 'ماهر پی  ',
     }
   }
 }

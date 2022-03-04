@@ -199,6 +199,7 @@ export class VendorComponent extends BaseComponent<Vendor> {
     this.imageModal = false;
     let x: any[] = item.getControlByName<Vendor>(c => c.Images).value;
     x.push({ Path: e, Description: '' });
+    item.getControlByName<Vendor>(c => c.Images).setValue(x);
     this.makeItDirty(item);
   }
   logoModal = false;

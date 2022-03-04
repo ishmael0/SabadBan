@@ -163,12 +163,12 @@
         <nz-form-label>لوگو</nz-form-label>
         <br />
         <button nz-button nzType="dashed" (click)="logoModal = true ">اضافه کردن   لوگو</button>
-        <app-image-uploader-card-as-modal *ngIf="logoModal" (onCancel)="logoModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addLogo(item, $event)"></app-image-uploader-card-as-modal>
+        <app-image-uploader-card-as-modal *ngIf="logoModal" [dimensional]="[1, 200, 200]" (onCancel)="logoModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addLogo(item, $event)"></app-image-uploader-card-as-modal>
         <div>
-          <nz-card *ngIf="item.controls.Logo.value" nz-col [nzMd]="6" [nzXs]="24" cdkDrag>
-            <img style="width:100%;min-width:200px" [src]="'/front'+item.controls.Logo.value" />
+          <nz-card *ngIf="item.controls.Logo.value"     >
+            <img style="width:100%;min-width:200px" [src]="dataManager.website.Media_Store_Front_location_Pre_Fix +item.controls.Logo.value" />
             <br />
-            <i nz-icon (click)="item.controls.Logo.setValue('')"
+            <i nz-icon (click)="item.controls.Logo.setValue('');makeItDirty(item)"
                style="color: #F93154;"
                class="larger"
                [innerHtml]="icons['delete']"></i>
@@ -185,7 +185,7 @@
           <nz-alert nzType="info" class="alertInTopOfTable" nzMessage=" اولین تصویر، تصویر اصلی، دومین تصویر تصویر فرعی محسوب میشوند"></nz-alert>
           <nz-alert nzType="info" class="alertInTopOfTable" nzMessage=" میتوانید با کشیدن و رها کردن ترتیب تصاویر را تغییر دهید"></nz-alert>
           <button nz-button nzType="dashed" (click)=" imageModal = true ">اضافه کردن   تصاویر</button>
-          <app-image-uploader-card-as-modal *ngIf="imageModal" (onCancel)="imageModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addImage(item, $event)"></app-image-uploader-card-as-modal>
+          <app-image-uploader-card-as-modal *ngIf="imageModal" [dimensional]="[16/9, 1200, 1200]" (onCancel)="imageModal = false" [key]="dataManager.key" [Id]="item.controls.Id.value" (onOk)="addImage(item, $event)"></app-image-uploader-card-as-modal>
         </div>
         <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
           <app-drag-and-drop-list formControlName="Images"
@@ -204,10 +204,10 @@
             <ng-template #body let-imgItem="item" let-index="index">
               <td>{{index + 1}}</td>
               <td>
-                <input type="text" nz-input style="width:100%" placeholder="توضیحات" [ngModelOptions]="{standalone: true}" [(ngModel)]="imgItem.Description" />
+                <input type="text" (change)="makeItDirty(item)" nz-input style="width:100%" placeholder="توضیحات" [ngModelOptions]="{standalone: true}" [(ngModel)]="imgItem.Description" />
               </td>
               <td>
-                <img style="width:100%" [src]="'/front'+imgItem.Path" />
+                <img style="width:200px" [src]="dataManager.website.Media_Store_Front_location_Pre_Fix + imgItem.Path" />
               </td>
             </ng-template>
           </app-drag-and-drop-list>
