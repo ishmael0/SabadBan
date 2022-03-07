@@ -38,7 +38,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "../../../Santel/ClientApp/src/assets",
+                "output": "/assets"
+              }
+              
             ],
             "styles": [
               "../../../Santel/ClientApp/src/styles.css",

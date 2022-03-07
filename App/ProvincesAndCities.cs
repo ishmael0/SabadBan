@@ -19,11 +19,11 @@ namespace Host
             {
                 foreach (var item in collection)
                 {
-                    var province = new Province { Title = item.Key, Create = DateTime.Now, Status = Statuses.Published };
+                    var province = new Province { Title = item.Key, Create = DateTime.Now, Status = Status.Published };
                     _context.Provinces.Add(province);
                     item.Value.ForEach(c =>
                     {
-                        _context.Cities.Add(new City { Title = c, Create = DateTime.Now, Status = Statuses.Published, Province = province });
+                        _context.Cities.Add(new City { Title = c, Create = DateTime.Now, Status = Status.Published, Province = province });
                     });
                 }
                 await _context.SaveChangesAsync();
