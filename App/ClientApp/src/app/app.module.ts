@@ -10,7 +10,7 @@ import { WebSiteService } from '../../../../../Santel/ClientApp/src/app/services
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'webselector', pathMatch:'full'
+    path: '', redirectTo: 'home', pathMatch:'full'
   },
   {
     path: 'Home', loadChildren: () => import('./front/front.module').then(m => m.FrontModule),
