@@ -5,6 +5,7 @@ import { IndexComponent } from './index/index.component';
 import { LayOutComponent } from './lay-out/lay-out.component';
 import { AntDesignSharedModulesModule } from '../../../../../../Santel/ClientApp/src/app/ant-design-shared-modules/ant-design-shared-modules.module';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { ThemeService } from '../../../../../../Santel/ClientApp/src/app/services/theme.service';
 
 const routes: Route[] = [
   //{ path: '', redirectTo: '', pathMatch: 'full' },
@@ -29,4 +30,9 @@ const routes: Route[] = [
   ]
 })
 export class FrontModule {
+  constructor(themeService: ThemeService) {
+    themeService.loadTheme();
+
+  }
+
 }

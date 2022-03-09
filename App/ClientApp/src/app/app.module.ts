@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'management', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
   { path: 'management', loadChildren: () => import('./back/back-wrapper-module').then(m => m.BackWrapperModule) },
 
