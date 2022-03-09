@@ -12,7 +12,8 @@ import { ActiveStatus,  defaultPropertyConfiguration, defaultPropertyWithTitleCo
 import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent } from './components';
 
 import "reflect-metadata";
-
+ 
+  
 
 export class Category extends BaseModelWithTitle {
   ParentCategoryId: number = 0;
@@ -324,7 +325,6 @@ export class BackModule {
     wss.selectedWebsite = config;
   }
 }
-
 
 
 

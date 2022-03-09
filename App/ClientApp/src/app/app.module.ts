@@ -1,34 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { WebSelectorComponent } from '../../../../../Santel/ClientApp/src/app/shared/components/web-selector/web-selector.component';
-import { LoginComponent } from '../../../../../Santel/ClientApp/src/app/shared/components/login/login.component';
-import { SharedModule } from '../../../../../Santel/ClientApp/src/app/shared/shared.module';
-import { WebSiteService } from '../../../../../Santel/ClientApp/src/app/services/website.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 const routes: Routes = [
-  {
-    path: '', redirectTo: 'home', pathMatch:'full'
-  },
-  {
-    path: 'Home', loadChildren: () => import('./front/front.module').then(m => m.FrontModule),
-  },
-  //{ path: '', redirectTo: 'shopify', pathMatch: 'full' },
-  {
-    path: 'AccDB'.toLowerCase(), loadChildren: () => import('../../../../../Santel/ClientApp/src/app/account-manager/account-manager.module').then(m => m.AccountManagerModule),
-    data: {
-      key: 'AccDB'.toLowerCase(), label: 'مدیریت کاربران', isAcc: true
-    }
-  },
-  {
-    path: 'management'.toLowerCase(), loadChildren: () => import('./back/back.module').then(m => m.BackModule),
-    data: { key: 'DB'.toLowerCase(), label: ' مدیریت وب سایت' }
-  },
+  { path: '', redirectTo: 'management', pathMatch: 'full' },
+  { path: 'home', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
+  { path: 'management', loadChildren: () => import('./back/back-wrapper-module').then(m => m.BackWrapperModule) },
 
-  { path: 'webselector', component: WebSelectorComponent },
-  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -36,18 +18,13 @@ const routes: Routes = [
     AppComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
-    SharedModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(wss: WebSiteService) {
-    wss.appConfig = {
-      description: '',
-      fullName: '',
-      logInDesc: 'ماهر پی  ',
-    }
-  }
+
 }
