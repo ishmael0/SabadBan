@@ -1,28 +1,49 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styles: [
+    `
+
+`
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   }
-  Features = [
-    { Title: 'حفظ محرمانگی اطلاعات کاربر', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: '' },
-    { Title: 'احراز هویت فروشندگان', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: '' },
-    { Title: 'زتبه بندی فروشندگان', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: '' },
+  Features: Featurs[] = [
 
-    { Title: 'ضمانت بازگشت وجه', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: ''},
-    { Title: 'ضمانت دریافت کالا', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: ''},
-    { Title: 'پشتیبانی 24 ساعته', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: '' },
-
-    { Title: 'سفارش امن', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: ''},
-    { Title: 'سفارش امن', UpperText: 'UpperText', LowerText: 'LowerText', UpperIcon: '', LowerIcon: ''},
+    this.createFeature('محرمانگی اطلاعات','<path d="M12.67 13.67C12.2 14.13 11.63 14.5 11 14.73V23H8V21H5V18H8V14.72C6.26 14.1 5 12.46 5 10.5C5 8 7 6 9.5 6C9.54 6 9.57 6 9.6 6C9.13 6.95 8.92 8 9.03 9.08C8.44 9.28 8 9.84 8 10.5C8 11.33 8.67 12 9.5 12C9.73 12 9.95 11.94 10.15 11.85C10.79 12.69 11.67 13.32 12.67 13.67M20.73 19.44L17.97 20.6L17.19 18.76L14.43 19.93L13.26 17.16L16.03 16L14.76 13C12.91 13.08 11.11 12.05 10.35 10.25C9.39 7.96 10.47 5.32 12.76 4.35C13 4.25 13.26 4.18 13.5 4.12C12.84 2.87 11.5 2 10 2C7.79 2 6 3.79 6 6C6 6.08 6 6.16 6 6.24C5.7 6.5 5.4 6.82 5.15 7.15C5.06 6.78 5 6.4 5 6C5 3.24 7.24 1 10 1S15 3.24 15 6C15 7.42 14.4 8.67 13.45 9.57C13.87 10 14.5 10.13 15.08 9.88C15.85 9.56 16.2 8.68 15.88 7.92C15.85 7.83 15.8 7.74 15.74 7.66C15.9 7.13 16 6.58 16 6C16 5.37 15.9 4.76 15.72 4.19C17 4.55 18.1 5.44 18.65 6.76C19.41 8.56 18.89 10.57 17.5 11.81L20.73 19.44M13 8.6C13.37 8.19 13.65 7.71 13.82 7.18C13.28 7.45 12.97 8 13 8.6Z" />'),
+    this.createFeature('احراز هویت فروشندگان', '<path d="M21,11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1L21,5V11M12,21C15.75,20 19,15.54 19,11.22V6.3L12,3.18L5,6.3V11.22C5,15.54 8.25,20 12,21M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9" />'),
+    this.createFeature('رتبه بندی فروشندگان','<path d="M7,13V11H21V13H7M7,19V17H21V19H7M7,7V5H21V7H7M3,8V5H2V4H4V8H3M2,17V16H5V20H2V19H4V18.5H3V17.5H4V17H2M4.25,10A0.75,0.75 0 0,1 5,10.75C5,10.95 4.92,11.14 4.79,11.27L3.12,13H5V14H2V13.08L4,11H2V10H4.25Z" />'),
+    this.createFeature('ضمانت بازگشت وجه','<path d="M12.3 8.93L9.88 6.5H15.5V10H17V5H9.88L12.3 2.57L11.24 1.5L7 5.75L11.24 10L12.3 8.93M12 14A3 3 0 1 0 15 17A3 3 0 0 0 12 14M3 11V23H21V11M19 19A2 2 0 0 0 17 21H7A2 2 0 0 0 5 19V15A2 2 0 0 0 7 13H17A2 2 0 0 0 19 15Z" />'),
+    this.createFeature('ضمانت دریافت کالا','<path d="M22 10.92L19.26 9.33C21.9 7.08 19.25 2.88 16.08 4.31L15.21 4.68L15.1 3.72C15 2.64 14.44 1.87 13.7 1.42C12.06 .467 9.56 1.12 9.16 3.5L6.41 1.92C5.45 1.36 4.23 1.69 3.68 2.65L2.68 4.38C2.4 4.86 2.57 5.47 3.05 5.75L10.84 10.25L12.34 7.65L14.07 8.65L12.57 11.25L20.36 15.75C20.84 16 21.46 15.86 21.73 15.38L22.73 13.65C23.28 12.69 22.96 11.47 22 10.92M12.37 5C11.5 5.25 10.8 4.32 11.24 3.55C11.5 3.07 12.13 2.91 12.61 3.18C13.38 3.63 13.23 4.79 12.37 5M17.56 8C16.7 8.25 16 7.32 16.44 6.55C16.71 6.07 17.33 5.91 17.8 6.18C18.57 6.63 18.42 7.79 17.56 8M20.87 16.88C21.28 16.88 21.67 16.74 22 16.5V20C22 21.11 21.11 22 20 22H4C2.9 22 2 21.11 2 20V11H10.15L11 11.5V20H13V12.65L19.87 16.61C20.17 16.79 20.5 16.88 20.87 16.88Z" />'),
+    this.createFeature('پشتیبانی 24 ساعته','<path d="M13 2.05V4.07C16.95 4.56 20 7.92 20 12C20 15.21 18.08 18 15.28 19.28L13 17V22H18L16.78 20.78C19.91 19.07 22 15.76 22 12C22 6.82 18.05 2.55 13 2.05M11 2C9.05 2.2 7.2 2.96 5.68 4.21L7.1 5.63C8.23 4.75 9.58 4.2 11 4V2M4.2 5.68C2.96 7.2 2.2 9.05 2 11H4C4.19 9.58 4.75 8.23 5.63 7.1L4.2 5.68M6 8V10H9V11H8C6.9 11 6 11.9 6 13V16H11V14H8V13H9C10.11 13 11 12.11 11 11V10C11 8.9 10.11 8 9 8H6M12 8V13H15V16H17V13H18V11H17V8H15V11H14V8H12M2 13C2.2 14.95 2.97 16.8 4.22 18.32L5.64 16.9C4.76 15.77 4.2 14.42 4 13H2M7.11 18.37L5.68 19.79C7.2 21.03 9.05 21.8 11 22V20C9.58 19.81 8.24 19.25 7.11 18.37Z" />'),
+    this.createFeature('تسویه آنی درآمد',' <path   d="M17.12 9.88C16.56 9.32 15.8 9 15 9S13.44 9.32 12.88 9.88C12.32 10.44 12 11.2 12 12S12.32 13.56 12.88 14.12 14.2 15 15 15 16.56 14.68 17.12 14.12 18 12.8 18 12 17.68 10.44 17.12 9.88M7 6V18H23V6H7M21 14C20.47 14 19.96 14.21 19.59 14.59C19.21 14.96 19 15.47 19 16H11C11 15.47 10.79 14.96 10.41 14.59C10.04 14.21 9.53 14 9 14V10C9.53 10 10.04 9.79 10.41 9.41C10.79 9.04 11 8.53 11 8H19C19 8.53 19.21 9.04 19.59 9.41C19.96 9.79 20.47 10 21 10V14M5 8H3C2.45 8 2 7.55 2 7C2 6.45 2.45 6 3 6H5V8M5 13H2C1.45 13 1 12.55 1 12C1 11.45 1.45 11 2 11H5V13M5 18H1C.448 18 0 17.55 0 17C0 16.45 .448 16 1 16H5V18Z" />'),
+    this.createFeature('سفارش امن', '<path d="M21,11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1L21,5V11M12,21C15.75,20 19,15.54 19,11.22V6.3L12,3.18L5,6.3V11.22C5,15.54 8.25,20 12,21M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9" />'),
   ]
+
+
+
+
+  createFeature(title: string, LowerIcon: string): Featurs {
+    return {
+      Title: title,
+      Icon: this.sanitizer.bypassSecurityTrustHtml(LowerIcon)
+    }
+  }
+}
+export class Featurs {
+
+  Title: string = '';
+  //  UpperText: string = '';
+  /*  LowerText: string = '';*/
+  /*  UpperIcon: SafeHtml = '';*/
+Icon: SafeHtml = '';
 }

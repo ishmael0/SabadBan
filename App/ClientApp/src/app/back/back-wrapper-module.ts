@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from "../../../../../../Santel/ClientApp/src/app/shared/components/login/login.component";
-import { WebSelectorComponent } from "../../../../../../Santel/ClientApp/src/app/shared/components/web-selector/web-selector.component";
+import { RouterModule, Routes, Router } from '@angular/router';
+import { LoginComponent } from "../../../../../../Santel/ClientApp/src/app/back-wrapper/components/login/login.component";
+import { WebSelectorComponent } from "../../../../../../Santel/ClientApp/src/app/back-wrapper/components/web-selector/web-selector.component";
 //import { SharedModule } from "../../../../../../Santel/ClientApp/src/app/shared/shared.module";
 import { DomSanitizer } from '@angular/platform-browser';
 import { TemplateModule } from "../../../../../../Santel/ClientApp/src/app/template/template.module";
@@ -54,7 +54,7 @@ const routes: Routes = [
   ]
 })
 export class BackWrapperModule {
-  constructor(wss: WebSiteService, themeService: ThemeService, domSanitizer: DomSanitizer, auth: AuthService) {
+  constructor(wss: WebSiteService, themeService: ThemeService, domSanitizer: DomSanitizer, auth: AuthService, router: Router) {
     AppInitializerProvider2(themeService, domSanitizer, auth);
     wss.appConfig = {
       routes: routes,
