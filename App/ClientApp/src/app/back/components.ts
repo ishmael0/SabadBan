@@ -19,9 +19,6 @@ import { Bank, Category, City, Invoice, InvoiceDetail, Province, Ticket, Transac
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CityComponent extends BaseComponent<City> {
-  override async ngOnInit() {
-    await super.ngOnInit();
-  }
 }
 
 
@@ -31,9 +28,7 @@ export class CityComponent extends BaseComponent<City> {
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styles: [
-    ``
-  ],
+  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceComponent extends BaseComponent<Invoice> {

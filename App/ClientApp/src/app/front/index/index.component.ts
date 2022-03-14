@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { FrontBaseComponent } from '../lay-out/lay-out.component';
 
 @Component({
   selector: 'app-index',
@@ -11,9 +12,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent extends FrontBaseComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {
+    super();
+  }
 
   ngOnInit(): void {
   }

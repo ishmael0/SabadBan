@@ -153,6 +153,7 @@ export class Invoice extends BaseModel {
 
 
 
+
 export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مدیریت وب سایت ', ' ', [
   //new EntityConfiguration(VendeeComponent, 'داشبورد فروشنده', [], { icon: 'file-tree' }),
   new EntityConfiguration<Category>(Category, CategoryComponent, 'دسته بندی', FullStatuses, [

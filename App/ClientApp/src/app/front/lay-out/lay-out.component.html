@@ -21,9 +21,9 @@
       <button nz-button nzType="text"> نحوه کار و کارمزد  </button>
       <button nz-button nzType="text"> تماس با ما</button>
       <button nz-button nzType="text"> درباره ما</button>
-      <button nz-button nzType="text" style="float: left; border-bottom: solid 2px #e13634">   ورود</button>
-      <span style="float:left">/</span>
-      <button nz-button nzType="text" style="float: left; border-bottom: solid 2px #e13634">   پنل فروشندگان</button>
+      <button nz-button nzType="text" style="float: left; border-bottom: solid 2px #e13634" [routerLink]="[prefixUrl('login')]">   ورود</button>
+      <button nz-button nzType="text" >    </button>
+      <button nz-button nzType="text" style="float: left; border-bottom: solid 2px #e13634" (click)="openInNewWindow('/management')">   پنل فروشندگان</button>
     </div>
   </div>
 
