@@ -1,0 +1,37 @@
+<div nz-row nzJustify="center">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20" >
+    <div class="glass" nz-row  nzJustify="center">
+      <div nz-col [nzXs]="0" [nzLg]="20">
+        <span>SabadBan</span>
+        <img style="width:50px" src="../../../assets/front/logo4colored.svg" />
+        <ng-container *ngTemplateOutlet="menues"></ng-container>
+      </div>
+      <div nz-col [nzXs]="24" [nzLg]="0">
+        <span>SabadBan</span>
+        <img style="width:50px" src="../../../assets/front/logo4colored.svg" />
+        <button nz-button nzType="text" (click)="showMenu=!showMenu"> |||   </button>
+        <div *ngIf="showMenu" class="buttoncotainer">
+          <ng-container *ngTemplateOutlet="menues"></ng-container>
+        </div>
+      </div>
+    </div>
+
+
+    <router-outlet></router-outlet>
+    <div style="text-align:center">
+      Made with <img src="./assets/heart.webp" style="width:25px" /> by MAHERNET team
+    </div>
+  </div>
+</div>
+
+
+<ng-template #menues>
+  <button nz-button nzType="text" [routerLink]="[prefixUrl('')]" style="font-size:larger">  صفحه اصلی</button>
+  <button nz-button nzType="text" [routerLink]="[prefixUrl('rules')]">مقررات، نحوه کار و کارمزد  </button>
+  <button nz-button nzType="text" [routerLink]="[prefixUrl('news')]">  اخبار</button>
+  <button nz-button nzType="text" [routerLink]="[prefixUrl('article')]">  مقالات</button>
+  <button nz-button nzType="text" [routerLink]="[prefixUrl('about')]"> درباره ما</button>
+  <button nz-button nzType="default" style="margin:0px 10px" nzDanger [routerLink]="[prefixUrl('login')]">   ورود </button>
+  <button nz-button nzType="default" nzDanger style="margin:0px 10px" [routerLink]="[prefixUrl('login')]">   مشاهده فاکتور </button>
+  <button nz-button nzType="text" style="float: left; border-bottom: solid 2px #e13634" (click)="openInNewWindow('/management')">   پنل کاربری فروشندگان</button>
+</ng-template>

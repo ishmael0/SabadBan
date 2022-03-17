@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="glass withheader">
+  <div class="glassheader">ورود</div>
+  <div class="glassbody" nz-row nzJustify="center">
+    <div nz-col [nzXs]="24" [nzSm]="20" [nzMd]="16" [nzLg]="10" [nzXl]="8" [nzXXl]="8">
+      <br />
+      <br />
+
+      <form [formGroup]="phoneForm" *ngIf="level == 1" style=" animation: fadeIn 0.5s ease-in-out;">
+        <div class="form-input">
+          <input type="text" formControlName="phoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
+          <span></span>
+          <div *ngIf="phoneForm.controls['phoneNumber'].touched && phoneForm.controls['phoneNumber'].invalid" class="warning">
+          شماره موبایل باید با 09 شروع شود
+            مثل 09120000000
+          </div>
+          invalid'  {{phoneForm.controls['phoneNumber'].invalid}}'
+
+          touched"{{phoneForm.controls['phoneNumber'].touched}}"
+          <div class="danger">شماره موبایل معتبر نیست!</div>
+        </div>
+      </form>
+
+
+
+      <form [formGroup]="smsForm" *ngIf="level == 2">
+        <input formCOntrolName="smsCode" class="splitted" maxlength='9' value='012345678' style=" animation: fadeIn 0.5s ease-in-out;" />
+        <div class="warning">asdas</div>
+        <div class="danger">asdas</div>
+      </form>
+
+
+    </div>
+  </div>
+  <div class="glassfooter" style="text-align:end">
+    <button *ngIf="level>1" nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="level=level-1">مرحله قبل</button>
+    <button  nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="level=level+1">مرحله بعد</button>
+  </div>
+</div>
