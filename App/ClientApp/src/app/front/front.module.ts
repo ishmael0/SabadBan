@@ -13,7 +13,7 @@ import { ArticleComponent } from './article/article.component';
 import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoicesComponent } from './invoices/invoices.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -52,7 +52,8 @@ const routes: Route[] = [
     NzCarouselModule,
     RouterModule.forChild(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class FrontModule {
