@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
-using Host.Models;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Core.DB;
+using DBContext.Models;
+using Core.Models;
+using Core.StartUp;
 
-namespace Host.DBContext
+namespace DBContext
 {
 
 
@@ -82,7 +85,7 @@ namespace Host.DBContext
     {
         public DB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(Host));
+            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(DBContext));
             return new DB(o.Options);
         }
     }
@@ -90,7 +93,7 @@ namespace Host.DBContext
     {
         public AccDB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(Host));
+            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(DBContext));
             return new AccDB(o.Options);
         }
     }

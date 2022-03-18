@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, Route } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { IndexComponent } from './index/index.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AntDesignSharedModulesModule } from '../../../../../Santel/ClientApp/src/app/ant-design-shared-modules/ant-design-shared-modules.module';
@@ -11,15 +13,14 @@ import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
 import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VendeeLayoutComponent } from './vendee-layout/vendee-layout.component';
 import { AuthService } from './Auth';
 import { VendeeInvoicesComponent } from './vendee-invoices/vendee-invoices.component';
 import { VendeeProfileComponent } from './vendee-profile/vendee-profile.component';
 import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.component';
-import { HttpRequestService } from '../../../../../Santel/ClientApp/src/app/services/http-request.service';
 import { AppComponent } from './app.component';
+import { HttpRequestService } from './http-request';
 const routes: Route[] = [
   { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
   {
@@ -31,7 +32,7 @@ const routes: Route[] = [
       { path: 'news', component: NewsComponent },
       { path: 'article', component: ArticleComponent },
       { path: 'about', component: AboutComponent },
-    
+
       {
         path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
           { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -58,18 +59,20 @@ const routes: Route[] = [
     VendeeInvoicesComponent,
     VendeeProfileComponent,
     VendeeAddressesComponent,
+    AppComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     AntDesignSharedModulesModule,
     NzCarouselModule,
-    RouterModule.forChild(routes),
+    RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
   bootstrap: [AppComponent],
-  providers: [HttpRequestService]
+  providers: []
 })
 export class AppModule {
 }

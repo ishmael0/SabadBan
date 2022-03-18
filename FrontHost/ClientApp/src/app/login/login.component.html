@@ -4,44 +4,44 @@
     <div nz-col [nzXs]="24" [nzSm]="20" [nzMd]="16" [nzLg]="10" [nzXl]="8" [nzXXl]="8">
       <br />
       <br />
-
-      <form [formGroup]="phoneForm" *ngIf="level == 1" style=" animation: fadeIn 0.5s ease-in-out;">
-        <div class="form-input">
-          <input type="text" formControlName="phoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
-          <span></span>
-          <div *ngIf="phoneForm.controls['phoneNumber'].invalid" class="warning">
-            شماره موبایل باید با 09 شروع شود
-            و 11 رقم باشد
-            مثل 09120000000
+      <nz-spin [nzSpinning]="isLoading">
+        <form [formGroup]="phoneForm" *ngIf="level == 1" style=" animation: fadeIn 0.5s ease-in-out;">
+          <div class="form-input">
+            <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
+            <span></span>
+            <div *ngIf="phoneForm.controls['PhoneNumber'].invalid" class="warning">
+              شماره موبایل باید با 09 شروع شود
+              و 11 رقم باشد
+              مثل 09120000000
+            </div>
+            <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['phoneNumber'].invalid" class="danger">شماره موبایل معتبر نیست!</div>
+            <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
+              شماره موبایل معتبر است!
+              لطفا بر روی مرحله بعد کلیک کنید.
+            </div>
           </div>
-          <div *ngIf="phoneForm.controls['phoneNumber'].touched && phoneForm.controls['phoneNumber'].invalid" class="danger">شماره موبایل معتبر نیست!</div>
-          <div *ngIf="!phoneForm.controls['phoneNumber'].invalid" class="ok">
-          شماره موبایل معتبر است!
-            لطفا بر روی مرحله بعد کلیک کنید.
+        </form>
+
+
+
+        <form [formGroup]="smsForm" *ngIf="level == 2">
+          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
+            کد اعتبار سنجی 5 رقمی به شماره تماس
+            {{smsForm.controls['phoneNumber'].value}}
+            ارسال شده است.
+            <br />
+            لطفا عبارت ارسال شده را وارد نمایید.
           </div>
-        </div>
-      </form>
+          <input formCOntrolName="smsCode" class="splitted-5" maxlength='5' style=" animation: fadeIn 0.5s ease-in-out;" />
+          <div class="warning">asdas</div>
+          <div class="danger">asdas</div>
+        </form>
 
-
-
-      <form [formGroup]="smsForm" *ngIf="level == 2">
-        <div *ngIf="!phoneForm.controls['phoneNumber'].invalid" class="ok">
-          کد اعتبار سنجی 5 رقمی به شماره تماس
-          {{smsForm.controls['phoneNumber'].value}}
-          ارسال شده است.
-          <br />
-          لطفا عبارت ارسال شده را وارد نمایید.
-        </div>
-        <input formCOntrolName="smsCode" class="splitted-5" maxlength='5'   style=" animation: fadeIn 0.5s ease-in-out;" />
-        <div class="warning">asdas</div>
-        <div class="danger">asdas</div>
-      </form>
-
-
+      </nz-spin>
     </div>
   </div>
-  <div class="glassfooter" style="text-align:center">
+  <div  class="glassfooter" style="text-align:center">
     <button *ngIf="level>1" nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="level=level-1">مرحله قبل</button>
-    <button  nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="goToNext()">مرحله بعد</button>
+    <button nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="goToNext()">مرحله بعد</button>
   </div>
 </div>

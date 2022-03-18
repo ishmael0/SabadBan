@@ -1,12 +1,12 @@
 ﻿using Core.Controllers;
 using Core.Services;
-using Host.DBContext;
-using Host.Models;
+using DBContext;
+using DBContext.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace Host
+namespace BackHost
 {
     public class VendorController : BaseController<DB, Vendor>
     {

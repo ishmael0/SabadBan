@@ -13,10 +13,7 @@ import { FrontBaseComponent } from '../layout/layout.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent extends FrontBaseComponent implements OnInit {
-
-  constructor(private sanitizer: DomSanitizer) {
-    super();
-  }
+ 
 
   ngOnInit(): void {
   }

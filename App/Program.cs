@@ -2,10 +2,10 @@ global using Core;
 global using Core.DB;
 global using Core.StartUp;
 global using Core.Models;
-using Host.DBContext;
-using Host;
+using DBContext;
+using BackHost;
 using Newtonsoft.Json;
-
+using DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 var startup = new BaseStartup<AccDB, BaseApplicationUser, BaseApplicationRole>(builder.Configuration, builder.Environment);
