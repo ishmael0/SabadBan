@@ -12,26 +12,38 @@ import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
 import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { InvoicesComponent } from './invoices/invoices.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VendeeLayoutComponent } from './vendee-layout/vendee-layout.component';
+import { AuthService } from './Auth';
+import { VendeeInvoicesComponent } from './vendee-invoices/vendee-invoices.component';
+import { VendeeProfileComponent } from './vendee-profile/vendee-profile.component';
+import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.component';
+import { HttpRequestService } from '../../../../../../Santel/ClientApp/src/app/services/http-request.service';
 
 
 const routes: Route[] = [
-  //{ path: '', redirectTo: '', pathMatch: 'full' },
+  { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
   {
     path: '', component: LayoutComponent, children: [
       { path: '', component: IndexComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'login/:redirectlink', component: LoginComponent },
       { path: 'rules', component: RulesComponent },
       { path: 'news', component: NewsComponent },
       { path: 'article', component: ArticleComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'invoice', component: InvoiceComponent },
-      { path: 'invoices', component: InvoicesComponent },
+    
+      {
+        path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
+          { path: '', redirectTo: 'profile', pathMatch: 'full' },
+          { path: '', component: VendeeProfileComponent },
+          { path: '', component: VendeeInvoicesComponent },
+          { path: '', component: VendeeAddressesComponent },
+        ]
+      },
     ]
   }
-
 ];
 
 @NgModule({
@@ -44,7 +56,10 @@ const routes: Route[] = [
     ArticleComponent,
     AboutComponent,
     InvoiceComponent,
-    InvoicesComponent,
+    VendeeLayoutComponent,
+    VendeeInvoicesComponent,
+    VendeeProfileComponent,
+    VendeeAddressesComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +69,8 @@ const routes: Route[] = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-  ]
+  ],
+  providers: [HttpRequestService]
 })
 export class FrontModule {
   constructor(themeService: ThemeService) {

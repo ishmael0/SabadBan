@@ -28,13 +28,10 @@ export class LoginComponent implements OnInit {
       if (this.phoneForm.valid) {
         this.smsForm.controls['phoneNumber'].setValue(this.phoneForm.controls['phoneNumber'].value)
         this.smsForm.controls['smsCode'].setValue('');
-
-
-
         this.level = 2;
       }
     }
-    else {
+    else if (this.level == 1) {
 
     }
   }

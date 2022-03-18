@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-invoices',
-  templateUrl: './invoices.component.html',
+  selector: 'app-vendee-layout',
+  templateUrl: './vendee-layout.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InvoicesComponent implements OnInit {
+export class VendeeLayoutComponent implements OnInit {
 
   constructor() { }
 
