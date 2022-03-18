@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Santel\Core\1-Core.csproj" />
+  </ItemGroup>
+
 </Project>
