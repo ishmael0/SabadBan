@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Santel\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Santel\Core\1-Core.csproj" />
   </ItemGroup>
 
 </Project>
