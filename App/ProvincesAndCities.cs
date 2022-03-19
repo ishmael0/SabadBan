@@ -1,9 +1,7 @@
-﻿using DBContext;
-using DBContext.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace BackHost
+namespace BackHost.DBContext
 {
     public class ProvincesAndCities
     {

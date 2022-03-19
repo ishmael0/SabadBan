@@ -21,7 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBContext\3-DBContext.csproj" />
+    <None Remove="DB.cs" />
+    <None Remove="Models.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Santel\Core\1-Core.csproj" />
   </ItemGroup>
 
 

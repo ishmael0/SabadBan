@@ -12,7 +12,7 @@ import { FrontBaseComponent } from '../layout/layout.component';
 })
 export class LoginComponent extends FrontBaseComponent {
 
-
+  countDown = 0;
   phoneForm = this.formBuilder.group({
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
   });
@@ -34,6 +34,15 @@ export class LoginComponent extends FrontBaseComponent {
           onSuccess: (m, d) => {
             this.smsForm.controls['PhoneNumber'].setValue(this.phoneForm.controls['PhoneNumber'].value)
             this.smsForm.controls['SMSCode'].setValue('');
+            this.countDown = 120;
+
+            let intervalId = setInterval(() => {
+              this.countDown -= - 1;
+              if (this.countDown === 0) {
+                clearInterval(intervalId)
+              }
+            }, 1000);
+
             this.level = 2;
           },
           onError: (m, d) => { }

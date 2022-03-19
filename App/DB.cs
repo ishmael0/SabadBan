@@ -2,12 +2,8 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Core.DB;
-using DBContext.Models;
-using Core.Models;
-using Core.StartUp;
 
-namespace DBContext
+namespace BackHost.DBContext
 {
 
 

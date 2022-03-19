@@ -1,3 +1,4 @@
+{{countDown/60 }}{{countDown%60}}
 <div class="glass withheader">
   <div class="glassheader">ورود</div>
   <div class="glassbody" nz-row nzJustify="center">
@@ -9,6 +10,8 @@
           <div class="form-input">
             <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
             <span></span>
+
+
             <div *ngIf="phoneForm.controls['PhoneNumber'].invalid" class="warning">
               شماره موبایل باید با 09 شروع شود
               و 11 رقم باشد
@@ -40,7 +43,7 @@
       </nz-spin>
     </div>
   </div>
-  <div  class="glassfooter" style="text-align:center">
+  <div class="glassfooter" style="text-align:center">
     <button *ngIf="level>1" nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="level=level-1">مرحله قبل</button>
     <button nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="goToNext()">مرحله بعد</button>
   </div>

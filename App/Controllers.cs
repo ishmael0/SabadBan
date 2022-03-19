@@ -1,7 +1,6 @@
 ﻿using Core.Controllers;
 using Core.Services;
-using DBContext;
-using DBContext.Models;
+using BackHost.DBContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
