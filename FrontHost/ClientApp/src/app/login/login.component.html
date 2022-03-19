@@ -8,16 +8,16 @@
         <form [formGroup]="phoneForm" *ngIf="level == 1" style=" animation: fadeIn 0.5s ease-in-out;">
           <div class="form-input">
             <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
-            <span></span>
+ <br />
+ <br />
 
-
-            <div *ngIf="phoneForm.controls['PhoneNumber'].invalid" class="warning">
+            <div *ngIf="phoneForm.controls['PhoneNumber'].invalid" class="wfg">
               شماره موبایل باید با 09 شروع شود
               و 11 رقم باشد
               مثل 09120000000
             </div>
-            <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['PhoneNumber'].invalid" class="danger">شماره موبایل معتبر نیست!</div>
-            <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
+            <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['PhoneNumber'].invalid" class="dfg">شماره موبایل معتبر نیست!</div>
+            <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="sfg">
               شماره موبایل معتبر است!
               لطفا بر روی مرحله بعد کلیک کنید.
             </div>
@@ -27,23 +27,26 @@
 
 
         <form [formGroup]="smsForm" *ngIf="level == 2">
-          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
+          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="sfg">
             کد اعتبار سنجی 5 رقمی به شماره تماس
             {{smsForm.controls['PhoneNumber'].value}}
             ارسال شده است.
             <br />
             لطفا عبارت ارسال شده را وارد نمایید.
           </div>
-        
+
 
           <input formCOntrolName="SMSCode" class="splitted-5" maxlength='5' style=" animation: fadeIn 0.5s ease-in-out;" />
-          <div class="warning" *ngIf="timer.countDown !=0">
+          <br />
+          <br />
+
+          <div class="wfg" *ngIf="timer.countDown !=0">
             {{timer.min }}:{{timer.sec}}
           </div>
-          <div class="warning" *ngIf="timer.countDown ==0">
+          <div class="wfg" *ngIf="timer.countDown ==0">
             با کلیک بر روی مرحله قبل، مجددا تلاش کنید.
           </div>
-          <div class="danger">asdas</div>
+          <div class="dfg">asdas</div>
         </form>
 
       </nz-spin>
