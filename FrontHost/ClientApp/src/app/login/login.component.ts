@@ -11,14 +11,17 @@ import { FrontBaseComponent } from '../layout/layout.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent extends FrontBaseComponent {
-
-  countDown = 0;
+  timer = {
+    countDown: 0,
+    min: 0,
+    sec: 0
+  }
   phoneForm = this.formBuilder.group({
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
   });
   smsForm = this.formBuilder.group({
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
-    smsCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])]
+    SMSCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])]
   });
   ngOnInit(): void {
   }
@@ -34,13 +37,16 @@ export class LoginComponent extends FrontBaseComponent {
           onSuccess: (m, d) => {
             this.smsForm.controls['PhoneNumber'].setValue(this.phoneForm.controls['PhoneNumber'].value)
             this.smsForm.controls['SMSCode'].setValue('');
-            this.countDown = 120;
+            this.timer.countDown = 120;
 
             let intervalId = setInterval(() => {
-              this.countDown -= - 1;
-              if (this.countDown === 0) {
+              this.timer.countDown = this.timer.countDown - 1;
+              this.timer.min = Math.floor(this.timer.countDown / 60);
+              this.timer.sec = this.timer.countDown - this.timer.min * 60;
+              if (this.timer.countDown === 0) {
                 clearInterval(intervalId)
               }
+              this.cdr.detectChanges();
             }, 1000);
 
             this.level = 2;
@@ -49,12 +55,22 @@ export class LoginComponent extends FrontBaseComponent {
         }))
 
 
-         
+
 
       }
     }
-    else if (this.level == 1) {
-
+    else if (this.level == 2) {
+      this.smsForm.markAsDirty();
+      if (this.smsForm.valid) {
+        await this.http.AddAndTry(new RequestPlus(HTTPTypes.POST, 'account', {
+          tokenNeeded: false,
+          action: 'verify', formData: this.phoneForm.value,
+          onSuccess: (m, d) => {
+            this.level = 2;
+          },
+          onError: (m, d) => { }
+        }))
+      }
     }
     this.isLoading = false;
     this.cdr.detectChanges();

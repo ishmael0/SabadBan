@@ -81,7 +81,7 @@ namespace BackHost.DBContext
     {
         public DB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(DBContext));
+            var o = AppSettingService.GetDbContextOptionsBuilder<DB>(nameof(BackHost));
             return new DB(o.Options);
         }
     }
@@ -89,7 +89,7 @@ namespace BackHost.DBContext
     {
         public AccDB CreateDbContext(string[] args)
         {
-            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(DBContext));
+            var o = AppSettingService.GetDbContextOptionsBuilder<AccDB>(nameof(BackHost));
             return new AccDB(o.Options);
         }
     }

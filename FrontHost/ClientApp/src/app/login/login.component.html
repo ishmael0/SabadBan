@@ -1,4 +1,3 @@
-{{countDown/60 }}{{countDown%60}}
 <div class="glass withheader">
   <div class="glassheader">ورود</div>
   <div class="glassbody" nz-row nzJustify="center">
@@ -17,7 +16,7 @@
               و 11 رقم باشد
               مثل 09120000000
             </div>
-            <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['phoneNumber'].invalid" class="danger">شماره موبایل معتبر نیست!</div>
+            <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['PhoneNumber'].invalid" class="danger">شماره موبایل معتبر نیست!</div>
             <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
               شماره موبایل معتبر است!
               لطفا بر روی مرحله بعد کلیک کنید.
@@ -30,13 +29,20 @@
         <form [formGroup]="smsForm" *ngIf="level == 2">
           <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="ok">
             کد اعتبار سنجی 5 رقمی به شماره تماس
-            {{smsForm.controls['phoneNumber'].value}}
+            {{smsForm.controls['PhoneNumber'].value}}
             ارسال شده است.
             <br />
             لطفا عبارت ارسال شده را وارد نمایید.
           </div>
-          <input formCOntrolName="smsCode" class="splitted-5" maxlength='5' style=" animation: fadeIn 0.5s ease-in-out;" />
-          <div class="warning">asdas</div>
+        
+
+          <input formCOntrolName="SMSCode" class="splitted-5" maxlength='5' style=" animation: fadeIn 0.5s ease-in-out;" />
+          <div class="warning" *ngIf="timer.countDown !=0">
+            {{timer.min }}:{{timer.sec}}
+          </div>
+          <div class="warning" *ngIf="timer.countDown ==0">
+            با کلیک بر روی مرحله قبل، مجددا تلاش کنید.
+          </div>
           <div class="danger">asdas</div>
         </form>
 
