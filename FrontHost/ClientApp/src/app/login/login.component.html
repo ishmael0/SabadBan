@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="glassfooter" style="text-align:center">
-    <button *ngIf="level>1" nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="level=level-1">مرحله قبل</button>
-    <button nz-button nzType="primary" nzSize="small" [nzLoading]="isLoading" (click)="goToNext()">مرحله بعد</button>
+    <button *ngIf="level>1" class="wout" (click)="level=level-1">   بازگشت</button>
+    <button class="sin" (click)="goToNext()">  گام بعد</button>
   </div>
 </div>

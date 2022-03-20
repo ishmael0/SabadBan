@@ -59,7 +59,6 @@ namespace FrontHost.Controllers
             }
             return false;
         }
-        [HttpPost]
         public async Task<JR<bool>> LogIn([FromBody] LoginFirstStepDTO helper)
         {
             var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);

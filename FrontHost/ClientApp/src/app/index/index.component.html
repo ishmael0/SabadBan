@@ -1,6 +1,22 @@
+<!--<div style="display:flex">
+  <div style="width:200px;height:50px" class="wbg">warning</div>
+  <div style="width:200px;height:50px" class="ibg">info</div>
+  <div style="width:200px;height:50px" class="sbg">success</div>
+  <div style="width:200px;height:50px" class="pbg">primary</div>
+  <div style="width:200px;height:50px" class="dbg">danger</div>
+  <div style="width:200px;height:50px" class="ebg">secondary</div>
+  <div style="width:200px;height:50px" class="wfg">warning</div>
+  <div style="width:200px;height:50px" class="ifg">info</div>
+  <div style="width:200px;height:50px" class="sfg">success</div>
+  <div style="width:200px;height:50px" class="pfg">primary</div>
+  <div style="width:200px;height:50px" class="dfg">danger</div>
+  <div style="width:200px;height:50px" class="efg">secondary</div>
+</div>
+
+
 <div nz-row  style="display:flex">
   <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="8" [nzXl]="6" [nzXXl]="6">
-    <div *ngFor="let i of ['#fe820c','#e23835' ]" style="width:100px;height:100px;background-color:{{i}}"></div>
+
   </div>
   <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="16" [nzLg]="16" [nzXl]="18" [nzXXl]="18">
     <nz-carousel nzAutoPlay>
@@ -13,28 +29,59 @@
       </div>
     </nz-carousel>
   </div>
-</div>  
+</div>-->
+<button class="din"> درباره ما</button>
+<button class="win"> درباره ما</button>
+<button class="iin"> درباره ما</button>
+<button class="sin"> درباره ما</button>
+<button class="pin"> درباره ما</button>
+<button class="ein">
+  درباره ما
+    <svg viewBox="0 0 24 24" [innerHTML]="Features[0].Icon">
+    </svg>
+</button>
+
+<button class="dout"> درباره ما</button>
+<button class="wout"> درباره ما</button>
+<button class="iout"> درباره ما</button>
+<button class="sout"> درباره ما</button>
+<button class="pout"> درباره ما</button>
+<button class="eout">
+  درباره ما
+  <svg viewBox="0 0 24 24" [innerHTML]="Features[0].Icon">
+  </svg>
+</button>
+<button class="eout">
+  <svg viewBox="0 0 24 24" [innerHTML]="Features[0].Icon">
+  </svg>
+  درباره ما
+  <svg viewBox="0 0 24 24" [innerHTML]="Features[0].Icon">
+  </svg>
+</button>
+
+
 
 
 <span style="font-size: x-large; color: #e13634;margin-right:100px">ویژگی های ما</span>
-<div nz-row nzJustify="center">
-  <div *ngFor="let i of Features" style="width:200px  "><!--nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="6" [nzXXl]="4"--> 
+<div nz-row nzJustify="center" class="glass">
+  <div *ngFor="let i of Features" style="width:180px  ">
+    <!--nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="6" [nzXXl]="4"-->
     <div style="margin:10px;position:relative">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
         <g id="OBJECTS">
-          <path style="fill: #2f832f"d="M57.22,451A283.69,283.69,0,0,1,12.73,298.14c0-157.38,128-285.41,285.41-285.41s285.42,128,285.42,285.41A283.78,283.78,0,0,1,539.07,451l9.28,9.07a296.39,296.39,0,0,0,47.93-161.94C596.28,133.75,462.54,0,298.14,0S0,133.75,0,298.14a296.37,296.37,0,0,0,47.94,162Z" />
-          <path style="fill: #2f832f"d="M493.56,506a284.86,284.86,0,0,1-390.84,0q-10.81-1.6-21.43-3.43a297.67,297.67,0,0,0,433.7,0Q504.39,504.38,493.56,506Z" />
-          <path style="fill: #2f832f" d="M111.33,355.66A196,196,0,0,1,101.42,294c0-108.48,88.25-196.72,196.72-196.72S494.86,185.52,494.86,294A196,196,0,0,1,485,355.66l14.28-3.06a208.85,208.85,0,0,0,8.36-58.6c0-115.49-94-209.45-209.45-209.45S88.7,178.51,88.7,294a208.84,208.84,0,0,0,8.35,58.6Z" />
-          <path style="fill:#1196d6" d="M171.68,406.07A849.53,849.53,0,0,1,55,389.76l37.16,52.71L55,478.81a851,851,0,0,0,116.73,16.32Z" />
-          <path style="fill:#1196d6" d="M424.6,406.07a849.53,849.53,0,0,0,116.73-16.31l-37.16,52.71,37.16,36.34A851,851,0,0,1,424.6,495.13Z" />
-          <polygon style="fill:#006b9e" points="482.84 436.25 424.6 406.07 424.6 495.13 482.84 463.87 482.84 436.25" />
-          <polygon style="fill:#006b9e" points="113.45 463.87 171.69 495.13 171.69 406.07 113.45 436.25 113.45 463.87 113.45 463.87" />
-          <path style="fill:#36a9e1" d="M482.84,463.87V374.82c-56.19,12-118.75,18.74-184.7,18.74s-128.51-6.71-184.69-18.74v89.05c56.19,12,118.74,18.75,184.69,18.75S426.65,475.9,482.84,463.87Z" />
+          <path style="fill: #00BCD4 " d="M57.22,451A283.69,283.69,0,0,1,12.73,298.14c0-157.38,128-285.41,285.41-285.41s285.42,128,285.42,285.41A283.78,283.78,0,0,1,539.07,451l9.28,9.07a296.39,296.39,0,0,0,47.93-161.94C596.28,133.75,462.54,0,298.14,0S0,133.75,0,298.14a296.37,296.37,0,0,0,47.94,162Z" />
+          <path style="fill: #00BCD4 " d="M493.56,506a284.86,284.86,0,0,1-390.84,0q-10.81-1.6-21.43-3.43a297.67,297.67,0,0,0,433.7,0Q504.39,504.38,493.56,506Z" />
+          <path style="fill: #00BCD4 " d="M111.33,355.66A196,196,0,0,1,101.42,294c0-108.48,88.25-196.72,196.72-196.72S494.86,185.52,494.86,294A196,196,0,0,1,485,355.66l14.28-3.06a208.85,208.85,0,0,0,8.36-58.6c0-115.49-94-209.45-209.45-209.45S88.7,178.51,88.7,294a208.84,208.84,0,0,0,8.35,58.6Z" />
+          <path style="fill: #7E57C2 " d="M171.68,406.07A849.53,849.53,0,0,1,55,389.76l37.16,52.71L55,478.81a851,851,0,0,0,116.73,16.32Z" />
+          <path style="fill: #7E57C2 " d="M424.6,406.07a849.53,849.53,0,0,0,116.73-16.31l-37.16,52.71,37.16,36.34A851,851,0,0,1,424.6,495.13Z" />
+          <polygon style="fill: #673AB7 " points="482.84 436.25 424.6 406.07 424.6 495.13 482.84 463.87 482.84 436.25" />
+          <polygon style="fill: #673AB7 " points="113.45 463.87 171.69 495.13 171.69 406.07 113.45 436.25 113.45 463.87 113.45 463.87" />
+          <path style="fill: #673AB7 " d="M482.84,463.87V374.82c-56.19,12-118.75,18.74-184.7,18.74s-128.51-6.71-184.69-18.74v89.05c56.19,12,118.74,18.75,184.69,18.75S426.65,475.9,482.84,463.87Z" />
           <text x="50%" y="450" fill="white" style="font-size:44px"
                 dominant-baseline="middle" text-anchor="middle">
             {{i.Title}}
           </text>
-          <svg style="fill: #e23835" width="250" height="250" x="175" y="125" viewBox="0 0 24 24" [innerHTML]="i.Icon">
+          <svg class="dfill" width="250" height="250" x="175" y="125" viewBox="0 0 24 24" [innerHTML]="i.Icon">
           </svg>
         </g>
       </svg>

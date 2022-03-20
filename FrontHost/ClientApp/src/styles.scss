@@ -1,6 +1,5 @@
 @import "../node_modules/ng-zorro-antd/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/grid/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/button/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/carousel/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/card/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/form/style/index.min.css";
@@ -22,33 +21,109 @@ body {
   background-image: url('assets/bg.jpg');
 }
 
-
+/*#d58c04*/
 $warning-color: #FFA900;
-$danger-color: #F93154;
-$success-color: #00B74A;
-$info-color: #39C0ED;
+$danger-color: #F51720;
+$success-color: #2f832f;
+$info-color: #1E88E5;
 $primary-color: #1266F1;
-$secondary-color: #B23CFD;
+$secondary-color: #673AB7;
+$black-color: #262626;
+$white-color: #FBFBFB;
 
 
-$colors: w warning $warning-color,d danger $danger-color, s success $success-color,i info $info-color, p primary $primary-color,e secondary $secondary-color;
+$colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, e secondary $secondary-color, b black $black-color, wh white $white-color;
+$delay: 200ms;
 
+
+button {
+  display: inline-flex;
+  min-width: 80px;
+  color: black;
+  border: none;
+  padding: 3px 8px;
+  margin: 0 5px;
+  background-color: transparent;
+  -webkit-transition: background $delay ease-out;
+  -moz-transition: background $delay ease-out;
+  -o-transition: background $delay ease-out;
+  transition: background $delay ease-out;
+  -webkit-transition: border $delay ease-out;
+  -moz-transition: border $delay ease-out;
+  -o-transition: border $delay ease-out;
+  transition: border $delay ease-out;
+  -webkit-transition: color $delay ease-out;
+  -moz-transition: color $delay ease-out;
+  -o-transition: color $delay ease-out;
+  transition: color $delay ease-out;
+  -webkit-transition: fill $delay ease-out;
+  -moz-transition: fill $delay ease-out;
+  -o-transition: fill $delay ease-out;
+  transition: fill $delay ease-out;
+}
+
+button:hover {
+  background-color: rgba( #bfbcbc,0.8);
+  cursor: pointer;
+}
+button svg, button i {
+  width:24px;
+}
+button::before,
+button::after {
+  content: '';
+  flex: 1 0 auto;
+}
 
 @each $i in $colors {
   $keyshort: nth($i, 1);
   $key: nth($i,2);
   $value: nth($i, 3);
-
-  .#{$key}bg {
-    background-color: $value;
+  /*buttons*/
+  .#{$keyshort}out {
+    border: 1px $value solid;
   }
 
-  .#{$key}fg {
-    color: $value;
+  .#{$keyshort}out i, .#{$keyshort}out svg {
+    fill: rgba( $value,0.9);
   }
+
+  .#{$keyshort}out:hover {
+    border: 1px rgba( $value,0.9) solid;
+    background-color: rgba( $value,0.9);
+    color: $white-color;
+  }
+
+  .#{$keyshort}out:hover i, .#{$keyshort}out:hover svg{
+    fill: $white-color;
+  }
+
+
+
+  .#{$keyshort}in {
+    border: 1px $value solid;
+    color: $white-color;
+    background-color: rgba( $value,0.9);
+  }
+
+  .#{$keyshort}in i, .#{$keyshort}in svg {
+    fill: $white-color;
+  }
+
+  .#{$keyshort}in:hover {
+    background-color: rgba( $value,1);
+  }
+
+
+
+
 
   .#{$keyshort}bg {
     background-color: $value;
+  }
+
+  .#{$keyshort}fill {
+    fill: $value;
   }
 
   .#{$keyshort}fg {
@@ -59,6 +134,7 @@ $colors: w warning $warning-color,d danger $danger-color, s success $success-col
 $char-w: 1ch;
 $gap: .5*$char-w;
 $n-char: 10;
+
 
 
 @for $i from 1 through $n-char {
@@ -147,12 +223,14 @@ $n-char: 10;
   padding: 10px;
   font-size: larger;
   margin-bottom: 10px;
+  background-color: #0000000f;
 }
 
 .glass.withheader .glassfooter {
   padding: 10px;
   font-size: larger;
   margin-top: 10px;
+  background-color: #0000000f;
 }
 
 .glass.withheader .glassbody {
