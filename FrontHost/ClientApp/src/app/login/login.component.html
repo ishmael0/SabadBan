@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="glassfooter" style="text-align:center">
-    <button *ngIf="level>1" class="wout" (click)="level=level-1">   بازگشت</button>
-    <button class="sin" (click)="goToNext()">  گام بعد</button>
+    <button *ngIf="back" class="wout" (click)="level=level-1">   بازگشت</button>
+    <button *ngIf="next" class="sin" (click)="goToNext()">  گام بعد</button>
   </div>
 </div>

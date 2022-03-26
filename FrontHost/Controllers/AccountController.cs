@@ -1,4 +1,5 @@
 ﻿using Core.Services;
+using Core.StartUp;
 using FrontHost.DBContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,23 @@ namespace FrontHost.Controllers
             return true;
         }
     }
- 
+
+
+    public class DataService
+    {
+        public DataService()
+        {
+            codesManager = new DictionaryCacheManager<string, DataService, string>(this, async (s, d, p) => { 
+                
+                return "";
+            
+            }, new TimeSpan(0, 2, 0));
+        }
+        public DictionaryCacheManager<string, DataService, string> codesManager;
+
+    }
+
+
     public class LoginFirstStepDTO
     {
         [Required]
@@ -40,11 +57,14 @@ namespace FrontHost.Controllers
         private readonly FrontDB dB;
         private readonly SMSService sms;
         private readonly RandomGenerator random;
-        public AccountController(FrontDB dB, SMSService sms, RandomGenerator random)
+        private readonly DataService data;
+
+        public AccountController(FrontDB dB, SMSService sms, RandomGenerator random, DataService data)
         {
             this.dB = dB;
             this.sms = sms;
             this.random = random;
+            this.data = data;
         }
         [NonAction]
         public async Task<bool> SendMessage(string phoneNumber)
@@ -64,6 +84,7 @@ namespace FrontHost.Controllers
             var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);
             if (user == null && await SendMessage(helper.PhoneNumber))
             {
+                await data.codesManager.TryGetValueAsync(helper.PhoneNumber);
                 return new JR<bool>(StatusCodes.Status200OK, "این شماره تماس قبلا ثبت نشده است، شما به مرحله ثبت نام هدایت میشوید.", false);
             }
             if (user.Status == Core.Models.Status.Blocked)

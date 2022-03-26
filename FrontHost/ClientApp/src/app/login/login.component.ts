@@ -11,6 +11,8 @@ import { FrontBaseComponent } from '../layout/layout.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent extends FrontBaseComponent {
+  back = true;
+  next = true;
   timer = {
     countDown: 0,
     min: 0,
@@ -24,6 +26,7 @@ export class LoginComponent extends FrontBaseComponent {
     SMSCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])]
   });
   ngOnInit(): void {
+
   }
   async goToNext() {
     if (this.isLoading) return;
@@ -38,13 +41,14 @@ export class LoginComponent extends FrontBaseComponent {
             this.smsForm.controls['PhoneNumber'].setValue(this.phoneForm.controls['PhoneNumber'].value)
             this.smsForm.controls['SMSCode'].setValue('');
             this.timer.countDown = 120;
-
+            this.back = false;
             let intervalId = setInterval(() => {
               this.timer.countDown = this.timer.countDown - 1;
               this.timer.min = Math.floor(this.timer.countDown / 60);
               this.timer.sec = this.timer.countDown - this.timer.min * 60;
               if (this.timer.countDown === 0) {
-                clearInterval(intervalId)
+                clearInterval(intervalId);
+                this.back = true;
               }
               this.cdr.detectChanges();
             }, 1000);

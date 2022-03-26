@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1-Core", "..\Santel\Core\1-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2-ClientApp", "..\Santel\ClientApp\2-ClientApp.csproj", "{A19E5105-2246-4822-976E-C56A821885BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontHost", "FrontHost\FrontHost.csproj", "{003CCAE5-D3E9-43A7-9E08-A81D455DA2B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontHost", "FrontHost\FrontHost.csproj", "{003CCAE5-D3E9-43A7-9E08-A81D455DA2B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A86E4A5B-2E7C-4C0A-9563-6E132EF92780}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
