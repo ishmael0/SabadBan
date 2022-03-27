@@ -39,6 +39,7 @@ builder.Services.AddControllersWithViews()
               ));
 var constr = builder.Configuration.GetSection("ConnectionString").Value;
 builder.Services.AddDbContext<FrontDB>(options => options.UseSqlServer(constr));
+builder.Services.AddSingleton<DataService, DataService>();
 builder.Services.AddSingleton<SMSService, SMSService>();
 builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp"; });
 Log.Logger = new LoggerConfiguration()

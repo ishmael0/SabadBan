@@ -49,6 +49,7 @@ export class LoginComponent extends FrontBaseComponent {
               if (this.timer.countDown === 0) {
                 clearInterval(intervalId);
                 this.back = true;
+                this.next = false;
               }
               this.cdr.detectChanges();
             }, 1000);
@@ -68,11 +69,13 @@ export class LoginComponent extends FrontBaseComponent {
       if (this.smsForm.valid) {
         await this.http.AddAndTry(new RequestPlus(HTTPTypes.POST, 'account', {
           tokenNeeded: false,
-          action: 'verify', formData: this.phoneForm.value,
+          action: 'verify', formData: this.smsForm.value,
           onSuccess: (m, d) => {
-            this.level = 2;
+            this.level = 3;
           },
-          onError: (m, d) => { }
+          onError: (m, d) => {
+
+          }
         }))
       }
     }

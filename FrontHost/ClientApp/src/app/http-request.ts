@@ -70,6 +70,19 @@ export class HttpRequestService extends HttpClient {
       if (e.StatusCode === HTTPStatusCodes.Unauthorized) {
         this.auth.logOut();
       }
+      else if (e.Message && e.Message.length > 0)
+      {
+        e.Message.
+          forEach(c => {
+            this.ns.create(
+              NZNotificationTypes.error,
+              'خطا',
+              c,
+              //'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
+              { nzPlacement: 'topRight', nzDuration: 1000 }
+            )
+          });
+      }
       else if (e.StatusCode === HTTPStatusCodes.NotFound) {
         this.ns.create(
           NZNotificationTypes.error,
@@ -108,6 +121,7 @@ export class HttpRequestService extends HttpClient {
       }
       else if (response.StatusCode !== HTTPStatusCodes.OK) {
         req.onError(response.Message, response.Data);
+        this.handleError(response)
       }
       else {
         throw new Error();
