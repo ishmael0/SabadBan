@@ -3,26 +3,26 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { IndexComponent } from './index/index.component';
-import { LayoutComponent } from './layout/layout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AntDesignSharedModulesModule } from '../../../../../Santel/ClientApp/src/app/ant-design-shared-modules/ant-design-shared-modules.module';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+
+import { IndexComponent } from './index/index.component';
+import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { RulesComponent } from './rules/rules.component';
 import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
 import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VendeeLayoutComponent } from './vendee-layout/vendee-layout.component';
-import { AuthService } from './Auth';
+import { AuthService } from './auth';
 import { VendeeInvoicesComponent } from './vendee-invoices/vendee-invoices.component';
 import { VendeeProfileComponent } from './vendee-profile/vendee-profile.component';
 import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.component';
 import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
 const routes: Route[] = [
-  { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
   {
     path: '', component: LayoutComponent, children: [
       { path: '', component: IndexComponent },
@@ -42,7 +42,9 @@ const routes: Route[] = [
         ]
       },
     ]
-  }
+  },
+  { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
+
 ];
 
 @NgModule({
@@ -62,17 +64,18 @@ const routes: Route[] = [
     AppComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     CommonModule,
     AntDesignSharedModulesModule,
     NzCarouselModule,
-    RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [HttpRequestService]
 })
 export class AppModule {
 }
+

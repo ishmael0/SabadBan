@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { AuthService } from './Auth';
+import { AuthService } from './auth';
 import { HTTPStatusCodes, HTTPTypes, NZNotificationTypes, RequestPlus, ResponsePlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
 
  

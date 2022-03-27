@@ -10,8 +10,8 @@ import { FrontBaseComponent } from '../layout/layout.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent extends FrontBaseComponent {
-  back = true;
+export class LoginComponent extends FrontBaseComponent { 
+  back = false;
   next = true;
   timer = {
     countDown: 0,
