@@ -1,5 +1,6 @@
 using Core.Services;
 using FrontHost.Controllers;
+using FrontHost.Services;
 using Microsoft.EntityFrameworkCore;
 using FrontHost.DBContext;
 using Serilog;
@@ -9,17 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-
-
-
-
-
-
-
-
-
-
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +35,34 @@ builder.Services.AddDbContext<FrontDB>(options => options.UseSqlServer(constr));
 builder.Services.AddSingleton<DataService, DataService>();
 builder.Services.AddSingleton<SMSService, SMSService>();
 builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp"; });
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)));
+var tempAppsettings = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
+builder.Services.AddAuthentication(configureOptions =>
+{
+    configureOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    configureOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(configureOptions =>
+{
+    configureOptions.RequireHttpsMetadata = false;
+    configureOptions.SaveToken = true;
+    configureOptions.IncludeErrorDetails = true;
+    configureOptions.TokenValidationParameters = new  TokenValidationParameters
+    {
+        ValidateIssuer = true, 
+        ValidateAudience = true, 
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        RequireSignedTokens = true,
+        RequireExpirationTime = true,
+        ValidIssuer = ((tempAppsettings.ValidIssuer)),
+        ValidAudience = ((tempAppsettings.ValidAudience)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(((tempAppsettings.IssuerSigningKey)))),
+        TokenDecryptionKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(((tempAppsettings.TokenDecryptionKey)))),
+        ClockSkew = TimeSpan.Zero // default: 5 min
+    };
+ });
+
 Log.Logger = new LoggerConfiguration()
 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
 .Enrich.FromLogContext()
@@ -70,6 +91,9 @@ else
     app.UseHsts();
 }
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
