@@ -32,11 +32,11 @@ $black-color: #262626;
 $white-color: #FBFBFB;
 
 
-$colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, e secondary $secondary-color, b black $black-color, wh white $white-color;
+$colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, se secondary $secondary-color, b black $black-color, wh white $white-color;
 $delay: 200ms;
 
 
-button {
+.btn {
   display: inline-flex;
   min-width: 80px;
   color: black;
@@ -62,18 +62,29 @@ button {
   transition: fill $delay ease-out;
 }
 
-button:hover {
+.btn:hover {
   background-color: rgba( #bfbcbc,0.8);
   cursor: pointer;
 }
-button svg, button i {
-  width:24px;
+
+.btn.small {
+  font-size: x-small;
 }
-button::before,
-button::after {
+
+svg {
+  width: 24px;
+}
+
+.btn svg, .btn i {
+  width: 24px;
+}
+
+.btn::before,
+.btn::after {
   content: '';
   flex: 1 0 auto;
 }
+
 
 @each $i in $colors {
   $keyshort: nth($i, 1);
@@ -94,7 +105,7 @@ button::after {
     color: $white-color;
   }
 
-  .#{$keyshort}out:hover i, .#{$keyshort}out:hover svg{
+  .#{$keyshort}out:hover i, .#{$keyshort}out:hover svg {
     fill: $white-color;
   }
 
@@ -227,14 +238,27 @@ $n-char: 10;
 }
 
 .glass.withheader .glassfooter {
-  padding: 10px;
+  padding: 5px;
   font-size: larger;
-  margin-top: 10px;
+  /*  margin-top: 10px;*/
   background-color: #0000000f;
 }
 
 .glass.withheader .glassbody {
   padding: 10px;
+  text-align: justify;
+ 
+}
+
+@each $i in $colors {
+  $keyshort: nth($i, 1);
+  $key: nth($i,2);
+  $value: nth($i, 3);
+
+  .glass.withheader.#{$keyshort} .glassheader, .glass.withheader.#{$keyshort} .glassfooter {
+    background: rgba($value, 0.5);
+    color: $white-color;
+  }
 }
 
 
@@ -248,7 +272,7 @@ $n-char: 10;
 }
 
 
-.buttoncotainer button {
+.buttoncontainer .btn {
   width: 100%
 }
 
@@ -260,4 +284,14 @@ $n-char: 10;
   to {
     opacity: 1;
   }
+}
+.indextitles {
+  background-color: $secondary-color;
+  border-radius: 20px 0px 20px 0px;
+  font-size: x-large;
+  color: $white-color;
+  padding-left: 20px;
+  margin-right: 10px;
+  width:300px;
+  text-align:left;
 }

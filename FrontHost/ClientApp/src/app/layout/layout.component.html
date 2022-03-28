@@ -26,12 +26,13 @@
 
 
 <ng-template #menues>
-  <button [routerLink]="[prefixUrl('')]" style="font-size:larger">  صفحه اصلی</button>
-  <button [routerLink]="[prefixUrl('rules')]">مقررات و نحوه کار   </button>
-  <button [routerLink]="[prefixUrl('news')]">  اخبار</button>
-  <button [routerLink]="[prefixUrl('article')]">  مقالات</button>
-  <button [routerLink]="[prefixUrl('about')]"  > درباره ما</button>
-  <button style="margin:0px 10px" class="din" [routerLink]="[prefixUrl('login')]">   ورود </button>
-  <button style="margin:0px 10px" [routerLink]="[prefixUrl('login')]" class="eout">   مشاهده فاکتور </button>
-  <button style="float: left; border-bottom: solid 2px #e13634" (click)="openInNewWindow('/management')">   پنل کاربری فروشندگان</button>
+  <button class="btn" [routerLink]="[prefixUrl('')]" style="font-size:larger">  صفحه اصلی</button>
+  <button class="btn" [routerLink]="[prefixUrl('rules')]">مقررات و نحوه کار   </button>
+  <button class="btn" [routerLink]="[prefixUrl('rules')]">فروشندگان  </button>
+  <button class="btn" [routerLink]="[prefixUrl('news')]">  اخبار</button>
+  <button class="btn" [routerLink]="[prefixUrl('article')]">  مقالات</button>
+  <button class="btn" [routerLink]="[prefixUrl('about')]"  > درباره ما</button>
+  <button class="btn din" style="margin:0px 10px"  [routerLink]="[prefixUrl('login')]">   ورود </button>
+  <button class="btn eout" style="margin:0px 10px" [routerLink]="[prefixUrl('login')]" >   مشاهده فاکتور </button>
+  <button class="btn" style="float: left; border-bottom: solid 2px #e13634" (click)="openInNewWindow('/management')">   پنل کاربری فروشندگان</button>
 </ng-template>

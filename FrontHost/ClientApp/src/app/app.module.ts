@@ -22,9 +22,21 @@ import { VendeeProfileComponent } from './vendee-profile/vendee-profile.componen
 import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.component';
 import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
+import { DesignSystemComponent } from './design-system/design-system.component';
+
+export const environment = {
+  production: false
+};
+import { enableProdMode } from '@angular/core';
+if (environment.production) {
+  enableProdMode();
+}
+
+
 const routes: Route[] = [
   {
     path: '', component: LayoutComponent, children: [
+      ...(environment.production ? [] : [{ path: 'designsystem', component: DesignSystemComponent}]),
       { path: '', component: IndexComponent },
       { path: 'login', component: LoginComponent },
       { path: 'login/:redirectlink', component: LoginComponent },
@@ -61,7 +73,8 @@ const routes: Route[] = [
     VendeeInvoicesComponent,
     VendeeProfileComponent,
     VendeeAddressesComponent,
-    AppComponent
+    AppComponent,
+    DesignSystemComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
