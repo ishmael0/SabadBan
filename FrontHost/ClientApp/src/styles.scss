@@ -1,10 +1,8 @@
 @import "../node_modules/ng-zorro-antd/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/grid/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/carousel/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/card/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/form/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/input/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/spin/style/index.min.css";
+@import "../node_modules/ng-zorro-antd/table/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/notification/style/index.min.css";
 
 html {
@@ -172,9 +170,16 @@ $n-char: 10;
 
 
 .form-input {
+  margin-bottom: 15px;
   position: relative;
-  display: inline-block;
+  display: flex;
   width: 100%;
+
+  label {
+    width: 200px;
+    padding-left: 10px;
+    text-align: end;
+  }
 
   input {
     background-color: transparent;
@@ -247,7 +252,6 @@ $n-char: 10;
 .glass.withheader .glassbody {
   padding: 10px;
   text-align: justify;
- 
 }
 
 @each $i in $colors {
@@ -285,13 +289,22 @@ $n-char: 10;
     opacity: 1;
   }
 }
+
 .indextitles {
   background-color: $secondary-color;
   border-radius: 20px 0px 20px 0px;
-  font-size: x-large;
+  font-size: large;
   color: $white-color;
   padding-left: 20px;
   margin-right: 10px;
-  width:300px;
-  text-align:left;
+  width: 300px;
+  text-align: left;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.ant-table-tbody > tr > td, .ant-table-thead > tr > th {
+  text-align: start !important
 }

@@ -1,1 +1,20 @@
-<p>vendee-invoices works!</p>
+<nz-table #basicTable nzTableLayout="fixed" [nzData]="[{a:'123456',b:'من',c:456789123}]">
+  <thead>
+    <tr>
+      <th>شماره فاکتور</th>
+      <th>فروشنده</th>
+      <th>مبلغ کل فاکتور</th>
+      <th>تاریخ ثبت   </th>
+      <th>تاریخ پرداخت   </th>
+      <th>وضعیت   </th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.a}}</td>
+      <td>{{data.b}}</td>
+      <td>{{data.c | number}}</td>
+    </tr>
+  </tbody>
+</nz-table>

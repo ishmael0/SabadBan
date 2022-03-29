@@ -4,7 +4,6 @@ import { RouterModule, Routes, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AntDesignSharedModulesModule } from '../../../../../Santel/ClientApp/src/app/ant-design-shared-modules/ant-design-shared-modules.module';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 import { IndexComponent } from './index/index.component';
@@ -23,15 +22,19 @@ import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.co
 import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
 import { DesignSystemComponent } from './design-system/design-system.component';
+import { VendeeTransactionsComponent } from './vendee-transactions/vendee-transactions.component';
 
 export const environment = {
   production: false
 };
 import { enableProdMode } from '@angular/core';
-if (environment.production) {
+ if (environment.production) {
   enableProdMode();
 }
-
+import { registerLocaleData } from '@angular/common';
+import fa from '@angular/common/locales/fa';
+import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
+registerLocaleData(fa);
 
 const routes: Route[] = [
   {
@@ -48,9 +51,10 @@ const routes: Route[] = [
       {
         path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
           { path: '', redirectTo: 'profile', pathMatch: 'full' },
-          { path: '', component: VendeeProfileComponent },
-          { path: '', component: VendeeInvoicesComponent },
-          { path: '', component: VendeeAddressesComponent },
+          { path: 'profile', component: VendeeProfileComponent },
+          { path: 'transactions', component: VendeeTransactionsComponent },
+          { path: 'invoices', component: VendeeInvoicesComponent },
+          { path: 'addresses', component: VendeeAddressesComponent },
         ]
       },
     ]
@@ -58,6 +62,11 @@ const routes: Route[] = [
   { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
 
 ];
+
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [
@@ -74,20 +83,25 @@ const routes: Route[] = [
     VendeeProfileComponent,
     VendeeAddressesComponent,
     AppComponent,
-    DesignSystemComponent
+    DesignSystemComponent,
+    VendeeTransactionsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     CommonModule,
-    AntDesignSharedModulesModule,
     NzCarouselModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    NzTableModule,
+    NzSpinModule,
+    NzNotificationModule,
+    NzGridModule
   ],
   bootstrap: [AppComponent],
-  providers: [HttpRequestService]
+  providers: [NzNotificationService, HttpRequestService, { provide: NZ_I18N, useValue: fa_IR }]
 })
 export class AppModule {
 }
