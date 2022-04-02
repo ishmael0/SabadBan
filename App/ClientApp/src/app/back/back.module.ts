@@ -16,7 +16,7 @@ import "reflect-metadata";
   
 
 export class Category extends BaseModelWithTitle {
-  ParentCategoryId: number = 0;
+  ParentCategoryId: number | undefined = undefined;
   EnTitle: number = 0;
   Icon: string = '';
   Summary: string = '';

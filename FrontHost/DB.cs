@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Metadata;
 using FrontHost.Models;
+using System.Collections.Generic;
+
 namespace FrontHost.DBContext
 {
     public class FrontDB  :DbContext

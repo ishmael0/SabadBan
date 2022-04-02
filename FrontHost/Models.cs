@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Core.Models;
+using System.Collections.Generic;
+using System;
 
 namespace FrontHost.Models
 {

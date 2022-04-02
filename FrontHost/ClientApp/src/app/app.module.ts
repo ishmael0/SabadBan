@@ -23,11 +23,11 @@ import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
 import { DesignSystemComponent } from './design-system/design-system.component';
 import { VendeeTransactionsComponent } from './vendee-transactions/vendee-transactions.component';
+import { enableProdMode, APP_INITIALIZER } from '@angular/core';
 
 export const environment = {
   production: false
 };
-import { enableProdMode } from '@angular/core';
  if (environment.production) {
   enableProdMode();
 }
@@ -67,6 +67,24 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { HTTPTypes, RequestPlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
+ 
+export function AppInitializerProvider() {
+  let x = {
+    provide: APP_INITIALIZER,
+    useFactory: (http: HttpRequestService) => async() => {
+      await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'init', {
+        tokenNeeded:false,
+        action: 'InitData',
+        onSuccess: (m, d) => { console.log(d) },
+        onError: (m, d) => { console.log(0) },
+      }))
+    },
+    deps: [HttpRequestService],
+    multi: true,
+  }
+  return x;
+};
 
 @NgModule({
   declarations: [
@@ -101,7 +119,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzGridModule
   ],
   bootstrap: [AppComponent],
-  providers: [NzNotificationService, HttpRequestService, { provide: NZ_I18N, useValue: fa_IR }]
+  providers: [NzNotificationService, HttpRequestService, { provide: NZ_I18N, useValue: fa_IR }, AppInitializerProvider()]
 })
 export class AppModule {
 }

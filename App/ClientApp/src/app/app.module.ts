@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import fa from '@angular/common/locales/fa';
+import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(fa);
 
 
 const routes: Routes = [
@@ -22,7 +25,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: fa_IR }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

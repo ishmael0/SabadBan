@@ -9,66 +9,97 @@ https://www.iconpacks.net/search/?icon=man
     <nz-tab nzTitle="محتوای اصلی">
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIDStatusForm;context:{  item:item}"></ng-container>
       <form nz-form [formGroup]="item">
-        <nz-form-item>
+
+
+        <div nz-row>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Title">عنوان</nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="عنوان را وارد کنید">
-            <input nz-input formControlName="Title" />
-           </nz-form-control></nz-form-item> 
-
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="عنوان را وارد کنید">
+                <input nz-input formControlName="Title" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
           <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="email"> دسته بندی والد</nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-            <nz-tree-select [nzNodes]="dataManager.ViewRecords"
-                            nzShowSearch
-                            nzPlaceHolder="لطفا دسته بندی والد را انتخاب نمایید"
-                            formControlName="ParentCategoryId">
-            </nz-tree-select>
-           </nz-form-control></nz-form-item> 
-        </nz-form-item>
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                <nz-tree-select [nzNodes]="dataManager.ViewRecords"
+                                nzShowSearch
+                                nzPlaceHolder="لطفا دسته بندی والد را انتخاب نمایید"
+                                formControlName="ParentCategoryId">
+                </nz-tree-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
 
-        <nz-form-item>
+        </div>
+
+        <div nz-row>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Priority">اولویت</nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="اولویت را وارد کنید">
-            <input nz-input formControlName="Priority" />
-           </nz-form-control></nz-form-item> 
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="اولویت را وارد کنید">
+                <input nz-input formControlName="Priority" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
           <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="Color">مقدار</nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="مقدار را وارد کنید">
-            <input type="color" nz-input formControlName="Color" />
-           </nz-form-control></nz-form-item> 
-        </nz-form-item>
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="مقدار را وارد کنید">
+                <input type="color" nz-input formControlName="Color" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
 
-        <nz-form-item>
+        <div nz-row>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Summary">شرح خلاصه</nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="شرح خلاصه را وارد کنید">
-            <input nz-input formControlName="Summary" />
-           </nz-form-control></nz-form-item> 
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شرح خلاصه را وارد کنید">
+                <input nz-input formControlName="Summary" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
 
 
           <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="email">
             آیکون
             <i [innerHtml]="item.controls['Icon'].value??'' | sanitizeHtml" style="font-size:24px" nz-icon></i>
           </nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-            <textarea nz-input formControlName="Icon"></textarea>
-           </nz-form-control></nz-form-item> 
+          <div nz-col [nzSm]="6" [nzXs]="24">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                <textarea nz-input formControlName="Icon"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
           <button nz-button nzType="primary" (click)="fileselector.click()">
             <i nz-icon [innerHtml]="icons['plus-thick']"></i>
           </button>
           <input type="file" #fileselector style="display:none" (change)="loadSVGFile($event, item.controls['Icon'])" />
-        </nz-form-item>
+        </div>
 
 
 
-        <nz-form-item>
+        <div nz-row>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Description">شرح </nz-form-label>
-           <nz-form-item><nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="شرح  را وارد کنید">
-            <!--<ckeditor [editor]="Editor" tagName="textarea" [config]="config" formControlName="Description"></ckeditor>-->
-            <textarea nz-input formControlName="Description"></textarea>
+          <div nz-col [nzSm]="14" [nzXs]="24">
 
-           </nz-form-control></nz-form-item> 
-        </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="شرح  را وارد کنید">
+                <!--<ckeditor [editor]="Editor" tagName="textarea" [config]="config" formControlName="Description"></ckeditor>-->
+                <textarea nz-input formControlName="Description"></textarea>
+
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
       </form>
     </nz-tab>
-     
+
     <nz-tab nzTitle=" تصاویر  ({{item.controls.Images.value?.length}})">
       <div nz-row>
         <div nz-col [nzMd]="6" [nzXs]="24" style="text-align:center">

@@ -7,14 +7,12 @@ namespace BackHost.DBContext
     {
         public static async Task<bool> AddProvincesAndCitiesAsync(IServiceProvider service)
         {
-            var collection = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(System.IO.File.ReadAllText("ProvincesAndCities.txt"))
-    .OrderBy(c => c.Key).ToDictionary(c => c.Key, c => c.Value.OrderBy(d => d).Select(d => d.Trim()).ToList());
             var _context = service.CreateScope().ServiceProvider.GetRequiredService<DB>();
-
-
             var isexist = _context.Provinces.Any();
             if (!isexist)
             {
+                var collection = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(System.IO.File.ReadAllText("ProvincesAndCities.txt"))
+    .OrderBy(c => c.Key).ToDictionary(c => c.Key, c => c.Value.OrderBy(d => d).Select(d => d.Trim()).ToList());
                 foreach (var item in collection)
                 {
                     var province = new Province { Title = item.Key, Create = DateTime.Now, Status = Status.Published };

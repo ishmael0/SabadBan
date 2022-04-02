@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using FrontHost.Services;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace FrontHost.Controllers
 {
-
-
 
     public class LoginFirstStepDTO
     {
@@ -24,9 +25,8 @@ namespace FrontHost.Controllers
         public int SMSCode { get; set; }
         public bool IsNew { get; set; }
     }
-    [ApiController]
-    [Route("api/[controller]/[action]")]
-    public class AccountController : ControllerBase
+
+    public class AccountController : SabadBanBaseController
     {
         private readonly FrontDB dB;
         private readonly SMSService sms;

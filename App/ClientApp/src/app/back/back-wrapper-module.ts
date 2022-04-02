@@ -14,10 +14,7 @@ import { HttpRequestService } from "../../../../../../Santel/ClientApp/src/app/s
 import { WebSiteService } from "../../../../../../Santel/ClientApp/src/app/services/website.service";
 import { ThemeService } from "../../../../../../Santel/ClientApp/src/app/services/theme.service";
 import { AppInitializerProvider, AppInitializerProvider2 } from '../../../../../../Santel/ClientApp/src/app/services/app-initializer-provider';
-import fa from '@angular/common/locales/fa';
-import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(fa);
+
 const routes: Routes = [
   { path: '', redirectTo: 'webselector', pathMatch: 'full' },
   {
@@ -50,7 +47,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ], providers: [AuthService, NzNotificationService, SignalRService, HttpRequestService, WebSiteService,
     //AppInitializerProvider(),
-    { provide: NZ_I18N, useValue: fa_IR }
+ 
   ]
 })
 export class BackWrapperModule {
