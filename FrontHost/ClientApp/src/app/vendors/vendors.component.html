@@ -1,0 +1,39 @@
+<div nz-row nzJustify="center">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+    <div class="glass">
+      <nz-tree [nzData]="ds.CategoryNodesAs" style="background:none"
+               nzBlockNode
+               [nzExpandAll]="true"
+               [nzSearchValue]="ds.CategorySearchValue"
+               [nzTreeTemplate]="nzTreeTemplate">
+        <ng-template #nzTreeTemplate let-node let-origin="origin">
+          <div>
+            <span [ngStyle]="{'color':  ds.CategorySearchValue!='' && node.title.indexOf(ds.CategorySearchValue)!=-1  ? 'red' : 'black'}">
+              asd
+            </span>
+
+          </div>
+        </ng-template>
+      </nz-tree>
+
+    </div>
+  </div>
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
+
+    <div class="glass">
+      hi
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+</div>

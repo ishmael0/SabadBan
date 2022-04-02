@@ -18,11 +18,11 @@ namespace FrontHost.Controllers
         }
         public async Task<JR<object>> InitData()
         {
-            var categories = await dB.Categories.ToListAsync();
+            var Categories = await dB.Categories.ToListAsync();
             var Vendees = await dB.Vendees.CountAsync();
             var Invoices = await dB.Invoices.CountAsync();
             var Vendors = await dB.Vendors.CountAsync();
-            return JR<object>.OK(new { categories , Vendees , Vendors, Invoices });
+            return JR<object>.OK(new { Categories , Vendees , Vendors, Invoices });
         }
     }
 }

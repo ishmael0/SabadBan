@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Directive, ViewEncapsulatio
 import { HttpRequestService } from '../http-request';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DataService } from '../data.service';
 
 @Directive()
 export abstract class FrontBaseComponent {
@@ -10,7 +11,11 @@ export abstract class FrontBaseComponent {
   }
   get front() { return "/home" };
   prefixUrl(url: string) { return "/" + (url[0] == '/' ? url : ("/" + url)) };
-  constructor(public formBuilder: FormBuilder, public http: HttpRequestService, public sanitizer: DomSanitizer, public cdr: ChangeDetectorRef) {
+  constructor(public formBuilder: FormBuilder,
+    public http: HttpRequestService,
+    public sanitizer: DomSanitizer,
+    public ds: DataService,
+    public cdr: ChangeDetectorRef) {
     
   }
 }

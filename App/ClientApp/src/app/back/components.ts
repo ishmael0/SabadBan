@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Injector } from '@angular/core';
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -32,7 +32,6 @@ export class CityComponent extends BaseComponent<City> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceComponent extends BaseComponent<Invoice> {
-
   selectVendorModal = false;
   selectVendeeModal = false;
   override async onNewObjectAdded(temp: FormGroup, t: Invoice) {
@@ -102,7 +101,6 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
 })
 export class BankComponent extends BaseComponent<Bank> {
 
-
 }
 @Component({
   selector: 'app-category',
@@ -112,7 +110,6 @@ export class BankComponent extends BaseComponent<Bank> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryComponent extends BaseComponent<Category> {
-
   imageModal = false;
   async addImage(e: string) {
     this.imageModal = false;
@@ -131,7 +128,6 @@ export class CategoryComponent extends BaseComponent<Category> {
 })
 export class ProvinceComponent extends BaseComponent<Province> {
 
-
 }
 @Component({
   selector: 'app-ticket',
@@ -141,7 +137,6 @@ export class ProvinceComponent extends BaseComponent<Province> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketComponent extends BaseComponent<Ticket> {
-
 }
 @Component({
   selector: 'app-transaction',
@@ -152,7 +147,6 @@ export class TicketComponent extends BaseComponent<Ticket> {
 })
 export class TransactionComponent extends BaseComponent<Transaction> {
 
-
 }
 @Component({
   selector: 'app-vendee',
@@ -162,8 +156,6 @@ export class TransactionComponent extends BaseComponent<Transaction> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendeeComponent extends BaseComponent<Vendee> {
-
-
 }
 @Component({
   selector: 'app-vendor',
@@ -233,7 +225,6 @@ export class VendorBankAccountComponent extends BaseComponent<VendorBankAccount>
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorBalanceComponent extends BaseComponent<VendorBalance> {
-
   override async fill() {
     let banks = this.dataManager.getLoadedData(Bank);
     console.log(banks)
@@ -247,7 +238,6 @@ export class VendorBalanceComponent extends BaseComponent<VendorBalance> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorSellComponent extends BaseComponent<VendorSell> {
-
 }
 
 @Component({
@@ -258,6 +248,5 @@ export class VendorSellComponent extends BaseComponent<VendorSell> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorWithdrawComponent extends BaseComponent<VendorWithdraw> {
-
 }
 

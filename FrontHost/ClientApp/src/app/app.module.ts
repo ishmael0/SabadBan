@@ -23,7 +23,10 @@ import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
 import { DesignSystemComponent } from './design-system/design-system.component';
 import { VendeeTransactionsComponent } from './vendee-transactions/vendee-transactions.component';
+import { VendorsComponent } from './vendors/vendors.component';
+import { VendorComponent } from './vendor/vendor.component';
 import { enableProdMode, APP_INITIALIZER } from '@angular/core';
+import { HTTPTypes, RequestPlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
 
 export const environment = {
   production: false
@@ -47,6 +50,8 @@ const routes: Route[] = [
       { path: 'news', component: NewsComponent },
       { path: 'article', component: ArticleComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'vendors', component: VendorsComponent },
+      { path: 'vendors/:id', component: VendorComponent },
 
       {
         path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
@@ -67,20 +72,22 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { HTTPTypes, RequestPlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { DataService } from './data.service';
+
  
 export function AppInitializerProvider() {
   let x = {
     provide: APP_INITIALIZER,
-    useFactory: (http: HttpRequestService) => async() => {
+    useFactory: (http: HttpRequestService, ds: DataService) => async() => {
       await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'init', {
         tokenNeeded:false,
         action: 'InitData',
-        onSuccess: (m, d) => { console.log(d) },
+        onSuccess: (m, d) => { ds.init(d); console.log(d) },
         onError: (m, d) => { console.log(0) },
       }))
     },
-    deps: [HttpRequestService],
+    deps: [HttpRequestService, DataService],
     multi: true,
   }
   return x;
@@ -102,7 +109,9 @@ export function AppInitializerProvider() {
     VendeeAddressesComponent,
     AppComponent,
     DesignSystemComponent,
-    VendeeTransactionsComponent
+    VendeeTransactionsComponent,
+    VendorsComponent,
+    VendorComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -113,6 +122,7 @@ export function AppInitializerProvider() {
     ReactiveFormsModule,
     HttpClientModule,
 
+    NzTreeModule,
     NzTableModule,
     NzSpinModule,
     NzNotificationModule,
