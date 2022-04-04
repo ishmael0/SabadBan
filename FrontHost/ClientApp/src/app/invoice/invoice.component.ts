@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FrontBaseComponent } from '../layout/layout.component';
 
 @Component({
   selector: 'app-invoice',
@@ -7,11 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InvoiceComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class InvoiceComponent extends FrontBaseComponent{
+ 
 
 }

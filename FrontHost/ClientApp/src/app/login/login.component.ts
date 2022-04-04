@@ -25,9 +25,6 @@ export class LoginComponent extends FrontBaseComponent {
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
     SMSCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])]
   });
-  ngOnInit(): void {
-
-  }
   async goToNext() {
     if (this.isLoading) return;
     this.isLoading = true;
@@ -71,6 +68,7 @@ export class LoginComponent extends FrontBaseComponent {
           tokenNeeded: false,
           action: 'verify', formData: this.smsForm.value,
           onSuccess: (m, d) => {
+            this.auth.login(d,d.Token)
             this.level = 3;
           },
           onError: (m, d) => {

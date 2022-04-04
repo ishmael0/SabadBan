@@ -5,7 +5,7 @@
       <br />
       <br />
       <nz-spin [nzSpinning]="isLoading">
-        <form [formGroup]="phoneForm" *ngIf="level == 1" style=" animation: fadeIn 0.5s ease-in-out;">
+        <form [formGroup]="phoneForm" *ngIf="level == 1"  class="fade">
           <div class="form-input">
             <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
           </div> <br />
@@ -36,7 +36,7 @@
           </div>
 
 
-          <input formControlName="SMSCode" class="splitted-5" maxlength='5' style=" animation: fadeIn 0.5s ease-in-out;" />
+          <input formControlName="SMSCode" class="splitted-5 fade" maxlength='5' />
           {{smsForm.controls['SMSCode'].value}}
           <br />
           <br />

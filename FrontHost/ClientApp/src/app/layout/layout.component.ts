@@ -3,11 +3,14 @@ import { HttpRequestService } from '../http-request';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DataService } from '../data.service';
+import { AuthService } from '../auth';
 
 @Directive()
 export abstract class FrontBaseComponent {
   openInNewWindow(url: string) {
     window.open(url, '_blank');
+  }
+  async ngOnInit() {
   }
   get front() { return "/home" };
   prefixUrl(url: string) { return "/" + (url[0] == '/' ? url : ("/" + url)) };
@@ -15,6 +18,7 @@ export abstract class FrontBaseComponent {
     public http: HttpRequestService,
     public sanitizer: DomSanitizer,
     public ds: DataService,
+    public auth: AuthService,
     public cdr: ChangeDetectorRef) {
     
   }
@@ -25,12 +29,8 @@ export abstract class FrontBaseComponent {
   templateUrl: './layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutComponent extends FrontBaseComponent implements OnInit {
-
+export class LayoutComponent extends FrontBaseComponent {
   showMenu = false;
-  ngOnInit(): void {
-  }
-
 }
 
 

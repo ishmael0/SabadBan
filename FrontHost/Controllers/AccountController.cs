@@ -7,6 +7,7 @@ using FrontHost.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
+using FrontHost.Models;
 
 namespace FrontHost.Controllers
 {
@@ -71,7 +72,7 @@ namespace FrontHost.Controllers
             return new(StatusCodes.Status403Forbidden, "مشکلی روی داده است، لطفا با پشتیبانی تماس بگیرید.", true);
         }
         [HttpPost]
-        public async Task<JR<string>> Verify([FromBody] LoginVerifyDTO helper)
+        public async Task<JR<UserViewDTO>> Verify([FromBody] LoginVerifyDTO helper)
         {
             if (data.IsVerificationCodeValid(helper.PhoneNumber, helper.SMSCode))
             {
@@ -81,7 +82,7 @@ namespace FrontHost.Controllers
                     user = new Models.Vendee { CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
-                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", data.TokenGen(user));
+                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user),user));
                 }
                 if (user.Status == Core.Models.Status.Blocked)
                 {
@@ -89,7 +90,7 @@ namespace FrontHost.Controllers
                 }
                 else
                 {
-                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", data.TokenGen(user));
+                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
                 }
             }
             else
@@ -98,5 +99,25 @@ namespace FrontHost.Controllers
             }
         }
 
+    }
+
+    public class UserViewDTO
+    {
+        public string Token { get; }
+        public int Id { get; }
+        public string CellPhone { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string MelliCode { get; }
+
+        public UserViewDTO(string token, Vendee v )
+        {
+            Token = token;
+            Id = v.Id;
+            CellPhone = v.CellPhone;
+            FirstName = v.FirstName;
+            LastName = v.LastName;
+            MelliCode = v.MelliCode;
+        }
     }
 }

@@ -54,8 +54,8 @@ builder.Services.AddAuthentication(configureOptions =>
     configureOptions.IncludeErrorDetails = true;
     configureOptions.TokenValidationParameters = new  TokenValidationParameters
     {
-        ValidateIssuer = true, 
-        ValidateAudience = true, 
+        ValidateIssuer = false, 
+        ValidateAudience = false, 
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         RequireSignedTokens = true,

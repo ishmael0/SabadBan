@@ -17,7 +17,7 @@ export class AuthService implements CanActivate {
     this.user = d;
     this.token = token;
     localStorage.setItem("token", token);
-    localStorage.setItem(UserData.name, token);
+    localStorage.setItem(UserData.name, JSON.stringify(d));
     this.router.navigate(['/home/account']);
   }
 

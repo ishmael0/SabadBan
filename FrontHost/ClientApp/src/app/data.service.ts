@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 function toTreeHelper(list: any[], key: any, parentKey: any, parentValue: any, condition = (d: any) => true) {
-  console.log(list, key, parentKey, parentValue)
   let temp: any = list.filter(c => c[parentKey] == parentValue && condition).map(c => ({ title: c.Title, key: c.Id, data: c }));
   for (var i = 0; i < temp.length; i++) {
     temp[i].children = toTreeHelper(list, key, parentKey, temp[i].data[key], condition);
@@ -24,7 +23,8 @@ export class DataService {
   CategoryNodesAs :any[]= [];
   CategorySearchValue = "";
   init(d:any) {
-    this.CategoryNodes = d.categories;
-    this.CategoryNodesAs = toTreeHelper(this.CategoryNodes,'Id' ,'ParentCategory',null);
+    this.CategoryNodes = d.Categories;
+    this.CategoryNodesAs = toTreeHelper(this.CategoryNodes, 'Id', 'ParentCategoryId', null);
+    console.log(this.CategoryNodesAs)
   }
 }

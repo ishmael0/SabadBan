@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RulesComponent } from './rules/rules.component';
 import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
-import { AboutComponent } from './about/about.component';
+//import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { VendeeLayoutComponent } from './vendee-layout/vendee-layout.component';
 import { AuthService } from './auth';
@@ -27,6 +27,7 @@ import { VendorsComponent } from './vendors/vendors.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { enableProdMode, APP_INITIALIZER } from '@angular/core';
 import { HTTPTypes, RequestPlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
+import { DataService } from './data.service';
 
 export const environment = {
   production: false
@@ -49,7 +50,6 @@ const routes: Route[] = [
       { path: 'rules', component: RulesComponent },
       { path: 'news', component: NewsComponent },
       { path: 'article', component: ArticleComponent },
-      { path: 'about', component: AboutComponent },
       { path: 'vendors', component: VendorsComponent },
       { path: 'vendors/:id', component: VendorComponent },
 
@@ -73,7 +73,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
-import { DataService } from './data.service';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
  
 export function AppInitializerProvider() {
@@ -101,7 +101,6 @@ export function AppInitializerProvider() {
     RulesComponent,
     NewsComponent,
     ArticleComponent,
-    AboutComponent,
     InvoiceComponent,
     VendeeLayoutComponent,
     VendeeInvoicesComponent,
@@ -126,7 +125,8 @@ export function AppInitializerProvider() {
     NzTableModule,
     NzSpinModule,
     NzNotificationModule,
-    NzGridModule
+    NzGridModule,
+    NzDropDownModule
   ],
   bootstrap: [AppComponent],
   providers: [NzNotificationService, HttpRequestService, { provide: NZ_I18N, useValue: fa_IR }, AppInitializerProvider()]

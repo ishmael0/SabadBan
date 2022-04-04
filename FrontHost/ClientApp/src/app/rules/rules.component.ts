@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FrontBaseComponent } from '../layout/layout.component';
 
 @Component({
   selector: 'app-rules',
@@ -7,11 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RulesComponent implements OnInit {
+export class RulesComponent extends FrontBaseComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+ 
 
 }

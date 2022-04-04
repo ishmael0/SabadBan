@@ -9,7 +9,7 @@
         <ng-template #nzTreeTemplate let-node let-origin="origin">
           <div>
             <span [ngStyle]="{'color':  ds.CategorySearchValue!='' && node.title.indexOf(ds.CategorySearchValue)!=-1  ? 'red' : 'black'}">
-              asd
+                {{origin.data.Title}}
             </span>
 
           </div>

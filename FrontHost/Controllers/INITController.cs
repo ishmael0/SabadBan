@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace FrontHost.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]/[action]")]
     public class INITController : SabadBanBaseController
     {
         private readonly FrontDB dB;
@@ -22,7 +20,7 @@ namespace FrontHost.Controllers
             var Vendees = await dB.Vendees.CountAsync();
             var Invoices = await dB.Invoices.CountAsync();
             var Vendors = await dB.Vendors.CountAsync();
-            return JR<object>.OK(new { Categories , Vendees , Vendors, Invoices });
+            return JR<object>.OK(new { Categories, Vendees, Vendors, Invoices });
         }
     }
 }

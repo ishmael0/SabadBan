@@ -1,4 +1,4 @@
-<nz-table #basicTable nzTableLayout="fixed" [nzData]="[{a:'123456',b:'من',c:456789123}]">
+<nz-table #basicTable nzTableLayout="fixed" [nzData]="list">
   <thead>
     <tr>
       <th>شماره فاکتور</th>
@@ -12,9 +12,15 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.a}}</td>
-      <td>{{data.b}}</td>
+      <td>{{data.Id}}</td>
+      <td>{{data.VendorTitle}}</td>
       <td>{{data.c | number}}</td>
+      <td>{{data.Create }}</td>
+      <td> </td>
+      <td>{{data.Status}}</td>
+      <td>
+        <button class="btn sout">مشاهده فاکتور</button>
+      </td>
     </tr>
   </tbody>
 </nz-table>

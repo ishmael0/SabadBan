@@ -8,10 +8,7 @@ import { FrontBaseComponent } from '../layout/layout.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VendeeLayoutComponent extends FrontBaseComponent implements OnInit {
-
-
-  ngOnInit(): void {
-  }
+export class VendeeLayoutComponent extends FrontBaseComponent  {
+ 
 
 }

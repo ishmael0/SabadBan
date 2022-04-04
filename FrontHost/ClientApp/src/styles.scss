@@ -4,6 +4,7 @@
 @import "../node_modules/ng-zorro-antd/spin/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/table/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/tree/style/index.min.css";
+@import "../node_modules/ng-zorro-antd/dropdown/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/notification/style/index.min.css";
 
 html {
@@ -34,10 +35,12 @@ $white-color: #FBFBFB;
 $colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, se secondary $secondary-color, b black $black-color, wh white $white-color;
 $delay: 200ms;
 
-
+.fade {
+  animation: fadeIn 0.5s ease-in-out;
+}
 .btn {
   display: inline-flex;
-  min-width: 80px;
+  /*  min-width: 80px;*/
   color: black;
   border: none;
   padding: 3px 8px;
@@ -68,6 +71,10 @@ $delay: 200ms;
 
 .btn.small {
   font-size: x-small;
+}
+.btn.larger {
+  font-size: larger;
+  line-height:20px;
 }
 
 svg {
@@ -167,9 +174,7 @@ $n-char: 10;
     }
   }
 }
-
-
-
+ 
 .form-input {
   margin-bottom: 15px;
   position: relative;
@@ -309,3 +314,5 @@ $n-char: 10;
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
   text-align: start !important
 }
+.ant-dropdown-menu{direction:rtl}
+.flex{display:flex}
