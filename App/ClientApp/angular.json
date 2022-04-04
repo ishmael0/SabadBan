@@ -29,7 +29,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/back-app",
             "index": "src/index.html",
@@ -44,7 +44,7 @@
                 "input": "../../../Santel/ClientApp/src/assets",
                 "output": "/assets"
               }
-              
+
             ],
             "styles": [
               "../../../Santel/ClientApp/src/styles.css",
@@ -67,6 +67,9 @@
           },
           "configurations": {
             "production": {
+              "customWebpackConfig": {
+                "path": "./webpack.config.js"
+              },
               "budgets": [
                 {
                   "type": "initial",

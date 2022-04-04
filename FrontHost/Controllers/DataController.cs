@@ -22,7 +22,7 @@ namespace FrontHost.Controllers
             var VendorId = int.Parse(GetVendorID());
             var Invoices = await dB.Invoices.Include(c => c.Vendee)
                 .Where(c => c.VendorId == VendorId)
-                .Select(c => new {c.Price,c.InvoiceDetails, c.Id , c.Create, c.Status, VendorTitle =  c.Vendor.Title, c.VendorId, c.VendeeId })
+                .Select(c => new {c.Price,c.InvoiceDetails,c.PostCost,c.PostType,c.Discount, c.Id , c.Create, c.Status, VendorTitle =  c.Vendor.Title, c.VendorId, c.VendeeId })
                 .ToListAsync();
             return JR<object>.OK(Invoices);
         }
