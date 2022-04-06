@@ -25,8 +25,98 @@
       <td> </td>
       <td>{{item.Status}}</td>
       <td>
-        <button class="btn sout" (click)="openInvoice(item)">مشاهده فاکتور</button>
+        <button class="btn sout" (click)="selectedItem=item; dis = true">مشاهده فاکتور</button>
       </td>
     </tr>
   </tbody>
 </nz-table>
+
+
+<button (click)="dis = !dis">{{dis}}</button>
+
+<div modal [(display)]="dis"  >
+  <!--<app-invoice *ngIf="selectedItem " [invoice]="selectedItem"></app-invoice>-->
+
+
+  <div class="glass withheader s" >
+    <div class="glassheader" style="margin:0">
+      <div>
+        شماره فاکتور:
+        {{selectedItem?.Id}}
+        وضعیت پرداخت:
+        {{selectedItem?.Status}}
+      </div>
+      <span class="close">&times;</span>
+    </div>
+    <div class="glassbody" style="padding:0px">
+
+      <nz-table *ngIf="selectedItem" #basicTable nzTableLayout="fixed" [nzFrontPagination]="false" [nzData]="selectedItem.InvoiceDetails">
+        <thead>
+          <tr>
+            <th>نام</th>
+            <th>توضیحات</th>
+            <th>قیمت</th>
+            <th>تعداد</th>
+            <th>تخفیف</th>
+            <th>قیمت کل</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of basicTable.data">
+            <td>{{item.Title}}</td>
+            <td>{{item.Description}}</td>
+            <td>{{item.Price}}</td>
+            <td>{{item.Count | number}}</td>
+            <td>{{item.Discount }}</td>
+            <td>{{((item.Count * item.Price)-item.Discount)| number}}</td>
+          </tr>
+
+
+          <tr>
+            <td colspan="5">
+              {{selectedItem.PostType}}
+              هزینه ارسال
+            </td>
+            <td>
+              {{selectedItem.PostCost | number}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              تخفیف روی کل فاکتور
+            </td>
+            <td>
+              {{selectedItem.Discount | number}}
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td colspan="4">
+              جمع
+            </td>
+            <td>
+              {{selectedItem.InvoiceDetailsDiscount| number}}
+            </td>
+            <td>
+              {{selectedItem.InvoiceDetailsPrice| number}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              قابل پرداخت
+            </td>
+            <td>
+              <button class="din larger">
+                {{selectedItem.Price| number}}
+              </button>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </nz-table>
+
+    </div>
+  </div>
+</div>

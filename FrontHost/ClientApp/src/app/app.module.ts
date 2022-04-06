@@ -71,6 +71,7 @@ import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notif
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ModalDirective } from './helpers/modal.directive';
 
  
 export function AppInitializerProvider() {
@@ -107,7 +108,8 @@ export function AppInitializerProvider() {
     DesignSystemComponent,
     VendeeTransactionsComponent,
     VendorsComponent,
-    VendorComponent
+    VendorComponent,
+    ModalDirective
   ],
   imports: [
     RouterModule.forRoot(routes),

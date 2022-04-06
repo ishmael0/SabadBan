@@ -39,7 +39,6 @@ export class VendeeLayoutComponent extends FrontVendeeComponent implements OnDes
       inject.get(DataService),
       inject.get(Router),
       inject.get(ChangeDetectorRef)
-
     );
     if (!this.routerEvent) {
       this.routerEvent = this.router.events.subscribe((event: Event) => {
@@ -101,6 +100,11 @@ export class VendeeInvoicesComponent extends FrontVendeeComponent {
       onSuccess: (m, d) => {
         console.log(d);
         this.list = d;
+        this.list.forEach(c => {
+          c.InvoiceDetailsPrice = c.InvoiceDetails.reduce((p:number,d:any)=> p + d.Price ,0)
+          c.InvoiceDetailsDiscount = c.InvoiceDetails.reduce((p: number, d: any) => p + d.Discount ,0)
+          c.Price = c.InvoiceDetailsPrice - c.InvoiceDetailsDiscount - c.Discount + c.PostCost;
+        })
         this.http.createNotification(NZNotificationTypes.success, "دریافت شد", "لیست فاکتور ها با موفقیت دریافت شد.")
         this.cdr.detectChanges();
       },
@@ -123,6 +127,8 @@ export class VendeeInvoicesComponent extends FrontVendeeComponent {
     localStorage.setItem(`invoice${item.Id}`, item)
     this.openInNewWindow(`vendee/invoice/${item.Id}`)
   }
+  selectedItem: any = {};
+  dis = false;
 }
 @Component({
   selector: 'app-vendee-addresses',

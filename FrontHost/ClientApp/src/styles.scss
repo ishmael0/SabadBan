@@ -38,6 +38,7 @@ $delay: 200ms;
 .fade {
   animation: fadeIn 0.5s ease-in-out;
 }
+
 .btn {
   display: inline-flex;
   /*  min-width: 80px;*/
@@ -63,20 +64,23 @@ $delay: 200ms;
   -o-transition: fill $delay ease-out;
   transition: fill $delay ease-out;
 }
+
 .btn:focus {
   outline: none;
 }
+
 .btn:hover {
   background-color: rgba( #bfbcbc,0.8);
   cursor: pointer;
 }
 
-.btn.small {
+.small {
   font-size: x-small;
 }
-.btn.larger {
+
+.larger {
   font-size: larger;
-  line-height:20px;
+  line-height: 20px;
 }
 
 svg {
@@ -176,7 +180,7 @@ $n-char: 10;
     }
   }
 }
- 
+
 .form-input {
   margin-bottom: 15px;
   position: relative;
@@ -259,6 +263,8 @@ $n-char: 10;
 
 .glass.withheader .glassbody {
   padding: 10px;
+  height:80%;
+  overflow:auto;
   text-align: justify;
 }
 
@@ -316,12 +322,70 @@ $n-char: 10;
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
   text-align: start !important
 }
-.ant-dropdown-menu{direction:rtl}
-.flex{display:flex}
-nz-notification{
-    direction:rtl
+
+.ant-dropdown-menu {
+  direction: rtl
 }
-.ant-notification-notice-close{
-    right:unset!important;
-    left:22px!important;
+
+.flex {
+  display: flex
+}
+
+nz-notification {
+  direction: rtl
+}
+
+.ant-notification-notice-close {
+  right: unset !important;
+  left: 22px !important;
+}
+
+
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 80px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /*overflow: auto;*/ /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* Modal Content */
+  /* The Close Button */
+  .close {
+    position: absolute;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    left: 10px;
+    top: 10px;
+  }
+
+
+
+
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+* {
+  scrollbar-width: 0;
+}
+
+*::-webkit-scrollbar {
+  background-color: transparent;
+  width: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background-color: #ddd;
+  border: 1px solid #fff;
 }

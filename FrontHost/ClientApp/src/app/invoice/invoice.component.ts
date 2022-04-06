@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FrontBaseComponent } from '../layout/layout.component';
 
 @Component({
@@ -9,6 +9,6 @@ import { FrontBaseComponent } from '../layout/layout.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceComponent extends FrontBaseComponent{
- 
+  @Input() invoice!:any;
 
 }
