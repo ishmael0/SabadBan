@@ -1,8 +1,8 @@
 <div nz-row nzJustify="center">
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20">
-    <div class="glass flex w100">
-      <img style="width:50px;margin-left:50px" src="../../../assets/front/logo4colored.svg" />
-      <div nz-row   class="w100">
+    <div class="glass flex ">
+      <img style="width:50px;margin-left:50px;flex:0 0 50" src="../../../assets/front/logo4colored.svg" />
+      <div nz-row  style="flex:1" >
         <div nz-col [nzXs]="0" [nzLg]="20">
           <!--<img style="width:50px" src="../../../assets/front/logo4colored.svg" />-->
           <button class="btn larger" [routerLink]="[prefixUrl('')]">سبدبان</button>
@@ -34,7 +34,7 @@
 <ng-template #useraccount>
   <button class="btn din" *ngIf="auth.isLoggedIn()" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
     حساب کاربری
-    <i nz-icon nzType="down"></i>
+    <svg viewBox="0 0 24 24"> <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
   </button>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>
@@ -55,6 +55,7 @@
   <button class="btn" [routerLink]="[prefixUrl('vendors')]">فروشندگان  </button>
   <button class="btn" [routerLink]="[prefixUrl('news')]">  اخبار</button>
   <button class="btn" [routerLink]="[prefixUrl('article')]">  مقالات</button>
+  <button class="btn" [routerLink]="[prefixUrl('designsystem')]" *ngIf="!environmentProduction">  designsystem</button>
   <!--<button class="btn" [routerLink]="[prefixUrl('about')]"> درباره ما</button>-->
   <!--<button class="btn" style="float: left; border-bottom: solid 2px #e13634" *ngIf="!auth.isLoggedIn()" (click)="openInNewWindow('/management')">   پنل کاربری فروشندگان</button>-->
 

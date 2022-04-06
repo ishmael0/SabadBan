@@ -22,6 +22,7 @@ export class DataService {
   CategoryNodes :any[]= [];
   CategoryNodesAs :any[]= [];
   CategorySearchValue = "";
+  selectedMenu = 0;
   init(d:any) {
     this.CategoryNodes = d.Categories;
     this.CategoryNodesAs = toTreeHelper(this.CategoryNodes, 'Id', 'ParentCategoryId', null);

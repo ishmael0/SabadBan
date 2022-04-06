@@ -1,0 +1,32 @@
+<button class="btn iin" (click)="refresh()">
+  به روزرسانی
+  <svg viewBox="0 0 24 24" [innerHTML]="icons.refresh">
+  </svg>
+</button>
+
+<nz-table #basicTable nzTableLayout="fixed" [nzData]="list">
+  <thead>
+    <tr>
+      <th>شماره فاکتور</th>
+      <th>فروشنده</th>
+      <th>مبلغ کل فاکتور</th>
+      <th>تاریخ ثبت   </th>
+      <th>تاریخ پرداخت   </th>
+      <th>وضعیت   </th>
+      <th>عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of basicTable.data">
+      <td>{{item.Id}}</td>
+      <td>{{item.VendorTitle}}</td>
+      <td>{{item.c | number}}</td>
+      <td>{{item.Create }}</td>
+      <td> </td>
+      <td>{{item.Status}}</td>
+      <td>
+        <button class="btn sout" (click)="openInvoice(item)">مشاهده فاکتور</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

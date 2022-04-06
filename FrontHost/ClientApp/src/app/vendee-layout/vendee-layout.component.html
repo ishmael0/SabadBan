@@ -1,12 +1,11 @@
 <div nz-row>
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="6">
     <div class="glass">
-
-      <button class="btn sout w100" [routerLink]="[prefixUrl('vendee')]">پروفایل</button>
-      <button class="btn sin w100" [routerLink]="[prefixUrl('vendee/invoices')]">فاکتور ها</button>
-      <button class="btn w100" [routerLink]="[prefixUrl('vendee/transactions')]">تراکنش ها</button>
-      <button class="btn w100" [routerLink]="[prefixUrl('vendee/addresses')]">آدرس ها</button>
-      <button class="btn w100" [routerLink]="[prefixUrl('vendee/addresses')]">شماره کارت و شبا</button>
+      <button class="btn w100" [class.sin]="ds.selectedMenu === 0"  [routerLink]="[prefixUrl('vendee/profile')]">پروفایل</button>
+      <button class="btn w100" [class.sin]="ds.selectedMenu === 1"  [routerLink]="[prefixUrl('vendee/invoices')]">فاکتور ها</button>
+      <button class="btn w100" [class.sin]="ds.selectedMenu === 2"  [routerLink]="[prefixUrl('vendee/transactions')]">تراکنش ها</button>
+      <button class="btn w100" [class.sin]="ds.selectedMenu === 3"  [routerLink]="[prefixUrl('vendee/addresses')]">آدرس ها</button>
+      <button class="btn w100" [class.sin]="ds.selectedMenu === 4"  [routerLink]="[prefixUrl('vendee/addresses')]">شماره کارت و شبا</button>
     </div>
   </div>
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16" [nzLg]="18">
@@ -15,3 +14,4 @@
     </div>
   </div>
 </div>
+

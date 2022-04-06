@@ -14,10 +14,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-  </ItemGroup>
+  </ItemGroup>-->
 
  
  

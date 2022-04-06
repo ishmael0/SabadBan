@@ -63,7 +63,9 @@ $delay: 200ms;
   -o-transition: fill $delay ease-out;
   transition: fill $delay ease-out;
 }
-
+.btn:focus {
+  outline: none;
+}
 .btn:hover {
   background-color: rgba( #bfbcbc,0.8);
   cursor: pointer;
@@ -316,3 +318,10 @@ $n-char: 10;
 }
 .ant-dropdown-menu{direction:rtl}
 .flex{display:flex}
+nz-notification{
+    direction:rtl
+}
+.ant-notification-notice-close{
+    right:unset!important;
+    left:22px!important;
+}

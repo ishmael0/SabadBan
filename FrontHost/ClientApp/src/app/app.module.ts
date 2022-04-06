@@ -14,15 +14,11 @@ import { NewsComponent } from './news/news.component';
 import { ArticleComponent } from './article/article.component';
 //import { AboutComponent } from './about/about.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { VendeeLayoutComponent } from './vendee-layout/vendee-layout.component';
+import { VendeeAddressesComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTransactionsComponent } from './vendee-layout/vendee-layout.component';
 import { AuthService } from './auth';
-import { VendeeInvoicesComponent } from './vendee-invoices/vendee-invoices.component';
-import { VendeeProfileComponent } from './vendee-profile/vendee-profile.component';
-import { VendeeAddressesComponent } from './vendee-addresses/vendee-addresses.component';
 import { AppComponent } from './app.component';
 import { HttpRequestService } from './http-request';
 import { DesignSystemComponent } from './design-system/design-system.component';
-import { VendeeTransactionsComponent } from './vendee-transactions/vendee-transactions.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { enableProdMode, APP_INITIALIZER } from '@angular/core';
@@ -60,11 +56,12 @@ const routes: Route[] = [
           { path: 'transactions', component: VendeeTransactionsComponent },
           { path: 'invoices', component: VendeeInvoicesComponent },
           { path: 'addresses', component: VendeeAddressesComponent },
+          { path: 'invoice/:id', component: InvoiceComponent },
         ]
       },
     ]
   },
-  { path: 'invoice/:guid', component: InvoiceComponent, canActivate: [AuthService] },
+  { path: 'invoice/:guid', component: InvoiceComponent},
 
 ];
 
@@ -83,8 +80,8 @@ export function AppInitializerProvider() {
       await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'init', {
         tokenNeeded:false,
         action: 'InitData',
-        onSuccess: (m, d) => { ds.init(d); console.log(d) },
-        onError: (m, d) => { console.log(0) },
+        onSuccess: (m, d) => { ds.init(d); },
+        onError: (m, d) => {  },
       }))
     },
     deps: [HttpRequestService, DataService],
