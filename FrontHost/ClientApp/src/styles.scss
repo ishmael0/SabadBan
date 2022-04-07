@@ -267,125 +267,128 @@ $n-char: 10;
   overflow:auto;
   text-align: justify;
 }
+.glass.withheader.scrollable .glassbody {
+  height: calc(100% - 20px);
+}
 
-@each $i in $colors {
-  $keyshort: nth($i, 1);
-  $key: nth($i,2);
-  $value: nth($i, 3);
+  @each $i in $colors {
+    $keyshort: nth($i, 1);
+    $key: nth($i,2);
+    $value: nth($i, 3);
 
-  .glass.withheader.#{$keyshort} .glassheader, .glass.withheader.#{$keyshort} .glassfooter {
-    background: rgba($value, 0.5);
+    .glass.withheader.#{$keyshort} .glassheader, .glass.withheader.#{$keyshort} .glassfooter {
+      background: rgba($value, 0.5);
+      color: $white-color;
+    }
+  }
+
+
+
+  .glassheader {
+    background-color: rgba( $danger-color, .3);
+  }
+
+  .glassfooter {
+    background-color: rgba( $danger-color, .3);
+  }
+
+
+  .buttoncontainer .btn {
+    width: 100%
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .indextitles {
+    background-color: $secondary-color;
+    border-radius: 20px 0px 20px 0px;
+    font-size: large;
     color: $white-color;
-  }
-}
-
-
-
-.glassheader {
-  background-color: rgba( $danger-color, .3);
-}
-
-.glassfooter {
-  background-color: rgba( $danger-color, .3);
-}
-
-
-.buttoncontainer .btn {
-  width: 100%
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+    padding-left: 20px;
+    margin-right: 10px;
+    width: 300px;
+    text-align: left;
   }
 
-  to {
-    opacity: 1;
+  .w100 {
+    width: 100%;
   }
-}
 
-.indextitles {
-  background-color: $secondary-color;
-  border-radius: 20px 0px 20px 0px;
-  font-size: large;
-  color: $white-color;
-  padding-left: 20px;
-  margin-right: 10px;
-  width: 300px;
-  text-align: left;
-}
+  .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
+    text-align: start !important
+  }
 
-.w100 {
-  width: 100%;
-}
+  .ant-dropdown-menu {
+    direction: rtl
+  }
 
-.ant-table-tbody > tr > td, .ant-table-thead > tr > th {
-  text-align: start !important
-}
+  .flex {
+    display: flex
+  }
 
-.ant-dropdown-menu {
-  direction: rtl
-}
+  nz-notification {
+    direction: rtl
+  }
 
-.flex {
-  display: flex
-}
-
-nz-notification {
-  direction: rtl
-}
-
-.ant-notification-notice-close {
-  right: unset !important;
-  left: 22px !important;
-}
-
-
-.modal {
-  display: none;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 80px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  /*overflow: auto;*/ /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  /* Modal Content */
-  /* The Close Button */
-  .close {
-    position: absolute;
-    color: #aaaaaa;
-    font-size: 28px;
-    font-weight: bold;
-    left: 10px;
-    top: 10px;
+  .ant-notification-notice-close {
+    right: unset !important;
+    left: 22px !important;
   }
 
 
+  .modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 80px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /*overflow: auto;*/ /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /* Modal Content */
+    /* The Close Button */
+    .close {
+      position: absolute;
+      color: #aaaaaa;
+      font-size: 28px;
+      font-weight: bold;
+      left: 10px;
+      top: 10px;
+    }
 
 
 
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
-}
 
-* {
-  scrollbar-width: 0;
-}
+  * {
+    scrollbar-width: 0;
+  }
 
-*::-webkit-scrollbar {
-  background-color: transparent;
-  width: 12px;
-}
+  *::-webkit-scrollbar {
+    background-color: transparent;
+    width: 12px;
+  }
 
-*::-webkit-scrollbar-thumb {
-  border-radius: 99px;
-  background-color: #ddd;
-  border: 1px solid #fff;
-}
+  *::-webkit-scrollbar-thumb {
+    border-radius: 99px;
+    background-color: #ddd;
+    border: 1px solid #fff;
+  }

@@ -23,8 +23,8 @@ export class ModalDirective implements AfterViewInit, OnChanges {
     this.renderer.addClass(this.divElement, "modal");
     this.renderer.appendChild(this.divElement, this.el.nativeElement);
     this.renderer.appendChild(document.body, this.divElement);
-    this.renderer.setStyle(this.el.nativeElement, 'height', '90%');
-
+    this.renderer.setStyle(this.el.nativeElement, 'height', '100%');
+ 
     this.renderer.setStyle(this.el.nativeElement.children[0],'height' ,'80%');
 
     if (this.divElement.getElementsByClassName('close').length > 0) {

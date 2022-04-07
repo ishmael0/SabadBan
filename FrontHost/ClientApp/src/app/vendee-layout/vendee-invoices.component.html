@@ -38,7 +38,7 @@
   <!--<app-invoice *ngIf="selectedItem " [invoice]="selectedItem"></app-invoice>-->
 
 
-  <div class="glass withheader s" >
+  <div class="glass withheader s " >
     <div class="glassheader" style="margin:0">
       <div>
         شماره فاکتور:
@@ -48,7 +48,7 @@
       </div>
       <span class="close">&times;</span>
     </div>
-    <div class="glassbody" style="padding:0px">
+    <div class="glassbody" style="padding: 0px;">
 
       <nz-table *ngIf="selectedItem" #basicTable nzTableLayout="fixed" [nzFrontPagination]="false" [nzData]="selectedItem.InvoiceDetails">
         <thead>
