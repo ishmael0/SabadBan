@@ -20,12 +20,13 @@
     <tr *ngFor="let item of basicTable.data">
       <td>{{item.Id}}</td>
       <td>{{item.VendorTitle}}</td>
-      <td>{{item.c | number}}</td>
+      <td>{{item.Price | number}}</td>
       <td>{{item.Create }}</td>
-      <td> </td>
-      <td>{{item.Status}}</td>
+      <td>{{item.Paid }} </td>
+      <td>{{item.InvoiceState}}</td>
       <td>
         <button class="btn sout" (click)="selectedItem=item; dis = true">مشاهده فاکتور</button>
+        <button class="btn sin"> پرداخت</button>
       </td>
     </tr>
   </tbody>
@@ -34,17 +35,22 @@
 
 <button (click)="dis = !dis">{{dis}}</button>
 
-<div modal [(display)]="dis"  >
+<div modal [(display)]="dis">
   <!--<app-invoice *ngIf="selectedItem " [invoice]="selectedItem"></app-invoice>-->
 
 
-  <div class="glass withheader s " >
+  <div class="glass withheader p">
     <div class="glassheader" style="margin:0">
       <div>
-        شماره فاکتور:
-        {{selectedItem?.Id}}
-        وضعیت پرداخت:
-        {{selectedItem?.Status}}
+        <span style="font-size:medium">          شماره فاکتور:        </span>
+        <span>  {{selectedItem?.Id}} </span>
+        /
+        <span style="font-size:medium">           وضعیت فاکتور:        </span>
+        <span>  {{selectedItem?.InvoiceState}} </span>
+        /
+        <span style="font-size:medium">           نوع فاکتور:        </span>
+        <span>  {{selectedItem?.PostType}} </span>
+        <button class="btn sin"> پرداخت</button>
       </div>
       <span class="close">&times;</span>
     </div>

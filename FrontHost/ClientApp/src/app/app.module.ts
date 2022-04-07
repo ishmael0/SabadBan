@@ -78,9 +78,9 @@ export function AppInitializerProvider() {
   let x = {
     provide: APP_INITIALIZER,
     useFactory: (http: HttpRequestService, ds: DataService) => async() => {
-      await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'init', {
+      await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Data', {
         tokenNeeded:false,
-        action: 'InitData',
+        action: 'Init',
         onSuccess: (m, d) => { ds.init(d); },
         onError: (m, d) => {  },
       }))

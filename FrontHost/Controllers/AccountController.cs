@@ -12,20 +12,7 @@ using FrontHost.Models;
 namespace FrontHost.Controllers
 {
 
-    public class LoginFirstStepDTO
-    {
-        [Required]
-        [MaxLength(11)]
-        [MinLength(11)]
-        [StringLength(11, ErrorMessage = "شماره همراه باید 11 رقم باشد")]
-        public string PhoneNumber { get; set; }
-    }
-    public class LoginVerifyDTO : LoginFirstStepDTO
-    {
-        [Required]
-        public int SMSCode { get; set; }
-        public bool IsNew { get; set; }
-    }
+
 
     public class AccountController : SabadBanBaseController
     {
@@ -100,7 +87,20 @@ namespace FrontHost.Controllers
         }
 
     }
-
+    public class LoginFirstStepDTO
+    {
+        [Required]
+        [MaxLength(11)]
+        [MinLength(11)]
+        [StringLength(11, ErrorMessage = "شماره همراه باید 11 رقم باشد")]
+        public string PhoneNumber { get; set; }
+    }
+    public class LoginVerifyDTO : LoginFirstStepDTO
+    {
+        [Required]
+        public int SMSCode { get; set; }
+        public bool IsNew { get; set; }
+    }
     public class UserViewDTO
     {
         public string Token { get; }

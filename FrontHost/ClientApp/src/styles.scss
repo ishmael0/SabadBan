@@ -38,7 +38,22 @@ $delay: 200ms;
 .fade {
   animation: fadeIn 0.5s ease-in-out;
 }
+a.btn, a.btn:hover, a.btn:focus, a.btn:active {
+  text-decoration: none;
+  font-size: 15px;
+  line-height:40px;
+}
+a.btn:hover, a.btn:focus, a.btn:active{
+    color:unset;
+}
+.btn:focus {
+  outline: none;
+}
 
+.btn:hover {
+  background-color: rgba( #bfbcbc,0.8);
+  cursor: pointer;
+}
 .btn {
   display: inline-flex;
   /*  min-width: 80px;*/
@@ -65,14 +80,7 @@ $delay: 200ms;
   transition: fill $delay ease-out;
 }
 
-.btn:focus {
-  outline: none;
-}
 
-.btn:hover {
-  background-color: rgba( #bfbcbc,0.8);
-  cursor: pointer;
-}
 
 .small {
   font-size: x-small;
@@ -267,7 +275,7 @@ $n-char: 10;
   overflow:auto;
   text-align: justify;
 }
-.glass.withheader.scrollable .glassbody {
+.glass.withheader .glassbody {
   height: calc(100% - 20px);
 }
 
@@ -392,3 +400,6 @@ $n-char: 10;
     background-color: #ddd;
     border: 1px solid #fff;
   }
+.fl{
+    float:left;
+}

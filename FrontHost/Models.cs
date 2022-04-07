@@ -182,23 +182,19 @@ namespace FrontHost.Models
         [ForeignKey("VendorId")]
         public virtual Vendor Vendor { set; get; }
         public int VendorId { set; get; }
-
+        public string Guid { set; get; }
 
         [ForeignKey("VendeeId")]
         public virtual Vendee Vendee { set; get; }
         public int VendeeId { set; get; }
-
-
         public string Description { set; get; }
         public int PostType { set; get; }
         public int PostCost { set; get; }
-        public int Price { set; get; }
         public int Discount { set; get; }
         public int PaymentType { set; get; }
+        public DateTime? Paid { set; get; }
+
         public List<InvoiceDetail> InvoiceDetails { set; get; }
-
-
         public InvoiceState InvoiceState { set; get; }
-
     }
 }
