@@ -193,7 +193,6 @@ namespace FrontHost.Models
         public int Discount { set; get; }
         public int PaymentType { set; get; }
         public DateTime? Paid { set; get; }
-
         public List<InvoiceDetail> InvoiceDetails { set; get; }
         public InvoiceState InvoiceState { set; get; }
     }

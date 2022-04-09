@@ -41,9 +41,9 @@ namespace FrontHost.Controllers
         {
             var VendorId = int.Parse(GetVendorID());
             var Invoices = await dB.Invoices 
-                .FirstOrDefaultAsync(c => c.InvoiceState == 0 &&  c.guid == guid)
+                .Where(c => c.InvoiceState == 0 &&  c.Guid == guid)
                 .Select(c => new { c.InvoiceState, c.Guid,  c.Paid, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, VendorTitle = c.Vendor.Title, c.VendorId, c.VendeeId })
-                .ToListAsync();
+                .FirstOrDefaultAsync();
             return JR<object>.OK(Invoices);
         }
 

@@ -3,27 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-
-import { IndexComponent } from './index/index.component';
-import { LayoutComponent } from './layout/layout.component';
-import { LoginComponent } from './login/login.component';
-import { RulesComponent } from './rules/rules.component';
-import { NewsComponent } from './news/news.component';
-import { ArticleComponent } from './article/article.component';
-//import { AboutComponent } from './about/about.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import { VendeeAddressesComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTransactionsComponent } from './vendee-layout/vendee-layout.component';
-import { AuthService } from './auth';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AppComponent } from './app.component';
-import { HttpRequestService } from './http-request';
-import { DesignSystemComponent } from './design-system/design-system.component';
-import { VendorsComponent } from './vendors/vendors.component';
-import { VendorComponent } from './vendor/vendor.component';
-import { enableProdMode, APP_INITIALIZER } from '@angular/core';
-import { HTTPTypes, RequestPlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
-import { DataService } from './data.service';
+
+import { enableProdMode } from '@angular/core';
+
 
 export const environment = {
   production: false
@@ -34,101 +18,33 @@ export const environment = {
 import { registerLocaleData } from '@angular/common';
 import fa from '@angular/common/locales/fa';
 import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
+import { HttpRequestService } from './http-request';
+import { AuthService } from './auth';
 registerLocaleData(fa);
 
+
 const routes: Route[] = [
-  {
-    path: '', component: LayoutComponent, children: [
-      ...(environment.production ? [] : [{ path: 'designsystem', component: DesignSystemComponent}]),
-      { path: '', component: IndexComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'login/:redirectlink', component: LoginComponent },
-      { path: 'rules', component: RulesComponent },
-      { path: 'news', component: NewsComponent },
-      { path: 'article', component: ArticleComponent },
-      { path: 'vendors', component: VendorsComponent },
-      { path: 'vendors/:id', component: VendorComponent },
-
-      {
-        path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
-          { path: '', redirectTo: 'profile', pathMatch: 'full' },
-          { path: 'profile', component: VendeeProfileComponent },
-          { path: 'transactions', component: VendeeTransactionsComponent },
-          { path: 'invoices', component: VendeeInvoicesComponent },
-          { path: 'addresses', component: VendeeAddressesComponent },
-          { path: 'invoice/:id', component: InvoiceComponent },
-        ]
-      },
-    ]
-  },
-  { path: 'invoice/:guid', component: InvoiceComponent},
-
-];
-
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzTreeModule } from 'ng-zorro-antd/tree';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { ModalDirective } from './helpers/modal.directive';
+  { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'invoice', loadChildren: () => import('./pay/pay.module').then(m => m.PayModule) },
+]
 
  
-export function AppInitializerProvider() {
-  let x = {
-    provide: APP_INITIALIZER,
-    useFactory: (http: HttpRequestService, ds: DataService) => async() => {
-      await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Data', {
-        tokenNeeded:false,
-        action: 'Init',
-        onSuccess: (m, d) => { ds.init(d); },
-        onError: (m, d) => {  },
-      }))
-    },
-    deps: [HttpRequestService, DataService],
-    multi: true,
-  }
-  return x;
-};
 
 @NgModule({
   declarations: [
-    IndexComponent,
-    LayoutComponent,
-    LoginComponent,
-    RulesComponent,
-    NewsComponent,
-    ArticleComponent,
-    InvoiceComponent,
-    VendeeLayoutComponent,
-    VendeeInvoicesComponent,
-    VendeeProfileComponent,
-    VendeeAddressesComponent,
     AppComponent,
-    DesignSystemComponent,
-    VendeeTransactionsComponent,
-    VendorsComponent,
-    VendorComponent,
-    ModalDirective
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     CommonModule,
-    NzCarouselModule,
-    FormsModule,
-    ReactiveFormsModule,
+
     HttpClientModule,
 
-    NzTreeModule,
-    NzTableModule,
-    NzSpinModule,
-    NzNotificationModule,
-    NzGridModule,
-    NzDropDownModule
+
   ],
   bootstrap: [AppComponent],
-  providers: [NzNotificationService, HttpRequestService, { provide: NZ_I18N, useValue: fa_IR }, AppInitializerProvider()]
+  providers: [HttpRequestService, AuthService, NzNotificationService, { provide: NZ_I18N, useValue: fa_IR }]
 })
 export class AppModule {
 }

@@ -1,12 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, Directive, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
-import { HttpRequestService } from '../http-request';
+import { Component, OnInit, ChangeDetectionStrategy, Directive, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { HttpRequestService } from '../../http-request';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { DataService } from '../data.service';
-import { AuthService } from '../auth';
+import { DataService } from '../../data.service';
+import { AuthService } from '../../auth';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Title } from "@angular/platform-browser";
-import { environment } from '../app.module';
+import { environment } from '../../app.module';
 
 
 @Directive()
@@ -48,7 +48,9 @@ export class FrontBaseComponent {
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  styleUrls:['../../../ant.scss']
 })
 export class LayoutComponent extends FrontBaseComponent {
   showMenu = false;

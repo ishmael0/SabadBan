@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
-import { HttpRequestService } from '../http-request';
+import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../../Santel/ClientApp/src/app/services/utils';
+import { HttpRequestService } from '../../http-request';
 import { Title } from "@angular/platform-browser";
 
 @Component({

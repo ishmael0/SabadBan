@@ -1,12 +1,3 @@
-@import "../node_modules/ng-zorro-antd/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/grid/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/carousel/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/spin/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/table/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/tree/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/dropdown/style/index.min.css";
-@import "../node_modules/ng-zorro-antd/notification/style/index.min.css";
-
 html {
   direction: rtl;
 }
@@ -38,14 +29,17 @@ $delay: 200ms;
 .fade {
   animation: fadeIn 0.5s ease-in-out;
 }
+
 a.btn, a.btn:hover, a.btn:focus, a.btn:active {
   text-decoration: none;
   font-size: 15px;
-  line-height:40px;
+  line-height: 40px;
 }
-a.btn:hover, a.btn:focus, a.btn:active{
-    color:unset;
+
+a.btn:hover, a.btn:focus, a.btn:active {
+  color: unset;
 }
+
 .btn:focus {
   outline: none;
 }
@@ -54,6 +48,7 @@ a.btn:hover, a.btn:focus, a.btn:active{
   background-color: rgba( #bfbcbc,0.8);
   cursor: pointer;
 }
+
 .btn {
   display: inline-flex;
   /*  min-width: 80px;*/
@@ -271,135 +266,137 @@ $n-char: 10;
 
 .glass.withheader .glassbody {
   padding: 10px;
-  height:80%;
-  overflow:auto;
+  height: 80%;
+  overflow: auto;
   text-align: justify;
 }
+
 .glass.withheader .glassbody {
   height: calc(100% - 20px);
 }
 
-  @each $i in $colors {
-    $keyshort: nth($i, 1);
-    $key: nth($i,2);
-    $value: nth($i, 3);
+@each $i in $colors {
+  $keyshort: nth($i, 1);
+  $key: nth($i,2);
+  $value: nth($i, 3);
 
-    .glass.withheader.#{$keyshort} .glassheader, .glass.withheader.#{$keyshort} .glassfooter {
-      background: rgba($value, 0.5);
-      color: $white-color;
-    }
-  }
-
-
-
-  .glassheader {
-    background-color: rgba( $danger-color, .3);
-  }
-
-  .glassfooter {
-    background-color: rgba( $danger-color, .3);
-  }
-
-
-  .buttoncontainer .btn {
-    width: 100%
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  .indextitles {
-    background-color: $secondary-color;
-    border-radius: 20px 0px 20px 0px;
-    font-size: large;
+  .glass.withheader.#{$keyshort} .glassheader, .glass.withheader.#{$keyshort} .glassfooter {
+    background: rgba($value, 0.5);
     color: $white-color;
-    padding-left: 20px;
-    margin-right: 10px;
-    width: 300px;
-    text-align: left;
+  }
+}
+
+
+
+.glassheader {
+  background-color: rgba( $danger-color, .3);
+}
+
+.glassfooter {
+  background-color: rgba( $danger-color, .3);
+}
+
+
+.buttoncontainer .btn {
+  width: 100%
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  .w100 {
-    width: 100%;
+  to {
+    opacity: 1;
+  }
+}
+
+.indextitles {
+  background-color: $secondary-color;
+  border-radius: 20px 0px 20px 0px;
+  font-size: large;
+  color: $white-color;
+  padding-left: 20px;
+  margin-right: 10px;
+  width: 300px;
+  text-align: left;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.ant-table-tbody > tr > td, .ant-table-thead > tr > th {
+  text-align: start !important
+}
+
+.ant-dropdown-menu {
+  direction: rtl
+}
+
+.flex {
+  display: flex
+}
+
+nz-notification {
+  direction: rtl
+}
+
+.ant-notification-notice-close {
+  right: unset !important;
+  left: 22px !important;
+}
+
+
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 80px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /*overflow: auto;*/ /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* Modal Content */
+  /* The Close Button */
+  .close {
+    position: absolute;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    left: 10px;
+    top: 10px;
   }
 
-  .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
-    text-align: start !important
+
+
+
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
+}
 
-  .ant-dropdown-menu {
-    direction: rtl
-  }
+* {
+  scrollbar-width: 0;
+}
 
-  .flex {
-    display: flex
-  }
+*::-webkit-scrollbar {
+  background-color: transparent;
+  width: 12px;
+}
 
-  nz-notification {
-    direction: rtl
-  }
+*::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background-color: #ddd;
+  border: 1px solid #fff;
+}
 
-  .ant-notification-notice-close {
-    right: unset !important;
-    left: 22px !important;
-  }
-
-
-  .modal {
-    display: none;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 80px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    /*overflow: auto;*/ /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    /* Modal Content */
-    /* The Close Button */
-    .close {
-      position: absolute;
-      color: #aaaaaa;
-      font-size: 28px;
-      font-weight: bold;
-      left: 10px;
-      top: 10px;
-    }
-
-
-
-
-
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-
-  * {
-    scrollbar-width: 0;
-  }
-
-  *::-webkit-scrollbar {
-    background-color: transparent;
-    width: 12px;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    border-radius: 99px;
-    background-color: #ddd;
-    border: 1px solid #fff;
-  }
-.fl{
-    float:left;
+.fl {
+  float: left;
 }

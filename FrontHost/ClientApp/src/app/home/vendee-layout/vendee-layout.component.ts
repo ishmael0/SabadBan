@@ -1,13 +1,13 @@
 import { Component, Directive, OnInit, Injector, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnChanges } from '@angular/core';
-import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../../Santel/ClientApp/src/app/services/utils';
 import { FrontBaseComponent } from '../layout/layout.component';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, ActivatedRoute, ActivatedRouteSnapshot, } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HttpRequestService } from '../http-request';
+import { HttpRequestService } from '../../http-request';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { DataService } from '../data.service';
-import { AuthService } from '../auth';
+import { DataService } from '../../data.service';
+import { AuthService } from '../../auth';
 import { Title } from "@angular/platform-browser";
 
 
