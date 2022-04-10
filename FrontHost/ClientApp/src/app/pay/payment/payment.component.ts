@@ -13,5 +13,5 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  level = 1;
 }

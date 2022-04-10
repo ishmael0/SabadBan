@@ -25,7 +25,7 @@ import { AuthService } from '../auth';
 import { environment } from '../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { enableProdMode, APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER } from '@angular/core';
 import { HttpRequestService } from './../http-request';
 
 const routes: Route[] = [
@@ -39,7 +39,7 @@ const routes: Route[] = [
       { path: 'news', component: NewsComponent },
       { path: 'article', component: ArticleComponent },
       { path: 'vendors', component: VendorsComponent },
-      { path: 'vendors/:id', component: VendorComponent },
+      { path: 'vendor/:id', component: VendorComponent },
 
       {
         path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [

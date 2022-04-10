@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AppComponent } from './app.component';
-
 import { enableProdMode } from '@angular/core';
 
 
@@ -38,7 +37,6 @@ const routes: Route[] = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     CommonModule,
-
     HttpClientModule,
 
 

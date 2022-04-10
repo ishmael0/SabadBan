@@ -1,3 +1,5 @@
+@import "../node_modules/ng-zorro-antd/grid/style/index.min.css";
+
 html {
   direction: rtl;
 }
@@ -12,6 +14,21 @@ body {
   background-image: url('assets/bg.jpg');
 }
 
+$widths: 10,20,50,100;
+$paddings: 0,1,2,3,4,5,8,10;
+
+@each $i in $widths {
+  .w#{$i} {
+    width: #{$i}#{'%'};
+  }
+}
+
+@each $i in $paddings {
+  .pad#{$i} {
+    padding: #{$i}#{'px'};
+  }
+}
+
 /*#d58c04*/
 $warning-color: #FFA900;
 $danger-color: #F51720;
@@ -23,7 +40,7 @@ $black-color: #262626;
 $white-color: #FBFBFB;
 
 
-$colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, se secondary $secondary-color, b black $black-color, wh white $white-color;
+$colors: w warning $warning-color, d danger $danger-color, s success $success-color, i info $info-color, p primary $primary-color, e secondary $secondary-color, b black $black-color, h white $white-color;
 $delay: 200ms;
 
 .fade {
@@ -33,11 +50,10 @@ $delay: 200ms;
 a.btn, a.btn:hover, a.btn:focus, a.btn:active {
   text-decoration: none;
   font-size: 15px;
-  line-height: 40px;
 }
 
 a.btn:hover, a.btn:focus, a.btn:active {
-  color: unset;
+  /*color: unset;*/
 }
 
 .btn:focus {
@@ -50,8 +66,8 @@ a.btn:hover, a.btn:focus, a.btn:active {
 }
 
 .btn {
-  display: inline-flex;
-  /*  min-width: 80px;*/
+  /*  display: inline-flex;
+*/ /*  min-width: 80px;*/
   color: black;
   border: none;
   padding: 3px 8px;
@@ -78,7 +94,7 @@ a.btn:hover, a.btn:focus, a.btn:active {
 
 
 .small {
-  font-size: x-small;
+  font-size: x-small !important;
 }
 
 .larger {
@@ -90,15 +106,21 @@ svg {
   width: 24px;
 }
 
-.btn svg, .btn i {
+.btn svg:first-child, .btn i {
   width: 24px;
+  float: right;
 }
 
-.btn::before,
+.btn svg:last-child, .btn i {
+  width: 24px;
+  float: left;
+}
+
+/*.btn::before,
 .btn::after {
   content: '';
   flex: 1 0 auto;
-}
+}*/
 
 
 @each $i in $colors {
@@ -189,6 +211,8 @@ $n-char: 10;
   position: relative;
   display: flex;
   width: 100%;
+  padding-right: 5px;
+  padding-left: 5px;
 
   label {
     width: 200px;
@@ -322,9 +346,7 @@ $n-char: 10;
   text-align: left;
 }
 
-.w100 {
-  width: 100%;
-}
+
 
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
   text-align: start !important
@@ -399,4 +421,21 @@ nz-notification {
 
 .fl {
   float: left;
+}
+
+.twocoltbl tr :nth-child(1) {
+  text-align: end
+}
+
+.twocoltbl tr :nth-child(2) {
+  text-align: start
+}
+
+.twocoltbl td {
+  padding-bottom: 10px;
+}
+
+.twocoltbl tr {
+  line-height: 30px;
+  vertical-align: baseline;
 }

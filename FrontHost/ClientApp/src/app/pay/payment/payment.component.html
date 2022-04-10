@@ -1,2 +1,110 @@
-<p>payment works!</p>
-<button class="btn din" [routerLink]="''">home</button>
+
+
+<div nz-row nzJustify="center" class="fade">
+  <div nz-col [nzXs]="24" [nzSm]="20" [nzMd]="16" [nzLg]="10" [nzXl]="8" [nzXXl]="8">
+    <br />
+    <div>
+      <img style="width:50px;margin-left:10px; " src="../../../assets/front/logo4colored.svg" />
+      <a class="btn larger" href="/" target="_blank">سبدبان</a>
+    </div>
+
+    <div class="glass withheader d ">
+      <div class="glassheader ">
+        <span>فاکتور شماره:</span>
+        <span>123456</span>
+        پرداخت نشده
+      </div>
+      <div class="glassbody fade" *ngIf="level == 1">
+        <div>
+          <div nz-row>
+            <div nz-col [nzXs]="24" [nzSm]="16">
+              <table class="w100 twocoltbl">
+                <tbody>
+                  <tr>
+                    <td>
+                      <span>صادر شده به نام:</span>
+                    </td>
+                    <td>
+                      <span class="larger">رضا رضایی</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>شماره تماس:</span>
+                    </td>
+                    <td>
+                      <span class="larger" style="direction:ltr"> 0912***0435  </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span> تاریخ ثبت:</span>
+                    </td>
+                    <td>
+                      <span class="larger">1401/12/12  </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="text-align:start">
+                      <span> مبلغ قابل پرداخت:</span>
+                    </td>
+                  </tr>
+                  <tr>
+
+                    <td colspan="2" class="hfg" style="text-align:center">
+                      <span class="larger sbg whfg pad5">{{123456789 |number}} ریال </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div nz-col [nzXs]="24" [nzSm]="8" style="text-align:center">
+              <img class="w100" style="max-width:200px" src="../../../assets/bg.jpg" />
+              <br />
+              <svg *ngFor="let item of [0,1,2,3]" style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path style="fill:gold" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+              </svg>
+              <svg *ngFor="let item of [5]" style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path style="fill:lightgray" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+              </svg>
+              <br />
+
+              <span class="larger">مای فروشگاه</span>
+              <br />
+
+              <a class="btn iout" target="_blank" href="/vendor/7">در مورد این فروشگاه</a>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="glass">
+          روش ارسال:
+          <br />
+          در این روش....
+        </div>
+        <button class="btn din " *ngIf="level == 1" (click)="level = 2">پذیرش شرایط و پرداخت</button>
+
+        <a class="btn wout" target="_blank" href="/vendee/invoices">جزییات بیشتر این فاکتور</a>
+      </div>
+      <div class="glassbody fade" *ngIf="level == 2">
+
+        <div>sadsadas</div>
+        <button class="btn win " *ngIf="level == 2" (click)="level = 1">بازگشت</button>
+      </div>
+
+
+      <div class="glassfooter">
+      </div>
+    </div>
+
+    <a class="btn" target="_blank" href="/vendee/profile">شرایط و ضوابط</a>
+
+  </div>
+</div>
+
+
+
