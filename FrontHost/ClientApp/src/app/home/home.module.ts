@@ -5,6 +5,7 @@ import { DataService } from './../data.service';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { DecimalPipe } from '@angular/common';
 import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
@@ -27,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { APP_INITIALIZER } from '@angular/core';
 import { HttpRequestService } from './../http-request';
+import { CounterDirective } from './helpers/counter.directive';
 
 const routes: Route[] = [
   {
@@ -64,7 +66,7 @@ export function AppInitializerProvider() {
       await http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Data', {
         tokenNeeded: false,
         action: 'Init',
-        onSuccess: (m, d) => { ds.init(d); },
+        onSuccess: (m, d) => { ds.init(d);console.log(d) },
         onError: (m, d) => { },
       }))
     },
@@ -91,7 +93,8 @@ export function AppInitializerProvider() {
     VendeeTransactionsComponent,
     VendorsComponent,
     VendorComponent,
-    ModalDirective
+    ModalDirective,
+    CounterDirective
 
   ],
   imports: [
@@ -111,7 +114,9 @@ export function AppInitializerProvider() {
 
   ],
   //providers: []
-  providers: [HttpRequestService, AuthService, NzNotificationService, AppInitializerProvider() ]
+  providers: [HttpRequestService, AuthService, NzNotificationService, DecimalPipe
+    //, AppInitializerProvider()
+  ]
 
 })
 export class HomeModule { }

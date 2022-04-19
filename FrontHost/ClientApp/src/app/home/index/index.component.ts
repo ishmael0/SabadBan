@@ -6,7 +6,7 @@ import { FrontBaseComponent } from '../layout/layout.component';
   selector: 'app-index',
   templateUrl: './index.component.html',
   styles: [
-    `.paras p{font-size: 15px; font-weight: 600;}
+    `.paras p{font-size: 14px; font-weight: 600;}
 .paras p{ text-indent: 50px;text-align: justify;}
 `
   ],

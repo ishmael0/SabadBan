@@ -1,77 +1,105 @@
-<!--<div style="display:flex">
-  <div style="width:200px;height:50px" class="wbg">warning</div>
-  <div style="width:200px;height:50px" class="ibg">info</div>
-  <div style="width:200px;height:50px" class="sbg">success</div>
-  <div style="width:200px;height:50px" class="pbg">primary</div>
-  <div style="width:200px;height:50px" class="dbg">danger</div>
-  <div style="width:200px;height:50px" class="ebg">secondary</div>
-  <div style="width:200px;height:50px" class="wfg">warning</div>
-  <div style="width:200px;height:50px" class="ifg">info</div>
-  <div style="width:200px;height:50px" class="sfg">success</div>
-  <div style="width:200px;height:50px" class="pfg">primary</div>
-  <div style="width:200px;height:50px" class="dfg">danger</div>
-  <div style="width:200px;height:50px" class="efg">secondary</div>
-</div>
+<div nz-row nzJustify="center">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+    <div nz-row>
 
-
-<div nz-row  style="display:flex">
-  <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="8" [nzXl]="6" [nzXXl]="6">
-
-  </div>
-  <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="16" [nzLg]="16" [nzXl]="18" [nzXXl]="18">
-    <nz-carousel nzAutoPlay>
-      <div nz-carousel-content *ngFor="let index of [1,2,3]">
-        <div class="glass" style="margin-right:10px;margin-left:10px">
-          <div>
-            <img src="../../../assets/front/temp169.png" style="width:100%" />
+      <div nz-col [nzXs]="12">
+        <div class="glass">
+          <div style="text-align:right;padding-right:20px;font-size:large">
+            پشتیبانی های انجام شده:
           </div>
+          <div style="text-align: center; direction: initial">
+            <span style="font-size:xx-large;direction:ltr">+</span>
+            <span style="font-size:xx-large;direction:ltr" appCounter>310000</span>
+          </div>
+          <button style="float:left" class="btn din" [routerLink]="[prefixUrl('vendee/invoices')]"> مشاهده فاکتور  !</button>
         </div>
       </div>
-    </nz-carousel>
-  </div>
-</div>-->
-
-<div nz-row nzJustify="center">
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="10">
-    <div style="margin:10px;height:120px" class="sbg">
-      <div style="font-size:large;text-align:center;padding:10px" class="whfg">
-
-        <span>تعداد فاکتورهای موفق پرداخت  شده:</span>
-        <br />
-        <span style="font-size:larger;direction:ltr">310,000+</span>
-        <br />
-        <button style="float:left" class="btn din" [routerLink]="[prefixUrl('vendee/invoices')]">  فاکتور خودتون رو پرداخت کنید !</button>
+      <div nz-col [nzXs]="12">
+        <div class="glass">
+          <div style="text-align:right;padding-right:20px;font-size:large">
+            فاکتورهای موفق:
+          </div>
+          <div style="text-align: center; direction: initial">
+            <span style="font-size:xx-large;direction:ltr">+</span>
+            <span style="font-size:xx-large;direction:ltr" appCounter>310000</span>
+          </div>
+          <button style="float:left" class="btn din" [routerLink]="[prefixUrl('vendee/invoices')]"> مشاهده فاکتور  !</button>
+        </div>
+      </div>
+      <div nz-col [nzXs]="12">
+        <div class="glass">
+          <div style="text-align:right;padding-right:20px;font-size:large">
+            خریداران فعال:
+          </div>
+          <div style="text-align: center; direction: initial">
+            <span style="font-size:xx-large;direction:ltr">+</span>
+            <span style="font-size:xx-large;direction:ltr" appCounter>310000</span>
+          </div>
+          <button style="float:left" class="btn din">  ورود/ثبت نام!</button>
+        </div>
+      </div>
+      <div nz-col [nzXs]="12">
+        <div class="glass">
+          <div style="text-align:right;padding-right:20px;font-size:large">
+            فروشندگان فعال:
+          </div>
+          <div style="text-align: center; direction: initial">
+            <span style="font-size:xx-large;direction:ltr">+</span>
+            <span style="font-size:xx-large;direction:ltr" appCounter>15000</span>
+          </div>
+          <button style="float:left" class="btn din">  فروشنده شوید!</button>
+        </div>
       </div>
 
     </div>
-    <div style="margin:10px;height:120px" class="sbg">
-      <div style="font-size:large;text-align:center;padding:10px" class="whfg">
-
-        <span>تعداد فروشندگان فعال:</span>
-        <br />
-        <span style="font-size:larger;direction:ltr">15,000+</span>
-        <br />
-        <button style="float:left" class="btn din">  فروشنده شوید!</button>
-      </div>
-
-    </div>
   </div>
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="14">
-
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
     <nz-carousel nzAutoPlay>
       <div nz-carousel-content *ngFor="let index of [1,2,3]">
         <div style="margin:10px;height:250px" class="pbg"></div>
       </div>
     </nz-carousel>
-
-
   </div>
 </div>
 
+<div class="indextitles">   سبدبان چکونه کار میکند </div>
+<div class="glass paras">
+  <p>
+
+    شیوع ویروس کرونا در سال 1398 پیامدهای گوناگونی داشت
+    که یکی از مهم ترین پیامدهای آن گریبان کسب و کارهای سنتی ای را گرفت
+    که سالیان سال به دور از هرگونه تکنولوژی تنها با روش فروش سنتی و حضوری کسب درآمد میکردند،
+    در این میان تمایل افراد جامعه به خرید های غیر حضوری و آنلاین افزایش یافت.
+    از اینرو، سرعت توسعه و تعداد وب سایت های فروشگاهی و خدمات آنلاین به طور چشمگیری افزایش داشت،
+
+    اما همچنان نگرانی های خریداران محصولات و خدمات از امنیت و اطمینیان خرید
+    وجود داشت
+    و نیاز به یک مجموعه منسجم و قابل اطمینان جهت خرید های آنلاین بسیار محسوس بود،
+    از این جهت برآن شدیم تا با یک تیم حرفه‌ای و با به کارگیری فناوری‌های روز درجهت حل این موضوع برآییم.
+  </p>
+  <p>
+    <span class="pfg larger">
+      "سبدبان"
+    </span>
+    یک سامانه هوشمند ثبت سفارشات خریدهای آنلاین است که خرید آنلاین را راحت تر و امن تر میکند.
+    در این سامانه، هم
+    خریدار
+    و هم
+    فروشنده
+    میتوانند بر اساس شرایط و ضوابط از پیش تعیین شده،
+    به راحتی و بدون دغدغه،
+    نیاز های خود را از طریق سامانه سبد بان
+    تامین کنند
+    .
+    در این سامانه، فروشنده ابتدا    یک فاکتور مجازی برای خریدار ایجاد میکند.
+    سپس خریدار با وارد کردن آدرس فاکتور و یا با ورود به حساب کاربری خود، ضمن مشاهده فاکتور ایجاد شده و بررسی آن
+    نسبت به پرداخت آن اقدام میکند.
+    فروشنده در هنگام ایجاد فاکتور مشخص میکند نحوه پرداخت و ارسال کالا و خدمات چکونه است.
+  </p>
+</div>
 
 
-
-<div class="indextitles">ویژگی های ما</div>
+<div class="indextitles">ویژگی های سبدبان</div>
 <div nz-row nzJustify="center" class="">
   <div *ngFor="let i of Features" style="width:180px  ">
     <!--nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="6" [nzXXl]="4"-->
@@ -97,125 +125,72 @@
     </div>
   </div>
 </div>
-<div nz-row class="paras"  >
-  <div nz-col [nzXs]="24">
 
 
-    <div class="indextitles">   هدف و دورنما </div>
+
+
+
+<div nz-row class="paras">
+  <div nz-col [nzXs]="12">
+    <div class="indextitles">    مزایای سبدبان برای  خریدارن</div>
     <div class="glass">
       <p>
-
-        شیوع ویروس کرونا در سال 1398 پیامدهای گوناگونی داشت
-        که یکی از مهم ترین پیامدهای آن گریبان کسب و کارهای سنتی ای را گرفت
-        که سالیان سال به دور از هرگونه تکنولوژی تنها با روش فروش سنتی و حضوری کسب درآمد میکردند،
-        در این میان تمایل افراد جامعه به خرید های غیر حضوری و آنلاین افزایش یافت.
-        از اینرو، سرعت توسعه و تعداد وب سایت های فروشگاهی و خدمات آنلاین به طور چشمگیری افزایش داشت،
-
-        اما همچنان نگرانی های خریداران محصولات و خدمات از امنیت و اطمینیان خرید
-        وجود داشت
-        و نیاز به یک مجموعه منسجم و قابل اطمینان جهت خرید های آنلاین بسیار محسوس بود،
-        از این جهت برآن شدیم تا با یک تیم حرفه‌ای و با به کارگیری فناوری‌های روز درجهت حل این موضوع برآییم.
-      </p>
-      <p>
-        <span class="pfg larger">
-          "سبدبان"
-        </span>
-        یک سامانه هوشمند ثبت سفارشات خریدهای آنلاین است که خرید آنلاین را راحت تر و امن تر میکند.
-        در این سامانه، هم
-        خریدار
-        و هم
-        فروشنده
-        میتوانند بر اساس شرایط و ضوابط از پیش تعیین شده،
-        به راحتی و بدون دغدغه،
-        نیاز های خود را از طریق سامانه سبد بان
-        تامین کنند
-        .
-        در سبدبان، فروشنده ابتدا    یک فاکتور مجازی برای خریدار ایجاد میکند.
-        سپس خریدار با وارد کردن آدرس فاکتور و یا با ورود به حساب کاربری خود، ضمن مشاهده فاکتور ایجاد شده و بررسی آن
-        نسبت به پرداخت آن اقدام میکند.
-        فروشنده در هنگام ایجاد فاکتور مشخص میکند نحوه پرداخت و ارسال کالا و خدمات چکونه است.
-      </p>
-      <p>
-        به طور مثال فروشنده نحوه پرداخت و ارسال را به شکل "پرداخت پیش از ارسال، تسویه پس از تایید توسط خریدار، ارسال با پیک":
-        تعیین کرده است. این بدین معنی است که:
-        <br />
- 
-      </p>
-      <p style=" text-align: center;">
-        <span class="dfg larger">
-          خریدار مبلغ فاکتور را پرداخت میکند، اما
-          تا زمانی که خریدار کالا را از طریق پست دریافت و صحت آن را تایید ننماید
-          مبلغی به حساب فروشنده واریز نمیشود،
-          !
+        <span class="flex">
+          <ul style=" list-style-type: none;flex:1 ">
+            <li>
+              <i [innerHtml]="icons.checkall"></i>
+              مشاهده نحوه ارایه خدمات و فروش کالا
+            </li>
+            <li>
+              <i [innerHtml]="icons.checkall"></i>تضمین دریافت کالا و خدمات
+            </li>
+            <li><i [innerHtml]="icons.checkall"></i>تضمین بازگشت وجه</li>
+            <li><i [innerHtml]="icons.checkall"></i>پرداخت امن</li>
+            <li><i [innerHtml]="icons.checkall"></i>تضمین محرمانگی اطلاعات</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده امتیاز فروشندگان</li>
+            <li><i [innerHtml]="icons.checkall"></i>مقایسه فروشندگان</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه</li>
+          </ul>
+          <img src="../../../assets/front/Asset 2.svg" style="width:200px" />
         </span>
       </p>
+    </div>
+
+  </div>
+  <div nz-col [nzXs]="12">
+    <div class="indextitles">    مزایای سبدبان برای  فروشندگان </div>
+    <div class="glass">
       <p>
-        سایر مزایا و امتیازات استفاده از
-        <span class="pfg larger">
-          "سبدبان"
+        <span class="flex">
+          <ul style=" list-style-type: none;flex:1 ">
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه انتخاب نحوه ارایه خدمات و فروش کالا</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاهپنل اختصاصی</li>
+            <li>
+              <i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه
+              صفحه مجازی اختصاصی              (در حال توسعه)
+            </li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاهمدیریت فروش و حسابداری</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاهصدور فاکتور سفارشی</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه                تسویه آنی درآمد              </li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاهپشتیبانی 24 ساعته هفت روز هفته</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاهامکان رقابت با سایر فروشندگان</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه</li>
+            <li><i [innerHtml]="icons.checkall"></i>مشاهده سوابق فروشگاه     </li>
+          </ul>
+          <img src="../../../assets/front/Asset 1.svg" style="width:200px"/>
+
         </span>
-        به شرح زیر است:
       </p>
-      <div nz-row>
-        <p nz-col [nzXs]="24" [nzSm]="12">
-          <span class="pfg larger">
-            سبد بان برای خریدارن:
-          </span>
-          <span>
-            <ul style=" list-style-type: none; ">
-              <li> مشاهده نحوه ارایه خدمات و فروش کالا</li>
-              <li>تضمین دریافت کالا و خدمات</li>
-              <li>تضمین بازگشت وجه</li>
-              <li>پرداخت امن</li>
-              <li>تضمین محرمانگی اطلاعات</li>
-              <li>مشاهده امتیاز فروشندگان</li>
-              <li>مقایسه فروشندگان</li>
-              <li>مشاهده سوابق فروشگاه</li>
-              <li>     </li>
-              <li>     </li>
-            </ul>
-          </span>
-        </p>
-        <p nz-col [nzXs]="24" [nzSm]="12">
-
-          <span class="pfg larger">
-            سبد بان برای فروشندگان:
-          </span>
-          <span>
-            <ul style=" list-style-type: none; ">
-              <li> انتخاب نحوه ارایه خدمات و فروش کالا</li>
-              <li>پنل اختصاصی</li>
-              <li>
-                صفحه مجازی اختصاصی              (در حال توسعه)
-              </li>
-              <li>مدیریت فروش و حسابداری</li>
-              <li>صدور فاکتور سفارشی</li>
-              <li>                تسویه آنی درآمد              </li>
-              <li>پشتیبانی 24 ساعته هفت روز هفته</li>
-              <li>امکان رقابت با سایر فروشندگان</li>
-              <li></li>
-              <li>     </li>
-            </ul>
-          </span>
-        </p>
-      </div>
-
-
-
-
-      
-
-
     </div>
   </div>
+
+
 </div>
-
-
-<div nz-row  class="paras" >
+<div nz-row class="paras">
   <div nz-col [nzXs]="12">
     <div class="indextitles">   ثبت نام خریدارن</div>
     <div class="glass">
-      <p >
+      <p>
 
         از آنجاییکه حفظ محرمانگی اطلاعات کاربران، از اصول ماست، لذا برای پرداخت خدمت و یا کالای خریداری شده، کافیست شماره فاکتور و یا آدرس فاکتور ایجاد شده رو از فروشنده بخواهید.
         با وارد  کردن آدرس، فاکتور شما و درگاه پرداخت شما نمایش داده میشود، اما اگر قصد داشته باشید جزییات فاکتور و یا سابقه پرداخت خود را مشاهده کنید، میبایستی با وارد کردن
@@ -229,7 +204,7 @@
     <div class="indextitles">    ثبت نام فروشندگان </div>
     <div class="glass">
       <p>
-جهت اطمینان از ارایه اطلاعات صحیح، همچنین با توجه به قوانین و مقررات کشور، برای احراز هویت فروشندگان،
+        جهت اطمینان از ارایه اطلاعات صحیح، همچنین با توجه به قوانین و مقررات کشور، برای احراز هویت فروشندگان،
         نیاز به ارایه اطلاعات شناسنامه ای برای افراد حقیقی و اطلاعات شرکت برای فروشندگان حقوقی هستیم.
         برای دسترسی به پنل اختصاصی نیز، علاوه بر شماره تماس معتبر، نیاز به یک ایمیل برای ارسال موارد امنیتی و بازیابی گذرواژه داریم.
         در هنگام ثبت نام، از شما درخواست میشود در صورت نیاز آدرس ساید صفحات مجازی خود را وارد سامانه کنید تا علاوه بر اطلاعات فروشگاه شما، سایر صفحات فضای مجازی شما نیز در وب سایت و صفحه اختصاصی شما نمایش داده شود.
@@ -240,6 +215,12 @@
 
 
 </div>
+
+
+ 
+
+
+
 <div nz-row>
 
   <div nz-col [nzXs]="12">
