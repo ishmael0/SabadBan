@@ -1,0 +1,39 @@
+<div nz-row nzJustify="center">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="6">
+    <div class="glass">
+      <div class="form-input">
+        <input type="text" style="text-align: center;direction: ltr;" placeholder="جستجوی خبر">
+      </div>
+      <button class="btn win ">
+        جستجو
+      </button>
+    </div>
+  </div>
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
+    <div nz-row>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+        <div class="glass withheader">
+          <div class="glassheader">
+            <svg viewBox="0 0 24 24" [innerHTML]="icons['refresh']">
+            </svg>
+            ترافیک پرحجم در محور کرج ـ چالوس و آزادراه تهران ـ کرج/ کرج چالوس یک طرفه می شود
+            1398/12/12
+          </div>
+          <div class="glassbody">
+            <img src="../../assets/bg.jpg" style="width:70px;float:right;padding:5px" />
+            علی زندی فر در گفت‌وگو با خبرنگار تسنیم در  کرج  در مورد آخرین وضعیت تردد در محورهای مواصلاتی استان البرز اظهار داشت: در حال حاضر ترافیک در  آزاد راه تهران - کرج - قزوین در حدفاصل گلشهر تا حصارک پرحجم است.
+          </div>
+          <div class="glassfooter" style="text-align:end">
+            <button class="btn din small" (click)="openInNewWindow('/news/123')">
+              ادامه->
+            </button>
+            <a class="btn dout small" target="_blank" href="/news/123">
+              ادامه->
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

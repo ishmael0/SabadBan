@@ -47,7 +47,8 @@ export class VendeeLayoutComponent extends FrontVendeeComponent implements OnDes
           if (event.urlAfterRedirects == "/vendee/invoices") { this.ds.selectedMenu = 1; }
           if (event.urlAfterRedirects == "/vendee/transactions") { this.ds.selectedMenu = 2; }
           if (event.urlAfterRedirects == "/vendee/addresses") { this.ds.selectedMenu = 3; }
-          if (event.urlAfterRedirects == "/vendee/addresses") { this.ds.selectedMenu = 4; }
+          if (event.urlAfterRedirects == "/vendee/cards") { this.ds.selectedMenu = 4; }
+          if (event.urlAfterRedirects == "/vendee/tickets") { this.ds.selectedMenu = 5; }
         }
       });
     }
@@ -142,4 +143,30 @@ export class VendeeAddressesComponent extends FrontVendeeComponent {
     super.ngOnInit();
     super.setTitle("آدرس ها");
   }
+}
+@Component({
+  selector: 'app-vendee-ticket',
+  templateUrl: './vendee-ticket.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VendeeTicketComponent extends FrontVendeeComponent {
+  override async ngOnInit() {
+    super.setTitle("تیکت های پشتیبانی");
+  }
+
+}
+@Component({
+  selector: 'app-vendee-cards',
+  templateUrl: './vendee-cards.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VendeeCardsComponent extends FrontVendeeComponent {
+  override async ngOnInit() {
+    super.setTitle("کارت ها");
+  }
+
 }

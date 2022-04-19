@@ -21,7 +21,7 @@ import { DesignSystemComponent } from './design-system/design-system.component';
 import { VendorsComponent } from './vendors/vendors.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { VendeeAddressesComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTransactionsComponent } from './vendee-layout/vendee-layout.component';
+import { VendeeAddressesComponent, VendeeTicketComponent, VendeeCardsComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTransactionsComponent } from './vendee-layout/vendee-layout.component';
 import { AuthService } from '../auth';
 import { environment } from '../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,9 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { APP_INITIALIZER } from '@angular/core';
 import { HttpRequestService } from './../http-request';
 import { CounterDirective } from './helpers/counter.directive';
+import { NewssComponent } from './newss/newss.component';
+import { RegisterComponent } from './register/register.component';
+import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Route[] = [
   {
@@ -38,11 +41,13 @@ const routes: Route[] = [
       { path: 'login', component: LoginComponent },
       { path: 'login/:redirectlink', component: LoginComponent },
       { path: 'rules', component: RulesComponent },
-      { path: 'news', component: NewsComponent },
-      { path: 'article', component: ArticleComponent },
+      { path: 'news', component: NewssComponent },
+      { path: 'news/:id', component: NewsComponent },
+      { path: 'articles', component: ArticlesComponent },
+      { path: 'article/:id', component: ArticleComponent },
       { path: 'vendors', component: VendorsComponent },
       { path: 'vendor/:id', component: VendorComponent },
-
+      { path: 'register', component: RegisterComponent },
       {
         path: 'vendee', component: VendeeLayoutComponent, canActivate: [AuthService], children: [
           { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -50,6 +55,8 @@ const routes: Route[] = [
           { path: 'transactions', component: VendeeTransactionsComponent },
           { path: 'invoices', component: VendeeInvoicesComponent },
           { path: 'addresses', component: VendeeAddressesComponent },
+          { path: 'cards', component: VendeeCardsComponent },
+          { path: 'tickets', component: VendeeTicketComponent },
           //  { path: 'invoice/:id', component: InvoiceComponent },
         ]
       },
@@ -94,8 +101,12 @@ export function AppInitializerProvider() {
     VendorsComponent,
     VendorComponent,
     ModalDirective,
-    CounterDirective
-
+    CounterDirective,
+    NewssComponent,
+    RegisterComponent,
+    VendeeTicketComponent,
+    VendeeCardsComponent,
+    ArticlesComponent
   ],
   imports: [
     CommonModule,
