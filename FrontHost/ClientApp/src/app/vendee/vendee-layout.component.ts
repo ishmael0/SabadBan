@@ -99,11 +99,11 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
 })
 export class VendeeInvoicesComponent extends FrontVendeeComponent {
   async get() {
-    await this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Data', {
-      action: 'GetInvoices',
+    await this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Account', {
+      action: 'Invoices',
       onSuccess: (m, d) => {
         console.log(d);
-        this.ds.Invoices = d;
+        this.ds.load({ Invoices: d });
         this.http.createNotification(NZNotificationTypes.success, "دریافت شد", "لیست فاکتور ها با موفقیت دریافت شد.")
         this.cdr.detectChanges();
       },

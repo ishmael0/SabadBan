@@ -14,9 +14,7 @@ function toTreeHelper(list: any[], key: any, parentKey: any, parentValue: any, c
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataService {
   save() {
     localStorage.setItem(DataService.name, JSON.stringify(this))

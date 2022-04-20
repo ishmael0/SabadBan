@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { DataService } from '../data.service';
 import { VendeeModule } from './vendee.module';
-@Injectable({ providedIn: 'any' })
+@Injectable({ providedIn: 'root' })
 export class VendeeAuthService implements CanActivate {
   constructor(private router: Router, public ds: DataService, public ns: NzNotificationService) { }
 

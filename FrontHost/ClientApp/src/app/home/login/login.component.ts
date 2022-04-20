@@ -10,7 +10,7 @@ import { FrontBaseComponent } from '../../shared/shared.module';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent extends FrontBaseComponent { 
+export class LoginComponent extends FrontBaseComponent {
   back = false;
   next = true;
   timer = {
@@ -68,8 +68,8 @@ export class LoginComponent extends FrontBaseComponent {
           tokenNeeded: false,
           action: 'verify', formData: this.smsForm.value,
           onSuccess: (m, d) => {
+            this.auth.login(d.Token);
             this.ds.load(d)
-            this.auth.login( d.Token);
             this.level = 3;
             this.back = false;
             this.next = false;

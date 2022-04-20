@@ -20,13 +20,17 @@
     <tr *ngFor="let item of basicTable.data">
       <td>{{item.Id}}</td>
       <td>{{item.VendorTitle}}</td>
-      <td>{{item.Price | number}}</td>
+      <td>
+        <button class="din larger">
+          {{item.Price | number}}
+        </button>
+      </td>
       <td>{{item.Create }}</td>
       <td>{{item.Paid }} </td>
       <td>{{item.InvoiceState}}</td>
       <td>
         <button class="btn sout" (click)="selectedItem=item; dis = true">مشاهده فاکتور</button>
-        <button class="btn sin"> پرداخت</button>
+        <a class="btn sin" href="/invoice/{{selectedItem.Guid}}" target="_blank"> پرداخت</a>
       </td>
     </tr>
   </tbody>
@@ -37,8 +41,6 @@
 
 <div modal [(display)]="dis">
   <!--<app-invoice *ngIf="selectedItem " [invoice]="selectedItem"></app-invoice>-->
-
-
   <div class="glass withheader p">
     <div class="glassheader" style="margin:0">
       <div>
@@ -50,7 +52,7 @@
         /
         <span style="font-size:medium">           نوع فاکتور:        </span>
         <span>  {{selectedItem?.PostType}} </span>
-        <button class="btn sin"> پرداخت</button>
+        <a href="/invoice/{{selectedItem.Guid}}" target="_blank" class="btn sin"> پرداخت</a>
       </div>
       <span class="close">&times;</span>
     </div>
@@ -118,11 +120,8 @@
               </button>
             </td>
           </tr>
-
-
         </tbody>
       </nz-table>
-
     </div>
   </div>
 </div>

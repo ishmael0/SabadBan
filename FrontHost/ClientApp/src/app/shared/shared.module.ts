@@ -8,8 +8,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
-import { DecimalPipe } from '@angular/common';
 
 
 import { FormBuilder, Validators } from '@angular/forms';
@@ -72,7 +70,6 @@ export class FrontBaseComponent {
     NzTreeModule,
     NzTableModule,
     NzSpinModule,
-    NzNotificationModule,
     NzGridModule,
     NzDropDownModule
   ],
@@ -83,20 +80,19 @@ export class FrontBaseComponent {
     NzTreeModule,
     NzTableModule,
     NzSpinModule,
-    NzNotificationModule,
     NzGridModule,
     NzDropDownModule,
     ModalDirective,
     CounterDirective,
   ],
-  providers: [NzNotificationService, DecimalPipe]
+  //providers: [NzNotificationService, DecimalPipe]
 })
 export class SharedModule {
   static forChild() {
     return {
       ngModule: SharedModule,
       providers: [
-        NzNotificationService, HttpRequestService, VendeeAuthService
+        //NzNotificationService, HttpRequestService
       ],
     };
   }

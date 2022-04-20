@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AppComponent } from './app.component';
 import { enableProdMode } from '@angular/core';
+import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
+import { DecimalPipe } from '@angular/common';
 
 
 export const environment = {
@@ -17,6 +18,8 @@ export const environment = {
 import { registerLocaleData } from '@angular/common';
 import fa from '@angular/common/locales/fa';
 import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
+import { DataService } from './data.service';
+import { HttpRequestService } from './http-request';
 registerLocaleData(fa);
 
 
@@ -36,11 +39,11 @@ const routes: Route[] = [
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-
+    NzNotificationModule
 
   ],
   bootstrap: [AppComponent],
-  providers: [ NzNotificationService, { provide: NZ_I18N, useValue: fa_IR }]
+  providers: [NzNotificationService, DataService, HttpRequestService, NzNotificationService, DecimalPipe, { provide: NZ_I18N, useValue: fa_IR }]
 })
 export class AppModule {
 }

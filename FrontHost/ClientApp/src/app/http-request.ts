@@ -6,7 +6,7 @@ import { VendeeAuthService } from './vendee/vendee-auth';
 
  
 
-@Injectable({ providedIn:'any' })
+@Injectable({ providedIn:'root' })
 export class HttpRequestService extends HttpClient {
   public apiPrefix = "/api/";
   constructor(
