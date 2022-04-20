@@ -1,14 +1,14 @@
 import { Component, Directive, OnInit, Injector, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, OnChanges } from '@angular/core';
-import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../../Santel/ClientApp/src/app/services/utils';
-import { FrontBaseComponent } from '../layout/layout.component';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, ActivatedRoute, ActivatedRouteSnapshot, } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HttpRequestService } from '../../http-request';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { DataService } from '../../data.service';
-import { AuthService } from '../../auth';
 import { Title } from "@angular/platform-browser";
+import { HttpRequestService } from '../http-request';
+import { VendeeAuthService } from './vendee-auth';
+import { DataService } from '../data.service';
+import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { FrontBaseComponent } from '../shared/shared.module';
 
 
 @Directive()
@@ -34,7 +34,7 @@ export class VendeeLayoutComponent extends FrontVendeeComponent implements OnDes
       inject.get(HttpRequestService),
       inject.get(DomSanitizer),
       inject.get(Title),
-      inject.get(AuthService),
+      inject.get(VendeeAuthService),
       inject.get(ActivatedRoute),
       inject.get(DataService),
       inject.get(Router),
@@ -86,6 +86,9 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
     super.setTitle("پروفایل");
   }
 
+
+
+
 }
 @Component({
   selector: 'app-vendee-invoices',
@@ -100,17 +103,11 @@ export class VendeeInvoicesComponent extends FrontVendeeComponent {
       action: 'GetInvoices',
       onSuccess: (m, d) => {
         console.log(d);
-        this.list = d;
-        this.list.forEach(c => {
-          c.InvoiceDetailsPrice = c.InvoiceDetails.reduce((p:number,d:any)=> p + d.Price ,0)
-          c.InvoiceDetailsDiscount = c.InvoiceDetails.reduce((p: number, d: any) => p + d.Discount ,0)
-          c.Price = c.InvoiceDetailsPrice - c.InvoiceDetailsDiscount - c.Discount + c.PostCost;
-        })
+        this.ds.Invoices = d;
         this.http.createNotification(NZNotificationTypes.success, "دریافت شد", "لیست فاکتور ها با موفقیت دریافت شد.")
         this.cdr.detectChanges();
       },
       onError: (m, d) => {
-        console.log(d);
         this.http.createNotification(NZNotificationTypes.error, "خطا", "دریافت لیست فاکتور ها با خطا مواجه شد.")
       },
     }))
@@ -120,13 +117,12 @@ export class VendeeInvoicesComponent extends FrontVendeeComponent {
   }
   override async ngOnInit() {
     super.ngOnInit();
-    await this.get();
     super.setTitle("فاکتور ها");
   }
-  list: any[] = []
+  //list: any[] = []
   openInvoice(item: any) {
     localStorage.setItem(`invoice${item.Id}`, item)
-    this.openInNewWindow(`vendee/invoice/${item.Id}`)
+    this.openInNewWindow(`/vendee/invoice/${item.Id}`)
   }
   selectedItem: any = {};
   dis = false;
@@ -168,5 +164,4 @@ export class VendeeCardsComponent extends FrontVendeeComponent {
   override async ngOnInit() {
     super.setTitle("کارت ها");
   }
-
 }

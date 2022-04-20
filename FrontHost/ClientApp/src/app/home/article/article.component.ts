@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FrontBaseComponent } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-article',
@@ -7,11 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class ArticleComponent extends FrontBaseComponent {
+ 
 
 }

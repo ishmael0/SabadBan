@@ -17,8 +17,6 @@ export const environment = {
 import { registerLocaleData } from '@angular/common';
 import fa from '@angular/common/locales/fa';
 import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
-import { HttpRequestService } from './http-request';
-import { AuthService } from './auth';
 registerLocaleData(fa);
 
 
@@ -42,7 +40,7 @@ const routes: Route[] = [
 
   ],
   bootstrap: [AppComponent],
-  providers: [HttpRequestService, AuthService, NzNotificationService, { provide: NZ_I18N, useValue: fa_IR }]
+  providers: [ NzNotificationService, { provide: NZ_I18N, useValue: fa_IR }]
 })
 export class AppModule {
 }

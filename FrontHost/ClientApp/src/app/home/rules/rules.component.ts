@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FrontBaseComponent } from '../layout/layout.component';
+import { FrontBaseComponent } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-rules',

@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-export class UserData {
+import { DataService } from '../data.service';
+import { VendeeModule } from './vendee.module';
+@Injectable({ providedIn: 'any' })
+export class VendeeAuthService implements CanActivate {
+  constructor(private router: Router, public ds: DataService, public ns: NzNotificationService) { }
 
-}
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService implements CanActivate {
-  constructor(private router: Router, public ns: NzNotificationService) { }
-
-  user!: UserData;
+  //user!: UserData;
   token!: string;
   lastTokenDateTime = '';
-  login(d: UserData, token: string) {
-    this.user = d;
+  login(token: string) {
+    //this.user = d;
     this.token = token;
     localStorage.setItem("token", token);
-    localStorage.setItem(UserData.name, JSON.stringify(d));
+    //localStorage.setItem(UserData.name, JSON.stringify(d));
     this.router.navigate(['/home/account']);
   }
 
   logOut() {
-    this.user = {};
+    //this.user = {};
+    localStorage.removeItem(DataService.name)
     this.token = '';
     localStorage.removeItem("token");
     this.router.navigate(['/']);
@@ -34,13 +32,13 @@ export class AuthService implements CanActivate {
     var temp = localStorage.getItem('token');
     if (temp) {
       this.token = temp;
-      this.user = localStorage.getItem(UserData.name) as UserData;
+      this.ds.load();
+      //this.user = localStorage.getItem(UserData.name) as UserData;
       return true;
     }
     return false;
   }
   canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): boolean | import("@angular/router").UrlTree | import("rxjs").Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {
-    return true;
     if (this.isLoggedIn()) {
       return true;
     }

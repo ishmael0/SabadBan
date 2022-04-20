@@ -64,6 +64,7 @@ namespace BackHost.DBContext
         public decimal Longitude { set; get; }
         [Column(TypeName = "decimal(10,8)")]
         public decimal Latitude { set; get; }
+        [Required]
         [MaxLength(11)]
         public string Phone1 { set; get; }
         [MaxLength(11)]
@@ -189,7 +190,7 @@ namespace BackHost.DBContext
         public int PostCost { set; get; }
         public int Discount { set; get; }
         public int PaymentType { set; get; }
-        public DateTime? Paid { set; get; };
+        public DateTime? Paid { set; get; }
         public List<InvoiceDetail> InvoiceDetails { set; get; }
         public InvoiceState InvoiceState { set; get; }
 

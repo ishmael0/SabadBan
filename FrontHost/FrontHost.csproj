@@ -26,6 +26,12 @@
     <ProjectReference Include="..\..\Santel\Core\1-Core.csproj" />
   </ItemGroup>
 
+ 
+ 
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\home\vendee-layout\" />
+  </ItemGroup>
+
 
   
   

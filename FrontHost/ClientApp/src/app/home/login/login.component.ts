@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HTTPTypes, RequestPlus } from '../../../../../../../Santel/ClientApp/src/app/services/utils';
-import { FrontBaseComponent } from '../layout/layout.component';
+import { FrontBaseComponent } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-login',
@@ -68,8 +68,11 @@ export class LoginComponent extends FrontBaseComponent {
           tokenNeeded: false,
           action: 'verify', formData: this.smsForm.value,
           onSuccess: (m, d) => {
-            this.auth.login(d,d.Token)
+            this.ds.load(d)
+            this.auth.login( d.Token);
             this.level = 3;
+            this.back = false;
+            this.next = false;
           },
           onError: (m, d) => {
 

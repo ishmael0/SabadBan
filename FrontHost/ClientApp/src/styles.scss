@@ -91,7 +91,9 @@ a.btn:hover, a.btn:focus, a.btn:active {
   transition: fill $delay ease-out;
 }
 
-
+.alert {
+  padding: 5px;
+}
 
 .small {
   font-size: x-small !important;
@@ -102,10 +104,13 @@ a.btn:hover, a.btn:focus, a.btn:active {
   line-height: 20px;
 }
 
-svg {
+svg,i {
   width: 24px;
 }
-
+i svg{
+    width:inherit;
+    height:inherit;
+}
 .btn svg:first-child, .btn i {
   width: 24px;
   float: right;

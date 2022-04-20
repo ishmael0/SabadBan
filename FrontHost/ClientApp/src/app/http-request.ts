@@ -1,17 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Optional} from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { AuthService } from './auth';
 import { HTTPStatusCodes, HTTPTypes, NZNotificationTypes, RequestPlus, ResponsePlus } from '../../../../../Santel/ClientApp/src/app/services/utils';
+import { VendeeAuthService } from './vendee/vendee-auth';
 
  
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn:'any' })
 export class HttpRequestService extends HttpClient {
   public apiPrefix = "/api/";
-  constructor(handler: HttpHandler, public auth: AuthService, public ns: NzNotificationService) {
+  constructor(
+    handler: HttpHandler,
+    public auth: VendeeAuthService,
+    public ns: NzNotificationService
+  //    @Inject('wsAuthKey') @Optional() public wsAuthKey?: string
+  ) {
     super(handler);
   }
   getHeader() {

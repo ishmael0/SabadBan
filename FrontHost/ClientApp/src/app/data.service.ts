@@ -9,7 +9,6 @@ function toTreeHelper(list: any[], key: any, parentKey: any, parentValue: any, c
     } else {
       temp[i].isLeaf = false;
     }
-
   }
   return temp;
 }
@@ -19,6 +18,24 @@ function toTreeHelper(list: any[], key: any, parentKey: any, parentValue: any, c
   providedIn: 'root'
 })
 export class DataService {
+  save() {
+    localStorage.setItem(DataService.name, JSON.stringify(this))
+  }
+  load(d: any = null) {
+    if (d == null) {
+      d = JSON.parse(localStorage.getItem(DataService.name)!)
+    }
+    if (d.Invoices) {
+      this.Invoices = d.Invoices;
+      this.Invoices.forEach(c => {
+        c.InvoiceDetailsPrice = c.InvoiceDetails.reduce((p: number, d: any) => p + d.Price, 0)
+        c.InvoiceDetailsDiscount = c.InvoiceDetails.reduce((p: number, d: any) => p + d.Discount, 0)
+        c.Price = c.InvoiceDetailsPrice - c.InvoiceDetailsDiscount - c.Discount + c.PostCost;
+      });
+    }
+    this.save();
+  }
+  Invoices: any[] = [];
   CategoryNodes :any[]= [];
   CategoryNodesAs :any[]= [];
   CategorySearchValue = "";
@@ -26,6 +43,6 @@ export class DataService {
   init(d:any) {
     this.CategoryNodes = d.Categories;
     this.CategoryNodesAs = toTreeHelper(this.CategoryNodes, 'Id', 'ParentCategoryId', null);
-    console.log(this.CategoryNodesAs)
+    this.save();
   }
 }

@@ -35,6 +35,7 @@ namespace BackHost.DBContext
             modelBuilder.Entity<Vendee>().Property(e => e.Addresses).HasConversion(v => JsonConvert.SerializeObject(v??new List<Address>()), v => JsonConvert.DeserializeObject<List<Address>>(v));
             modelBuilder.Entity<Vendor>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v??new List<Images>()), v => JsonConvert.DeserializeObject<List<Images>>(v));
             modelBuilder.Entity<Invoice>().Property(e => e.InvoiceDetails).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<InvoiceDetail>>(v));
+            modelBuilder.Entity<Vendor>().Property(e => e.CellPhone1).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorSell>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBankAccount>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBalance>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);

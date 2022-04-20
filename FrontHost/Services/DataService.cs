@@ -98,7 +98,7 @@ namespace FrontHost.Services
                 Audience = AppSettingService.Security.JWT_ValidAudience,
                 IssuedAt = DateTime.UtcNow,
                 NotBefore = DateTime.UtcNow,
-                Expires = DateTime.UtcNow.Date.AddDays(1),
+                Expires = DateTime.UtcNow.Date.AddDays(7),
                 Subject = new ClaimsIdentity(new List<Claim> {
                              new Claim(nameof(Vendee.CellPhone), applicationUser.CellPhone),
                              new Claim(nameof(Vendee.Id), applicationUser.Id.ToString()),

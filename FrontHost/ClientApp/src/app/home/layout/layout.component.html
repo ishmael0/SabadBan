@@ -5,14 +5,14 @@
       <div nz-row style="margin-right:100px">
         <div nz-col [nzXs]="0" [nzLg]="20">
           <!--<img style="width:50px" src="../../../assets/front/logo4colored.svg" />-->
-          <button class="btn larger" [routerLink]="[prefixUrl('')]">سبدبان</button>
+          <button class="btn larger" [routerLink]="['']">سبدبان</button>
           <ng-container *ngTemplateOutlet="menues"></ng-container>
           <ng-container *ngTemplateOutlet="useraccount"></ng-container>
 
         </div>
         <div nz-col [nzXs]="24" [nzLg]="0">
           <!--<img style="width:50px" src="../../../assets/front/logo4colored.svg" />-->
-          <button class="btn larger" [routerLink]="[prefixUrl('')]">سبدبان</button>
+          <button class="btn larger" [routerLink]="['']">سبدبان</button>
           <button class="btn dout" (click)="showMenu=!showMenu"> |||   </button>
           <div *ngIf="showMenu" class="buttoncotainer fade">
             <ng-container *ngTemplateOutlet="menues"></ng-container>
@@ -52,22 +52,22 @@
       <li nz-menu-item>1st menu item</li>
       <li nz-menu-item>2nd menu item</li>
       <li nz-menu-divider></li>
-      <li nz-menu-item [routerLink]="[prefixUrl('vendee/profile')]"> پنل کاربری </li>
-      <li nz-menu-item [routerLink]="[prefixUrl('vendee/invoices')]">   مشاهده فاکتورها </li>
-      <li nz-menu-item [routerLink]="[prefixUrl('vendee/transactions')]">   مشاهده تراکنش ها </li>
+      <li nz-menu-item [routerLink]="['/vendee/profile']"> پنل کاربری </li>
+      <li nz-menu-item [routerLink]="['/vendee/invoices']">   مشاهده فاکتورها </li>
+      <li nz-menu-item [routerLink]="['/vendee/transactions']">   مشاهده تراکنش ها </li>
       <li nz-menu-divider></li>
-      <li nz-menu-item [routerLink]="[prefixUrl('login')]" nzDanger>خروج</li>
+      <li nz-menu-item (click)="auth.logOut();"   nzDanger>خروج</li>
     </ul>
   </nz-dropdown-menu>
 </ng-template>
 <ng-template #menues>
   <!--<button class="btn" [routerLink]="[prefixUrl('')]" style="font-size:larger">  صفحه اصلی</button>-->
-  <button class="btn" [routerLink]="[prefixUrl('rules')]">مقررات و نحوه کار   </button>
-  <button class="btn" [routerLink]="[prefixUrl('vendors')]">فروشندگان  </button>
-  <button class="btn" [routerLink]="[prefixUrl('news')]">  اخبار</button>
-  <button class="btn" [routerLink]="[prefixUrl('articles')]">  مقالات</button>
-  <button class="btn" [routerLink]="[prefixUrl('designsystem')]" *ngIf="!environmentProduction">  designsystem</button>
+  <button class="btn" [routerLink]="['/rules']">مقررات و نحوه کار   </button>
+  <button class="btn" [routerLink]="['/vendors']">فروشندگان  </button>
+  <button class="btn" [routerLink]="['/news']">  اخبار</button>
+  <button class="btn" [routerLink]="['/articles']">  مقالات</button>
+  <button class="btn" [routerLink]="['/designsystem']" *ngIf="!environmentProduction">  designsystem</button>
   <!--<button class="btn" [routerLink]="[prefixUrl('about')]"> درباره ما</button>-->
   <!--<button class="btn" style="float: left; border-bottom: solid 2px #e13634" *ngIf="!auth.isLoggedIn()" (click)="openInNewWindow('/management')">   پنل کاربری فروشندگان</button>-->
-  <button class="btn din" style="float: left; margin: 0px 10px" [routerLink]="[prefixUrl('login')]" *ngIf="!auth.isLoggedIn()">   ورود/مشاهده فاکتور </button>
+  <button class="btn din" style="float: left; margin: 0px 10px" [routerLink]="['login']" *ngIf="!auth.isLoggedIn()">   ورود/مشاهده فاکتور </button>
 </ng-template>

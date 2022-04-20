@@ -25,19 +25,8 @@ namespace FrontHost.Controllers
             var Vendors = await dB.Vendors.CountAsync();
             return JR<object>.OK(new { Categories, Vendees, Vendors, Invoices });
         }
-        [Authorize]
         [HttpGet]
-        public async Task<JR<object>> GetInvoices()
-        {
-            var VendorId = int.Parse(GetVendorID());
-            var Invoices = await dB.Invoices.Include(c => c.Vendee)
-                .Where(c => c.VendorId == VendorId)
-                .Select(c => new { c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, VendorTitle = c.Vendor.Title, c.VendorId, c.VendeeId })
-                .ToListAsync();
-            return JR<object>.OK(Invoices);
-        }
-        [HttpGet]
-        public async Task<JR<object>> GetInvoice(string guid)
+        public async Task<JR<object>> Invoice(string guid)
         {
             var VendorId = int.Parse(GetVendorID());
             var Invoices = await dB.Invoices 

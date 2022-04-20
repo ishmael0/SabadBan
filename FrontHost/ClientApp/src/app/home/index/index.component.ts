@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { FrontBaseComponent } from '../layout/layout.component';
+import { FrontBaseComponent } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-index',

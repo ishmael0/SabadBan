@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
 using FrontHost.Models;
+using System.Collections.Generic;
+using System.Linq;
+using Core.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontHost.Controllers
 {
@@ -69,7 +73,7 @@ namespace FrontHost.Controllers
                     user = new Models.Vendee { CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
-                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user),user));
+                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user, new List<InvoiceView>()));
                 }
                 if (user.Status == Core.Models.Status.Blocked)
                 {
@@ -77,13 +81,32 @@ namespace FrontHost.Controllers
                 }
                 else
                 {
-                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
+
+                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user, await Invoices(user.Id)));
                 }
             }
             else
             {
                 return new(StatusCodes.Status403Forbidden, "کد ارسالی نامعتبر است");
             }
+        }
+
+
+        [NonAction]
+        public async Task<List<InvoiceView>> Invoices(int id)
+        {
+            return await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendorId == id).Select(c => new InvoiceView(c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId)).ToListAsync();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<JR<List<InvoiceView>>> Invoices()
+        {
+            var VendorId = int.Parse(GetVendorID());
+            var Invoices = await dB.Invoices.Include(c => c.Vendee)
+                .Where(c => c.VendorId == VendorId)
+                .Select(c => new InvoiceView ( c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
+                .ToListAsync();
+            return JR<List<InvoiceView>>.OK(Invoices);
         }
 
     }
@@ -104,20 +127,44 @@ namespace FrontHost.Controllers
     public class UserViewDTO
     {
         public string Token { get; }
-        public int Id { get; }
-        public string CellPhone { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string MelliCode { get; }
+        public Vendee Vendee { get; }
+        public List<InvoiceView> Invoices { get; }
 
-        public UserViewDTO(string token, Vendee v )
+        public UserViewDTO(string token, Vendee v, List<InvoiceView> Invoices)
         {
             Token = token;
-            Id = v.Id;
-            CellPhone = v.CellPhone;
-            FirstName = v.FirstName;
-            LastName = v.LastName;
-            MelliCode = v.MelliCode;
+            Vendee = v;
+            this.Invoices = Invoices;
+        }
+    }
+
+    public class InvoiceView
+    {
+        public InvoiceState InvoiceState { get; }
+        public List<InvoiceDetail> InvoiceDetails { get; }
+        public int PostCost { get; }
+        public int PostType { get; }
+        public int Discount { get; }
+        public int Id { get; }
+        public DateTime? Create { get; }
+        public Status Status { get; }
+        public string VendorTitle { get; }
+        public int VendorId { get; }
+        public int VendeeId { get; }
+
+        public InvoiceView(InvoiceState invoiceState, List<InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
+        {
+            InvoiceState = invoiceState;
+            InvoiceDetails = invoiceDetails;
+            PostCost = postCost;
+            PostType = postType;
+            Discount = discount;
+            Id = id;
+            Create = create;
+            Status = status;
+            VendorTitle = vendorTitle;
+            VendorId = vendorId;
+            VendeeId = vendeeId;
         }
     }
 }
