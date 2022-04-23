@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using BackHost.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +37,7 @@ builder.Services.AddControllersWithViews()
               }
               ));
 var constr = builder.Configuration.GetSection("ConnectionString").Value;
-builder.Services.AddDbContext<FrontDB>(options => options.UseSqlServer(constr));
+builder.Services.AddDbContext<DB>(options => options.UseSqlServer(constr));
 builder.Services.AddSingleton<DataService, DataService>();
 builder.Services.AddSingleton<SMSService, SMSService>();
 builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp"; });

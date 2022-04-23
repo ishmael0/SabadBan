@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using FrontHost.Services;
 using System.Linq;
-using FrontHost.Models;
+using BackHost.DBContext;
 
 namespace FrontHost.Controllers
 {

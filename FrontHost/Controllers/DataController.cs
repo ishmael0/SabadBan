@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using BackHost.DBContext;
+using Core.Services;
 using FrontHost.DBContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace FrontHost.Controllers
 {
     public class DataController : SabadBanBaseController
     {
-        private readonly FrontDB dB;
+        private readonly DB dB;
 
-        public DataController(FrontDB dB)
+        public DataController(DB dB)
         {
             this.dB = dB;
         }

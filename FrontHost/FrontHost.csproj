@@ -23,6 +23,7 @@
  
   <ItemGroup>
     <ProjectReference Include="..\..\Santel\Core\1-Core.csproj" />
+    <ProjectReference Include="..\App\BackHost.csproj" />
   </ItemGroup>
 
  

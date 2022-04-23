@@ -7,11 +7,11 @@ using FrontHost.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
-using FrontHost.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
+using BackHost.DBContext;
 
 namespace FrontHost.Controllers
 {
@@ -20,11 +20,11 @@ namespace FrontHost.Controllers
 
     public class AccountController : SabadBanBaseController
     {
-        private readonly FrontDB dB;
+        private readonly DB dB;
         private readonly SMSService sms;
         private readonly DataService data;
 
-        public AccountController(FrontDB dB, SMSService sms, DataService data)
+        public AccountController(DB dB, SMSService sms, DataService data)
         {
             this.dB = dB;
             this.sms = sms;
@@ -70,7 +70,7 @@ namespace FrontHost.Controllers
                 var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);
                 if (user == null)
                 {
-                    user = new Models.Vendee { CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
+                    user = new Vendee { CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
                     return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user, new List<InvoiceView>()));
@@ -129,10 +129,10 @@ namespace FrontHost.Controllers
     public class UserViewDTO
     {
         public string Token { get; }
-        public Vendee Vendee { get; }
+        public BackHost.DBContext.Vendee Vendee { get; }
         public List<InvoiceView> Invoices { get; }
 
-        public UserViewDTO(string token, Vendee v, List<InvoiceView> Invoices)
+        public UserViewDTO(string token, BackHost.DBContext.Vendee v, List<InvoiceView> Invoices)
         {
             Token = token;
             Vendee = v;
@@ -143,8 +143,8 @@ namespace FrontHost.Controllers
     public class InvoiceView
     {
         public string Guid { get; }
-        public InvoiceState InvoiceState { get; }
-        public List<InvoiceDetail> InvoiceDetails { get; }
+        public BackHost.DBContext.InvoiceState InvoiceState { get; }
+        public List<BackHost.DBContext.InvoiceDetail> InvoiceDetails { get; }
         public int PostCost { get; }
         public int PostType { get; }
         public int Discount { get; }
@@ -155,7 +155,7 @@ namespace FrontHost.Controllers
         public int VendorId { get; }
         public int VendeeId { get; }
 
-        public InvoiceView(string Guid, InvoiceState invoiceState, List<InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
+        public InvoiceView(string Guid, BackHost.DBContext.InvoiceState invoiceState, List<BackHost.DBContext.InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
         {
             this.Guid = Guid;
             InvoiceState = invoiceState;
