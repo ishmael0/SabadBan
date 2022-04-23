@@ -9,7 +9,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FileManagerComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/file-manager/file-manager.component';
 import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/icons/icons.component';
 import { ActiveStatus, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration, DeletedStatus, FullStatuses, PublishedStatus } from '../../../../../../Santel/ClientApp/src/app/services/properties';
-import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorSellComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent } from './components';
+import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorDetailComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent } from './components';
 
 import "reflect-metadata";
 
@@ -53,13 +53,17 @@ export class Vendor extends BaseModelWithTitle {
   Phone2Confirm = false;
   CellPhone1Confirm = false;
 }
-export class VendorSell extends BaseModel {
+export class VendorDetail extends BaseModel {
   Successed = 0;
   VendorId!: number;
   Confirmed = 0;;
   Created = 0;;
   WaitingForPayment = 0;;
   Canceled = 0;
+
+  Rank = 0;
+
+
 }
 export class VendorBankAccount extends BaseModel {
   BankId!: number;
@@ -209,7 +213,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration<VendorSell>("VendorSell", VendorSell, VendorSellComponent, 'اطلاعات فروش فروشگاه', FullStatuses, [
+  new EntityConfiguration<VendorDetail>("VendorSell", VendorDetail, VendorDetailComponent, 'اطلاعات فروش فروشگاه', FullStatuses, [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Successed, 'فاکتور موفق', {}),
@@ -302,7 +306,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   declarations: [
     CategoryComponent,
     VendorComponent,
-    VendorSellComponent,
+    VendorDetailComponent,
     VendorBankAccountComponent,
     VendorBalanceComponent,
     ProvinceComponent,

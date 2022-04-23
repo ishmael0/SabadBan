@@ -30,7 +30,7 @@
       <td>{{item.InvoiceState}}</td>
       <td>
         <button class="btn sout" (click)="selectedItem=item; dis = true">مشاهده فاکتور</button>
-        <a class="btn sin" href="/invoice/{{selectedItem.Guid}}" target="_blank"> پرداخت</a>
+        <button class="btn sin" (click)="openInNewWindow('/invoice/'+selectedItem.Guid)"  > پرداخت</button>
       </td>
     </tr>
   </tbody>

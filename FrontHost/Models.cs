@@ -89,10 +89,6 @@ namespace FrontHost.Models
         public string Url { get; set; }
         public int Type { get; set; }
     }
-    public class VendorRequest : BaseModelWithTitle
-    {
-
-    }
     [Index(nameof(VendorId), IsUnique = true)]
     public class VendorSell : BaseModel
     {

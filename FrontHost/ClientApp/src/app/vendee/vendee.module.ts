@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VendeeAddressesComponent, VendeeCardsComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTicketComponent, VendeeTransactionsComponent } from './vendee-layout.component';
+import { VendeeAddressesComponent, VendeeCardsComponent, VendeeInvoicesComponent, VendeeLayoutComponent, VendeeProfileComponent, VendeeTicketComponent, VendeeTransactionsComponent } from './component';
 
 import { RouterModule, Routes, Route } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';

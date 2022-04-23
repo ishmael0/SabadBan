@@ -72,7 +72,7 @@ namespace FrontHost.Services
 
         public bool IsVerificationCodeValid(string phone, int code)
         {
-            if (VerificationCodes.TryGetValue(phone, out var verificationCode) && verificationCode.Data.Code == code)
+            if (VerificationCodes.TryGetValue(phone, out var verificationCode) && verificationCode.Code == code)
             {
                 return true;
             }
@@ -82,7 +82,7 @@ namespace FrontHost.Services
         {
             if (VerificationCodes.TryGetValue(phone, out var v, true))
             {
-                verificationCode = v.Data.Code;
+                verificationCode = v.Code;
                 return true;
             }
             verificationCode = 0;

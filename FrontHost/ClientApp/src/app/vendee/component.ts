@@ -22,7 +22,7 @@ export class FrontVendeeComponent extends FrontBaseComponent {
 }
 @Component({
   selector: 'app-vendee-layout',
-  templateUrl: './vendee-layout.component.html',
+  templateUrl: './layout.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -64,7 +64,7 @@ export class VendeeLayoutComponent extends FrontVendeeComponent implements OnDes
 
 @Component({
   selector: 'app-vendee-transactions',
-  templateUrl: './vendee-transactions.component.html',
+  templateUrl: './transactions.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -76,7 +76,7 @@ export class VendeeTransactionsComponent extends FrontVendeeComponent {
 }
 @Component({
   selector: 'app-vendee-profile',
-  templateUrl: './vendee-profile.component.html',
+  templateUrl: './profile.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -92,7 +92,7 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
 }
 @Component({
   selector: 'app-vendee-invoices',
-  templateUrl: './vendee-invoices.component.html',
+  templateUrl: './invoices.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -129,7 +129,7 @@ export class VendeeInvoicesComponent extends FrontVendeeComponent {
 }
 @Component({
   selector: 'app-vendee-addresses',
-  templateUrl: './vendee-addresses.component.html',
+  templateUrl: './addresses.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -142,7 +142,7 @@ export class VendeeAddressesComponent extends FrontVendeeComponent {
 }
 @Component({
   selector: 'app-vendee-ticket',
-  templateUrl: './vendee-ticket.component.html',
+  templateUrl: './ticket.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -155,7 +155,7 @@ export class VendeeTicketComponent extends FrontVendeeComponent {
 }
 @Component({
   selector: 'app-vendee-cards',
-  templateUrl: './vendee-cards.component.html',
+  templateUrl: './cards.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

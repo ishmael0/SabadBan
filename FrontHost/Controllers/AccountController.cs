@@ -95,7 +95,7 @@ namespace FrontHost.Controllers
         [NonAction]
         public async Task<List<InvoiceView>> Invoices(int id)
         {
-            return await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendorId == id).Select(c => new InvoiceView(c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId)).ToListAsync();
+            return await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendorId == id).Select(c => new InvoiceView(c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId)).ToListAsync();
         }
         [Authorize]
         [HttpGet]
@@ -104,10 +104,12 @@ namespace FrontHost.Controllers
             var VendorId = int.Parse(GetVendorID());
             var Invoices = await dB.Invoices.Include(c => c.Vendee)
                 .Where(c => c.VendorId == VendorId)
-                .Select(c => new InvoiceView ( c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
+                .Select(c => new InvoiceView (c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
                 .ToListAsync();
             return JR<List<InvoiceView>>.OK(Invoices);
         }
+
+
 
     }
     public class LoginFirstStepDTO
@@ -140,6 +142,7 @@ namespace FrontHost.Controllers
 
     public class InvoiceView
     {
+        public string Guid { get; }
         public InvoiceState InvoiceState { get; }
         public List<InvoiceDetail> InvoiceDetails { get; }
         public int PostCost { get; }
@@ -152,8 +155,9 @@ namespace FrontHost.Controllers
         public int VendorId { get; }
         public int VendeeId { get; }
 
-        public InvoiceView(InvoiceState invoiceState, List<InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
+        public InvoiceView(string Guid, InvoiceState invoiceState, List<InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
         {
+            this.Guid = Guid;
             InvoiceState = invoiceState;
             InvoiceDetails = invoiceDetails;
             PostCost = postCost;
