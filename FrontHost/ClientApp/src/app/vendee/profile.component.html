@@ -1,20 +1,27 @@
+<form [formGroup]="profileForm">
 
-<div nz-row>
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
-    <label>نام:</label>
-    <input type="text" placeholder="">
-  </div>
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
-    <label>نام خانوادگی:</label>
-    <input type="text" placeholder="">
-  </div>
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
-    <label>کد ملی:</label>
-    <input type="text" placeholder="">
-  </div>
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
-    <label>شماره تماس:</label>
-    <input type="text" disabled placeholder="" value="09126200435">
+  <div nz-row>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
+      <label>نام: *</label>
+      <input formControlName="FirstName" type="text" placeholder="">
+
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
+      <label>نام خانوادگی:*</label>
+      <input formControlName="LastName" type="text" placeholder="">
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
+      <label>کد ملی:   *</label>
+      <input formControlName="MelliCode" type="text" placeholder="">
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" class="form-input">
+      <label>شماره تماس:</label>
+      <input formControlName="CellPhone" type="text"   placeholder="">
+    </div>
+
   </div>
 
-</div>
+  <button class="btn sin" (click)="save()">  ذخیره </button>
+  {{ds.Vendee.MelliCode}}
+  {{ds.Vendee.CellPhone}}
+</form>

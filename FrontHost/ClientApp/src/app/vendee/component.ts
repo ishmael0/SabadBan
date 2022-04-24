@@ -84,10 +84,38 @@ export class VendeeTransactionsComponent extends FrontVendeeComponent {
 export class VendeeProfileComponent extends FrontVendeeComponent {
   override async ngOnInit() {
     super.setTitle("پروفایل");
+    this.profileForm.controls['FirstName'].setValue(this.ds.Vendee.FirstName);
+    this.profileForm.controls['LastName'].setValue(this.ds.Vendee.LastName);
+    this.profileForm.controls['CellPhone'].setValue(this.ds.Vendee.CellPhone);
+    this.profileForm.controls['CellPhone'].disable();
+    this.profileForm.controls['MelliCode'].setValue(this.ds.Vendee.MelliCode);
+    this.profileForm.controls['MelliCode'].disable();
   }
 
+  profileForm = this.formBuilder.group({
+    FirstName: ['', Validators.compose([Validators.required])],
+    LastName: ['', Validators.compose([Validators.required])],
+    CellPhone: ['', Validators.compose([])],
+    MelliCode: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
+  });
 
 
+  async save() {
+
+    if (!this.profileForm.valid)
+      return;
+    await this.http.AddAndTry(new RequestPlus(HTTPTypes.POST, 'account', {
+      tokenNeeded: false,
+      action: 'profile', formData: this.profileForm.value,
+      onSuccess: (m, d) => {
+        this.ds.load(d)
+      },
+      onError: (m, d) => {
+
+      }
+    }))
+
+  }
 
 }
 @Component({

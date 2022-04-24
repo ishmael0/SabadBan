@@ -70,10 +70,10 @@ namespace FrontHost.Controllers
                 var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);
                 if (user == null)
                 {
-                    user = new Vendee { CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
+                    user = new Vendee { MelliCode = helper.MelliCode, CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
-                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user, new List<InvoiceView>()));
+                    return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
                 }
                 if (user.Status == Core.Models.Status.Blocked)
                 {
@@ -82,7 +82,7 @@ namespace FrontHost.Controllers
                 else
                 {
 
-                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user, await Invoices(user.Id)));
+                    return new(StatusCodes.Status200OK, "ورود شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
                 }
             }
             else
@@ -92,21 +92,15 @@ namespace FrontHost.Controllers
         }
 
 
-        [NonAction]
-        public async Task<List<InvoiceView>> Invoices(int id)
-        {
-            return await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendorId == id).Select(c => new InvoiceView(c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId)).ToListAsync();
-        }
+        [HttpPost]
         [Authorize]
-        [HttpGet]
-        public async Task<JR<List<InvoiceView>>> Invoices()
+        public async Task<JR<Vendee>> Profile([FromBody] Vendee v)
         {
-            var VendorId = int.Parse(GetVendorID());
-            var Invoices = await dB.Invoices.Include(c => c.Vendee)
-                .Where(c => c.VendorId == VendorId)
-                .Select(c => new InvoiceView (c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
-                .ToListAsync();
-            return JR<List<InvoiceView>>.OK(Invoices);
+            var ven = await dB.Vendees.FirstOrDefaultAsync(c => c.Id == VendorId);
+            ven.FirstName = v.FirstName;
+            ven.LastName = v.LastName;
+            await dB.SaveChangesAsync();
+            return new(StatusCodes.Status200OK, "  با موفقیت ذخیره شد", v);
         }
     }
     public class LoginFirstStepDTO
@@ -116,6 +110,7 @@ namespace FrontHost.Controllers
         [MinLength(11)]
         [StringLength(11, ErrorMessage = "شماره همراه باید 11 رقم باشد")]
         public string PhoneNumber { get; set; }
+        public string MelliCode { get; set; }
     }
     public class LoginVerifyDTO : LoginFirstStepDTO
     {
@@ -127,45 +122,11 @@ namespace FrontHost.Controllers
     {
         public string Token { get; }
         public BackHost.DBContext.Vendee Vendee { get; }
-        public List<InvoiceView> Invoices { get; }
 
-        public UserViewDTO(string token, BackHost.DBContext.Vendee v, List<InvoiceView> Invoices)
+        public UserViewDTO(string token, BackHost.DBContext.Vendee v)
         {
             Token = token;
             Vendee = v;
-            this.Invoices = Invoices;
-        }
-    }
-
-    public class InvoiceView
-    {
-        public string Guid { get; }
-        public BackHost.DBContext.InvoiceState InvoiceState { get; }
-        public List<BackHost.DBContext.InvoiceDetail> InvoiceDetails { get; }
-        public int PostCost { get; }
-        public int PostType { get; }
-        public int Discount { get; }
-        public int Id { get; }
-        public DateTime? Create { get; }
-        public Status Status { get; }
-        public string VendorTitle { get; }
-        public int VendorId { get; }
-        public int VendeeId { get; }
-
-        public InvoiceView(string Guid, BackHost.DBContext.InvoiceState invoiceState, List<BackHost.DBContext.InvoiceDetail> invoiceDetails, int postCost, int postType, int discount, int id, DateTime? create, Status status, string vendorTitle, int vendorId, int vendeeId)
-        {
-            this.Guid = Guid;
-            InvoiceState = invoiceState;
-            InvoiceDetails = invoiceDetails;
-            PostCost = postCost;
-            PostType = postType;
-            Discount = discount;
-            Id = id;
-            Create = create;
-            Status = status;
-            VendorTitle = vendorTitle;
-            VendorId = vendorId;
-            VendeeId = vendeeId;
         }
     }
 }

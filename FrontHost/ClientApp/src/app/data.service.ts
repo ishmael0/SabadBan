@@ -31,9 +31,13 @@ export class DataService {
         c.Price = c.InvoiceDetailsPrice - c.InvoiceDetailsDiscount - c.Discount + c.PostCost;
       });
     }
+    if (d.Vendee) {
+      this.Vendee = d.Vendee;
+    }
     this.save();
   }
   Invoices: any[] = [];
+  Vendee: any = {};
   CategoryNodes :any[]= [];
   CategoryNodesAs :any[]= [];
   CategorySearchValue = "";

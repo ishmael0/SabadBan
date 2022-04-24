@@ -19,11 +19,13 @@ using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using BackHost.DBContext;
+using Core.StartUp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+AppSettingService.Publics.App_Name = "Sabadban";
+AppSettingService.Privates.App_ConnectionString = "Data Source=.;Initial Catalog={0};User id=sa;Password=09016200321a@0A";
 builder.Services.AddControllersWithViews()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)); })
                 .AddNewtonsoftJson(new Action<MvcNewtonsoftJsonOptions>(

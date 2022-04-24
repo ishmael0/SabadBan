@@ -7,9 +7,9 @@
       <nz-spin [nzSpinning]="isLoading">
         <form [formGroup]="phoneForm" *ngIf="level == 1" class="fade">
           <div class="form-input">
-            <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خودرا وارد کنید">
-          </div> <br />
-          <br />
+            <input type="text" formControlName="PhoneNumber" style="text-align: center;direction: ltr;" placeholder="شماره تماس خود را وارد کنید">
+          </div>
+
 
           <div *ngIf="phoneForm.controls['PhoneNumber'].invalid" class="wfg">
             شماره موبایل باید با 09 شروع شود
@@ -19,11 +19,34 @@
           <div *ngIf="phoneForm.controls['PhoneNumber'].touched && phoneForm.controls['PhoneNumber'].invalid" class="dfg">شماره موبایل معتبر نیست!</div>
           <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="sfg">
             شماره موبایل معتبر است!
-            لطفا بر روی مرحله بعد کلیک کنید.
           </div>
+          <br />
+          <br />
+          <div class="form-input">
+            <input type="text" formControlName="MelliCode" style="text-align: center;direction: ltr;" placeholder="کد ملی خود را وارد نمایید">
+          </div>
+
+
+          <div *ngIf="phoneForm.controls['MelliCode'].invalid" class="wfg">
+            کد ملی باید 10 رقم باشد
+          </div>
+
+          <div *ngIf="phoneForm.controls['MelliCode'].touched && phoneForm.controls['MelliCode'].invalid" class="dfg">کد ملی معتبر نیست!</div>
+          <div *ngIf="!phoneForm.controls['MelliCode'].invalid" class="sfg">
+            کد ملی معتبر است!
+          </div>
+
+          <br />
+          <br />
+          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid && !phoneForm.controls['MelliCode'].invalid" class="sfg">
+            لطفا بر روی گام بعد کلیک کنید.
+          </div>
+
+
 
         </form>
 
+    
 
 
         <form [formGroup]="smsForm" *ngIf="level == 2">
@@ -37,17 +60,18 @@
 
 
           <input formControlName="SMSCode" class="splitted-5 fade" maxlength='5' />
-          {{smsForm.controls['SMSCode'].value}}
+          <!--{{smsForm.controls['SMSCode'].value}}-->
           <br />
           <br />
 
           <div class="wfg" *ngIf="timer.countDown !=0">
+            ارسال مجدد کد اعتبار سنجی تا
             {{timer.min }}:{{timer.sec}}
           </div>
           <div class="wfg" *ngIf="timer.countDown ==0">
             با کلیک بر روی مرحله قبل، مجددا تلاش کنید.
           </div>
-          <div class="dfg">asdas</div>
+          <div class="dfg"> </div>
         </form>
         <div *ngIf="level == 3" style="text-align:center">
 
@@ -59,7 +83,7 @@
           </div>
           <br />
           <div class="alert sin">
-            الآن می تونید اطلاعات حساب، اصلاعات فاکتور ها و.. رو مشاهده کنید!
+            الآن می تونید اطلاعات حساب، اطلاعات فاکتور ها و.. رو مشاهده کنید!
           </div>
           <br />
           <a class="btn sin" [routerLink]="['/vendee/profile']"> مشاهده اطلاعات کاربری   </a>
@@ -68,7 +92,7 @@
     </div>
   </div>
   <div class="glassfooter" style="text-align:center">
-    <button *ngIf="back" class="wout" (click)="level=level-1">   گام قبل</button>
-    <button *ngIf="next" class="sin" (click)="goToNext()">  گام بعد</button>
+    <button *ngIf="back" class="btn wout" (click)="goToPrev()">   گام قبل</button>
+    <button *ngIf="next" class="btn sin" (click)="goToNext()">  گام بعد</button>
   </div>
 </div>

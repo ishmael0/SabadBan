@@ -20,11 +20,20 @@ export class LoginComponent extends FrontBaseComponent {
   }
   phoneForm = this.formBuilder.group({
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
+    MelliCode: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[0-9]{10}")])],
   });
   smsForm = this.formBuilder.group({
     PhoneNumber: ['', Validators.compose([Validators.minLength(11), Validators.required, Validators.pattern("09[0-9]{9}")])],
-    SMSCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])]
+    SMSCode: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(5)])],
+    MelliCode: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[0-9]{10}")])],
   });
+  goToPrev() {
+    if (this.level == 2) {
+      this.back = false;
+      this.next = true;
+    }
+    this.level = this.level - 1;
+  }
   async goToNext() {
     if (this.isLoading) return;
     this.isLoading = true;
@@ -36,6 +45,7 @@ export class LoginComponent extends FrontBaseComponent {
           action: 'login', formData: this.phoneForm.value,
           onSuccess: (m, d) => {
             this.smsForm.controls['PhoneNumber'].setValue(this.phoneForm.controls['PhoneNumber'].value)
+            this.smsForm.controls['MelliCode'].setValue(this.phoneForm.controls['MelliCode'].value)
             this.smsForm.controls['SMSCode'].setValue('');
             this.timer.countDown = 120;
             this.back = false;

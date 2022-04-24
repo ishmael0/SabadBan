@@ -17,6 +17,13 @@ namespace FrontHost.Controllers
         {
             return HttpContext.User.Claims.FirstOrDefault(c => c.Type == nameof(Vendee.Id))?.Value;
         }
+        public int VendorId
+        {
+            get
+            {
+                return int.Parse(GetVendorID());
+            }
+        }
         public string GetUserIP()
         {
             return HttpContext?.Connection?.RemoteIpAddress?.ToString() ?? "";

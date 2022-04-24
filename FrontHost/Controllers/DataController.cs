@@ -5,6 +5,7 @@ using FrontHost.DBContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,10 +28,19 @@ namespace FrontHost.Controllers
             var Vendors = await dB.Vendors.CountAsync();
             return JR<object>.OK(new { Categories, Vendees, Vendors, Invoices });
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<JR<List<Invoice>>> Invoices()
+        {
+            var Invoices = await dB.Invoices.Include(c => c.Vendee)
+                .Where(c => c.VendorId == VendorId)
+                //.Select(c => new InvoiceView (c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
+                .ToListAsync();
+            return JR<List<Invoice>>.OK(Invoices);
+        }
         [HttpGet]
         public async Task<JR<Invoice>> Invoice(string guid)
         {
-            var VendorId = int.Parse(GetVendorID());
             var invoice = await dB.Invoices 
                 .Where(c => c.InvoiceState == 0 &&  c.Guid == guid)
                 //.Select(c => new { c.InvoiceState, c.Guid,  c.Paid, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, VendorTitle = c.Vendor.Title, c.VendorId, c.VendeeId })

@@ -47,7 +47,7 @@ namespace FrontHost.Services
                 {
                     var x = new SMSDataStoreHelper
                     {
-                        Code = RandomGenerator.NextInt(10000, 99999),
+                        Code = 12345,// RandomGenerator.NextInt(10000, 99999),
                         Count = 1,
                         LastTryDateTime = DateTime.Now
                     };
@@ -61,7 +61,7 @@ namespace FrontHost.Services
                         prev.Data.Count /= 2;
                     }
                     if (prev.Data.Count > Captcha.MaxTries) return null;
-                    prev.Data.Code = RandomGenerator.NextInt(10000, 99999);
+                    prev.Data.Code = 12345;// RandomGenerator.NextInt(10000, 99999);
                     prev.Data.LastTryDateTime = DateTime.Now;
                     return prev.Data;
                 }
