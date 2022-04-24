@@ -9,7 +9,7 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FileManagerComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/file-manager/file-manager.component';
 import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/icons/icons.component';
 import { ActiveStatus, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration, DeletedStatus, FullStatuses, PublishedStatus } from '../../../../../../Santel/ClientApp/src/app/services/properties';
-import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorDetailComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent } from './components';
+import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorDetailComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent, VendorCommentComponent } from './components';
 
 import "reflect-metadata";
 
@@ -56,14 +56,19 @@ export class Vendor extends BaseModelWithTitle {
 export class VendorDetail extends BaseModel {
   Successed = 0;
   VendorId!: number;
-  Confirmed = 0;;
-  Created = 0;;
-  WaitingForPayment = 0;;
+  Confirmed = 0;
+  Created = 0;
+  WaitingForPayment = 0;
   Canceled = 0;
-
   Rank = 0;
-
-
+  CommentsCount = 0;
+}
+export class VendorComment extends BaseModel {
+  VendeeId = '';
+  VendorId!: number;
+  Text = 0;
+  Rank = 0;
+  Created = 0;
 }
 export class VendorBankAccount extends BaseModel {
   BankId!: number;
@@ -213,7 +218,7 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
   //Done
 
 
-  new EntityConfiguration<VendorDetail>("VendorSell", VendorDetail, VendorDetailComponent, 'اطلاعات فروش فروشگاه', FullStatuses, [
+  new EntityConfiguration<VendorDetail>("VendorDetail", VendorDetail, VendorDetailComponent, 'اطلاعات فروش فروشگاه', FullStatuses, [
     ...defaultPropertyConfiguration,
     new PropertyConfiguration(c => c.VendorId, 'فروشگاه', { Validators: [Validators.required] }),
     new PropertyConfiguration(c => c.Successed, 'فاکتور موفق', {}),
@@ -221,6 +226,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.Created, 'فاکتور صادر شده', {}),
     new PropertyConfiguration(c => c.WaitingForPayment, 'فاکتور در انتظار پرداخت', {}),
     new PropertyConfiguration(c => c.Canceled, 'فاکتور باطل شده', {}),
+    new PropertyConfiguration(c => c.CommentsCount, 'تعداد کامنت ها', {}),
+    new PropertyConfiguration(c => c.Rank, 'رنک', { Validators: [Validators.min(0), Validators.max(5)] }),
   ], { icon: 'storefront', canAdd: false, canDelete: false, getTitle: (item: FormGroup) => { return "getTitle" }, neededData: [], componentType: ComponentTypes.lazytable }),
   new EntityConfiguration<VendorBalance>("VendorBalance", VendorBalance, VendorBalanceComponent, 'موجودی حساب فروشگاه', FullStatuses, [
     ...defaultPropertyConfiguration,
@@ -244,6 +251,14 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     new PropertyConfiguration(c => c.Type, 'نوع انتقال', {}),
     new PropertyConfiguration(c => c.DateTime, 'زمان اتقال', {}),
   ], { neededData: [Bank], canAdd: false, canDelete: false, getTitle: (item: FormGroup) => { return item.controls['Title']?.value ?? "جدید"; } }),
+
+  new EntityConfiguration<VendorComment>("VendorComment", VendorComment, VendorCommentComponent, 'نظرات', FullStatuses, [
+    ...defaultPropertyConfiguration,
+    new PropertyConfiguration(c => c.VendorId, 'فروشگاه', {}),
+    new PropertyConfiguration(c => c.VendeeId, 'خریدار', {}),
+    new PropertyConfiguration(c => c.Rank, 'رتبه  ', {}),
+    new PropertyConfiguration(c => c.Text, 'متن', {}),
+  ], {  canAdd: true, canDelete: true,  }),
 
 
 
@@ -316,7 +331,8 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     VendeeComponent,
     TicketComponent,
     VendorWithdrawComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    VendorCommentComponent
   ],
   imports: [
     TemplateModule,

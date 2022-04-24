@@ -4,16 +4,18 @@ using BackHost.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Host.DB_Migration
+namespace BackHost.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220424074044__18")]
+    partial class _18
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -445,7 +447,7 @@ namespace Host.DB_Migration
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VendeeId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VendorId")
@@ -458,7 +460,7 @@ namespace Host.DB_Migration
                     b.ToTable("VendorComments");
                 });
 
-            modelBuilder.Entity("BackHost.DBContext.VendorDetail", b =>
+            modelBuilder.Entity("BackHost.DBContext.VendorSell", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -498,7 +500,7 @@ namespace Host.DB_Migration
                     b.HasIndex("VendorId")
                         .IsUnique();
 
-                    b.ToTable("VendorDetails");
+                    b.ToTable("VendorSells");
                 });
 
             modelBuilder.Entity("BackHost.DBContext.VendorSocialMedia", b =>
@@ -806,11 +808,11 @@ namespace Host.DB_Migration
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("BackHost.DBContext.VendorDetail", b =>
+            modelBuilder.Entity("BackHost.DBContext.VendorSell", b =>
                 {
                     b.HasOne("BackHost.DBContext.Vendor", "Vendor")
                         .WithOne("VendorSell")
-                        .HasForeignKey("BackHost.DBContext.VendorDetail", "VendorId")
+                        .HasForeignKey("BackHost.DBContext.VendorSell", "VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

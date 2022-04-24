@@ -17,7 +17,8 @@ namespace BackHost.DBContext
         public DbSet<City> Cities { set; get; }
         public DbSet<Bank> Banks { set; get; }
         public DbSet<Vendor> Vendors { set; get; }
-        public DbSet<VendorSell> VendorSells { set; get; }
+        public DbSet<VendorDetail> VendorDetails { set; get; }
+        public DbSet<VendorComment> VendorComments { set; get; }
         public DbSet<VendorBalance> VendorBalances { set; get; }
         public DbSet<VendorBankAccount> VendorBankAccounts { set; get; }
         public DbSet<VendorWithdraw>  VendorWithdraws { set; get; }
@@ -36,7 +37,7 @@ namespace BackHost.DBContext
             modelBuilder.Entity<Vendor>().Property(e => e.Images).HasConversion(v => JsonConvert.SerializeObject(v??new List<Images>()), v => JsonConvert.DeserializeObject<List<Images>>(v));
             modelBuilder.Entity<Invoice>().Property(e => e.InvoiceDetails).HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<InvoiceDetail>>(v));
             modelBuilder.Entity<Vendor>().Property(e => e.CellPhone1).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
-            modelBuilder.Entity<VendorSell>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<VendorDetail>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBankAccount>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorBalance>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorWithdraw>().Property(e => e.VendorBankAccountId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);

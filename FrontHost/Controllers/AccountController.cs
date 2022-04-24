@@ -108,9 +108,6 @@ namespace FrontHost.Controllers
                 .ToListAsync();
             return JR<List<InvoiceView>>.OK(Invoices);
         }
-
-
-
     }
     public class LoginFirstStepDTO
     {

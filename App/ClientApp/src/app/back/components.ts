@@ -198,7 +198,8 @@ export class VendorComponent extends BaseComponent<Vendor> {
   async ConfirmVendor(item: any) {
     this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, this.dataManager.key, {
       params: { Id: item.Id },
-      action: 'ConfirmVendor', onSuccess: (m: string[], d: any) => {
+      useDefaultMessageNotification:true,
+      action: 'BuildVendor', onSuccess: (m: string[], d: any) => {
       }
     }))
     releaseEvents
@@ -248,5 +249,15 @@ export class VendorDetailComponent extends BaseComponent<VendorDetail> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VendorWithdrawComponent extends BaseComponent<VendorWithdraw> {
+}
+
+@Component({
+  selector: 'app-vendor-comment',
+  templateUrl: './vendor-comment.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VendorCommentComponent extends BaseComponent<VendorWithdraw> {
 }
 

@@ -79,6 +79,8 @@ namespace BackHost.DBContext
         public bool CellPhone2Confirm { set; get; }
         public List<Images> Images { set; get; }
         public string Logo { set; get; }
+        public virtual VendorDetail VendorSell { set; get; }
+
     }
     public class VendorSocialMedia : BaseModelWithTitle
     {
@@ -92,8 +94,17 @@ namespace BackHost.DBContext
     {
 
     }
+    public class VendorComment : BaseModel
+    {
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { set; get; }
+        public int VendorId { set; get; }
+        public string VendeeId { set; get; }
+        public string Text { set; get; }
+        public int Rank { set; get; }
+    }
     [Index(nameof(VendorId), IsUnique = true)]
-    public class VendorSell : BaseModel
+    public class VendorDetail : BaseModel
     {
         [ForeignKey("VendorId")]
         public virtual Vendor Vendor { set; get; }
@@ -102,6 +113,8 @@ namespace BackHost.DBContext
         public int Confirmed { set; get; }
         public int Created { set; get; }
         public int Canceled { set; get; }
+        public int CommentsCount { set; get; }
+        public float Rank { set; get; }
     }
     public class VendorBankAccount : BaseModelWithTitle
     {
