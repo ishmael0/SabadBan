@@ -156,7 +156,7 @@ namespace BackHost.DBContext
         public DateTime DateTime { set; get; }
     }
     [Index(nameof(CellPhone), IsUnique = true)]
-    [Index(nameof(MelliCode), IsUnique = true)]
+    //[Index(nameof(MelliCode), IsUnique = true)]
     public class Vendee : BaseModel
     {
         public string MelliCode { set; get; }

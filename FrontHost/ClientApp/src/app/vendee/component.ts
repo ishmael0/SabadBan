@@ -105,7 +105,6 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
     if (!this.profileForm.valid)
       return;
     await this.http.AddAndTry(new RequestPlus(HTTPTypes.POST, 'account', {
-      tokenNeeded: false,
       action: 'profile', formData: this.profileForm.value,
       onSuccess: (m, d) => {
         this.ds.load(d)
