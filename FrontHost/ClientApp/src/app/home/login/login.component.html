@@ -22,23 +22,8 @@
           </div>
           <br />
           <br />
-          <div class="form-input">
-            <input type="text" formControlName="MelliCode" style="text-align: center;direction: ltr;" placeholder="کد ملی خود را وارد نمایید">
-          </div>
 
-
-          <div *ngIf="phoneForm.controls['MelliCode'].invalid" class="wfg">
-            کد ملی باید 10 رقم باشد
-          </div>
-
-          <div *ngIf="phoneForm.controls['MelliCode'].touched && phoneForm.controls['MelliCode'].invalid" class="dfg">کد ملی معتبر نیست!</div>
-          <div *ngIf="!phoneForm.controls['MelliCode'].invalid" class="sfg">
-            کد ملی معتبر است!
-          </div>
-
-          <br />
-          <br />
-          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid && !phoneForm.controls['MelliCode'].invalid" class="sfg">
+          <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="sfg">
             لطفا بر روی گام بعد کلیک کنید.
           </div>
 
@@ -50,6 +35,19 @@
 
 
         <form [formGroup]="smsForm" *ngIf="level == 2">
+          <div *ngIf="showMelli">
+            <div class="form-input">
+              <input type="text" formControlName="MelliCode" style="text-align: center;direction: ltr;" placeholder="کد ملی خود را وارد نمایید">
+            </div>
+            <div *ngIf="smsForm.controls['MelliCode'].invalid" class="wfg">
+              کد ملی باید 10 رقم باشد
+            </div>
+            <div *ngIf="smsForm.controls['MelliCode'].touched && smsForm.controls['MelliCode'].invalid" class="dfg">کد ملی معتبر نیست!</div>
+            <div *ngIf="!smsForm.controls['MelliCode'].invalid" class="sfg">
+              کد ملی معتبر است!
+            </div>
+          </div>
+
           <div *ngIf="!phoneForm.controls['PhoneNumber'].invalid" class="sfg">
             کد اعتبار سنجی 5 رقمی به شماره تماس
             {{smsForm.controls['PhoneNumber'].value}}
@@ -78,15 +76,18 @@
           <i class="sfg" [innerHtml]="icons.checkall" style="width:150px"></i>
 
           <br />
-          <div class="alert sin">
-            شما با موفقیت وارد شدید
+          <div class="alert sin" *ngIf="showMelli">
+            ثبت نام شما انجام شد
+          </div>
+          <div class="alert sin" *ngIf="!showMelli">
+         
           </div>
           <br />
           <div class="alert sin">
             الآن می تونید اطلاعات حساب، اطلاعات فاکتور ها و.. رو مشاهده کنید!
           </div>
           <br />
-          <a class="btn sin" [routerLink]="['/vendee/profile']"> مشاهده اطلاعات کاربری   </a>
+          <button class="btn sin" [routerLink]="['/vendee/profile']"> مشاهده اطلاعات کاربری   </button>
         </div>
       </nz-spin>
     </div>

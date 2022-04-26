@@ -22,8 +22,9 @@
       </div>
     </div>
 
-
-    <router-outlet></router-outlet>
+    <nz-spin [nzSpinning]="http.loading | async" nzTip="لطفا کمی صبر کنید">
+      <router-outlet *ngIf="ok"></router-outlet>
+    </nz-spin>
     <!--position: fixed; bottom: 0px;max-width: inherit;-->
     <div style=" width: 100%; ">
       <div class="glass">
@@ -43,13 +44,13 @@
 
 
 <ng-template #useraccount>
-  <button class="btn din fl"  *ngIf="auth.isLoggedIn()" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+  <button class="btn din fl" *ngIf="auth.isLoggedIn()" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
     حساب کاربری
     <svg viewBox="0 0 24 24"> <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
   </button>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>
-      <li nz-menu-item>1st menu item</li>
+      <li nz-menu-item nzDanger>{{ ds.Vendee.FirstName + ' ' +ds.Vendee.LastName   }}</li>
       <li nz-menu-divider></li>
       <li nz-menu-item [routerLink]="['/vendee/profile']"> پنل کاربری </li>
       <li nz-menu-item [routerLink]="['/vendee/invoices']">   مشاهده فاکتورها </li>

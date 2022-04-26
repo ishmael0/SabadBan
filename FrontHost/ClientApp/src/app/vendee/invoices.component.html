@@ -3,6 +3,8 @@
   <svg viewBox="0 0 24 24" [innerHTML]="icons.refresh">
   </svg>
 </button>
+تاریخ آخرین به روزرسانی: 
+{{ds.lastUpdateDates['Invoices'] |pdate}}
 
 <nz-table #basicTable nzTableLayout="fixed" [nzData]="ds.Invoices">
   <thead>
@@ -30,14 +32,13 @@
       <td>{{item.InvoiceState}}</td>
       <td>
         <button class="btn sout" (click)="selectedItem=item; dis = true">مشاهده فاکتور</button>
-        <button class="btn sin" (click)="openInNewWindow('/invoice/'+selectedItem.Guid)"  > پرداخت</button>
+        <button class="btn sin" (click)="openInNewWindow('/invoice/'+selectedItem.Guid)"> پرداخت</button>
       </td>
     </tr>
   </tbody>
 </nz-table>
 
 
-<button (click)="dis = !dis">{{dis}}</button>
 
 <div modal [(display)]="dis">
   <!--<app-invoice *ngIf="selectedItem " [invoice]="selectedItem"></app-invoice>-->

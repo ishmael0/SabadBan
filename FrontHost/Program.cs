@@ -21,6 +21,9 @@ using Microsoft.Extensions.Hosting;
 using BackHost.DBContext;
 using Core.StartUp;
 
+using Microsoft.AspNetCore.Authorization;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -46,10 +49,17 @@ builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)));
 var tempAppsettings = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
+builder.Services.AddAuthorization(configureOptions =>
+{
+    configureOptions.AddPolicy(nameof(Vendor) + nameof(Vendor.Id), p => p.RequireClaim(nameof(Vendor) + nameof(Vendor.Id)));
+}
+);
 builder.Services.AddAuthentication(configureOptions =>
 {
     configureOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     configureOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    configureOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
 }).AddJwtBearer(configureOptions =>
 {
     configureOptions.RequireHttpsMetadata = false;

@@ -20,6 +20,7 @@ import { DataService } from '../data.service';
 import { environment } from '../app.module';
 import { ModalDirective } from './modal.directive';
 import { CounterDirective } from './counter.directive';
+import { pdatePipe } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 
 
 @Directive()
@@ -60,6 +61,7 @@ export class FrontBaseComponent {
   declarations: [
     ModalDirective,
     CounterDirective,
+    pdatePipe
   ],
   imports: [
     CommonModule,
@@ -84,6 +86,7 @@ export class FrontBaseComponent {
     NzDropDownModule,
     ModalDirective,
     CounterDirective,
+    pdatePipe
   ],
   //providers: [NzNotificationService, DecimalPipe]
 })

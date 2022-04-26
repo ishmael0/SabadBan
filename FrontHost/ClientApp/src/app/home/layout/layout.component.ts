@@ -14,11 +14,16 @@ import { FrontBaseComponent } from '../../shared/shared.module';
 })
 export class LayoutComponent extends FrontBaseComponent {
   showMenu = false;
+  ok = false;
   override async ngOnInit() {
+    this.ds.firstLoad();
     await this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Data', {
       tokenNeeded: false,
       action: 'Init',
-      onSuccess: (m, d) => { this.ds.init(d); console.log(d) },
+      onSuccess: (m, d) => {
+        this.ds.load(d);
+        this.ok = true;
+      },
       onError: (m, d) => { },
     }))
 

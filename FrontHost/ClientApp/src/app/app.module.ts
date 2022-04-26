@@ -20,7 +20,7 @@ import fa from '@angular/common/locales/fa';
 import { NZ_I18N, fa_IR } from 'ng-zorro-antd/i18n';
 import { DataService } from './data.service';
 import { HttpRequestService } from './http-request';
-registerLocaleData(fa);
+ registerLocaleData(fa);
 
 
 const routes: Route[] = [
@@ -33,6 +33,7 @@ const routes: Route[] = [
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     RouterModule.forRoot(routes),

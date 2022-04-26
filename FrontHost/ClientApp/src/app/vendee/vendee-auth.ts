@@ -8,12 +8,10 @@ export class VendeeAuthService implements CanActivate {
   constructor(private router: Router, public ds: DataService, public ns: NzNotificationService) { }
 
   //user!: UserData;
-  token!: string;
   lastTokenDateTime = '';
   login(token: string) {
+    this.ds.load({ Token: token })
     //this.user = d;
-    this.token = token;
-    localStorage.setItem("token", token);
     //localStorage.setItem(UserData.name, JSON.stringify(d));
     this.router.navigate(['/home/account']);
   }
@@ -21,21 +19,13 @@ export class VendeeAuthService implements CanActivate {
   logOut() {
     //this.user = {};
     localStorage.removeItem(DataService.name)
-    this.token = '';
-    localStorage.removeItem("token");
+    this.ds.ClearAll();
     this.router.navigate(['/']);
   }
 
 
   isLoggedIn() {
-    if (this.token && this.token != '') return true;
-    var temp = localStorage.getItem('token');
-    if (temp) {
-      this.token = temp;
-      this.ds.load();
-      //this.user = localStorage.getItem(UserData.name) as UserData;
-      return true;
-    }
+    if (this.ds.Token && this.ds.token != '') return true;
     return false;
   }
   canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): boolean | import("@angular/router").UrlTree | import("rxjs").Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {

@@ -101,7 +101,7 @@ namespace FrontHost.Services
                 Expires = DateTime.UtcNow.Date.AddDays(7),
                 Subject = new ClaimsIdentity(new List<Claim> {
                              new Claim(nameof(Vendee.CellPhone), applicationUser.CellPhone),
-                             new Claim(nameof(Vendee.Id), applicationUser.Id.ToString()),
+                             new Claim(nameof(Vendee)+nameof(Vendee.Id), applicationUser.Id.ToString()),
                          }),
                 SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(options.IssuerSigningKey)),SecurityAlgorithms.HmacSha256Signature),

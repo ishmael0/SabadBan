@@ -2,7 +2,6 @@
 using FrontHost.DBContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using FrontHost.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -15,15 +14,11 @@ using BackHost.DBContext;
 
 namespace FrontHost.Controllers
 {
-
-
-
     public class AccountController : SabadBanBaseController
     {
         private readonly DB dB;
         private readonly SMSService sms;
         private readonly DataService data;
-
         public AccountController(DB dB, SMSService sms, DataService data)
         {
             this.dB = dB;
@@ -56,7 +51,7 @@ namespace FrontHost.Controllers
             {
                 return new(StatusCodes.Status403Forbidden, "دسترسی شما به سامانه مسدود شده است! لطفا با پشتیبانی تماس بگیرید.", true);
             }
-            if (user.Status == Core.Models.Status.Active && await SendMessage(helper.PhoneNumber))
+            if (user.Status == Core.Models.Status.Published && await SendMessage(helper.PhoneNumber))
             {
                 return new(StatusCodes.Status200OK, "", true);
             }
@@ -70,7 +65,7 @@ namespace FrontHost.Controllers
                 var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);
                 if (user == null)
                 {
-                    user = new Vendee { MelliCode = helper.MelliCode, CellPhone = helper.PhoneNumber, CellPhoneConfirm = true };
+                    user = new Vendee { MelliCode = helper.MelliCode, CellPhone = helper.PhoneNumber, CellPhoneConfirm = true,Status = Status.Published };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
                     return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
@@ -90,8 +85,6 @@ namespace FrontHost.Controllers
                 return new(StatusCodes.Status403Forbidden, "کد ارسالی نامعتبر است");
             }
         }
-
-
         [HttpPost]
         [Authorize]
         public async Task<JR<Vendee>> Profile([FromBody] Vendee v)
@@ -100,33 +93,7 @@ namespace FrontHost.Controllers
             ven.FirstName = v.FirstName;
             ven.LastName = v.LastName;
             await dB.SaveChangesAsync();
-            return new(StatusCodes.Status200OK, "  با موفقیت ذخیره شد", v);
-        }
-    }
-    public class LoginFirstStepDTO
-    {
-        [Required]
-        [MaxLength(11)]
-        [MinLength(11)]
-        [StringLength(11, ErrorMessage = "شماره همراه باید 11 رقم باشد")]
-        public string PhoneNumber { get; set; }
-        public string MelliCode { get; set; }
-    }
-    public class LoginVerifyDTO : LoginFirstStepDTO
-    {
-        [Required]
-        public int SMSCode { get; set; }
-        public bool IsNew { get; set; }
-    }
-    public class UserViewDTO
-    {
-        public string Token { get; }
-        public BackHost.DBContext.Vendee Vendee { get; }
-
-        public UserViewDTO(string token, BackHost.DBContext.Vendee v)
-        {
-            Token = token;
-            Vendee = v;
+            return new(StatusCodes.Status200OK, "  با موفقیت ذخیره شد", ven);
         }
     }
 }

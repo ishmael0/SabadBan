@@ -7,7 +7,7 @@ import { Title } from "@angular/platform-browser";
 import { HttpRequestService } from '../http-request';
 import { VendeeAuthService } from './vendee-auth';
 import { DataService } from '../data.service';
-import { HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { getNameOf, HTTPTypes, NZNotificationTypes, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { FrontBaseComponent } from '../shared/shared.module';
 
 
@@ -104,10 +104,12 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
 
     if (!this.profileForm.valid)
       return;
+    
     await this.http.AddAndTry(new RequestPlus(HTTPTypes.POST, 'account', {
       action: 'profile', formData: this.profileForm.value,
+      defaultMessageNotification: ['ذخیره شد','مشکلی روی داده است'],
       onSuccess: (m, d) => {
-        this.ds.load(d)
+        this.ds.load({ Vendee: d }, new Date())
       },
       onError: (m, d) => {
 
@@ -126,16 +128,14 @@ export class VendeeProfileComponent extends FrontVendeeComponent {
 })
 export class VendeeInvoicesComponent extends FrontVendeeComponent {
   async get() {
-    await this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'Account', {
+    this.ds.isOkToFetch(getNameOf(c=>DataService.prototype.Invoices)) &&
+    await this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, 'data', {
       action: 'Invoices',
       onSuccess: (m, d) => {
-        console.log(d);
-        this.ds.load({ Invoices: d });
-        this.http.createNotification(NZNotificationTypes.success, "دریافت شد", "لیست فاکتور ها با موفقیت دریافت شد.")
+        this.ds.load({ Invoices: d },new Date());
         this.cdr.detectChanges();
       },
       onError: (m, d) => {
-        this.http.createNotification(NZNotificationTypes.error, "خطا", "دریافت لیست فاکتور ها با خطا مواجه شد.")
       },
     }))
   }
