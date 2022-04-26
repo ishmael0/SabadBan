@@ -13,10 +13,12 @@ namespace FrontHost.Controllers
 {
     public static class DBHelper
     {
-        public async static Task<List<Invoice>> GetVendeeInvoicesAsync(this DB dB, int VendorId)
+        public async static Task<List<Invoice>> GetVendeeInvoicesAsync(this DB dB, int id)
         {
             //.Select(c => new InvoiceView (c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
-            var Invoices = await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendorId == VendorId).ToListAsync();
+            var Invoices = await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendeeId == id)
+                .Include(c=>c.Vendor)
+                .ToListAsync();
             return Invoices;
         }
         public async static Task<Invoice> GetInvoiceAsync(this DB dB, string guid)

@@ -79,7 +79,7 @@ export class DataService {
       this.lastUpdateDates[getNameOf(c => DataService.prototype.Vendee)] = time;
       saveFlag = true;
     }
-    if (d.Token) {
+    if (d.Token != undefined) {
       this.Token = d.Token;
       this.lastUpdateDates[getNameOf(c => DataService.prototype.Token)] = time;
       saveFlag = true;

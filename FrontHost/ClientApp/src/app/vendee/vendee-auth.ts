@@ -25,7 +25,7 @@ export class VendeeAuthService implements CanActivate {
 
 
   isLoggedIn() {
-    if (this.ds.Token && this.ds.token != '') return true;
+    if (this.ds.Token && this.ds.Token != '') return true;
     return false;
   }
   canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): boolean | import("@angular/router").UrlTree | import("rxjs").Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {

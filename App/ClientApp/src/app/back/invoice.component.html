@@ -40,12 +40,12 @@
         <br />
         <nz-form-label>تنظیمات فاکتور</nz-form-label>
         <br />
-        <div class="invoice" style="background-image: url('../../assets/invoice templates/001.jpg')">
+        <!--<div class="invoice" style="background-image: url('../../assets/invoice templates/001.jpg')">
           <div style="display:flex" class="glass">
             <label nz-checkbox>نمایش ردیف تخفیف در فاکتور</label>
 
           </div>
-        </div>
+        </div>-->
         <div class="invoice">
           <div class="glass">
             <!--<label formControlName="InvoiceDetails" nz-checkbox>نمایش هزینه ارسال در فاکتور</label><br />-->
@@ -53,7 +53,8 @@
         </div>
       </div>
       <div nz-col [nzMd]="18" [nzXs]="24">
-        <div class="invoice" style="width:100%;background-image:url('../../assets/invoice templates/001.jpg')">
+        <!--background-image:url('../../assets/invoice templates/001.jpg')-->
+        <div class="invoice" style="width:100%;">
           <div style="display:flex" class="glass">
             <div style="width:50%">
               فروشگاه
@@ -267,13 +268,13 @@
                 <th>ردیف</th>
                 <th> نام محصول</th>
                 <th>
- تعداد
+                  تعداد
                 </th>
                 <th>
-قیمت
+                  قیمت
                 </th>
                 <th>
- قیمت کل
+                  قیمت کل
                 </th>
               </ng-template>
               <ng-template #body let-invoiceItem="item" let-index="index">

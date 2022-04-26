@@ -44,11 +44,13 @@ export class InvoiceComponent extends BaseComponent<Invoice> {
     this.selectedForm().form.getControlByName<Invoice>(c => c.Vendor).setValue(e);
     this.selectedForm().form.getControlByName<Invoice>(c => c.VendorId).setValue(e.Id);
     this.selectVendorModal = false;
+    this.makeItDirty(this.selectedForm().form)
   }
   vendeeModalSelected(e: Vendee) {
     this.selectedForm().form.getControlByName<Invoice>(c => c.Vendee).setValue(e);
     this.selectedForm().form.getControlByName<Invoice>(c => c.VendeeId).setValue(e.Id);
     this.selectVendeeModal = false;
+    this.makeItDirty(this.selectedForm().form)
   }
 
 
@@ -198,7 +200,6 @@ export class VendorComponent extends BaseComponent<Vendor> {
   async ConfirmVendor(item: any) {
     this.http.AddAndTry(new RequestPlus(HTTPTypes.GET, this.dataManager.key, {
       params: { Id: item.Id },
-      useDefaultMessageNotification:true,
       action: 'BuildVendor', onSuccess: (m: string[], d: any) => {
       }
     }))

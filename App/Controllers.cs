@@ -40,6 +40,12 @@ namespace BackHost
             return base.BeforeGet(q).Include(c => c.Vendee).Include(c => c.Vendor);
             //.Select(c=> c with {Vendee = new Vendee {FirstName = c.Vendee.FirstName }            });
         }
+        public override void BeforeSet(Invoice t)
+        {
+            base.BeforeSet(t);
+            _context.Entry(t.Vendee).State = EntityState.Unchanged;
+            _context.Entry(t.Vendor).State = EntityState.Unchanged;
+        }
     }
 
 }

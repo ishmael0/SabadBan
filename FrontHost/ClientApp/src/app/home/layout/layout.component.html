@@ -51,6 +51,7 @@
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>
       <li nz-menu-item nzDanger>{{ ds.Vendee.FirstName + ' ' +ds.Vendee.LastName   }}</li>
+      <li nz-menu-item nzDanger>{{ ds.Vendee.CellPhone   }}</li>
       <li nz-menu-divider></li>
       <li nz-menu-item [routerLink]="['/vendee/profile']"> پنل کاربری </li>
       <li nz-menu-item [routerLink]="['/vendee/invoices']">   مشاهده فاکتورها </li>
