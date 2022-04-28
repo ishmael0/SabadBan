@@ -13,11 +13,27 @@ namespace FrontHost.Controllers
 {
     public static class DBHelper
     {
-        public async static Task<List<Invoice>> GetVendeeInvoicesAsync(this DB dB, int id)
+        public async static Task<List<InvoiceView>> GetVendeeInvoicesAsync(this DB dB, int id)
         {
             //.Select(c => new InvoiceView (c.Guid, c.InvoiceState, c.InvoiceDetails, c.PostCost, c.PostType, c.Discount, c.Id, c.Create, c.Status, c.Vendor.Title, c.VendorId, c.VendeeId ))
             var Invoices = await dB.Invoices.Include(c => c.Vendee).Where(c => c.VendeeId == id)
-                .Include(c=>c.Vendor)
+                .Include(c => c.Vendor)
+                .Select(c => new InvoiceView
+                {
+                    VendorTitle = c.Vendor.Title,
+                    Id = c.Vendor.Id,
+                    VendorTitleEn = c.Vendor.TitleEn,
+                    Guid = c.Guid,
+                    Create = c.Create,
+                    InvoiceState = c.InvoiceState,
+                    InvoiceDetails = c.InvoiceDetails,
+                    PostType = c.PostType,
+                    PostCost = c.PostCost,
+                    PaymentType = c.PaymentType,
+                    Paid = c.Paid,
+                    Description = c.Description,
+                    Discount = c.Discount
+                })
                 .ToListAsync();
             return Invoices;
         }
@@ -29,7 +45,22 @@ namespace FrontHost.Controllers
         }
     }
 
-
+    public class InvoiceView
+    {
+        public string VendorTitle { get; set; }
+        public int Id { get; set; }
+        public string VendorTitleEn { get; set; }
+        public string Guid { get; set; }
+        public System.DateTime? Create { get; set; }
+        public InvoiceState InvoiceState { get; set; }
+        public List<InvoiceDetail> InvoiceDetails { get; set; }
+        public int PostType { get; set; }
+        public int PostCost { get; set; }
+        public int PaymentType { get; set; }
+        public System.DateTime? Paid { get; set; }
+        public string Description { get; set; }
+        public int Discount { get; set; }
+    }
 
     public class DataController : SabadBanBaseController
     {
@@ -68,7 +99,7 @@ namespace FrontHost.Controllers
                 .Take(20)
                 .Include(c => c.VendorSell)
                 .ToListAsync();
-            return JR<object>.OK(vendors); 
+            return JR<object>.OK(vendors);
         }
     }
 }

@@ -45,6 +45,8 @@ namespace BackHost
             base.BeforeSet(t);
             _context.Entry(t.Vendee).State = EntityState.Unchanged;
             _context.Entry(t.Vendor).State = EntityState.Unchanged;
+            if (t.Id == 0)
+                t.Guid = Guid.NewGuid().ToString("N") + DateTime.Now.ToString("yyyyMMddTHH:mm:ss");
         }
     }
 

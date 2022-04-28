@@ -189,6 +189,7 @@ namespace BackHost.DBContext
         public int Discount { set; get; }
         public int Count { set; get; }
     }
+    [Index(nameof(Guid), IsUnique = true)]
     public class Invoice : BaseModel
     {
         [ForeignKey("VendorId")]
@@ -203,7 +204,7 @@ namespace BackHost.DBContext
         public int PostCost { set; get; }
         public int Discount { set; get; }
         public int PaymentType { set; get; }
-        public DateTime? Paid { set; get; }
+        public DateTime? ExpiredDateTime { set; get; }
         public List<InvoiceDetail> InvoiceDetails { set; get; }
         public InvoiceState InvoiceState { set; get; }
 

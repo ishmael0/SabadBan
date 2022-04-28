@@ -43,6 +43,7 @@ namespace BackHost.DBContext
             modelBuilder.Entity<VendorWithdraw>().Property(e => e.VendorBankAccountId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<Invoice>().Property(e => e.VendeeId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<Invoice>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
+            modelBuilder.Entity<Invoice>().Property(e => e.Guid).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
             modelBuilder.Entity<VendorSocialMedia>().Property(e => e.VendorId).Metadata.SetAfterSaveBehavior( PropertySaveBehavior.Ignore);
 
             //            modelBuilder.Entity<Content>().HasMany(p => p.KeyWords).WithMany(p => p.Contents).UsingEntity<ContentKeyword>(
