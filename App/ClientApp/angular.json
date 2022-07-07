@@ -68,7 +68,7 @@
           "configurations": {
             "production": {
               "customWebpackConfig": {
-                "path": "./webpack.config.js"
+                "path": "../../../Santel/ClientApp/webpack.config.js"
               },
               "budgets": [
                 {

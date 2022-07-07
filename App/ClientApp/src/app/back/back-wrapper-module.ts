@@ -45,7 +45,8 @@ const routes: Routes = [
     CommonModule,
     AntDesignSharedModulesModule.forRoot(),
     RouterModule.forChild(routes),
-  ], providers: [AuthService, NzNotificationService, SignalRService, HttpRequestService, WebSiteService,
+  ],
+  providers: [ThemeService, NzNotificationService, SignalRService, HttpRequestService, WebSiteService,
     //AppInitializerProvider(),
  
   ]

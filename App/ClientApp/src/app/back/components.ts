@@ -203,7 +203,7 @@ export class VendorComponent extends BaseComponent<Vendor> {
       action: 'BuildVendor', onSuccess: (m: string[], d: any) => {
       }
     }))
-    releaseEvents
+    //releaseEvents
   }
 }
 @Component({

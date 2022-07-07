@@ -48,7 +48,7 @@ namespace FrontHost.Controllers
     public class InvoiceView
     {
         public string VendorTitle { get; set; }
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string VendorTitleEn { get; set; }
         public string Guid { get; set; }
         public System.DateTime? Create { get; set; }
@@ -79,12 +79,12 @@ namespace FrontHost.Controllers
             var Vendors = await dB.Vendors.CountAsync();
             return JR<object>.OK(new { Categories, Statics = new { Vendees, Vendors, Invoices } });
         }
-        [Authorize]
-        [HttpGet]
-        public async Task<JR<List<Invoice>>> Invoices()
-        {
-            return JR<List<Invoice>>.OK(await dB.GetVendeeInvoicesAsync(VendeeId));
-        }
+        //[Authorize]
+        //[HttpGet]
+        //public async Task<JR<List<Invoice>>> Invoices()
+        //{
+        //    return JR<List<Invoice>>.OK(await dB.GetVendeeInvoicesAsync(VendeeId));
+        //}
         [HttpGet]
         public async Task<JR<Invoice>> Invoice(string guid)
         {

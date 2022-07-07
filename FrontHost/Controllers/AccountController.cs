@@ -47,11 +47,11 @@ namespace FrontHost.Controllers
             {
                 return new(StatusCodes.Status200OK, "این شماره تماس قبلا ثبت نشده است، شما به مرحله ثبت نام هدایت میشوید.", false);
             }
-            if (user.Status == Core.Models.Status.Blocked)
+            if (user.Status ==Statuses.Blocked)
             {
                 return new(StatusCodes.Status403Forbidden, "دسترسی شما به سامانه مسدود شده است! لطفا با پشتیبانی تماس بگیرید.", true);
             }
-            if (user.Status == Core.Models.Status.Published && await SendMessage(helper.PhoneNumber))
+            if (user.Status == Statuses.Published && await SendMessage(helper.PhoneNumber))
             {
                 return new(StatusCodes.Status200OK, "", true);
             }
@@ -65,12 +65,12 @@ namespace FrontHost.Controllers
                 var user = await dB.Vendees.FirstOrDefaultAsync(c => c.CellPhone == helper.PhoneNumber);
                 if (user == null)
                 {
-                    user = new Vendee { MelliCode = helper.MelliCode, CellPhone = helper.PhoneNumber, CellPhoneConfirm = true,Status = Status.Published };
+                    user = new Vendee { MelliCode = helper.MelliCode, CellPhone = helper.PhoneNumber, CellPhoneConfirm = true,Status = Statuses.Published };
                     dB.Vendees.Add(user);
                     await dB.SaveChangesAsync();
                     return new(StatusCodes.Status200OK, "ثبت نام شما با موفقیت انجام شد", new UserViewDTO(data.TokenGen(user), user));
                 }
-                if (user.Status == Core.Models.Status.Blocked)
+                if (user.Status == Statuses.Blocked)
                 {
                     return new(StatusCodes.Status403Forbidden, "دسترسی شما به سامانه مسدود شده است! لطفا با پشتیبانی تماس بگیرید.");
                 }

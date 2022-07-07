@@ -25,10 +25,12 @@ namespace BackHost.DBContext
         public string Color { set; get; }
     }
     [SafeToGetAll]
+    [Index(nameof(Title), IsUnique = true)]
     public class Province : BaseModelWithTitle
     {
     }
     [SafeToGetAll]
+    [Index(nameof(Title), IsUnique = true)]
     public class City : BaseModelWithTitle
     {
         [ForeignKey("ProvinceId")]

@@ -15,11 +15,11 @@ namespace BackHost.DBContext
     .OrderBy(c => c.Key).ToDictionary(c => c.Key, c => c.Value.OrderBy(d => d).Select(d => d.Trim()).ToList());
                 foreach (var item in collection)
                 {
-                    var province = new Province { Title = item.Key, Create = DateTime.Now, Status = Status.Published };
+                    var province = new Province { Title = item.Key, Create = DateTime.Now, Status = Statuses.Published };
                     _context.Provinces.Add(province);
                     item.Value.ForEach(c =>
                     {
-                        _context.Cities.Add(new City { Title = c, Create = DateTime.Now, Status = Status.Published, Province = province });
+                        _context.Cities.Add(new City { Title = c, Create = DateTime.Now, Status = Statuses.Published, Province = province });
                     });
                 }
                 await _context.SaveChangesAsync();

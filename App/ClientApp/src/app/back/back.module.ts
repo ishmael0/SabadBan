@@ -2,12 +2,8 @@ import { NgModule } from '@angular/core';
 import { buildPath, buildPathFromConfig, TemplateModule } from '../../../../../../Santel/ClientApp/src/app/template/template.module';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseModel, BaseModelWithTitle, ComponentTypes, EntityConfiguration, getNameOf, isUndefinedOrWhiteSpaces, PropertyConfiguration, Status, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
-import { AuthService } from '../../../../../../Santel/ClientApp/src/app/services/auth.service';
 import { WebSiteService } from '../../../../../../Santel/ClientApp/src/app/services/website.service';
 import { Validators, FormGroup } from '@angular/forms';
-//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { FileManagerComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/file-manager/file-manager.component';
-import { IconsComponent } from '../../../../../../Santel/ClientApp/src/app/template/components/icons/icons.component';
 import { ActiveStatus, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration, DeletedStatus, FullStatuses, PublishedStatus } from '../../../../../../Santel/ClientApp/src/app/services/properties';
 import { CategoryComponent, VendorComponent, BankComponent, CityComponent, ProvinceComponent, TicketComponent, TransactionComponent, VendeeComponent, VendorBankAccountComponent, VendorDetailComponent, VendorBalanceComponent, VendorWithdrawComponent, InvoiceComponent, VendorCommentComponent } from './components';
 
